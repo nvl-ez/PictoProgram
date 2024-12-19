@@ -1,6 +1,7 @@
 package nodes;
 
-import utils.ErrorTypes;
+import static nodes.Node.eh;
+import utils.ErrorPhase;
 import utils.OpArit;
 import utils.Types;
 import utils.description.ConstantDescription;
@@ -17,7 +18,7 @@ public class _ConstDeclaration extends Node {
         super(left, right);
 
         if (type == Types.VOID) {
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.VOID, null, line, column);
+            eh.addError(ErrorPhase.Semantic, "Constants cannot be of type void", left, right);
             st.put(new ConstantDescription(id));
             this.type = Types.NULL;
             return;
@@ -26,14 +27,14 @@ public class _ConstDeclaration extends Node {
         if (!checkInt(decimalValue)) {
             this.type = Types.NULL;
             st.put(new ConstantDescription(id));
-            eh.addError(ErrorTypes.VALUE_OUT_OF_BOUNDS, decimalValue, line, column);
+            eh.addError(ErrorPhase.Semantic, "Value "+decimalValue+" is out of bounds", left, right);
             return;
         }
         
         if(type != Types.INT){
             this.type = Types.NULL;
             st.put(new ConstantDescription(id));
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.INT, type, line, column);
+            eh.addError(ErrorPhase.Semantic, "Invalid type assignation for variable: "+id, left, right);
             return;
         }
         
@@ -41,7 +42,7 @@ public class _ConstDeclaration extends Node {
         
         if(!st.put(description)){
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.DUPLICATED_NAMES, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             return;
         }
         this.type = type;
@@ -56,13 +57,13 @@ public class _ConstDeclaration extends Node {
 
         if (type == Types.VOID) {
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.VOID, null, line, column);
+            eh.addError(ErrorPhase.Semantic, "Constants cannot be of type void", left, right);
             st.put(new ConstantDescription(id));
             return;
         }
         
         if(opArit != OpArit.SUB && opArit != OpArit.SUM){
-            eh.addError(ErrorTypes.INVALID_OPERATION, "", line, column);
+            eh.addError(ErrorPhase.Semantic, "Invalid assignation", left, right);
             st.put(new ConstantDescription(id));
             this.type = Types.NULL;
             return;
@@ -70,7 +71,7 @@ public class _ConstDeclaration extends Node {
         
         if (!checkInt(decimalValue)) {
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.VALUE_OUT_OF_BOUNDS, decimalValue, line, column);
+            eh.addError(ErrorPhase.Semantic, "Value +-"+decimalValue+" is out of bounds", left, right);
             st.put(new ConstantDescription(id));
             return;
         }
@@ -78,14 +79,14 @@ public class _ConstDeclaration extends Node {
         if(type != Types.INT){
             this.type = Types.NULL;
             st.put(new ConstantDescription(id));
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.INT, type, line, column);
+            eh.addError(ErrorPhase.Semantic, "Invalid type assignation for variable: "+id, left, right);
             return;
         }
         
         ConstantDescription description = new ConstantDescription(id, decimalValue);
         if(!st.put(description)){
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.DUPLICATED_NAMES, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             return;
         }
         
@@ -103,7 +104,7 @@ public class _ConstDeclaration extends Node {
 
         if (type == Types.VOID) {
             this.type = Types.VOID;
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.VOID, null, line, column);
+            eh.addError(ErrorPhase.Semantic, "Constants cannot be of type void", left, right);
             st.put(new ConstantDescription(id));
             return;
         }
@@ -111,21 +112,21 @@ public class _ConstDeclaration extends Node {
         if (!checkChar(characterValue)) {
             this.type = Types.NULL;
             st.put(new ConstantDescription(id));
-            eh.addError(ErrorTypes.VALUE_OUT_OF_BOUNDS, characterValue, line, column);
+            eh.addError(ErrorPhase.Semantic, "Constants cannot be of type void", left, right);
             return;
         }
         
         if(type != Types.CHAR){
             this.type = Types.NULL;
             st.put(new ConstantDescription(id));
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.CHAR, type, line, column);
+            eh.addError(ErrorPhase.Semantic, "Invalid type assignation for variable: "+id, left, right);
             return;
         }
         
         ConstantDescription description = new ConstantDescription(id, characterValue);
         if(!st.put(description)){
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.DUPLICATED_NAMES, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             return;
         }
 
@@ -140,7 +141,7 @@ public class _ConstDeclaration extends Node {
 
         if (type == Types.VOID) {
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.VOID, null, line, column);
+            eh.addError(ErrorPhase.Semantic, "Constants cannot be of type void", left, right);
             st.put(new ConstantDescription(id));
             return;
         }
@@ -148,14 +149,14 @@ public class _ConstDeclaration extends Node {
         if(type != Types.BOOL){
             this.type = Types.NULL;
             st.put(new ConstantDescription(id));
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.BOOL, type, line, column);
+            eh.addError(ErrorPhase.Semantic, "Invalid type assignation for variable: "+id, left, right);
             return;
         }
         
         ConstantDescription description = new ConstantDescription(id, booleanValue);
         if(!st.put(description)){
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.DUPLICATED_NAMES, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             return;
         }
         

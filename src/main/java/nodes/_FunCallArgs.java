@@ -1,7 +1,7 @@
 package nodes;
 
 import static nodes.Node.eh;
-import utils.ErrorTypes;
+import utils.ErrorPhase;
 import utils.Types;
 import utils.description.Description;
 import utils.description.TypeDescription;
@@ -26,7 +26,7 @@ public class _FunCallArgs extends Node{
         
         Description desc = st.get(id);
         if(desc == null){
-            eh.addError(ErrorTypes.NOT_VARIABLE, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Inexistent variable: "+id, left, right);
             type = Types.NULL;
             return;
         }
@@ -37,7 +37,7 @@ public class _FunCallArgs extends Node{
                 return;
             }
         } else{
-            eh.addError(ErrorTypes.NOT_ARRAY, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Inexistent array: "+id, left, right);
             type = Types.NULL;
             return;
         }

@@ -1,6 +1,6 @@
 package nodes;
 
-import utils.ErrorTypes;
+import utils.ErrorPhase;
 import utils.OpArit;
 import utils.OpLog;
 import utils.Types;
@@ -28,7 +28,7 @@ public class _Expression extends Node {
                 if(temp == Types.BOOL){
                     temp = expression.getType();
                 }
-                eh.addError(ErrorTypes.INVALID_TYPE, Types.BOOL, temp, line, column);
+                eh.addError(ErrorPhase.Semantic, "Logical operands must be of type boolean", left, right);
                 type = Types.NULL;
                 return;
             }
@@ -40,7 +40,7 @@ public class _Expression extends Node {
                 if(temp == Types.INT){
                     temp = expression.getType();
                 }
-                eh.addError(ErrorTypes.INVALID_TYPE, Types.INT, temp, line, column);
+                eh.addError(ErrorPhase.Semantic, "Arithmetic operands must be of type integer", left, right);
                 type = Types.NULL;
                 return;
             }
@@ -48,13 +48,13 @@ public class _Expression extends Node {
         } else if(operation.getOpcomp() != null){
             //Verificar que se puede usar la operacion de comparacion
             if(value.getType() != expression.getType()){
-                eh.addError(ErrorTypes.INVALID_TYPE, value.getType(), expression.getType(), line, column);
+                eh.addError(ErrorPhase.Semantic, "Comparative operands must be of same type", left, right);
                 type = Types.NULL;
                 return;
             }
             type = Types.BOOL;
         } else{
-            eh.addError(ErrorTypes.UNHANDLED_ERROR, "", line, column);
+            eh.addError(ErrorPhase.Semantic, "FATAL ERROR _Expression", left, right);
             type = Types.NULL;
             return;
         }
@@ -72,7 +72,7 @@ public class _Expression extends Node {
         }
         
         if(expression.getType() != Types.INT){
-            eh.addError(ErrorTypes.INVALID_TYPE, expression.getType(), type, line, column);
+            eh.addError(ErrorPhase.Semantic, "Arithmetic negation operand must be of type integer", left, right);
             type = Types.NULL;
             return;
         }
@@ -82,7 +82,7 @@ public class _Expression extends Node {
         } else if(operation == OpArit.SUM){
             //skip this
         } else{
-            eh.addError(ErrorTypes.INVALID_OPERATION, "", line, column);
+            eh.addError(ErrorPhase.Semantic, "Unexpected operand", left, right);
             type = Types.NULL;
             return;
         }

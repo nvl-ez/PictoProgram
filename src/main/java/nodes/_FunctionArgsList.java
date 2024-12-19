@@ -2,7 +2,7 @@ package nodes;
 
 import static nodes.Node.eh;
 import static nodes.Node.st;
-import utils.ErrorTypes;
+import utils.ErrorPhase;
 import utils.Types;
 import utils.description.IndexDescription;
 import utils.description.TypeDescription;
@@ -23,14 +23,14 @@ public class _FunctionArgsList extends Node{
         
         if(!st.put(description)){
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.DUPLICATED_NAMES, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             return;
         }
         
         if(type == Types.VOID){
             this.type = Types.NULL;
             description.setType(Types.NULL);
-            eh.addError(ErrorTypes.INVALID_OPERATION, Types.VOID, null, line, column);
+            eh.addError(ErrorPhase.Semantic, "Arguments cannot be of type void", left, right);
             return;
         }
         
@@ -47,14 +47,14 @@ public class _FunctionArgsList extends Node{
         TypeDescription description = new TypeDescription(id, typeDimentions.getType());
         if(!st.put(description)){
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.DUPLICATED_NAMES, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             return;
         }
         
         if(type == Types.VOID){
             this.type = Types.NULL;
             description.setType(Types.NULL);
-            eh.addError(ErrorTypes.INVALID_OPERATION, Types.VOID, null, line, column);
+            eh.addError(ErrorPhase.Semantic, "Variables cannot be of type void", left, right);
             return;
         }
         
@@ -65,7 +65,7 @@ public class _FunctionArgsList extends Node{
             if(!checkInt(i.getDecimal()) || i.getDecimal() <= 0){
                 this.type = Types.NULL;
                 description.setType(Types.NULL);
-                eh.addError(ErrorTypes.VALUE_OUT_OF_BOUNDS, i.getDecimal(), line, column);
+                eh.addError(ErrorPhase.Semantic, "Value "+i.getDecimal()+" is out of bounds", left, right);
                 return;
             }
             i = i.getNext();
@@ -78,7 +78,7 @@ public class _FunctionArgsList extends Node{
             if(!st.putIndex(id, indexDescription)){
                 this.type = Types.NULL;
                 description.setType(Types.NULL);
-                eh.addError(ErrorTypes.NOT_ARRAY, id, line, column);
+                eh.addError(ErrorPhase.Semantic, "Identifier '"+id+"' is not an array", left, right);
                 return;
             }
         }
