@@ -1,0 +1,269 @@
+
+
+/**
+ * Assignatura 21780 - Compiladors
+ * Estudis: Grau en Informàtica 
+ * Itinerari: Intel·ligència Artificial i Computació
+ *
+ * Professor: Pere Palmer
+ */
+package front.sintactic;
+
+
+
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
+
+import java_cup.runtime.*;
+
+import java.io.PrintStream;
+import java.util.HashMap;
+
+import nodes.*;
+import utils.Types;
+import utils.OpComp;
+import utils.OpLog;
+import utils.OpArit;
+import utils.SymbolTable;
+
+class Parser;
+
+/**
+ ** Aquí es podria posar un codi 'ad hoc' però en aquest cas no és necessari.
+**/
+parser code {:
+/***
+    private Scanner scanner;
+    public Parser(Scanner scanner) { 
+        this.scanner = scanner;
+    }
+***/
+    private static SymbolTable st;
+    public Parser(SymbolTable st) {
+      this.st = st;
+    }
+
+
+:}
+
+/**
+ ** També aquí es poden afegir accions a realitzar quan es requereix un token.
+scan with {:     next_token(); :}
+**/
+
+terminal    ArrayIcon, Const, Main, Read, Write, Return, Lparen, Rparen, Lbracket, Rbracket,
+            Assign, Opif, Opelse, Opinc, Opwhile, Opfor, Endline, Comma;
+
+terminal Types Type;
+terminal OpComp Opcomp;
+terminal OpLog Oplog;
+terminal OpArit Oparit;
+terminal int Decimal;
+terminal boolean BooleanValue;
+terminal char Character;
+terminal String Id;
+
+non terminal                            SetUp;
+non terminal    _PictoProgram           PictoProgram;
+non terminal    _GlobalDeclarations     GlobalDeclarations;
+non terminal    _Functions              Functions;
+non terminal    _TypeDimentions         TypeDimentions;
+non terminal    _MainFunction           MainFunction;
+non terminal    _Declaration            Declaration;
+non terminal    _ConstDeclaration       ConstDelcaration;
+non terminal    _VarDeclaration         VarDeclaration;
+non terminal    _ArrDeclaration         ArrDeclaration;
+non terminal    _DimentionSizes         DimentionSizes;
+non terminal    _Function              Function;
+non terminal    _FunctionBody           FunctionBody;
+non terminal    _FunctionArgsList       FunctionArgsList;
+non terminal    _FunctionArgs           FunctionArgs;
+non terminal    _FunctionHead           FunctionHead;
+non terminal    _FunCallArgs            FunCallArgs;
+non terminal    _FunctionCall           FunctionCall;
+non terminal    _Value                  Value;
+non terminal    _Expression             Expression;
+non terminal    _Operation              Operation;
+non terminal    _Instruction            Instruction;
+non terminal    _Else                   Else;
+non terminal    _Index                  Index;
+non terminal    _Assignation            Assignation;
+non terminal    F_IN;
+non terminal    F_OUT;
+/**** Pere. Añadir esta variable  ****/
+non terminal    _AssignationPart        AssignationPart;
+/**** Pere. Hasta aquí  ****/
+
+
+/***********************************/
+/**************GRAMMAR**************/
+/***********************************/
+
+start with PictoProgram;
+
+SetUp               ::=                                                                                             {:  :}
+                    ;
+
+PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0);:}
+                    |   SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0);:}
+                    |   SetUp Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0);:}
+                    |   SetUp MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0);:}
+                    ;
+
+/***********************************/
+/********GLOBAL*DECLARATIONS********/
+/***********************************/
+GlobalDeclarations  ::= GlobalDeclarations:globalDeclarations Declaration:declaration                               {:RESULT = new _GlobalDeclarations(declaration, globalDeclarations, declarationleft, declarationright);:}
+                    |   Declaration:declaration                                                                     {:RESULT = new _GlobalDeclarations(declaration, null, declarationleft, declarationright);:}
+                    ;
+
+Declaration         ::= ConstDelcaration:constDeclaration                                                           {:RESULT = new _Declaration(constDeclaration, constDeclarationleft, constDeclarationright);:}
+                    |   VarDeclaration:varDeclaration                                                               {:RESULT = new _Declaration(varDeclaration, varDeclarationleft, varDeclarationright);:}
+                    |   ArrDeclaration:arrDeclaration                                                               {:RESULT = new _Declaration(arrDeclaration, arrDeclarationleft, arrDeclarationright);:}
+                    ;
+
+    /***********************************/
+    /*************CONSTANT**************/
+    /***********************************/
+ConstDelcaration    ::= Const Type:type Id:id Assign Decimal:decimal Endline                                        {:RESULT = new _ConstDeclaration(type, id, decimal, typeleft, decimalright);:}
+                    |   Const Type:type Id:id Assign Oparit:opArit Decimal:decimal Endline                          {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
+                    |   Const Type:type Id:id Assign BooleanValue:booleanValue Endline                              {:RESULT = new _ConstDeclaration(type, id, booleanValue, typeleft, booleanValueright);:}
+                    |   Const Type:type Id:id Assign Character:character Endline                                    {:RESULT = new _ConstDeclaration(type, id, character, typeleft, characterright);:}
+                    ;
+
+    /***********************************/
+    /*************VARIABLES*************/
+    /***********************************/
+VarDeclaration      ::= Type:type Id:id AssignationPart:assignationPart Endline                                     {:RESULT = new _VarDeclaration(type, id, assignationPart, idleft, idright);:}
+                    ;
+
+AssignationPart     ::= Assign Expression:expression                                                                {:RESULT = new _AssignationPart(expression, expressionleft, expressionright);:}
+                    |                                                                                               {: /* Pere. No hay asignación */ :}
+                    ;
+                    
+    /***********************************/
+    /**************ARRAYS***************/
+    /***********************************/
+ArrDeclaration      ::= Type:type DimentionSizes:dimentionSizes Id:id Endline                                       {:RESULT = new _ArrDeclaration(type, dimentionSizes, id, typeleft, idright);:}
+                    ;
+
+DimentionSizes      ::= DimentionSizes:dimentionSizes ArrayIcon Decimal:decimal                                     {:RESULT = new _DimentionSizes(dimentionSizes, decimal, decimalleft, decimalright);:}
+                    |   ArrayIcon Decimal:decimal                                                                   {:RESULT = new _DimentionSizes(null, decimal, decimalleft, decimalright);  :}
+                    ;
+
+/***********************************/
+/********GLOBAL*DECLARATIONS********/
+/***********************************/
+Functions           ::= Function:function Functions:functions                                                       {:RESULT = new _Functions(function, functions, functionleft, functionright);:}
+                    |   Function:function                                                                           {:RESULT = new _Functions(function, null, functionleft, functionright);:}
+                    ;
+
+Function            ::= Type:type FunctionHead:functionHead Lbracket FunctionBody:functionBody F_OUT                {:RESULT = new _Function(type, functionHead, functionBody, typeleft, functionHeadright);:}
+                    ;
+
+TypeDimentions      ::= Type:type DimentionSizes:dimentionSizes                                                     {:RESULT = new _TypeDimentions(dimentionSizes, type, typeleft, dimentionSizesright);:}
+                    ;
+
+FunctionHead        ::= Id:id FunctionArgs:functionArgs                                                             {:RESULT = new _FunctionHead(id, functionArgs, idleft, idright);:}
+                    ;
+
+FunctionArgs        ::= F_IN FunctionArgsList:functionArgsList Rparen                                               {:RESULT = new _FunctionArgs(functionArgsList, functionArgsListleft, functionArgsListright);:}
+                    |   F_IN Rparen                                                                                 {:  :}
+                    ;
+
+FunctionArgsList    ::= FunctionArgsList:functionArgsList Comma Type:type Id:id                                     {:RESULT = new _FunctionArgsList(functionArgsList, type, id, typeleft, idright);:}
+                    | FunctionArgsList:functionArgsList Comma TypeDimentions:typeDimentions Id:id                   {:RESULT = new _FunctionArgsList(functionArgsList, typeDimentions, id, typeDimentionsleft, idright);:}
+                    | Type:type Id:id                                                                               {:RESULT = new _FunctionArgsList(null, type, id, typeleft, idright);:}
+                    | TypeDimentions:typeDimentions Id:id                                                           {:RESULT = new _FunctionArgsList(null, typeDimentions, id, typeDimentionsleft, idright);:}
+                    ;
+
+FunctionBody        ::= Instruction:instruction FunctionBody:functionBody                                           {:RESULT = new _FunctionBody(instruction, functionBody, instructionleft, instructionright);:}
+                    |                                                                                               {:  :}
+                    ;
+    /***********************************/
+    /****************MAIN***************/
+    /***********************************/
+MainFunction        ::= Main:main F_IN Rparen Lbracket FunctionBody:functionBody F_OUT                         {:RESULT = new _MainFunction(functionBody, functionBodyleft, functionBodyright);:}
+                    ;
+
+    /***********************************/
+    /*************FUNCALL***************/
+    /***********************************/
+FunctionCall        ::= Id:id Lparen FunCallArgs:funCallArgs Rparen                                                 {:RESULT = new _FunctionCall(id, funCallArgs, idleft, funCallArgsright);:}
+                    ;
+
+FunCallArgs         ::= FunCallArgs:funCallArgs Comma Expression:expression                                         {:RESULT = new _FunCallArgs(funCallArgs, expression, expressionleft, expressionright);:}
+                    |   Expression:expression                                                                       {:RESULT = new _FunCallArgs(null, expression, expressionleft, expressionright);:}
+					|   FunCallArgs:funCallArgs Comma ArrayIcon Id:id                                               {:RESULT = new _FunCallArgs(funCallArgs, id, idleft, idright);:}
+                    |   ArrayIcon Id:id                                                                             {:RESULT = new _FunCallArgs(null, id, idleft, idright);:}
+                    |                                                                                               {: /* Pere. asegurar que no devuelve nada */ :}
+                    ;
+
+/***********************************/
+/******EXPRESSIONS*AND*VALUES*******/
+/***********************************/
+    Expression          ::= Value:value Operation:operation Expression:expression                                   {:RESULT = new _Expression(value, operation, expression, valueleft, expressionright);:}
+                        |   Value:value                                                                             {:RESULT = new _Expression(value, valueleft, valueright);:}
+                        |   Oparit:opArit Expression:expression                                                     {:RESULT = new _Expression(expression, opArit, expressionleft, expressionright);:}
+                        ;
+
+    Value               ::= FunctionCall:functionCall                                                               {:RESULT = new _Value(functionCall, functionCallleft, functionCallright);:}
+                        |   Lparen Expression:expression Rparen                                                     {:RESULT = new _Value(expression, expressionleft, expressionright);:}
+                        |   Decimal:decimal                                                                         {:RESULT = new _Value(decimal, decimalleft, decimalright);:}
+                        |   BooleanValue:booleanValue                                                               {:RESULT = new _Value(booleanValue, booleanValueleft, booleanValueright);:}
+                        |   Character:character                                                                     {:RESULT = new _Value(character, characterleft, characterright);:}
+                        |   Id:id Index:index                                                                       {:RESULT = new _Value(id, index, idleft, idright);:}
+                        |   Id:id                                                                                   {:RESULT = new _Value(id, idleft, idright);:}
+                        |   Read:read Lparen Rparen Endline                                                         {:RESULT = new _Value(readleft, readright);:}
+                        ;
+
+
+/***********************************/
+/****INSTRUCTIONS*AND*OPERATIONS****/
+/***********************************/
+
+Instruction         ::= Opif Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket Else:_else {:RESULT = new _Instruction(expression, functionBody, _else, expressionleft, expressionright);:}
+                    |   Opwhile Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket     {:RESULT = new _Instruction(expression, functionBody, expressionleft, expressionright);:}
+                    |   Declaration:declaration                                                                     {:RESULT = new _Instruction(declaration, declarationleft, declarationright);:}
+                    |   FunctionCall:functionCall Endline                                                           {:RESULT = new _Instruction(functionCall, functionCallleft, functionCallright);:}
+                    |   Assignation:assignation                                                                     {:RESULT = new _Instruction(assignation, assignationleft, assignationright);:}
+                    |   Return Endline                                                                              {:RESULT = new _Instruction();:}
+                    |   Return Expression:expression Endline                                                        {:RESULT = new _Instruction(expression, expressionleft, expressionright);:}
+                    |   Opfor Lparen VarDeclaration:varDeclaration Expression:expression Endline Id:id Opinc Rparen Lbracket FunctionBody:functionBody Rbracket    {:RESULT = new _Instruction(varDeclaration, expression, id, functionBody, varDeclarationleft, varDeclarationright);:}
+                        //Write (CharArr, IndexBegin, IndexEnd, Column, Row)
+                    |   Write Lparen Id:id Comma Expression:expression1 Comma Expression:expression2 Comma Expression:expression3 Comma Expression:expression4 Rparen Endline {:RESULT = new _Instruction(id, expression1, expression2, expression3, expression4, idleft, idright);:}
+                    ;
+
+Operation           ::= Oparit:opArit                                                                               {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
+                    |   Oplog:opLog                                                                                 {:RESULT = new _Operation(opLog, opLogleft, opLogright);:}
+                    |   Opcomp:opComp                                                                               {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+                    ;
+
+Else                ::= Opelse Lbracket FunctionBody:functionBody Rbracket                                          {:RESULT = new _Else(functionBody, functionBodyleft, functionBodyright);:}
+                    |                                                                                               {:  :}
+                    ;
+    /***********************************/
+    /************ASSIGNATION************/
+    /***********************************/
+Assignation         ::= Id:id Assign Expression:expression Endline                                                  {:RESULT = new _Assignation(id, expression, idleft, idright);:}
+                    |   Id:id Index:index Assign Expression:expression Endline                                      {:RESULT = new _Assignation(id, index, expression, idleft, idright);}
+                    ;
+
+Index               ::= ArrayIcon Decimal:decimal Index:index                                                       {:RESULT = new _Index(decimal, index, decimalleft, decimalright);:}
+                    |   ArrayIcon Decimal:decimal                                                                   {:RESULT = new _Index(decimal, null, decimalleft, decimalright);:}
+                    |   ArrayIcon Id:id Index:index                                                                 {:RESULT = new _Index(id, index, idleft, idright);:}
+                    |   ArrayIcon Id:id                                                                             {:RESULT = new _Index(id, null, idleft, idright);:}
+                    ;
+
+/***********************************/
+/************MARCADORES*************/
+/***********************************/
+F_IN        ::= Lparen {:st.enterBlock();:};
+F_OUT       ::= Rbracket{:st.exitBlock();:};
+
+
+/**
+TODO:
+1 añadir a FunctionArgsList poder poner una variable por cada argumento
+2 comprobar el tip ode variable en paso 1
+3 en _Function comprobar si tiene return type corrsepondiente
+**/

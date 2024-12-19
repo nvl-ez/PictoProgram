@@ -1,0 +1,44 @@
+🕳️🏠{
+	✏️("Array length 1D:");
+	🔢 length1d ⬅️ 👁️();
+	✏️("Array length 2D:");
+	🔢 length2d ⬅️ 👁️();
+	
+	🔢📦length1d 📦length2d numeros;
+	
+	🔂(🔢i⬅️0; i⬇️length1d; i➕➕ ){
+		🔂(🔢j⬅️0; j⬇️length2d; j➕➕ ){
+			numeros📦i 📦j⬅️👁️();
+}
+}
+
+🔢 num ⬅️ 👁️();
+
+
+🔂(; i⬇️length AND found ⚖️ 👎; i➕➕ ){
+		❓(numeros📦i ⚖️ num){
+			 found ⬅️👍;
+		}
+}
+	
+	✏️(contiene(numeros, length1d, length2d, num));
+}
+
+
+🔢contiene(🔢📦📦 numeros, 🔢length1d, 🔢length2d,🔢num){
+	🔢totalLength ⬅️ length1d✖️length2d;
+	🔢i ⬅️ 0;
+	
+	🔁(i⬇️totalLength){
+		🔢pos1d ⬅️ i➗totalLength;
+		🔢pos2d ⬅️ i®️totalLength;
+		
+		❓(numeros📦pos1d📦pos2d ⚖️ num){
+			 ↩️i;
+		}
+		
+		i➕➕;
+}
+
+↩️ -1;
+}
