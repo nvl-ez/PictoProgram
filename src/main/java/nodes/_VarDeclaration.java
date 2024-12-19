@@ -1,6 +1,7 @@
 package nodes;
 
-import utils.ErrorTypes;
+import static nodes.Node.eh;
+import utils.ErrorPhase;
 import utils.Types;
 import utils.description.Description;
 import utils.description.VariableDescription;
@@ -16,7 +17,7 @@ public class _VarDeclaration extends Node {
         
         if (type == Types.VOID) {
             this.type = Types.NULL;
-            eh.addError(ErrorTypes.INVALID_TYPE, Types.VOID, null, line, column);
+            eh.addError(ErrorPhase.Semantic, "Variables cannot be of type void", left, right);
             st.put(new VariableDescription(id, Types.NULL));
             return;
         }
@@ -26,7 +27,7 @@ public class _VarDeclaration extends Node {
             Types assignationType = assignationPart.getExpression().getType();
 
             if (assignationType != type) {
-                eh.addError(ErrorTypes.INVALID_TYPE, type, assignationType, line, column);
+                eh.addError(ErrorPhase.Semantic, "Invalid type assignation for variable: "+id, left, right);
                 this.type = Types.NULL;
                 st.put(new VariableDescription(id, Types.NULL));
                 return;
@@ -34,7 +35,7 @@ public class _VarDeclaration extends Node {
         }
 
         if (!st.put(new VariableDescription(id, type))) {
-            eh.addError(ErrorTypes.DUPLICATED_NAMES, id, line, column);
+            eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             this.type = Types.NULL;
             return;
         }

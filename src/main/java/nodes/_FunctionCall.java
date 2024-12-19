@@ -48,7 +48,7 @@ public class _FunctionCall extends Node {
                 return;
             }
             if (argDesc.getType() != arg.getType()) {
-                eh.addError(ErrorTypes.INVALID_TYPE, argDesc.getType(), arg.getType(), line, column);
+                eh.addError(ErrorPhase.Semantic, "Unmatching types for argument: "+argDesc.getId(), left, right);
                 this.type = Types.NULL;
                 ((ProcedureDescription) description).setType(Types.NULL);
                 return;
@@ -56,7 +56,7 @@ public class _FunctionCall extends Node {
 
             if (argDesc.getDimentions() != null) {//es un array
                 if (arg.getId() == null) {
-                    eh.addError(ErrorTypes.NOT_ARRAY, arg.getId(), line, column);
+                    eh.addError(ErrorPhase.Semantic, "Inexistent array: "+argDesc.getId(), left, right);
                     this.type = Types.NULL;
                     ((ProcedureDescription) description).setType(Types.NULL);
                     return;
@@ -72,7 +72,7 @@ public class _FunctionCall extends Node {
                     int length = iter.next();
 
                     if (length != indDesc.getLength()) {
-                        eh.addError(ErrorTypes.UNMATCHING_DIMENTIOSNS, arg.getId(), line, column);
+                        eh.addError(ErrorPhase.Semantic, "Invalid indexed dimentions", left, right);
                         this.type = Types.NULL;
                         ((ProcedureDescription) description).setType(Types.NULL);
                         return;
@@ -81,7 +81,7 @@ public class _FunctionCall extends Node {
                 }
 
                 if (iter.hasNext() || j != 0) {
-                    eh.addError(ErrorTypes.UNMATCHING_DIMENTIOSNS, arg.getId(), line, column);
+                    eh.addError(ErrorPhase.Semantic, "Invalid indexed dimentions", left, right);
                     this.type = Types.NULL;
                     ((ProcedureDescription) description).setType(Types.NULL);
                     return;
@@ -92,7 +92,7 @@ public class _FunctionCall extends Node {
         }
 
         if (i != 0 || arg != null) {
-            eh.addError(ErrorTypes.UNMATCHING_ARGUMENTS, arg.getId(), line, column);
+            eh.addError(ErrorPhase.Semantic, "Invalid argument number", left, right);
             this.type = Types.NULL;
             ((ProcedureDescription) description).setType(Types.NULL);
             return;

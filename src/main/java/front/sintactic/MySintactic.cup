@@ -245,7 +245,7 @@ Else                ::= Opelse Lbracket FunctionBody:functionBody Rbracket      
     /************ASSIGNATION************/
     /***********************************/
 Assignation         ::= Id:id Assign Expression:expression Endline                                                  {:RESULT = new _Assignation(id, expression, idleft, idright);:}
-                    |   Id:id Index:index Assign Expression:expression Endline                                      {:RESULT = new _Assignation(id, index, expression, idleft, idright);}
+                    |   Id:id Index:index Assign Expression:expression Endline                                      {:RESULT = new _Assignation(id, index, expression, idleft, idright);:}
                     ;
 
 Index               ::= ArrayIcon Decimal:decimal Index:index                                                       {:RESULT = new _Index(decimal, index, decimalleft, decimalright);:}
