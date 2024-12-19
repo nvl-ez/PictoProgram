@@ -54,7 +54,7 @@ public class _FunctionArgsList extends Node{
         if(type == Types.VOID){
             this.type = Types.NULL;
             description.setType(Types.NULL);
-            eh.addError(ErrorPhase.Semantic, "Variables cannot be of type void", left, right);
+            eh.addError(ErrorPhase.Semantic, "Arrays cannot be of type void", left, right);
             return;
         }
         

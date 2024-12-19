@@ -72,7 +72,7 @@ public class _FunctionCall extends Node {
                     int length = iter.next();
 
                     if (length != indDesc.getLength()) {
-                        eh.addError(ErrorPhase.Semantic, "Invalid indexed dimentions", left, right);
+                        eh.addError(ErrorPhase.Semantic, "Invalid dimention length", left, right);
                         this.type = Types.NULL;
                         ((ProcedureDescription) description).setType(Types.NULL);
                         return;

@@ -147,6 +147,7 @@ public class _Instruction extends Node{
     
     //for write
     //Write (CharArr, IndexBegin, IndexEnd, Column, Row)
+    //Array provided needs to be og length 256
     public _Instruction(String id, _Expression expression1, _Expression expression2, _Expression expression3, _Expression expression4, int left, int right) {
         super(left, right);
         
@@ -188,6 +189,24 @@ public class _Instruction extends Node{
             eh.addError(ErrorPhase.Semantic, "Row is not a number", left, right);
             return;
         }
+        
+        //Verify length and dimentions of array;
+        TypeDescription arr = (TypeDescription)desc;
+        
+        if(arr.getType()==Types.NULL){
+            return;
+        }
+        
+        int i = st.first(arr.getId());
+        if(st.next(i)!=0){
+            eh.addError(ErrorPhase.Semantic, "Invalid indexed dimentions", left, right);
+            return;
+        }
+        
+        if(st.check(i).getLength() != 256){
+            eh.addError(ErrorPhase.Semantic, "Invalid dimention length: Length 256 expected for function 'Write'", left, right);
+        }
+        
         
         this.id = id;
         this.expression1 = expression1;
