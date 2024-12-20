@@ -16,7 +16,9 @@ public class ErrorHandler {
     
     public String toString(){
         String errorString = "-------------------------------------------------------------------------------------------------------------------------\n";
-        errorString += "Compiling Phase | Row | Column | Details\n";
+        errorString += "|################################################### ERRORS ############################################################|\n";
+        errorString += "-------------------------------------------------------------------------------------------------------------------------\n";
+        errorString += "| Compiling Phase | Row | Column | Details\n";
         
         for(Row error : errors){
             errorString += "| ";
@@ -35,9 +37,8 @@ public class ErrorHandler {
             errorString += " "+error.line+"\t|";
             errorString += " "+error.column+"\t|";
             errorString += " "+error.errorDesc+"\n";
-            errorString += "-------------------------------------------------------------------------------------------------------------------------\n";
         }
-        
+        errorString += "-------------------------------------------------------------------------------------------------------------------------\n";
         return errorString;
     }
 

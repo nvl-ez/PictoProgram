@@ -95,6 +95,7 @@ public class _ConstDeclaration extends Node {
         
         if(opArit == OpArit.SUB) decimalValue *=-1;
         this.decimalValue = decimalValue;
+        description.setDecimalValue(decimalValue);
         
         
     }

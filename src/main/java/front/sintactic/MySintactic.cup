@@ -263,7 +263,5 @@ F_OUT       ::= Rbracket{:st.exitBlock();:};
 
 /**
 TODO:
-1 añadir a FunctionArgsList poder poner una variable por cada argumento
-2 comprobar el tip ode variable en paso 1
-3 en _Function comprobar si tiene return type corrsepondiente
+1 variables globales no pueden ser declaradas e inicializadas con read.
 **/

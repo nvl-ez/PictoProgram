@@ -49,5 +49,7 @@ public class ConstantDescription extends Description{
         return characterValue;
     }
     
-
+    public void setDecimalValue(int decimalValue) {
+        this.decimalValue = decimalValue;
+    }
 }
