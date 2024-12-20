@@ -147,6 +147,11 @@ endline         = ;
         cs.right = yycolumn;
         return cs;
     }
+
+    private static ErrorHandler eh;
+    public void setErrorHandler(ErrorHandler eh) {
+      this.eh = eh;
+    }
 %}
 
 /****************************************************************************/
