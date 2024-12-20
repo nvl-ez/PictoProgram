@@ -66,9 +66,10 @@ import utils.OpArit;
 %eofval}
 
 // Declaracions
-
+quote = \'
+character = {quote}[\x20-\x7E]{quote}//
 id		= [A-Za-z_][A-Za-z0-9_]*/**/
-type            = [🕳️ 🔢 🔤 ✅]
+type            = [🕳️🔢🔤✅]
 booleanValue    = [👍👎]
 arrayIcon       = 📦
 const           = 🔒
@@ -84,12 +85,9 @@ rparen          = \) //
 lbracket        = \{ //
 rbracket        = \} //
 
-quote = \'
-whitespace = [' '|'\t'|'\r'|'\n'|"\r\n"]
+
+whitespace = [ \t\r\n]
 comma = ,
-
-
-character = {quote}[\x20-\x7E]{quote}//
 
 decimal		= {digit10}+
 
@@ -155,6 +153,7 @@ endline         = ;
 %%
 
 // Regles/accions
+{character}     { return symbol(ParserSym.Character, this.yytext().charAt(1)); }
 {id}            { return symbol(ParserSym.Id, this.yytext()); }
 {type}          {
                     String type = this.yytext();
@@ -197,7 +196,6 @@ endline         = ;
                 
 {decimal}       { return symbol(ParserSym.Decimal, Integer.parseInt(this.yytext())); }
 {comma}         { return symbol(ParserSym.Comma); }
-{character}     { return symbol(ParserSym.Character, this.yytext().charAt(1)); }
 {lparen}        { return symbol(ParserSym.Lparen); }
 {rparen}        { return symbol(ParserSym.Rparen); }
 {lbracket}      { return symbol(ParserSym.Lbracket); }
