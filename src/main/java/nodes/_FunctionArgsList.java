@@ -73,7 +73,7 @@ public class _FunctionArgsList extends Node{
         
         i = dimentions;
         
-        while(dimentions!= null){
+        while(i!= null){
             IndexDescription indexDescription = new IndexDescription(i.getDecimal());
             if(!st.putIndex(id, indexDescription)){
                 this.type = Types.NULL;
@@ -81,6 +81,7 @@ public class _FunctionArgsList extends Node{
                 eh.addError(ErrorPhase.Semantic, "Identifier '"+id+"' is not an array", left, right);
                 return;
             }
+            i = i.getNext();
         }
         
         this.functionArgList = functionArgList;

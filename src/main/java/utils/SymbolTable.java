@@ -142,7 +142,9 @@ public class SymbolTable {
         int idxe = row.first;
         int idxep = 0;
         
-        while(idxe != 0 && expansionTable.get(idxe).description.getId().compareTo(description.getId())!= 0){
+        Row tempElem = expansionTable.get(idxe);
+        
+        while(idxe != 0 && tempElem.description.getId().compareTo(description.getId())!= 0){
             idxep = idxe;
             idxe = expansionTable.get(idxe).next;
         }

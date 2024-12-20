@@ -70,14 +70,14 @@ import utils.OpArit;
 quote = \'
 character = {quote}[\x20-\x7E]{quote}//
 id		= [A-Za-z_][A-Za-z0-9_]*/**/
-type            = [🕳️🔢🔤✅]
+type            = [🕳🔢🔤✅]
 booleanValue    = [👍👎]
 arrayIcon       = 📦
 const           = 🔒
 main            = 🏠
-read            = 👁️
-write           = ✏️
-return          = ↩️
+read            = 👁
+write           = ✏
+return          = ↩
 
 digit10		= [0-9]//
 
@@ -92,7 +92,7 @@ comma = ,
 
 decimal		= {digit10}+
 
-assign          = ⬅️ //
+assign          = ⬅ //
 
 letterA         = ['A'|'a'] //
 letterD         = ['D'|'d'] //
@@ -103,11 +103,11 @@ letterR         = ['R'|'r'] //
 opif            = ❓ //
 opelse          = ❌ //
 
-opcomp          = ⚖️|⬆️|⬇️|⬆️⚖️|⬇️⚖️|🚫 //
+opcomp          = ⚖|⬆|⬇|⬆⚖|⬇⚖|🚫 //
 
 oplog           = ({letterA}{letterN}{letterD})|({letterO}{letterR}) //
 
-oparit          = ➕|➖|✖️|➗|®️ //
+oparit          = ➕|➖|✖|➗|® //
 
 opinc           = ➕➕
 
@@ -129,7 +129,7 @@ endline         = ;
      Construcció d'un symbol sense atribut associat.
      **/
     private ComplexSymbol symbol(int type) throws IOException{
-        writer.write(ParserSym.terminalNames[type]); 
+        writer.write(ParserSym.terminalNames[type]+" "); 
         writer.flush();
         ComplexSymbol cs = new ComplexSymbol(ParserSym.terminalNames[type], type);
         cs.left = yyline + 1;
@@ -141,7 +141,7 @@ endline         = ;
      Construcció d'un symbol amb un atribut associat.
      **/
     private ComplexSymbol symbol(int type, Object value) throws IOException{
-        writer.write(ParserSym.terminalNames[type]); 
+        writer.write(ParserSym.terminalNames[type]+" "); 
         writer.flush();
         ComplexSymbol cs = new ComplexSymbol(ParserSym.terminalNames[type], type, value);
         cs.left = yyline + 1;
@@ -164,7 +164,7 @@ endline         = ;
     return symbol(ParserSym.Id, this.yytext()); }
 {type}          {
                     String type = this.yytext();
-                    if(type.equals("🕳️".replaceAll("\\ufe0f", ""))){
+                    if(type.equals("🕳".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Type, Types.VOID);
                     } else if(type.equals("🔢".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Type, Types.INT);
@@ -212,15 +212,15 @@ endline         = ;
 
 {opcomp}        { 
                     String op = this.yytext();
-                    if(op.equals("⚖️".replaceAll("\\ufe0f", ""))){
+                    if(op.equals("⚖".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.EQUAL);
-                    } else if(op.equals("⬆️".replaceAll("\\ufe0f", ""))){
+                    } else if(op.equals("⬆".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.GREATER_THAN);
-                    } else if(op.equals("⬇️".replaceAll("\\ufe0f", ""))){
+                    } else if(op.equals("⬇".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.LESS_THAN);
-                    } else if(op.equals("⬆️⚖️".replaceAll("\\ufe0f", ""))){
+                    } else if(op.equals("⬆⚖".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.GREATER_EQUAL_THAN);
-                    } else if(op.equals("⬇️⚖️".replaceAll("\\ufe0f", ""))){
+                    } else if(op.equals("⬇⚖".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.LESS_EQUAL_THAN);
                     } else if(op.equals("🚫".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.DIFFERENT);
@@ -235,11 +235,11 @@ endline         = ;
                         return symbol(ParserSym.Oparit, OpArit.SUM);
                     } else if(op.equals("➖".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.SUB);
-                    } else if(op.equals("✖️".replaceAll("\\ufe0f", ""))){
+                    } else if(op.equals("✖".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.MUL);
                     } else if(op.equals("➗".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.DIV);
-                    } else if(op.equals("®️".replaceAll("\\ufe0f", ""))){
+                    } else if(op.equals("®".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.MOD);
                     }
                 }

@@ -22,13 +22,13 @@ public class Compilador {
 
     public static void main(String[] args) {
         String filePath = "program.txt";
-
+        ErrorHandler eh = new ErrorHandler();
         try {
             preprocessFile(filePath);
-            FileReader input = new FileReader(new File("emptyFunctionTest.txt"));
+            FileReader input = new FileReader(new File(filePath));
             
             SymbolTable st = new SymbolTable();
-            ErrorHandler eh = new ErrorHandler();
+            
             
             SymbolFactory sf = new ComplexSymbolFactory();
             
@@ -47,12 +47,14 @@ public class Compilador {
             
             parser.parse();
             
-            System.out.println(eh.toString());
+            
 
             
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        System.out.println(eh.toString());
     }
     
     //Sometimes text edditors add special characters, these cause problems for the lexic.

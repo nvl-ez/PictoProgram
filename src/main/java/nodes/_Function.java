@@ -79,12 +79,15 @@ public class _Function extends Node {
                     description.setType(Types.NULL);
                     return;
                 }
+                
+                args = args.getNext();
             }
         }
 
         boolean found = false;
 
-        _FunctionBody funcBody = functionBody.getNext();
+        _FunctionBody funcBody = functionBody;
+        
         while (funcBody != null) {
             _Instruction instr = funcBody.getInstruction();
             if (instr.getOpType() == OpType.RETURN_EXPRESSION) {
@@ -98,12 +101,22 @@ public class _Function extends Node {
                 }
                 found = true;
             }
+            if(instr.getOpType() == OpType.RETURN && type != Types.VOID){
+                    eh.addError(ErrorPhase.Semantic, "Function type does not match return type", instr.getLine(), instr.getColumn());
+                    this.type = Types.NULL;
+                    description.setType(Types.NULL);
+                    return;
+            }
+            
+            if(instr.getOpType() == OpType.RETURN && type == Types.VOID){
+                found = true;
+            }
 
-            funcBody = functionBody.getNext();
+            funcBody = funcBody.getNext();
         }
 
         if (!found && type != Types.VOID) {
-            eh.addError(ErrorPhase.Semantic, "No return statement found for typed function", line, column);
+            eh.addError(ErrorPhase.Semantic, "No return statement found", line, column);
             this.type = Types.NULL;
             description.setType(Types.NULL);
             return;
