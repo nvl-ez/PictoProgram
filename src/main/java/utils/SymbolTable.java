@@ -4,6 +4,7 @@ package utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeMap;
 import utils.description.ArgumentDescription;
 import utils.description.Description;
 import utils.description.IndexDescription;
@@ -13,25 +14,25 @@ import utils.description.TypeDescription;
 
 public class SymbolTable {
     private int n;
-    private ArrayList<Integer> scopeTable;
-    private ArrayList<Row> expansionTable;
+    private TreeMap<Integer, Integer> scopeTable;
+    private TreeMap<Integer, Row> expansionTable;
     private HashMap<String, Row> descriptionTable;
-    private ErrorHandler eh;
     
     public SymbolTable(){
         n = 0; 
-        scopeTable = new ArrayList<>();
-        expansionTable = new ArrayList<>();
+        scopeTable = new TreeMap<>();
+        expansionTable = new TreeMap<>();
         descriptionTable = new HashMap<>();
-        this.eh = new ErrorHandler();
+        
+        empty();
     }
     
     public void empty(){
         n = 0;
         descriptionTable.clear();
-        scopeTable.set(n, 0);
+        scopeTable.put(n, 0);
         n = 1;
-        scopeTable.set(n, 0);
+        scopeTable.put(n, 0);
     }
     
     public boolean put(Description description) {
@@ -43,8 +44,8 @@ public class SymbolTable {
             }
             
             int idxe = scopeTable.get(n)+1;
-            scopeTable.set(n, idxe);
-            expansionTable.set(idxe, row);
+            scopeTable.put(n, idxe);
+            expansionTable.put(idxe, row);
         }
         descriptionTable.put(description.getId(), new Row(description, n));
         return true;
@@ -52,7 +53,7 @@ public class SymbolTable {
     
     public void enterBlock(){
         n++;
-        scopeTable.set(n, scopeTable.get(n-1));
+        scopeTable.put(n, scopeTable.get(n-1));
     }
     
     public Description get(String id){
@@ -63,7 +64,7 @@ public class SymbolTable {
     public boolean putIndex(String id, IndexDescription description){
         Description da = descriptionTable.get(id).description;
         
-        if((da instanceof TypeDescription) == false || ((TypeDescription)da).getType() != Types.ARR ){
+        if((da instanceof TypeDescription) == false){
             return false;
         }
         
@@ -76,11 +77,11 @@ public class SymbolTable {
         }
         
         idxe = scopeTable.get(n)+1;
-        scopeTable.set(n, idxe);
+        scopeTable.put(n, idxe);
         description.setId(null);
         Row row  = new Row(description, -1);
         row.next = 0;
-        expansionTable.add(idxe, row);
+        expansionTable.put(idxe, row);
         
         if(idxep == 0){
             descriptionTable.get(id).first = idxe;
@@ -97,7 +98,7 @@ public class SymbolTable {
         
         int start = Math.min(scopeTable.get(n), scopeTable.get(n-1));
         int end = Math.max(scopeTable.get(n), scopeTable.get(n-1));
-        
+        n--;
         for(int i = start; i<=end; i++){
             Row row = expansionTable.get(i);
             String id = row.description.getId();
@@ -148,10 +149,10 @@ public class SymbolTable {
         
         if(idxe != 0) return false;
         idxe = scopeTable.get(n)+1;
-        scopeTable.set(n, idxe);
+        scopeTable.put(n, idxe);
         row = new Row(description, -1);
         row.next = 0;
-        expansionTable.add(idxe, row);
+        expansionTable.put(idxe, row);
         
         if(idxep == 0){
             descriptionTable.get(idProcedure).first = idxe;

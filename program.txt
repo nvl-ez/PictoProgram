@@ -1,0 +1,173 @@
+🔤📦10📦10 letters;
+🔒 🔤 letterA ⬅ 'a';
+🔒 🔢 pi ⬅ 3;
+🔒 🔢 null ⬅ ➖1;
+
+🔒 ✅ true ⬅ 👍;
+
+🔢 globalCounter ⬅ 0;
+🔤 letterCounter ⬅ 'a';
+
+
+
+✅ equalsNum(🔢 num1, 🔢 num2){
+    ↩ num1 ⚖ num2;
+} 
+
+🕳 printArray(🔤📦10📦10 arr){
+
+}
+
+🔤 numToChar(🔢 answer){
+    🔤 num1 ⬅ ' ';
+
+    ❓(answer ⚖ 0){
+        num1 ⬅ '0';
+    } ❌{
+        ❓(answer ⚖ 1){
+            num1 ⬅ '1';
+        } ❌{
+            ❓(answer ⚖ 2){
+                num1 ⬅ '2';
+            } ❌{
+                ❓(answer ⚖ 3){
+                    num1 ⬅ '3';
+                } ❌{
+                    ❓(answer ⚖ 4){
+                        num1 ⬅ '4';
+                    } ❌{
+                        ❓(answer ⚖ 5){
+                            num1 ⬅ '5';
+                        } ❌{
+                            ❓(answer ⚖ 6){
+                                num1 ⬅ '6';
+                            } ❌{
+                                ❓(answer ⚖ 7){
+                                    num1 ⬅ '7';
+                                } ❌{
+                                    ❓(answer ⚖ 8){
+                                        num1 ⬅ '8';
+                                    } ❌{
+                                        ❓(answer ⚖ 9){
+                                            num1 ⬅ '9';
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ↩ num1;
+}
+
+🔢 charToNum(🔤 answer){
+    🔢 num1 ⬅ ➖1;
+
+    ❓(answer ⚖ '0'){
+        num1 ⬅ 0;
+    } ❌{
+        ❓(answer ⚖ '1'){
+            num1 ⬅ 1;
+        } ❌{
+            ❓(answer ⚖ '2'){
+                num1 ⬅ 2;
+            } ❌{
+                ❓(answer ⚖ '3'){
+                    num1 ⬅ 3;
+                } ❌{
+                    ❓(answer ⚖ '4'){
+                        num1 ⬅ 4;
+                    } ❌{
+                        ❓(answer ⚖ '5'){
+                            num1 ⬅ 5;
+                        } ❌{
+                            ❓(answer ⚖ '6'){
+                                num1 ⬅ 6;
+                            } ❌{
+                                ❓(answer ⚖ '7'){
+                                    num1 ⬅ 7;
+                                } ❌{
+                                    ❓(answer ⚖ '8'){
+                                        num1 ⬅ 8;
+                                    } ❌{
+                                        ❓(answer ⚖ '9'){
+                                            num1 ⬅ 9;
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ↩ num1;
+}
+
+🏠(){
+    🔤📦256 text;
+
+    text 📦0 ⬅ 'L';
+    text 📦1 ⬅ 'e';
+    text 📦2 ⬅ 'n';
+    text 📦3 ⬅ 'g';
+    text 📦4 ⬅ 't';
+    text 📦5 ⬅ 'h';
+    text 📦6 ⬅ ':';
+    text 📦7 ⬅ ' ';
+
+    ✏(text, 0, 7, 0, 0);
+
+    🔤 answer ⬅ 👁();
+
+    🔢 num1;
+
+    🔂(🔢 num2 ⬅ 0; num2⬇num1; num2➕➕){
+        globalCounter ⬅ globalCounter ➕ 2;
+    }
+
+    🔢 decimal ⬅ globalCounter ➗ 10;
+    🔢 reminder ⬅ globalCounter ® 10;
+
+    🔤 textDec ⬅ numToChar(decimal);
+    🔤 textRem ⬅ numToChar(reminder);
+
+    text 📦0 ⬅ textDec;
+    text 📦1 ⬅ textRem;
+
+    ✏(text, 0, 1, 0, 2);
+
+    answer ⬅ 👁();
+
+    🔤📦10 whitespace;
+
+    🔂(🔢 i ⬅ 0; i⬇10; i➕➕){
+        whitespace 📦i ⬅ ' ';
+        ✏(whitespace, 0, 9, 0, i);
+    }
+
+    🔢📦10📦10 array;
+    🔢 a;
+    🔁(a⬇10){
+        🔢 f ⬅ a;
+        🔢 g ⬅ a;
+
+        🔁(f⬇10){
+            array 📦f📦a ⬅ a;
+            f⬅f➕1;
+        }
+
+        🔁(g⬇10){
+            array 📦a📦g ⬅ a;
+            g⬅g➕1;
+        }
+
+        a⬅a➕1;
+    }
+
+}

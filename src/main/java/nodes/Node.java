@@ -27,12 +27,12 @@ public class Node {
         return column;
     }
     
-    public void setErrorHandler(ErrorHandler eh){
-        this.eh = eh;
+    public static void setErrorHandler(ErrorHandler errh){
+        eh = errh;
     }
     
-    public void setSymbolTable(SymbolTable st){
-        this.st = st;
+    public static void setSymbolTable(SymbolTable simt){
+        st = simt;
     }
     
     protected boolean checkInt(int number){

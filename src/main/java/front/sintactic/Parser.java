@@ -15,6 +15,7 @@ import utils.OpComp;
 import utils.OpLog;
 import utils.OpArit;
 import utils.SymbolTable;
+import utils.ErrorHandler;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -348,18 +349,16 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 
 
-/***
-    private Scanner scanner;
-    public Parser(Scanner scanner) { 
-        this.scanner = scanner;
-    }
-***/
+
     private static SymbolTable st;
-    public Parser(SymbolTable st) {
+    public void setSymbolTable(SymbolTable st) {
       this.st = st;
     }
 
-
+    private static ErrorHandler eh;
+    public void setErrorHandler(ErrorHandler eh) {
+      this.eh = eh;
+    }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/

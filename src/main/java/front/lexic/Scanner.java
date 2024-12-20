@@ -21,6 +21,7 @@ import front.sintactic.ParserSym;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import utils.ErrorHandler;
 
 import utils.Types;
 import utils.OpComp;
@@ -121,15 +122,15 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\2\1\4\1\5\1\6"+
-    "\1\7\1\10\3\11\1\12\1\2\1\13\3\1\1\3"+
-    "\1\1\1\14\1\15\2\16\2\1\1\17\1\1\1\20"+
-    "\1\21\1\22\1\23\1\24\1\25\1\2\1\0\1\26"+
+    "\1\0\1\1\1\2\1\1\1\3\1\4\1\5\1\6"+
+    "\1\7\3\10\1\11\1\1\1\12\3\1\1\13\1\1"+
+    "\1\14\1\15\2\16\2\1\1\17\1\1\1\20\1\21"+
+    "\1\22\1\23\1\24\1\25\1\0\1\26\1\0\1\26"+
     "\1\0\2\26\1\27\1\30\1\31\1\32\1\25\1\33"+
-    "\2\34\1\26\1\0";
+    "\1\34\1\0";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[51];
+    int [] result = new int[49];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -154,16 +155,16 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\47\0\116\0\116\0\165\0\47\0\47\0\47"+
-    "\0\234\0\47\0\303\0\352\0\u0111\0\47\0\u0138\0\47"+
-    "\0\u015f\0\u0186\0\u01ad\0\47\0\u01d4\0\47\0\47\0\u01fb"+
-    "\0\47\0\u0222\0\u0249\0\47\0\u0270\0\47\0\47\0\47"+
-    "\0\47\0\47\0\47\0\u0297\0\u02be\0\u02e5\0\u030c\0\u02be"+
-    "\0\47\0\47\0\47\0\47\0\47\0\u0333\0\47\0\116"+
-    "\0\47\0\116\0\u01ad";
+    "\0\0\0\47\0\116\0\165\0\47\0\47\0\47\0\234"+
+    "\0\47\0\303\0\352\0\u0111\0\47\0\u0138\0\47\0\u015f"+
+    "\0\u0186\0\u01ad\0\47\0\u01d4\0\47\0\47\0\u01fb\0\47"+
+    "\0\u0222\0\u0249\0\47\0\u0270\0\47\0\47\0\47\0\47"+
+    "\0\47\0\47\0\u0297\0\u02be\0\u02be\0\u0297\0\u02e5\0\47"+
+    "\0\u02e5\0\47\0\47\0\47\0\47\0\u030c\0\47\0\47"+
+    "\0\u01ad";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[51];
+    int [] result = new int[49];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -186,26 +187,24 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\4\1\2\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\1\13\3\14\1\15\1\14\1\16\1\17"+
+    "\1\2\2\3\1\2\1\4\1\5\1\6\1\7\1\10"+
+    "\1\11\1\12\3\13\1\14\1\13\1\15\1\16\1\17"+
     "\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27"+
-    "\1\30\1\31\1\32\1\33\1\24\1\34\1\35\1\36"+
-    "\1\37\1\40\1\41\1\42\1\43\50\0\2\3\1\0"+
-    "\1\3\14\0\1\3\26\0\1\3\1\44\1\45\1\46"+
-    "\10\45\1\47\1\45\1\50\1\45\1\46\1\45\34\0"+
-    "\1\11\42\0\1\47\3\0\1\14\1\0\3\14\1\15"+
-    "\2\14\1\0\1\47\35\0\1\14\1\0\6\14\33\0"+
-    "\1\51\3\0\1\14\1\0\6\14\1\0\1\51\26\0"+
-    "\2\3\1\0\1\46\10\0\1\47\1\0\1\51\1\0"+
-    "\1\46\63\0\1\31\46\0\1\52\46\0\1\43\46\0"+
-    "\1\53\42\0\1\54\52\0\1\55\46\0\1\56\46\0"+
-    "\1\57\11\0\2\3\1\0\1\60\14\0\1\3\31\0"+
-    "\1\61\43\0\2\3\1\0\1\62\7\0\1\51\4\0"+
-    "\1\62\31\0\1\51\7\0\1\51\4\0\1\51\52\0"+
-    "\1\63\21\0";
+    "\1\30\1\31\1\32\1\23\1\33\1\34\1\35\1\36"+
+    "\1\37\1\40\1\41\1\42\50\0\2\3\46\0\2\43"+
+    "\1\44\10\43\1\45\1\43\1\46\1\43\1\44\1\43"+
+    "\34\0\1\10\42\0\1\47\3\0\1\13\1\0\3\13"+
+    "\1\14\2\13\1\0\1\47\35\0\1\13\1\0\6\13"+
+    "\33\0\1\50\3\0\1\13\1\0\6\13\1\0\1\50"+
+    "\31\0\1\51\10\0\1\47\1\0\1\50\1\0\1\51"+
+    "\63\0\1\30\46\0\1\52\46\0\1\42\46\0\1\53"+
+    "\42\0\1\54\52\0\1\55\46\0\1\56\46\0\1\57"+
+    "\14\0\1\60\46\0\1\60\7\0\1\50\4\0\1\50"+
+    "\31\0\1\50\7\0\1\50\4\0\1\50\52\0\1\61"+
+    "\21\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[858];
+    int [] result = new int[819];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -248,13 +247,13 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\3\1\3\11\1\1\1\11\3\1\1\11"+
+    "\1\0\1\11\2\1\3\11\1\1\1\11\3\1\1\11"+
     "\1\1\1\11\3\1\1\11\1\1\2\11\1\1\1\11"+
-    "\2\1\1\11\1\1\6\11\1\1\1\0\1\1\1\0"+
-    "\1\1\5\11\1\1\1\11\1\1\1\11\1\1\1\0";
+    "\2\1\1\11\1\1\6\11\1\0\1\1\1\0\1\1"+
+    "\1\0\1\11\1\1\4\11\1\1\2\11\1\0";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[51];
+    int [] result = new int[49];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -358,6 +357,11 @@ public class Scanner implements java_cup.runtime.Scanner {
         cs.left = yyline + 1;
         cs.right = yycolumn;
         return cs;
+    }
+
+    private static ErrorHandler eh;
+    public void setErrorHandler(ErrorHandler eh) {
+      this.eh = eh;
     }
 
 
@@ -810,56 +814,57 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 30: break;
           case 3:
-            { String type = this.yytext();
-                    if(type.equals("🕳️")){
-                        return symbol(ParserSym.Type, Types.VOID);
-                    } else if(type.equals("🔢")){
-                        return symbol(ParserSym.Type, Types.INT);
-                    } else if(type.equals("🔤")){
-                        return symbol(ParserSym.Type, Types.CHAR);
-                    } else if(type.equals("✅")){
-                        return symbol(ParserSym.Type, Types.BOOL);
-                    }
+            { return symbol(ParserSym.Lparen);
             }
           // fall through
           case 31: break;
           case 4:
-            { return symbol(ParserSym.Lparen);
+            { return symbol(ParserSym.Rparen);
             }
           // fall through
           case 32: break;
           case 5:
-            { return symbol(ParserSym.Rparen);
+            { return symbol(ParserSym.Comma);
             }
           // fall through
           case 33: break;
           case 6:
-            { return symbol(ParserSym.Comma);
+            { return symbol(ParserSym.Decimal, Integer.parseInt(this.yytext()));
             }
           // fall through
           case 34: break;
           case 7:
-            { return symbol(ParserSym.Decimal, Integer.parseInt(this.yytext()));
+            { return symbol(ParserSym.Endline);
             }
           // fall through
           case 35: break;
           case 8:
-            { return symbol(ParserSym.Endline);
+            { System.out.println(this.yytext());
+    return symbol(ParserSym.Id, this.yytext());
             }
           // fall through
           case 36: break;
           case 9:
-            { return symbol(ParserSym.Id, this.yytext());
+            { return symbol(ParserSym.Lbracket);
             }
           // fall through
           case 37: break;
           case 10:
-            { return symbol(ParserSym.Lbracket);
+            { return symbol(ParserSym.Rbracket);
             }
           // fall through
           case 38: break;
           case 11:
-            { return symbol(ParserSym.Rbracket);
+            { String type = this.yytext();
+                    if(type.equals("🕳️".replaceAll("\\ufe0f", ""))){
+                        return symbol(ParserSym.Type, Types.VOID);
+                    } else if(type.equals("🔢".replaceAll("\\ufe0f", ""))){
+                        return symbol(ParserSym.Type, Types.INT);
+                    } else if(type.equals("🔤".replaceAll("\\ufe0f", ""))){
+                        return symbol(ParserSym.Type, Types.CHAR);
+                    } else if(type.equals("✅".replaceAll("\\ufe0f", ""))){
+                        return symbol(ParserSym.Type, Types.BOOL);
+                    }
             }
           // fall through
           case 39: break;
@@ -875,15 +880,15 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 41: break;
           case 14:
             { String op = this.yytext();
-                    if(op.equals("➕")){
+                    if(op.equals("➕".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.SUM);
-                    } else if(op.equals("➖")){
+                    } else if(op.equals("➖".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.SUB);
-                    } else if(op.equals("✖️")){
+                    } else if(op.equals("✖️".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.MUL);
-                    } else if(op.equals("➗")){
+                    } else if(op.equals("➗".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.DIV);
-                    } else if(op.equals("®️")){
+                    } else if(op.equals("®️".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Oparit, OpArit.MOD);
                     }
             }
@@ -895,9 +900,9 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 43: break;
           case 16:
-            { if(this.yytext().equals("👍")){
+            { if(this.yytext().equals("👍".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.BooleanValue, true);
-                    } else if(this.yytext().equals("👎")){
+                    } else if(this.yytext().equals("👎".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.BooleanValue, false);
                     }
             }
@@ -925,17 +930,17 @@ public class Scanner implements java_cup.runtime.Scanner {
           case 48: break;
           case 21:
             { String op = this.yytext();
-                    if(op.equals("⚖️")){
+                    if(op.equals("⚖️".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.EQUAL);
-                    } else if(op.equals("⬆️")){
+                    } else if(op.equals("⬆️".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.GREATER_THAN);
-                    } else if(op.equals("⬇️")){
+                    } else if(op.equals("⬇️".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.LESS_THAN);
-                    } else if(op.equals("⬆️⚖️")){
+                    } else if(op.equals("⬆️⚖️".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.GREATER_EQUAL_THAN);
-                    } else if(op.equals("⬇️⚖️")){
+                    } else if(op.equals("⬇️⚖️".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.LESS_EQUAL_THAN);
-                    } else if(op.equals("🚫")){
+                    } else if(op.equals("🚫".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Opcomp, OpComp.DIFFERENT);
                     }
             }
