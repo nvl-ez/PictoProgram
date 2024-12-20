@@ -17,6 +17,7 @@ import front.sintactic.ParserSym;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import utils.ErrorHandler;
 
 import utils.Types;
 import utils.OpComp;
