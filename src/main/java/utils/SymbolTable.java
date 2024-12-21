@@ -1,6 +1,5 @@
 package utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -16,8 +15,11 @@ public class SymbolTable {
     private TreeMap<Integer, Integer> scopeTable;
     private TreeMap<Integer, Row> expansionTable;
     private HashMap<String, Row> descriptionTable;
+    
+    private static ErrorHandler eh;
 
-    public SymbolTable() {
+    public SymbolTable(ErrorHandler errh) {
+        eh = errh;
         n = 0;
         scopeTable = new TreeMap<>();
         expansionTable = new TreeMap<>();
@@ -91,25 +93,39 @@ public class SymbolTable {
     }
 
     public void exitBlock() {
-        if (n == 0) {
+        // evaluar si hay un nivel al que volver
+            if(n==1){
+            eh.addError(ErrorPhase.Semantic, "Escaping the global scope was atempted, might be due a faulty function definition.", -1, -1);
             return;
         }
+        int idxi = scopeTable.get(n); // idxi = ta[n]
+        n = n - 1;                    // n = n - 1
+        int idxf = scopeTable.get(n); // idxf = ta[n]
 
-        int start = Math.min(scopeTable.get(n), scopeTable.get(n - 1));
-        int end = Math.max(scopeTable.get(n), scopeTable.get(n - 1));
-        n--;
-        for (int i = start; i <= end; i++) {
-            Row row = expansionTable.get(i);
-            String id = row.description.getId();
-            descriptionTable.put(id, new Row(row.description, row.np));
+        // while idxi > idxf
+        while (idxi > idxf) {
+            Row row = expansionTable.get(idxi); // te[idxi]
+            if (row != null && row.np != -1) {
+                // if te[idxi].np != -1
+                String id = row.description.getId(); // id = te[idxi].id
+                Row rowInDescription = descriptionTable.get(id); // td[id]
+
+                if (rowInDescription != null) {
+                    // td[id].np = te[idxi].np
+                    // td[id].d = te[idxi].d
+                    // td[id].first = te[idxi].next
+                    rowInDescription.np = row.np;
+                    rowInDescription.description = row.description;
+                    rowInDescription.first = row.next;
+                }
+            }
+            idxi = idxi - 1; // idxi = idxi - 1
         }
-
-        //Tweeker code lmao, elimina los elementos que no se hayan substituido al salir de un bloque.
         Iterator<HashMap.Entry<String, Row>> iterator = descriptionTable.entrySet().iterator();
         while (iterator.hasNext()) {
             HashMap.Entry<String, Row> entry = iterator.next();
-            if (((Row)entry.getValue()).np == n+1) {
-                iterator.remove(); 
+            if (((Row) entry.getValue()).np == n + 1) {
+                iterator.remove();
             }
         }
     }

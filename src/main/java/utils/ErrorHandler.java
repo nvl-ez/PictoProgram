@@ -18,24 +18,32 @@ public class ErrorHandler {
         String errorString = "-------------------------------------------------------------------------------------------------------------------------\n";
         errorString += "|################################################### ERRORS ############################################################|\n";
         errorString += "-------------------------------------------------------------------------------------------------------------------------\n";
-        errorString += "| Compiling Phase | Row | Column | Details\n";
+        errorString += "| Compiling Phase | Row \t| Column | Details\n";
+        
         
         for(Row error : errors){
             errorString += "| ";
             switch(error.phase){
                 case ErrorPhase.Lexic:
-                    errorString += "LEXIC          |";
+                    errorString += "LEXIC           |";
                     break;
                 case ErrorPhase.Sintactic:
-                    errorString += "SINTACTIC      |";
+                    errorString += "SINTACTIC       |";
                     break;
                 case ErrorPhase.Semantic:
-                    errorString += "SEMANTIC       |";
+                    errorString += "SEMANTIC        |";
                     break;
             }
-            
-            errorString += " "+error.line+"\t|";
-            errorString += " "+error.column+"\t|";
+            if(error.line >= 0){
+                errorString += " "+error.line+"\t\t|";
+            } else{
+                errorString += " \t\t|";
+            }
+            if(error.column >= 0){
+                errorString += " "+error.column+"\t |";
+            } else{
+                errorString += " \t |";
+            }
             errorString += " "+error.errorDesc+"\n";
         }
         errorString += "-------------------------------------------------------------------------------------------------------------------------\n";

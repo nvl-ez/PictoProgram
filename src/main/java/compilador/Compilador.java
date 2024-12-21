@@ -21,13 +21,13 @@ import utils.SymbolTable;
 public class Compilador {
 
     public static void main(String[] args) {
-        String filePath = "program.txt";
+        String filePath = "empty.txt";
         ErrorHandler eh = new ErrorHandler();
         try {
             preprocessFile(filePath);
             FileReader input = new FileReader(new File(filePath));
             
-            SymbolTable st = new SymbolTable();
+            SymbolTable st = new SymbolTable(eh);
             
             
             SymbolFactory sf = new ComplexSymbolFactory();
@@ -47,6 +47,7 @@ public class Compilador {
             
             parser.parse();
             
+            scanner.closeTokenStram();
             
 
             

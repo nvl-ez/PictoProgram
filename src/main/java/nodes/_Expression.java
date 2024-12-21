@@ -44,7 +44,7 @@ public class _Expression extends Node {
                 type = Types.NULL;
                 return;
             }
-            type = Types.BOOL;
+            type = Types.INT;
         } else if(operation.getOpcomp() != null){
             //Verificar que se puede usar la operacion de comparacion
             if(value.getType() != expression.getType()){

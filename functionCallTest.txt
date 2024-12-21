@@ -1,0 +1,19 @@
+🔢 pi ⬅ 3;
+
+🔤 numToChar(🔢 answer){
+    🔤 num1 ⬅ ' ';
+    ↩ num1;
+}
+
+🔢 charToNum(🔤 answer){
+    🔢 num1 ⬅ ➖1;
+    ↩ num1;
+}
+
+🏠(){
+    🔢 decimal ⬅ 12 ➗ 10;
+    🔢 reminder ⬅ 12 ® 10;
+
+    🔤 textDec ⬅ numToChar(decimal);
+    🔤 textRem ⬅ numToChar(reminder);
+}

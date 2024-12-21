@@ -18,7 +18,7 @@
 
 }
 
-🔤 numToChar(🔢 answer, 🔢 num2){
+🔤 numToChar(🔢 answer){
     🔤 num1 ⬅ ' ';
 
     ❓(answer ⚖ 0){
@@ -144,7 +144,7 @@
 
     answer ⬅ 👁();
 
-    🔤📦10 whitespace;
+    🔤📦256 whitespace;
 
     🔂(🔢 i ⬅ 0; i⬇10; i➕➕){
         whitespace 📦i ⬅ ' ';

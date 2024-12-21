@@ -22,6 +22,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import utils.ErrorHandler;
+import utils.ErrorPhase;
 
 import utils.Types;
 import utils.OpComp;
@@ -326,13 +327,7 @@ public class Scanner implements java_cup.runtime.Scanner {
 
   /* user code: */
     private BufferedWriter writer; 
-    /***
-       Mecanismes de gestió de símbols basat en ComplexSymbol. Tot i que en
-       aquest cas potser no és del tot necessari.
-     ***/
-    /**
-     Construcció d'un symbol sense atribut associat.
-     **/
+
     private ComplexSymbol symbol(int type) throws IOException{
         writer.write(ParserSym.terminalNames[type]+" "); 
         writer.flush();
@@ -342,9 +337,6 @@ public class Scanner implements java_cup.runtime.Scanner {
         return cs;
     }
     
-    /**
-     Construcció d'un symbol amb un atribut associat.
-     **/
     private ComplexSymbol symbol(int type, Object value) throws IOException{
         writer.write(ParserSym.terminalNames[type]+" "); 
         writer.flush();
@@ -352,6 +344,16 @@ public class Scanner implements java_cup.runtime.Scanner {
         cs.left = yyline + 1;
         cs.right = yycolumn;
         return cs;
+    }
+
+    public void closeTokenStram(){
+        try {
+            if (writer != null) {
+                writer.close();  
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static ErrorHandler eh;
@@ -786,20 +788,13 @@ public class Scanner implements java_cup.runtime.Scanner {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-          {     try {
-        if (writer != null) {
-            writer.close();  
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    return symbol(ParserSym.EOF);
+          {     return symbol(ParserSym.EOF);
  }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { System.out.println("Char error: "+yytext());writer.write("~"+yytext()+"~"); writer.flush();
+            { eh.addError(ErrorPhase.Lexic, "Unexpected character: '"+yytext()+"'", yyline + 1, yycolumn);
             }
           // fall through
           case 29: break;

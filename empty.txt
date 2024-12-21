@@ -1,0 +1,13 @@
+🔢 num1 ⬅ 1 ➖➖➖ 0;
+🔢 numToChar(🔤 answer, 🔤 num2){
+    🔢 num1 ⬅ ➖1;
+    ↩ num1;
+}
+
+🏠(){
+    🔤 decimal ⬅ 'b';
+    🔤 reminder ⬅ 'a';
+    🔢 num2 ⬅ 1 ➖➖➖ 0;
+
+    🔢 textDec ⬅ numToChar(decimal, reminder);
+}

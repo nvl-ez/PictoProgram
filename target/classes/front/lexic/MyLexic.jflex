@@ -18,6 +18,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import utils.ErrorHandler;
+import utils.ErrorPhase;
 
 import utils.Types;
 import utils.OpComp;
@@ -56,13 +57,6 @@ import utils.OpArit;
 
 
 %eofval{
-    try {
-        if (writer != null) {
-            writer.close();  
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
     return symbol(ParserSym.EOF);
 %eofval}
 
@@ -121,13 +115,7 @@ endline         = ;
 // El següent codi es copiarà també, dins de la classe. És a dir, si es posa res
 // ha de ser en el format adient: mètodes, atributs, etc. 
 %{
-    /***
-       Mecanismes de gestió de símbols basat en ComplexSymbol. Tot i que en
-       aquest cas potser no és del tot necessari.
-     ***/
-    /**
-     Construcció d'un symbol sense atribut associat.
-     **/
+
     private ComplexSymbol symbol(int type) throws IOException{
         writer.write(ParserSym.terminalNames[type]+" "); 
         writer.flush();
@@ -137,9 +125,6 @@ endline         = ;
         return cs;
     }
     
-    /**
-     Construcció d'un symbol amb un atribut associat.
-     **/
     private ComplexSymbol symbol(int type, Object value) throws IOException{
         writer.write(ParserSym.terminalNames[type]+" "); 
         writer.flush();
@@ -147,6 +132,16 @@ endline         = ;
         cs.left = yyline + 1;
         cs.right = yycolumn;
         return cs;
+    }
+
+    public void closeTokenStram(){
+        try {
+            if (writer != null) {
+                writer.close();  
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static ErrorHandler eh;
@@ -248,7 +243,7 @@ endline         = ;
 {opwhile}       { return symbol(ParserSym.Opwhile); }
 {endline}       { return symbol(ParserSym.Endline); }
 {ws}            {}
-[^]             {System.out.println("Char error: "+yytext());writer.write("~"+yytext()+"~"); writer.flush();}
+[^]             {eh.addError(ErrorPhase.Lexic, "Unexpected character: '"+yytext()+"'", yyline + 1, yycolumn);}
 
 
 /****************************************************************************/
