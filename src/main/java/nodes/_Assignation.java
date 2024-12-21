@@ -6,6 +6,7 @@ import static nodes.Node.st;
 import utils.ErrorPhase;
 import utils.Types;
 import utils.description.Description;
+import utils.description.IndexDescription;
 import utils.description.TypeDescription;
 import utils.description.VariableDescription;
 
@@ -47,6 +48,21 @@ public class _Assignation extends Node{
         
         if(expression.getType() == Types.NULL){
             return;
+        }
+        
+        TypeDescription arr = (TypeDescription)desc;
+        
+        int i = st.first(arr.getId());
+        _Index ind = index;
+        
+        while(i>0){
+            IndexDescription iDesc = st.check(i);
+            if(iDesc.getLength() <= ind.getDecimal()){
+                eh.addError(ErrorPhase.Semantic, "Indexed position '"+ind.getDecimal()+"' is out of boudnds for length '"+iDesc.getLength()+"'", left, right);
+                return;
+            }
+            i = st.next(i);
+            ind = ind.getNext();
         }
         
         

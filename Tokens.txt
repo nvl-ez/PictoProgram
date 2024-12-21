@@ -1,1 +1,1 @@
-Type Id Lparen Type Id Comma Type Id Rparen Lbracket Type Id Assign Oparit Decimal Endline Return Id Endline Rbracket Main Lparen Rparen Lbracket Type Id Assign Character Endline Type Id Assign Character Endline Type Id Assign Decimal Oparit Oparit Oparit Decimal Endline Type Id Assign Id Lparen Id Comma Id Rparen Endline Rbracket EOF EOF 
+Type ArrayIcon Decimal Id Endline Main Lparen Rparen Lbracket Id ArrayIcon Decimal Assign Character Endline Rbracket EOF EOF 
