@@ -62,6 +62,9 @@ parser code {:
 scan with {:     next_token(); :}
 **/
 
+/***************************************************/
+/************** TERMINALS & NONTERMINALS ***********/
+/***************************************************/
 terminal    ArrayIcon, Const, Main, Read, Write, Return, Lparen, Rparen, Lbracket, Rbracket,
             Assign, Opif, Opelse, Opinc, Opwhile, Opfor, Endline, Comma;
 
@@ -85,7 +88,7 @@ non terminal    _ConstDeclaration       ConstDelcaration;
 non terminal    _VarDeclaration         VarDeclaration;
 non terminal    _ArrDeclaration         ArrDeclaration;
 non terminal    _DimentionSizes         DimentionSizes;
-non terminal    _Function              Function;
+non terminal    _Function               Function;
 non terminal    _FunctionBody           FunctionBody;
 non terminal    _FunctionArgsList       FunctionArgsList;
 non terminal    _FunctionArgs           FunctionArgs;
@@ -109,184 +112,330 @@ non terminal    _AssignationPart        AssignationPart;
 /***********************************/
 /**************GRAMMAR**************/
 /***********************************/
-
 start with PictoProgram;
 
-SetUp               ::=                                                                                             {:  :}
-                    ;
+SetUp               ::= 
+    {:  :}
+    ;
 
-PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0);:}
-                    |   SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0);:}
-                    |   SetUp Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0);:}
-                    |   SetUp MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0);:}
-                    
-                    |   SetUp GlobalDeclarations:globalDeclarations Functions:functions                             {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp GlobalDeclarations:globalDeclarations                                                 {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp Functions:functions                                                                   {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp                                                                                       {:eh.addError(ErrorPhase.Sintactic, "The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    ;
+PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction
+    {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0);:}
+    | SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction
+    {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0);:}
+    | SetUp Functions:functions MainFunction:mainFunction
+    {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0);:}
+    | SetUp MainFunction:mainFunction
+    {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0);:}
 
-/***********************************/
-/********GLOBAL*DECLARATIONS********/
-/***********************************/
-GlobalDeclarations  ::= GlobalDeclarations:globalDeclarations Declaration:declaration                               {:RESULT = new _GlobalDeclarations(declaration, globalDeclarations, declarationleft, declarationright);:}
-                    |   Declaration:declaration                                                                     {:RESULT = new _GlobalDeclarations(declaration, null, declarationleft, declarationright);:}
-                    ;
-
-Declaration         ::= ConstDelcaration:constDeclaration                                                           {:RESULT = new _Declaration(constDeclaration, constDeclarationleft, constDeclarationright);:}
-                    |   VarDeclaration:varDeclaration                                                               {:RESULT = new _Declaration(varDeclaration, varDeclarationleft, varDeclarationright);:}
-                    |   ArrDeclaration:arrDeclaration                                                               {:RESULT = new _Declaration(arrDeclaration, arrDeclarationleft, arrDeclarationright);:}
-                    ;
-
-    /***********************************/
-    /*************CONSTANT**************/
-    /***********************************/
-ConstDelcaration    ::= Const Type:type Id:id Assign Decimal:decimal Endline                                        {:RESULT = new _ConstDeclaration(type, id, decimal, typeleft, decimalright);:}
-                    |   Const Type:type Id:id Assign Oparit:opArit Decimal:decimal Endline                          {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
-                    |   Const Type:type Id:id Assign BooleanValue:booleanValue Endline                              {:RESULT = new _ConstDeclaration(type, id, booleanValue, typeleft, booleanValueright);:}
-                    |   Const Type:type Id:id Assign Character:character Endline                                    {:RESULT = new _ConstDeclaration(type, id, character, typeleft, characterright);:}
-                    
-                    |   Const error Endline                                                                         {:eh.addError(ErrorPhase.Sintactic, "Wrong constant declaration", getLeft(), getRight());:}
-                    ;
-
-    /***********************************/
-    /*************VARIABLES*************/
-    /***********************************/
-VarDeclaration      ::= Type:type Id:id AssignationPart:assignationPart Endline                                     {:RESULT = new _VarDeclaration(type, id, assignationPart, idleft, idright);:}
-                    
-                    |   Type Id error Endline                                                                       {:eh.addError(ErrorPhase.Sintactic, "Wrong variable declaration", getLeft(), getRight());:}
-                    |   Type error Endline                                                                          {:eh.addError(ErrorPhase.Sintactic, "Wrong variable declaration", getLeft(), getRight());:}
-                    ;
-
-AssignationPart     ::= Assign Expression:expression                                                                {:RESULT = new _AssignationPart(expression, expressionleft, expressionright);:}
-                    |                                                                                               {: /* Pere. No hay asignación */ :}
-                    ;
-                    
-    /***********************************/
-    /**************ARRAYS***************/
-    /***********************************/
-ArrDeclaration      ::= Type:type DimentionSizes:dimentionSizes Id:id Endline                                       {:RESULT = new _ArrDeclaration(type, dimentionSizes, id, typeleft, idright);:}
-                    ;
-
-DimentionSizes      ::= DimentionSizes:dimentionSizes ArrayIcon Decimal:decimal                                     {:RESULT = new _DimentionSizes(dimentionSizes, decimal, decimalleft, decimalright);:}
-                    |   ArrayIcon Decimal:decimal                                                                   {:RESULT = new _DimentionSizes(null, decimal, decimalleft, decimalright);  :}
-                    |   ArrayIcon error Endline                                                                     {:eh.addError(ErrorPhase.Sintactic, "Wrong array index declaration", getLeft(), getRight());:}
-                    ;
+    | SetUp GlobalDeclarations:globalDeclarations Functions:functions
+    {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+    | SetUp GlobalDeclarations:globalDeclarations
+    {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+    | SetUp Functions:functions
+    {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+    | SetUp
+    {:eh.addError(ErrorPhase.Sintactic, "The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+    ;
 
 /***********************************/
 /********GLOBAL*DECLARATIONS********/
 /***********************************/
-Functions           ::= Function:function Functions:functions                                                       {:RESULT = new _Functions(function, functions, functionleft, functionright);:}
-                    |   Function:function                                                                           {:RESULT = new _Functions(function, null, functionleft, functionright);:}
-                    ;
+GlobalDeclarations  ::= GlobalDeclarations:globalDeclarations Declaration:declaration
+    {:RESULT = new _GlobalDeclarations(declaration, globalDeclarations, declarationleft, declarationright);:}
+    | Declaration:declaration
+    {:RESULT = new _GlobalDeclarations(declaration, null, declarationleft, declarationright);:}
+    ;
 
-Function            ::= Type:type FunctionHead:functionHead Lbracket FunctionBody:functionBody F_OUT                {:RESULT = new _Function(type, functionHead, functionBody, typeleft, functionHeadright);:}
-                    ;
+Declaration         ::= ConstDelcaration:constDeclaration
+    {:RESULT = new _Declaration(constDeclaration, constDeclarationleft, constDeclarationright);:}
+    | VarDeclaration:varDeclaration
+    {:RESULT = new _Declaration(varDeclaration, varDeclarationleft, varDeclarationright);:}
+    | ArrDeclaration:arrDeclaration
+    {:RESULT = new _Declaration(arrDeclaration, arrDeclarationleft, arrDeclarationright);:}
+    ;
 
-TypeDimentions      ::= Type:type DimentionSizes:dimentionSizes                                                     {:RESULT = new _TypeDimentions(dimentionSizes, type, typeleft, dimentionSizesright);:}
-                    ;
+/***********************************/
+/*************CONSTANT**************/
+/***********************************/
+ConstDelcaration    ::=
+    Const Type:type Id:id Assign Decimal:decimal Endline
+    {:RESULT = new _ConstDeclaration(type, id, decimal, typeleft, decimalright);:}
+    | Const Type:type Id:id Assign Oparit:opArit Decimal:decimal Endline
+    {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
+    | Const Type:type Id:id Assign BooleanValue:booleanValue Endline
+    {:RESULT = new _ConstDeclaration(type, id, booleanValue, typeleft, booleanValueright);:}
+    | Const Type:type Id:id Assign Character:character Endline
+    {:RESULT = new _ConstDeclaration(type, id, character, typeleft, characterright);:}
 
-FunctionHead        ::= Id:id FunctionArgs:functionArgs                                                             {:RESULT = new _FunctionHead(id, functionArgs, idleft, idright);:}
-                    ;
+    | Const error Endline
+    {:eh.addError(ErrorPhase.Sintactic, "Wrong constant declaration", getLeft(), getRight());:}
+    ;
 
-FunctionArgs        ::= F_IN FunctionArgsList:functionArgsList Rparen                                               {:RESULT = new _FunctionArgs(functionArgsList, functionArgsListleft, functionArgsListright);:}
-                    |   F_IN Rparen                                                                                 {:  :}
-                    |   error Rparen                                                                                {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
-                    |   error                                                                                       {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
-                    ;
+/***********************************/
+/*************VARIABLES*************/
+/***********************************/
+VarDeclaration      ::=
+    Type:type Id:id AssignationPart:assignationPart Endline
+    {:RESULT = new _VarDeclaration(type, id, assignationPart, idleft, idright);:}
 
-FunctionArgsList    ::= FunctionArgsList:functionArgsList Comma Type:type Id:id                                     {:RESULT = new _FunctionArgsList(functionArgsList, type, id, typeleft, idright);:}
-                    | FunctionArgsList:functionArgsList Comma TypeDimentions:typeDimentions Id:id                   {:RESULT = new _FunctionArgsList(functionArgsList, typeDimentions, id, typeDimentionsleft, idright);:}
-                    | Type:type Id:id                                                                               {:RESULT = new _FunctionArgsList(null, type, id, typeleft, idright);:}
-                    | TypeDimentions:typeDimentions Id:id                                                           {:RESULT = new _FunctionArgsList(null, typeDimentions, id, typeDimentionsleft, idright);:}
-                    | error                                                                                         {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
-                    ;
+    | Type Id error Endline
+    {:eh.addError(ErrorPhase.Sintactic, "Wrong variable declaration", getLeft(), getRight());:}
+    | Type error Endline
+    {:eh.addError(ErrorPhase.Sintactic, "Wrong variable declaration", getLeft(), getRight());:}
+    ;
 
-FunctionBody        ::= Instruction:instruction FunctionBody:functionBody                                           {:RESULT = new _FunctionBody(instruction, functionBody, instructionleft, instructionright);:}
-                    |                                                                                               {:  :}
-                    ;
-    /***********************************/
-    /****************MAIN***************/
-    /***********************************/
-MainFunction        ::= Main:main F_IN Rparen Lbracket FunctionBody:functionBody F_OUT                              {:RESULT = new _MainFunction(functionBody, functionBodyleft, functionBodyright);:}
-                    |   Main error                                                      {:eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());:}                                                                      {:eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());:}
-                    ;
+AssignationPart     ::=
+    Assign Expression:expression
+    {:RESULT = new _AssignationPart(expression, expressionleft, expressionright);:}
+    |
+    {: /* no assignation */ :}
+    ;
 
-    /***********************************/
-    /*************FUNCALL***************/
-    /***********************************/
-FunctionCall        ::= Id:id Lparen FunCallArgs:funCallArgs Rparen                                                 {:RESULT = new _FunctionCall(id, funCallArgs, idleft, funCallArgsright);:}
-                    ;
+/***********************************/
+/**************ARRAYS***************/
+/***********************************/
+ArrDeclaration      ::=
+    Type:type DimentionSizes:dimentionSizes Id:id Endline
+    {:RESULT = new _ArrDeclaration(type, dimentionSizes, id, typeleft, idright);:}
+    ;
 
-FunCallArgs         ::= FunCallArgs:funCallArgs Comma Expression:expression                                         {:RESULT = new _FunCallArgs(funCallArgs, expression, expressionleft, expressionright);:}
-                    |   Expression:expression                                                                       {:RESULT = new _FunCallArgs(null, expression, expressionleft, expressionright);:}
-					|   FunCallArgs:funCallArgs Comma ArrayIcon Id:id                                               {:RESULT = new _FunCallArgs(funCallArgs, id, idleft, idright);:}
-                    |   ArrayIcon Id:id                                                                             {:RESULT = new _FunCallArgs(null, id, idleft, idright);:}
-                    |                                                                                               {: /* Pere. asegurar que no devuelve nada */ :}
-                    |   error                                                                                       {:eh.addError(ErrorPhase.Sintactic, "Wrong function call arguments", getLeft(), getRight());:}
-                    ;
+DimentionSizes      ::=
+    DimentionSizes:dimentionSizes ArrayIcon Decimal:decimal
+    {:RESULT = new _DimentionSizes(dimentionSizes, decimal, decimalleft, decimalright);:}
+    | ArrayIcon Decimal:decimal
+    {:RESULT = new _DimentionSizes(null, decimal, decimalleft, decimalright);:}
+    | ArrayIcon error Endline
+    {:eh.addError(ErrorPhase.Sintactic, "Wrong array index declaration", getLeft(), getRight());:}
+    ;
+
+/***********************************/
+/********GLOBAL*DECLARATIONS********/
+/***********************************/
+Functions           ::=
+    Function:function Functions:functions
+    {:RESULT = new _Functions(function, functions, functionleft, functionright);:}
+    | Function:function
+    {:RESULT = new _Functions(function, null, functionleft, functionright);:}
+    ;
+
+Function            ::=
+    Type:type FunctionHead:functionHead Lbracket FunctionBody:functionBody F_OUT
+    {:RESULT = new _Function(type, functionHead, functionBody, typeleft, functionHeadright);:}
+    ;
+
+TypeDimentions      ::=
+    Type:type DimentionSizes:dimentionSizes
+    {:RESULT = new _TypeDimentions(dimentionSizes, type, typeleft, dimentionSizesright);:}
+    ;
+
+FunctionHead        ::=
+    Id:id FunctionArgs:functionArgs
+    {:RESULT = new _FunctionHead(id, functionArgs, idleft, idright);:}
+    ;
+
+FunctionArgs        ::=
+    F_IN FunctionArgsList:functionArgsList Rparen
+    {:RESULT = new _FunctionArgs(functionArgsList, functionArgsListleft, functionArgsListright);:}
+    | F_IN Rparen
+    {: /* no arguments */ :}
+    | error Rparen
+    {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
+    | error
+    {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
+    ;
+
+FunctionArgsList    ::=
+    FunctionArgsList:functionArgsList Comma Type:type Id:id
+    {:RESULT = new _FunctionArgsList(functionArgsList, type, id, typeleft, idright);:}
+    | FunctionArgsList:functionArgsList Comma TypeDimentions:typeDimentions Id:id
+    {:RESULT = new _FunctionArgsList(functionArgsList, typeDimentions, id, typeDimentionsleft, idright);:}
+    | Type:type Id:id
+    {:RESULT = new _FunctionArgsList(null, type, id, typeleft, idright);:}
+    | TypeDimentions:typeDimentions Id:id
+    {:RESULT = new _FunctionArgsList(null, typeDimentions, id, typeDimentionsleft, idright);:}
+    | error
+    {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
+    ;
+
+/******************************************************/
+/******** FUNCTION BODY (+ error production) **********/
+/******************************************************/
+FunctionBody        ::=
+    Instruction:instruction FunctionBody:functionBody
+    {:RESULT = new _FunctionBody(instruction, functionBody, instructionleft, instructionright);:}
+    |
+    {: /* empty */ :}
+    /* Added an error production so we can catch stray tokens before a closing bracket */
+    | error Rbracket
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Syntactic error in function body", getLeft(), getRight());
+    :}
+    ;
+
+/***********************************/
+/************* MAIN ****************/
+/***********************************/
+MainFunction        ::=
+    Main:main F_IN Rparen Lbracket FunctionBody:functionBody F_OUT
+    {:RESULT = new _MainFunction(functionBody, functionBodyleft, functionBodyright);:}
+    | Main error
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());
+    :} 
+    /* repeated error capture from the original line */
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());
+    :}
+    ;
+
+/***********************************/
+/************* FUNCALL *************/
+/***********************************/
+FunctionCall        ::=
+    Id:id Lparen FunCallArgs:funCallArgs Rparen
+    {:RESULT = new _FunctionCall(id, funCallArgs, idleft, funCallArgsright);:}
+    ;
+
+FunCallArgs         ::=
+    FunCallArgs:funCallArgs Comma Expression:expression
+    {:RESULT = new _FunCallArgs(funCallArgs, expression, expressionleft, expressionright);:}
+    | Expression:expression
+    {:RESULT = new _FunCallArgs(null, expression, expressionleft, expressionright);:}
+    | FunCallArgs:funCallArgs Comma ArrayIcon Id:id
+    {:RESULT = new _FunCallArgs(funCallArgs, id, idleft, idright);:}
+    | ArrayIcon Id:id
+    {:RESULT = new _FunCallArgs(null, id, idleft, idright);:}
+    |
+    {: /* empty */ :}
+    /* Optional: catch something unexpected in fun call args */
+    | error
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Syntactic error in function call arguments", getLeft(), getRight());
+    :}
+    ;
 
 /***********************************/
 /******EXPRESSIONS*AND*VALUES*******/
 /***********************************/
-    Expression          ::= Value:value Operation:operation Expression:expression                                   {:RESULT = new _Expression(value, operation, expression, valueleft, expressionright);:}
-                        |   Value:value                                                                             {:RESULT = new _Expression(value, valueleft, valueright);:}
-                        |   Oparit:opArit Expression:expression                                                     {:RESULT = new _Expression(expression, opArit, expressionleft, expressionright);:}
-                        ;
+Expression          ::=
+    Value:value Operation:operation Expression:expression
+    {:RESULT = new _Expression(value, operation, expression, valueleft, expressionright);:}
+    | Value:value
+    {:RESULT = new _Expression(value, valueleft, valueright);:}
+    | Oparit:opArit Expression:expression
+    {:RESULT = new _Expression(expression, opArit, expressionleft, expressionright);:}
+    /* Added an error production for expressions */
+    | error
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Syntactic error in expression", getLeft(), getRight());
+    :}
+    ;
 
-    Value               ::= FunctionCall:functionCall                                                               {:RESULT = new _Value(functionCall, functionCallleft, functionCallright);:}
-                        |   Lparen Expression:expression Rparen                                                     {:RESULT = new _Value(expression, expressionleft, expressionright);:}
-                        |   Decimal:decimal                                                                         {:RESULT = new _Value(decimal, decimalleft, decimalright);:}
-                        |   BooleanValue:booleanValue                                                               {:RESULT = new _Value(booleanValue, booleanValueleft, booleanValueright);:}
-                        |   Character:character                                                                     {:RESULT = new _Value(character, characterleft, characterright);:}
-                        |   Id:id Index:index                                                                       {:RESULT = new _Value(id, index, idleft, idright);:}
-                        |   Id:id                                                                                   {:RESULT = new _Value(id, idleft, idright);:}
-                        |   Read:read Lparen Rparen                                                                 {:RESULT = new _Value(readleft, readright);:}
-                        ;
-
+Value               ::=
+    FunctionCall:functionCall
+    {:RESULT = new _Value(functionCall, functionCallleft, functionCallright);:}
+    | Lparen Expression:expression Rparen
+    {:RESULT = new _Value(expression, expressionleft, expressionright);:}
+    | Decimal:decimal
+    {:RESULT = new _Value(decimal, decimalleft, decimalright);:}
+    | BooleanValue:booleanValue
+    {:RESULT = new _Value(booleanValue, booleanValueleft, booleanValueright);:}
+    | Character:character
+    {:RESULT = new _Value(character, characterleft, characterright);:}
+    | Id:id Index:index
+    {:RESULT = new _Value(id, index, idleft, idright);:}
+    | Id:id
+    {:RESULT = new _Value(id, idleft, idright);:}
+    | Read:read Lparen Rparen
+    {:RESULT = new _Value(readleft, readright);:}
+    ;
 
 /***********************************/
 /****INSTRUCTIONS*AND*OPERATIONS****/
 /***********************************/
+Instruction         ::=
+    Opif Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket Else:_else
+    {:RESULT = new _Instruction(expression, functionBody, _else, expressionleft, expressionright);:}
+    | Opwhile Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket
+    {:RESULT = new _Instruction(expression, functionBody, expressionleft, expressionright);:}
+    | Declaration:declaration
+    {:RESULT = new _Instruction(declaration, declarationleft, declarationright);:}
+    | Assignation:assignation
+    {:RESULT = new _Instruction(assignation, assignationleft, assignationright);:}
+    | FunctionCall:functionCall Endline
+    {:RESULT = new _Instruction(functionCall, functionCallleft, functionCallright);:}
+    | Return Endline
+    {:RESULT = new _Instruction();:}
+    | Return Expression:expression Endline
+    {:RESULT = new _Instruction(expression, expressionleft, expressionright);:}
+    | Opfor Lparen VarDeclaration:varDeclaration Expression:expression Endline Id:id Opinc Rparen Lbracket FunctionBody:functionBody Rbracket
+    {:RESULT = new _Instruction(varDeclaration, expression, id, functionBody, varDeclarationleft, varDeclarationright);:}
+    | Write Lparen Id:id Comma Expression:expression1 Comma Expression:expression2 Comma Expression:expression3 Comma Expression:expression4 Rparen Endline
+    {:RESULT = new _Instruction(id, expression1, expression2, expression3, expression4, idleft, idright);:}
 
-Instruction         ::= Opif Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket Else:_else {:RESULT = new _Instruction(expression, functionBody, _else, expressionleft, expressionright);:}
-                    |   Opwhile Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket     {:RESULT = new _Instruction(expression, functionBody, expressionleft, expressionright);:}
-                    |   Declaration:declaration                                                                     {:RESULT = new _Instruction(declaration, declarationleft, declarationright);:}
-                    |   FunctionCall:functionCall Endline                                                           {:RESULT = new _Instruction(functionCall, functionCallleft, functionCallright);:}
-                    |   Assignation:assignation                                                                     {:RESULT = new _Instruction(assignation, assignationleft, assignationright);:}
-                    |   Return Endline                                                                              {:RESULT = new _Instruction();:}
-                    |   Return Expression:expression Endline                                                        {:RESULT = new _Instruction(expression, expressionleft, expressionright);:}
-                    |   Opfor Lparen VarDeclaration:varDeclaration Expression:expression Endline Id:id Opinc Rparen Lbracket FunctionBody:functionBody Rbracket    {:RESULT = new _Instruction(varDeclaration, expression, id, functionBody, varDeclarationleft, varDeclarationright);:}
-                        //Write (CharArr, IndexBegin, IndexEnd, Column, Row)
-                    |   Write Lparen Id:id Comma Expression:expression1 Comma Expression:expression2 Comma Expression:expression3 Comma Expression:expression4 Rparen Endline {:RESULT = new _Instruction(id, expression1, expression2, expression3, expression4, idleft, idright);:}
-                    ;
+    /* Added error productions for instructions */
+    | error Endline
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Syntactic error in instruction", getLeft(), getRight());
+    :}
+    | error Rbracket
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Syntactic error in instruction", getLeft(), getRight());
+    :}
+    ;
 
-Operation           ::= Oparit:opArit                                                                               {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
-                    |   Oplog:opLog                                                                                 {:RESULT = new _Operation(opLog, opLogleft, opLogright);:}
-                    |   Opcomp:opComp                                                                               {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
-                    ;
+Operation           ::=
+    Oparit:opArit
+    {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
+    | Oplog:opLog
+    {:RESULT = new _Operation(opLog, opLogleft, opLogright);:}
+    | Opcomp:opComp
+    {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+    ;
 
-Else                ::= Opelse Lbracket FunctionBody:functionBody Rbracket                                          {:RESULT = new _Else(functionBody, functionBodyleft, functionBodyright);:}
-                    |                                                                                               {:  :}
-                    ;
-    /***********************************/
-    /************ASSIGNATION************/
-    /***********************************/
-Assignation         ::= Id:id Assign Expression:expression Endline                                                  {:RESULT = new _Assignation(id, expression, idleft, idright);:}
-                    |   Id:id Index:index Assign Expression:expression Endline                                      {:RESULT = new _Assignation(id, index, expression, idleft, idright);:}
-                    ;
+Else                ::=
+    Opelse Lbracket FunctionBody:functionBody Rbracket
+    {:RESULT = new _Else(functionBody, functionBodyleft, functionBodyright);:}
+    |
+    {: /* empty */ :}
+    ;
 
-Index               ::= ArrayIcon Decimal:decimal Index:index                                                       {:RESULT = new _Index(decimal, index, decimalleft, decimalright);:}
-                    |   ArrayIcon Decimal:decimal                                                                   {:RESULT = new _Index(decimal, null, decimalleft, decimalright);:}
-                    |   ArrayIcon Id:id Index:index                                                                 {:RESULT = new _Index(id, index, idleft, idright);:}
-                    |   ArrayIcon Id:id                                                                             {:RESULT = new _Index(id, null, idleft, idright);:}
-                    ;
+/***********************************/
+/************ASSIGNATION************/
+/***********************************/
+Assignation         ::=
+    Id:id Index:index Assign Expression:expression Endline
+    {:RESULT = new _Assignation(id, index, expression, idleft, idright);:}   
+    | Id:id Assign Expression:expression Endline
+    {:RESULT = new _Assignation(id, expression, idleft, idright);:}
+    /* Added error production for assignation */
+    | error Endline
+    {:
+      eh.addError(ErrorPhase.Sintactic, "Syntactic error in assignation", getLeft(), getRight());
+    }
+    ;
+
+Index               ::=
+    ArrayIcon Decimal:decimal Index:index
+    {:RESULT = new _Index(decimal, index, decimalleft, decimalright);:}
+    | ArrayIcon Decimal:decimal
+    {:RESULT = new _Index(decimal, null, decimalleft, decimalright);:}
+    | ArrayIcon Id:id Index:index
+    {:RESULT = new _Index(id, index, idleft, idright);:}
+    | ArrayIcon Id:id
+    {:RESULT = new _Index(id, null, idleft, idright);:}
+    ;
 
 /***********************************/
 /************MARCADORES*************/
 /***********************************/
-F_IN        ::= Lparen {:st.enterBlock();:};
-F_OUT       ::= Rbracket{:st.exitBlock();:};
+F_IN        ::= Lparen
+    {:st.enterBlock();:}
+    ;
+
+F_OUT       ::= Rbracket
+    {:st.exitBlock();:}
+    ;
 
 
 /**

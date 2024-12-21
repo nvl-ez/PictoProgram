@@ -55,9 +55,9 @@ public class _Assignation extends Node{
         int i = st.first(arr.getId());
         _Index ind = index;
         
-        while(i>0){
+        while(i>0 && ind != null ){
             IndexDescription iDesc = st.check(i);
-            if(iDesc.getLength() <= ind.getDecimal()){
+            if(ind.getDecimal() != -1 && iDesc.getLength() <= ind.getDecimal()){
                 eh.addError(ErrorPhase.Semantic, "Indexed position '"+ind.getDecimal()+"' is out of boudnds for length '"+iDesc.getLength()+"'", left, right);
                 return;
             }
