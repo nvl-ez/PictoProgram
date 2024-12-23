@@ -15,7 +15,7 @@ public class SymbolTable {
     private TreeMap<Integer, Integer> scopeTable;
     private TreeMap<Integer, Row> expansionTable;
     private HashMap<String, Row> descriptionTable;
-    
+
     private static ErrorHandler eh;
 
     public SymbolTable(ErrorHandler errh) {
@@ -69,6 +69,30 @@ public class SymbolTable {
             return false;
         }
 
+        int idxe = scopeTable.get(n) + 1;
+        scopeTable.put(n, idxe);
+
+        description.setId(null);
+        Row row = new Row(description, -1);
+
+        // Insert at the beginning
+        row.next = descriptionTable.get(id).first;
+        descriptionTable.get(id).first = idxe;
+
+        expansionTable.put(idxe, row);
+
+        return true;
+    }
+    //Tener en cuenta el orden en el que se insertan las dimensiones en las listas de _ArrDeclaration/_FunctionArgList
+    //
+    /* 
+    public boolean putIndex(String id, IndexDescription description) {
+        Description da = descriptionTable.get(id).description;
+
+        if ((da instanceof TypeDescription) == false) {
+            return false;
+        }
+
         int idxe = descriptionTable.get(id).first;
         int idxep = 0;
 
@@ -91,10 +115,11 @@ public class SymbolTable {
         }
         return true;
     }
+    */
 
     public void exitBlock() {
         // evaluar si hay un nivel al que volver
-            if(n==1){
+        if (n == 1) {
             eh.addError(ErrorPhase.Semantic, "Escaping the global scope was atempted, might be due a faulty function definition.", -1, -1);
             return;
         }

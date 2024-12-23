@@ -24,6 +24,7 @@ import utils.OpComp;
 import utils.OpLog;
 import utils.OpArit;
 import utils.SymbolTable;
+import intermediateCode.ThreeAddressCode;
 
 import utils.ErrorHandler;
 import utils.ErrorPhase;
@@ -44,6 +45,11 @@ parser code {:
     private static ErrorHandler eh;
     public void setErrorHandler(ErrorHandler eh) {
       this.eh = eh;
+    }
+
+    private static ThreeAddressCode tac;
+    public void setThreeAddressCode(ThreeAddressCode tac) {
+      this.tac = tac;
     }
 
     private int getLeft(){
@@ -216,6 +222,7 @@ MainFunction        ::= Main:main F_IN Rparen Lbracket FunctionBody:functionBody
     /*************FUNCALL***************/
     /***********************************/
 FunctionCall        ::= Id:id Lparen FunCallArgs:funCallArgs Rparen                                                 {:RESULT = new _FunctionCall(id, funCallArgs, idleft, funCallArgsright);:}
+                    | error
                     ;
 
 FunCallArgs         ::= FunCallArgs:funCallArgs Comma Expression:expression                                         {:RESULT = new _FunCallArgs(funCallArgs, expression, expressionleft, expressionright);:}
@@ -251,8 +258,8 @@ FunCallArgs         ::= FunCallArgs:funCallArgs Comma Expression:expression     
 Instruction         ::= Opif Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket Else:_else {:RESULT = new _Instruction(expression, functionBody, _else, expressionleft, expressionright);:}
                     |   Opwhile Lparen Expression:expression Rparen Lbracket FunctionBody:functionBody Rbracket     {:RESULT = new _Instruction(expression, functionBody, expressionleft, expressionright);:}
                     |   Declaration:declaration                                                                     {:RESULT = new _Instruction(declaration, declarationleft, declarationright);:}
-                    |   Assignation:assignation                                                                     {:RESULT = new _Instruction(assignation, assignationleft, assignationright);:}
                     |   FunctionCall:functionCall Endline                                                           {:RESULT = new _Instruction(functionCall, functionCallleft, functionCallright);:}
+                    |   Assignation:assignation                                                                     {:RESULT = new _Instruction(assignation, assignationleft, assignationright);:}
                     |   Return Endline                                                                              {:RESULT = new _Instruction();:}
                     |   Return Expression:expression Endline                                                        {:RESULT = new _Instruction(expression, expressionleft, expressionright);:}
                     |   Opfor Lparen VarDeclaration:varDeclaration Expression:expression Endline Id:id Opinc Rparen Lbracket FunctionBody:functionBody Rbracket    {:RESULT = new _Instruction(varDeclaration, expression, id, functionBody, varDeclarationleft, varDeclarationright);:}
@@ -271,14 +278,22 @@ Else                ::= Opelse Lbracket FunctionBody:functionBody Rbracket      
     /***********************************/
     /************ASSIGNATION************/
     /***********************************/
-Assignation         ::= Id:id Index:index Assign Expression:expression Endline                                      {:RESULT = new _Assignation(id, index, expression, idleft, idright);:}   
+Assignation         ::= Id:id Index:index Assign Expression:expression Endline                                      {:RESULT = new _Assignation(id, index, expression, idleft, idright);:}
                     |   Id:id Assign Expression:expression Endline                                                  {:RESULT = new _Assignation(id, expression, idleft, idright);:}
+                    |   Id:id error Endline                                                                         {:eh.addError(ErrorPhase.Sintactic, "Wrong assignation to variable "+id, getLeft(), getRight());:}
                     ;
 
 Index               ::= ArrayIcon Decimal:decimal Index:index                                                       {:RESULT = new _Index(decimal, index, decimalleft, decimalright);:}
                     |   ArrayIcon Decimal:decimal                                                                   {:RESULT = new _Index(decimal, null, decimalleft, decimalright);:}
                     |   ArrayIcon Id:id Index:index                                                                 {:RESULT = new _Index(id, index, idleft, idright);:}
                     |   ArrayIcon Id:id                                                                             {:RESULT = new _Index(id, null, idleft, idright);:}
+                    
+                    |   error Id                                                                                    {:eh.addError(ErrorPhase.Sintactic, "Wrong assignation", getLeft(), getRight());:}
+                    |   ArrayIcon error                                                                             {:eh.addError(ErrorPhase.Sintactic, "Wrong assignation", getLeft(), getRight());:}
+                    |   error Decimal                                                                               {:eh.addError(ErrorPhase.Sintactic, "Wrong assignation", getLeft(), getRight());:}
+                    |   error Id Index                                                                              {:eh.addError(ErrorPhase.Sintactic, "Wrong assignation", getLeft(), getRight());:}
+                    |   error Decimal Index                                                                         {:eh.addError(ErrorPhase.Sintactic, "Wrong assignation", getLeft(), getRight());:}
+                    |   ArrayIcon error Index                                                                       {:eh.addError(ErrorPhase.Sintactic, "Wrong assignation", getLeft(), getRight());:}
                     ;
 
 /***********************************/
@@ -291,4 +306,5 @@ F_OUT       ::= Rbracket{:st.exitBlock();:};
 /**
 TODO:
 1 variables globales no pueden ser declaradas e inicializadas con read.
+2 Revisar Value, _Index, _ArrDeclaration, _Assignation, _FunctionArgsList y SymbolTable
 **/

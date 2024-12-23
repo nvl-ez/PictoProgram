@@ -1,9 +1,12 @@
 
 package utils.description;
 
+import intermediateCode.ThreeAddressCode;
+
 public class Description {
     private String id;
     private int size;
+    private static ThreeAddressCode tac;
     
     
     public Description(String id) {
@@ -24,6 +27,10 @@ public class Description {
 
     public void setSize(int size) {
         this.size = size;
+    }
+    
+    public void setThreeAddressCode(ThreeAddressCode threeAddressCode){
+        tac = threeAddressCode;
     }
     
     

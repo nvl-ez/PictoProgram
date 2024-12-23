@@ -21,7 +21,7 @@ import utils.SymbolTable;
 public class Compilador {
 
     public static void main(String[] args) {
-        String filePath = "empty.txt";
+        String filePath = "arrayTest.txt";
         ErrorHandler eh = new ErrorHandler();
         try {
             preprocessFile(filePath);

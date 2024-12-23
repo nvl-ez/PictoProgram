@@ -1,1 +1,1 @@
-Type ArrayIcon Decimal Id Endline Main Lparen Rparen Lbracket Id Decimal Assign Character Endline Rbracket EOF EOF EOF 
+Type ArrayIcon Decimal ArrayIcon Decimal Id Endline Main Lparen Rparen Lbracket Id ArrayIcon Decimal ArrayIcon Decimal Assign Character Endline Rbracket EOF EOF 

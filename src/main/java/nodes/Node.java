@@ -1,6 +1,7 @@
 
 package nodes;
 
+import intermediateCode.ThreeAddressCode;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import utils.ErrorHandler;
 import utils.SymbolTable;
@@ -12,6 +13,7 @@ public class Node {
     protected int column;
     protected static ErrorHandler eh;
     protected static SymbolTable st;
+    protected static ThreeAddressCode tac;
     
     
     public Node(int line, int column){

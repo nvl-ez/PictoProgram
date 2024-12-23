@@ -6,9 +6,9 @@ import utils.Types;
 
 public class ConstantDescription extends Description{
     private Types type;
-    private int decimalValue;
-    private boolean booleanValue;
-    private char characterValue;
+    private Integer decimalValue = null;
+    private Boolean booleanValue = null;
+    private Character characterValue = null;
     
     public ConstantDescription(String id, int decimalValue) {
         super(id);
@@ -28,6 +28,7 @@ public class ConstantDescription extends Description{
         this.characterValue = characterValue;
     }
     
+    //C0onstructor cuando hay error
     public ConstantDescription(String id) {
         super(id);
         this.type = Types.NULL;

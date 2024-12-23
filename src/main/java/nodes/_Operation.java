@@ -5,9 +5,9 @@ import utils.OpLog;
 import utils.OpComp;
 
 public class _Operation extends Node{
-    private OpArit oparit;
-    private OpComp opcomp;
-    private OpLog oplog;
+    private OpArit oparit = null;
+    private OpComp opcomp = null;
+    private OpLog oplog = null;
 
     public _Operation(OpArit oparit, int left, int right) {
         super(left, right);
@@ -35,7 +35,4 @@ public class _Operation extends Node{
     public OpLog getOplog() {
         return oplog;
     }
-    
-    
-
 }

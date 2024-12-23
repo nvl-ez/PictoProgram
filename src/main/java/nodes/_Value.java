@@ -1,5 +1,8 @@
 package nodes;
 
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Variable;
 import utils.ErrorPhase;
 import utils.Types;
 import utils.description.ConstantDescription;
@@ -11,15 +14,18 @@ import utils.description.VariableDescription;
 
 public class _Value extends Node {
 
-    private String id;
-    private char characterValue;
-    private boolean booleanValue;
-    private int decimalValue;
-    private _Expression expression;
-    private _FunctionCall functionCall;
-    private Types type;
-    private _Index index;
-
+    private String id = null;
+    private Character characterValue = null;
+    private Boolean booleanValue = null;
+    private Integer decimalValue = null;
+    private _Expression expression = null;
+    private _FunctionCall functionCall = null;
+    private Types type = Types.NULL;
+    private _Index index = null;
+    
+    Description desc = null;
+    
+    //Llamada a funcion
     public _Value(_FunctionCall functionCall, int left, int right) {
         super(left, right);
         this.functionCall = functionCall;
@@ -27,18 +33,21 @@ public class _Value extends Node {
 
         if (description != null && description instanceof ProcedureDescription) {
             type = ((ProcedureDescription)description).getType();
+            desc = description;
         } else{
             type = Types.NULL;
         }
-
+        
     }
-
+    
+    //Expression
     public _Value(_Expression expression, int left, int right) {
         super(left, right);
         this.expression = expression;
         type = expression.getType();
     }
-
+    
+    //Literal int
     public _Value(int decimal, int left, int right) {
         super(left, right);
         if (checkInt(decimal)) {
@@ -49,13 +58,14 @@ public class _Value extends Node {
             eh.addError(ErrorPhase.Semantic, "Value "+decimal+" is out of bounds", left, right);
         }
     }
-
+    //Literal bool
     public _Value(boolean booleanValue, int left, int right) {
         super(left, right);
         this.booleanValue = booleanValue;
         type = Types.NULL;
     }
 
+    //Literal char
     public _Value(char character, int left, int right) {
         super(left, right);
         if (checkChar(character)) {
@@ -67,7 +77,8 @@ public class _Value extends Node {
         }
 
     }
-
+    
+    //Valor en array
     public _Value(String id, _Index index, int left, int right) {
         super(left, right);
         this.id = id;
@@ -128,8 +139,10 @@ public class _Value extends Node {
         }
         
         type = ((TypeDescription)description).getType();
+        desc = description;
     }
-
+    
+    //Variable
     public _Value(String id, int left, int right) {
         super(left, right);
         
@@ -137,6 +150,9 @@ public class _Value extends Node {
         if (description != null) {
             if (description instanceof ConstantDescription) {
                 type = ((ConstantDescription) description).getType();
+                characterValue = ((ConstantDescription) description).getCharacterValue();
+                decimalValue = ((ConstantDescription) description).getDecimalValue();
+                booleanValue = ((ConstantDescription) description).getBooleanValue();
             } else if (description instanceof VariableDescription) {
                 type = ((VariableDescription) description).getType();
             } else {
@@ -155,6 +171,7 @@ public class _Value extends Node {
         }
         
         this.id = id;
+        desc = description;
     }
     
     //READ
@@ -177,6 +194,37 @@ public class _Value extends Node {
 
     public Types getType() {
         return type;
+    }
+    
+    public Variable generate(){
+        Variable var = new Variable();
+        if(characterValue != null){
+            tac.put(new Instruction(Operations.COPY, (int)characterValue, var));
+        } else if(decimalValue != null){
+            tac.put(new Instruction(Operations.COPY, decimalValue, var));
+        } else if(booleanValue != null){
+            tac.put(new Instruction(Operations.COPY, (booleanValue ? -1 : 0), var));
+        } else if(expression != null){
+            var = expression.generate();
+        } else if(functionCall != null){//Function
+            
+        } else if(index != null && id != null){//Array
+            TypeDescription arr = (TypeDescription)desc;
+            
+            Variable i = index.generate(arr.getDimLengths(), 0);
+            
+            Variable result = new Variable();
+            
+            tac.put(new Instruction(Operations.IND_VAL, arr.getBase(), i, result));
+            return result;
+         
+        } else if(id != null  && index == null){//Variable
+            return ((VariableDescription)desc).getVar();
+        } else{ //Read
+            
+        }
+        
+        return var;
     }
 
 }

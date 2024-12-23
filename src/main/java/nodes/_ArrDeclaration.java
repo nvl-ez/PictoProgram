@@ -1,5 +1,6 @@
 
 package nodes;
+import java.util.LinkedList;
 import static nodes.Node.eh;
 import static nodes.Node.st;
 import utils.ErrorPhase;
@@ -31,7 +32,9 @@ public class _ArrDeclaration extends Node {
         }
         
         _DimentionSizes i = dimentionSizes;
+        LinkedList<Integer> dimLength = new LinkedList<>();
         while(i!= null){
+            dimLength.push(i.getDecimal());
             if(!checkInt(i.getDecimal()) || i.getDecimal() <= 0){
                 this.type = Types.NULL;
                 description.setType(Types.NULL);
@@ -40,6 +43,8 @@ public class _ArrDeclaration extends Node {
             }
             i = i.getNext();
         }
+
+        description.setDimLengths(dimLength);
         
         i = dimentionSizes;
         

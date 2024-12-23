@@ -1,6 +1,7 @@
 
 package utils.description;
 
+import intermediateCode.Variable;
 import utils.Types;
 
 
@@ -9,6 +10,7 @@ public class VariableDescription extends Description{
     private static int counter = 0;
     private final int varIdentifier;
     private Types type;
+    private Variable var;
 
     
     public VariableDescription(String id, Types type) {
@@ -16,7 +18,7 @@ public class VariableDescription extends Description{
         
         counter++;
         varIdentifier = counter;
-        
+        var = new Variable();
         this.type = type;
     }
     
@@ -32,5 +34,11 @@ public class VariableDescription extends Description{
         return type;
     }
     
+    public Variable getVar() {
+        return var;
+    }
 
+    public void setVar(Variable var) {
+        this.var = var;
+    }
 }
