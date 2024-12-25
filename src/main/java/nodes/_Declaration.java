@@ -23,5 +23,15 @@ public class _Declaration extends Node {
         super(left, right);
         this.arrDeclaration = arrDeclaration;
     }
+    
+    public void generate(){
+        if(varDeclaration != null){
+            varDeclaration.generate();
+        } else if(arrDeclaration != null){
+            arrDeclaration.generate();
+        } else if(constDeclaration != null){
+            constDeclaration.generate();
+        }
+    }
 
 }

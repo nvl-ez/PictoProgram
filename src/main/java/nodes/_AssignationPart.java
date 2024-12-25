@@ -1,6 +1,8 @@
 
 package nodes;
 
+import intermediateCode.Variable;
+
 
 public class _AssignationPart extends Node {
     private _Expression expression;
@@ -12,6 +14,10 @@ public class _AssignationPart extends Node {
     
     public _Expression getExpression(){
         return expression;
+    }
+    
+    public Variable generate(){
+        return expression.generate();
     }
 
 }

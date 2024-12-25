@@ -1,0 +1,406 @@
+[BEFORE ENTERING BLOCK]----------------------------------------------------
+N = 1
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|2		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE EXITING BLOCK]----------------------------------------------------
+N = 2
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|2		|
+|2		|2		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| num1 | INT | VariableDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+| num2 | INT | VariableDescription 	|
+----------------------------------------
+[BEFORE ENTERING BLOCK]----------------------------------------------------
+N = 1
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|4		|
+|2		|2		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE EXITING BLOCK]----------------------------------------------------
+N = 2
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|4		|
+|2		|6		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+| 5 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 6 | -1 |  | null | IndexDescription | 0 | 5 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| arr | CHAR | TypeDescription 	|
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE ENTERING BLOCK]----------------------------------------------------
+N = 1
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|5		|
+|2		|6		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+| 5 | -1 |  | arr | ArgumentDescription | 0 | 0 	|
+| 6 | -1 |  | null | IndexDescription | 0 | 5 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE EXITING BLOCK]----------------------------------------------------
+N = 2
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|5		|
+|2		|5		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+| 5 | -1 |  | arr | ArgumentDescription | 0 | 0 	|
+| 6 | -1 |  | null | IndexDescription | 0 | 5 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| answer | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| num1 | CHAR | VariableDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE ENTERING BLOCK]----------------------------------------------------
+N = 1
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|6		|
+|2		|5		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+| 5 | -1 |  | arr | ArgumentDescription | 0 | 0 	|
+| 6 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE EXITING BLOCK]----------------------------------------------------
+N = 2
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|6		|
+|2		|6		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+| 5 | -1 |  | arr | ArgumentDescription | 0 | 0 	|
+| 6 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| answer | CHAR | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| num1 | INT | VariableDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE ENTERING BLOCK]----------------------------------------------------
+N = 1
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|7		|
+|2		|6		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+| 5 | -1 |  | arr | ArgumentDescription | 0 | 0 	|
+| 6 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
+| 7 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| letterA | CHAR | ConstantDescription 	|
+| true | BOOL | ConstantDescription 	|
+| pi | INT | ConstantDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| letters | CHAR | TypeDescription 	|
+----------------------------------------
+[BEFORE EXITING BLOCK]----------------------------------------------------
+N = 2
+
+------------------
+| ACCESS   TABLE |
+------------------
+| LVL   | IDX    |
+------------------
+|0		|0		|
+|1		|7		|
+|2		|11		|
+------------------
+
+----------------------------------------
+|           EXPANSION  TABLE           |
+----------------------------------------
+| INDX | NP | ID | DESC | FIRST | NEXT |
+----------------------------------------
+| 1 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 2 | -1 |  | null | IndexDescription | 0 | 1 	|
+| 3 | -1 |  | num2 | ArgumentDescription | 0 | 4 	|
+| 4 | -1 |  | num1 | ArgumentDescription | 0 | 0 	|
+| 5 | -1 |  | arr | ArgumentDescription | 0 | 0 	|
+| 6 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
+| 7 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
+| 8 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 9 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 10 | -1 |  | null | IndexDescription | 0 | 0 	|
+| 11 | -1 |  | null | IndexDescription | 0 | 10 	|
+----------------------------------------
+
+----------------------------------------
+|          DESCRIPTION  TABLE          |
+----------------------------------------
+|    ID    |     TYPE     |    DESC    |
+----------------------------------------
+| letterA | CHAR | ConstantDescription 	|
+| textRem | CHAR | VariableDescription 	|
+| array | INT | TypeDescription 	|
+| num1 | INT | VariableDescription 	|
+| text | CHAR | TypeDescription 	|
+| letters | CHAR | TypeDescription 	|
+| num2 | INT | VariableDescription 	|
+| a | INT | VariableDescription 	|
+| reminder | INT | VariableDescription 	|
+| f | INT | VariableDescription 	|
+| g | INT | VariableDescription 	|
+| textDec | CHAR | VariableDescription 	|
+| i | INT | VariableDescription 	|
+| letterCounter | CHAR | VariableDescription 	|
+| null | INT | ConstantDescription 	|
+| globalCounter | INT | VariableDescription 	|
+| answer | CHAR | VariableDescription 	|
+| true | BOOL | ConstantDescription 	|
+| pi | INT | ConstantDescription 	|
+| decimal | INT | VariableDescription 	|
+| whitespace | CHAR | TypeDescription 	|
+----------------------------------------

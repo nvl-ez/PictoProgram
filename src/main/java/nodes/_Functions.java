@@ -11,4 +11,8 @@ public class _Functions extends Node {
         this. functions = functions;
         this.function = function;
     }
+    
+    public void generate(){
+        
+    }
 }

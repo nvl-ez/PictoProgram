@@ -9,14 +9,14 @@ import utils.ErrorPhase;
 import utils.Types;
 import utils.description.ConstantDescription;
 import utils.description.Description;
+import utils.description.TACDescription;
 import utils.description.VariableDescription;
 
 public class _Index extends Node {
 
     private int decimal = -1;
-    private _Index index;
+    private _Index index = null;
     private String id = null;
-    private VariableDescription desc = null;
 
     public _Index(int decimal, _Index index, int left, int right) {
         super(left, right);
@@ -39,7 +39,7 @@ public class _Index extends Node {
             this.decimal = -1;
             return;
         }
-        
+
         if (description instanceof ConstantDescription) {
             ConstantDescription constant = (ConstantDescription) description;
             if (constant.getType() == Types.INT) {
@@ -66,7 +66,6 @@ public class _Index extends Node {
             return;
         }
         this.index = index;
-        desc = (VariableDescription) description;
     }
 
     public _Index getNext() {
@@ -80,34 +79,30 @@ public class _Index extends Node {
     public int getDecimal() {
         return decimal;
     }
-    
-    public Variable generate(LinkedList<Integer> sizes, int depth){
-        Variable indexVar = null;
-        if(desc != null){
-            indexVar = desc.getVar();
+
+    public Variable generate(LinkedList<Integer> sizes) {
+        // Base case: if there is no next index, return the current decimal value
+        Variable t = new Variable(1);
+        if (id == null) {
+            tac.put(new Instruction(Operations.COPY, decimal, t));
         } else {
-            tac.put(new Instruction(Operations.COPY, decimal, indexVar));
+            t = ((TACDescription) st.get(id)).getVariable();
         }
-        
-        //Caso base
-        if(index == null){
-            return indexVar;
+        if (index == null) {
+            return t;
         }
-        Variable t1 = new Variable();
-        tac.put(new Instruction(Operations.COPY, productOfRemainingDimensions(sizes, depth - 1), t1));
-        Variable t2 = new Variable();
-        tac.put(new Instruction(Operations.PROD, indexVar, t1, t2));
-        Variable t3 = new Variable();
-        tac.put(new Instruction(Operations.SUM, index.generate(sizes, depth-1), t2, t3));
+
+        // Recursive case: compute the linear index
+        Variable t0 = index.generate(sizes);
+
+        Variable t1 = new Variable(1);
+        tac.put(new Instruction(Operations.COPY, sizes.pop(), t1));
+        Variable t2 = new Variable(1);
+        tac.put(new Instruction(Operations.PROD, t0, t1, t2));
+        Variable t3 = new Variable(1);
+        tac.put(new Instruction(Operations.SUM, t, t2, t3));
         
         return t3;
     }
-    
-    private int productOfRemainingDimensions(LinkedList<Integer> sizes, int start){
-        int product = 1;
-        for (int i = start; i < sizes.size(); i++) {
-            product *= sizes.get(i);
-        }
-        return product;
-    }
+
 }

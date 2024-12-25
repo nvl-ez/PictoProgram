@@ -10,7 +10,7 @@ public class VariableDescription extends Description{
     private static int counter = 0;
     private final int varIdentifier;
     private Types type;
-    private Variable var;
+    private Variable var = null;
 
     
     public VariableDescription(String id, Types type) {
@@ -18,9 +18,9 @@ public class VariableDescription extends Description{
         
         counter++;
         varIdentifier = counter;
-        var = new Variable();
         this.type = type;
     }
+    
     
     public int getVarIdentifier(){
         return varIdentifier;
@@ -32,13 +32,5 @@ public class VariableDescription extends Description{
     
     public Types getType(){
         return type;
-    }
-    
-    public Variable getVar() {
-        return var;
-    }
-
-    public void setVar(Variable var) {
-        this.var = var;
     }
 }

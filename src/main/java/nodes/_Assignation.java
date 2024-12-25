@@ -14,7 +14,7 @@ import utils.description.VariableDescription;
 public class _Assignation extends Node{
     private String id;
     private _Expression expression;
-    private _Index index;
+    private _Index index = null;
 
     public _Assignation(String id, _Expression expression, int left, int right) {
         super(left, right);
@@ -69,6 +69,14 @@ public class _Assignation extends Node{
         this.id = id;
         this.index = index;
         this.expression = expression;
+    }
+    
+    public void generate(){
+        if(index == null){
+            
+        } else{
+            
+        }
     }
 
 }

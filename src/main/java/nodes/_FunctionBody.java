@@ -20,4 +20,11 @@ public class _FunctionBody extends Node {
         return instruction;
     }
     
+    public void generate(){
+        if(functionBody!= null){
+            functionBody.generate();
+        }
+        instruction.generate();
+    }
+    
 }

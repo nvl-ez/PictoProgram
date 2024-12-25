@@ -9,6 +9,7 @@ import utils.description.ConstantDescription;
 import utils.description.Description;
 import utils.description.IndexDescription;
 import utils.description.ProcedureDescription;
+import utils.description.TACDescription;
 import utils.description.TypeDescription;
 import utils.description.VariableDescription;
 
@@ -23,8 +24,6 @@ public class _Value extends Node {
     private Types type = Types.NULL;
     private _Index index = null;
     
-    Description desc = null;
-    
     //Llamada a funcion
     public _Value(_FunctionCall functionCall, int left, int right) {
         super(left, right);
@@ -33,7 +32,6 @@ public class _Value extends Node {
 
         if (description != null && description instanceof ProcedureDescription) {
             type = ((ProcedureDescription)description).getType();
-            desc = description;
         } else{
             type = Types.NULL;
         }
@@ -139,7 +137,6 @@ public class _Value extends Node {
         }
         
         type = ((TypeDescription)description).getType();
-        desc = description;
     }
     
     //Variable
@@ -171,7 +168,6 @@ public class _Value extends Node {
         }
         
         this.id = id;
-        desc = description;
     }
     
     //READ
@@ -197,29 +193,31 @@ public class _Value extends Node {
     }
     
     public Variable generate(){
-        Variable var = new Variable();
+        Variable var = null;
         if(characterValue != null){
+            var  = new Variable(1);
             tac.put(new Instruction(Operations.COPY, (int)characterValue, var));
         } else if(decimalValue != null){
+            var  = new Variable(1);
             tac.put(new Instruction(Operations.COPY, decimalValue, var));
         } else if(booleanValue != null){
+            var  = new Variable(1);
             tac.put(new Instruction(Operations.COPY, (booleanValue ? -1 : 0), var));
         } else if(expression != null){
+            var  = new Variable(1);
             var = expression.generate();
         } else if(functionCall != null){//Function
             
         } else if(index != null && id != null){//Array
-            TypeDescription arr = (TypeDescription)desc;
+            var = new Variable(1);
             
-            Variable i = index.generate(arr.getDimLengths(), 0);
+            TACDescription arrDesc = (TACDescription)st.get(id);
+            Variable i = index.generate(arrDesc.getSizes());
             
-            Variable result = new Variable();
-            
-            tac.put(new Instruction(Operations.IND_VAL, arr.getBase(), i, result));
-            return result;
+            tac.put(new Instruction(Operations.IND_VAL, arrDesc.getVariable(), i, var));
          
         } else if(id != null  && index == null){//Variable
-            return ((VariableDescription)desc).getVar();
+            return ((TACDescription)st.get(id)).getVariable();
         } else{ //Read
             
         }

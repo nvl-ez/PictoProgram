@@ -37,6 +37,10 @@ public class Node {
         st = simt;
     }
     
+    public static void setThreeAddressCode(ThreeAddressCode threeAddressCode){
+        tac = threeAddressCode;
+    }
+    
     protected boolean checkInt(int number){
         return -32768<= number && number<= 32767;
     }

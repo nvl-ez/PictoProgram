@@ -9,5 +9,9 @@ public class _Else extends Node{
         super(left, right);
         this. functionBody = functionBody;
     }
+    
+    public void generate(){
+        functionBody.generate();
+    }
 
 }

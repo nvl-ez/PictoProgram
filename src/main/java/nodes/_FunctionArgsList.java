@@ -74,8 +74,6 @@ public class _FunctionArgsList extends Node{
             i = i.getNext();
         }
         
-        description.setDimLengths(dimLength);
-        
         i = dimentions;
         
         while(i!= null){

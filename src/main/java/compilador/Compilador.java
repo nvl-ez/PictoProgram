@@ -2,6 +2,8 @@ package compilador;
 
 import front.lexic.Scanner;
 import front.sintactic.Parser;
+import intermediateCode.Operand;
+import intermediateCode.ThreeAddressCode;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,13 +23,14 @@ import utils.SymbolTable;
 public class Compilador {
 
     public static void main(String[] args) {
-        String filePath = "arrayTest.txt";
+        String filePath = "program.txt";
         ErrorHandler eh = new ErrorHandler();
+        
         try {
             preprocessFile(filePath);
             FileReader input = new FileReader(new File(filePath));
             
-            SymbolTable st = new SymbolTable(eh);
+            SymbolTable st = new SymbolTable(eh, true);
             
             
             SymbolFactory sf = new ComplexSymbolFactory();
@@ -44,6 +47,10 @@ public class Compilador {
             
             Node.setSymbolTable(st);
             Node.setErrorHandler(eh);
+            
+            ThreeAddressCode tac = new ThreeAddressCode();
+            Operand.setThreeAddressCode(tac);
+            Node.setThreeAddressCode(tac);
             
             parser.parse();
             

@@ -1,18 +1,22 @@
 package nodes;
 
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Variable;
 import static nodes.Node.eh;
 import utils.ErrorPhase;
 import utils.OpArit;
 import utils.Types;
 import utils.description.ConstantDescription;
+import utils.description.TACDescription;
 
 public class _ConstDeclaration extends Node {
 
     private Types type;
     private String id;
-    private char characterValue;
-    private int decimalValue;
-    private boolean booleanValue;
+    private Character characterValue = null;
+    private Integer decimalValue = null;
+    private Boolean booleanValue = null;
 
     public _ConstDeclaration(Types type, String id, int decimalValue, int left, int right) {
         super(left, right);
@@ -164,6 +168,19 @@ public class _ConstDeclaration extends Node {
         this.type = type;
         this.id = id;
         this.booleanValue = booleanValue;
+    }
+    
+    public void generate(){
+        Variable t = new Variable(1);
+        st.put(new TACDescription(id, t));
+        
+        if(decimalValue!=null){
+            tac.put(new Instruction(Operations.COPY, decimalValue, t));
+        } else if(characterValue!=null){
+            tac.put(new Instruction(Operations.COPY, characterValue, t));
+        } else if(booleanValue!=null){
+            tac.put(new Instruction(Operations.COPY, (booleanValue ? -1:0), t));
+        }
     }
 
 }

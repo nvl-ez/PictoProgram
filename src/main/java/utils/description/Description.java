@@ -20,14 +20,6 @@ public class Description {
     public void setId(String id){
         this.id = id;
     }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
     
     public void setThreeAddressCode(ThreeAddressCode threeAddressCode){
         tac = threeAddressCode;

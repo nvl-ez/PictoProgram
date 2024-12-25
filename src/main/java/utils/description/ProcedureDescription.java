@@ -10,15 +10,12 @@ public class ProcedureDescription extends Description{
     private final int procIdentifier;
     private Types type;
     
-    private Variable var;
-    
     public ProcedureDescription(String id, Types type) {
         super(id);
         this.type = type;
         
         counter++;
         procIdentifier = counter;
-        var = new Variable();
     }
     
     public Types getType(){
@@ -28,13 +25,4 @@ public class ProcedureDescription extends Description{
     public void setType(Types type){
         this.type = type;
     }
-    
-    public Variable getVar() {
-        return var;
-    }
-
-    public void setVar(Variable var) {
-        this.var = var;
-    }
-
 }

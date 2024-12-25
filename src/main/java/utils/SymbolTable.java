@@ -1,13 +1,21 @@
 package utils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.description.ArgumentDescription;
+import utils.description.ConstantDescription;
 import utils.description.Description;
 import utils.description.IndexDescription;
 import utils.description.ProcedureDescription;
 import utils.description.TypeDescription;
+import utils.description.VariableDescription;
 
 public class SymbolTable {
 
@@ -16,14 +24,28 @@ public class SymbolTable {
     private TreeMap<Integer, Row> expansionTable;
     private HashMap<String, Row> descriptionTable;
 
+    private BufferedWriter writer = null;
+
     private static ErrorHandler eh;
 
-    public SymbolTable(ErrorHandler errh) {
+    private boolean print;
+
+    public SymbolTable(ErrorHandler errh, boolean print) {
         eh = errh;
         n = 0;
         scopeTable = new TreeMap<>();
         expansionTable = new TreeMap<>();
         descriptionTable = new HashMap<>();
+
+        this.print = print;
+
+        if (print) {
+            try {
+                writer = new BufferedWriter(new FileWriter("SymbolTable.txt"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         empty();
     }
@@ -53,6 +75,16 @@ public class SymbolTable {
     }
 
     public void enterBlock() {
+        if (print) {
+            try {
+                String text = "[BEFORE ENTERING BLOCK]----------------------------------------------------\n" + toString();
+                writer.write(text);
+                writer.flush();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
         n++;
         scopeTable.put(n, scopeTable.get(n - 1));
     }
@@ -83,6 +115,7 @@ public class SymbolTable {
 
         return true;
     }
+
     //Tener en cuenta el orden en el que se insertan las dimensiones en las listas de _ArrDeclaration/_FunctionArgList
     //
     /* 
@@ -115,9 +148,18 @@ public class SymbolTable {
         }
         return true;
     }
-    */
-
+     */
     public void exitBlock() {
+        if (print) {
+            try {
+                String text = "[BEFORE EXITING BLOCK]----------------------------------------------------\n" + toString();
+                writer.write(text);
+                writer.flush();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
         // evaluar si hay un nivel al que volver
         if (n == 1) {
             eh.addError(ErrorPhase.Semantic, "Escaping the global scope was atempted, might be due a faulty function definition.", -1, -1);
@@ -228,6 +270,51 @@ public class SymbolTable {
             this.np = np;
             next = 0;
         }
+    }
+
+    public String toString() {
+        String value = "N = " + n + "\n\n";
+
+        value += "------------------\n";
+        value += "| ACCESS   TABLE |\n";
+        value += "------------------\n";
+        value += "| LVL   | IDX    |\n";
+        value += "------------------\n";
+
+        for (Map.Entry<Integer, Integer> entry : scopeTable.entrySet()) {
+            value += "|" + entry.getKey() + "\t\t|" + entry.getValue() + "\t\t|\n";
+        }
+        value += "------------------\n\n";
+        value += "----------------------------------------\n";
+        value += "|           EXPANSION  TABLE           |\n";
+        value += "----------------------------------------\n";
+        value += "| INDX | NP | ID | DESC | FIRST | NEXT |\n";
+        value += "----------------------------------------\n";
+
+        for (Map.Entry<Integer, Row> entry : expansionTable.entrySet()) {
+            Row row = entry.getValue();
+            value += "| " + entry.getKey() + " | " + row.np + " | " + " | " + row.description.getId() + " | " + row.description.getClass().getSimpleName() + " | " + row.first + " | " + row.next + " \t|\n";
+        }
+        value += "----------------------------------------\n\n";
+
+        value += "----------------------------------------\n";
+        value += "|          DESCRIPTION  TABLE          |\n";
+        value += "----------------------------------------\n";
+        value += "|    ID    |     TYPE     |    DESC    |\n";
+        value += "----------------------------------------\n";
+
+        for (Map.Entry<String, Row> entry : descriptionTable.entrySet()) {
+            Row row = entry.getValue();
+            if (row.description instanceof ConstantDescription) {
+                value += "| " + row.description.getId() + " | " + ((ConstantDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
+            } else if (row.description instanceof VariableDescription) {
+                value += "| " + row.description.getId() + " | " + ((VariableDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
+            } else if (row.description instanceof TypeDescription) {
+                value += "| " + row.description.getId() + " | " + ((TypeDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
+            }
+        }
+        value += "----------------------------------------\n";
+        return value;
     }
 
     /*PREGUTNAS DECLARACION DE TABLAS:

@@ -13,5 +13,12 @@ public class _GlobalDeclarations extends Node {
         this.declaration = declaration;
         this.globalDeclarations = globalDeclarations;
     }
-
+    
+    public void generate(){
+        if(globalDeclarations != null){
+            globalDeclarations.generate();
+        }
+        
+        declaration.generate();
+    }
 }

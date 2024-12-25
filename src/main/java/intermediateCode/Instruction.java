@@ -2,10 +2,10 @@ package intermediateCode;
 
 public class Instruction {
 
-    private Operations op;
-    private Operand operand1;
-    private Operand operand2;
-    private Operand result;
+    private Operations op = null;
+    private Operand operand1 = null;
+    private Operand operand2 = null;
+    private Operand result = null;
     
     private Integer value = null;
 
@@ -32,5 +32,17 @@ public class Instruction {
         this.op = op;
         value = bool? -1 : 0;
         this.result = result;
+    }
+    
+    public String toString(){
+        if(op == Operations.SKIP){
+            return result.getName()+": "+op.name();
+        }
+        
+        if(value != null){
+            return op.name()+"("+ value + ", " + (operand2!=null?operand2.getName() : "--") + ", "+(result!=null?result.getName() : "--")+")";
+        }
+        
+        return op.name()+"("+ (operand1!=null?operand1.getName() : "--") + ", " + (operand2!=null?operand2.getName() : "--") + ", "+(result!=null?result.getName() : "--")+")";
     }
 }

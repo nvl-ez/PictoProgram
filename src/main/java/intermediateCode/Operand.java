@@ -4,6 +4,17 @@ package intermediateCode;
  *
  * @author nahu
  */
-public interface Operand {
-
+ public class Operand {
+    protected static ThreeAddressCode tac = null;
+    
+    public String getName(){
+        return "";
+    }
+    public int getId(){
+        return 0;
+    }
+    
+    public static void setThreeAddressCode(ThreeAddressCode threeAddressCode){
+        tac = threeAddressCode;
+    }
 }

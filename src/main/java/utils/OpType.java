@@ -12,6 +12,5 @@ public enum OpType {
     RETURN,
     FOR,
     INCREMENT,
-    READ,
     WRITE
 }

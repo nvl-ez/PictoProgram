@@ -1,9 +1,13 @@
 package nodes;
 
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Variable;
 import static nodes.Node.eh;
 import utils.ErrorPhase;
 import utils.Types;
 import utils.description.Description;
+import utils.description.TACDescription;
 import utils.description.VariableDescription;
 
 public class _VarDeclaration extends Node {
@@ -11,6 +15,8 @@ public class _VarDeclaration extends Node {
     private Types type;
     private String id;
     private _AssignationPart assignationPart;
+    
+    private VariableDescription desc = null;
 
     public _VarDeclaration(Types type, String id, _AssignationPart assignationPart, int left, int right) {
         super(left, right);
@@ -33,8 +39,8 @@ public class _VarDeclaration extends Node {
                 return;
             }
         }
-
-        if (!st.put(new VariableDescription(id, type))) {
+        desc = new VariableDescription(id, type);
+        if (!st.put(desc)) {
             eh.addError(ErrorPhase.Semantic, "Identifier '" + id + "' already in use", left, right);
             this.type = Types.NULL;
             return;
@@ -43,6 +49,16 @@ public class _VarDeclaration extends Node {
         this.type = type;
         this.id = id;
         this.assignationPart = assignationPart;
+    }
+    
+    public void generate(){
+        if(assignationPart != null){
+            st.put(new TACDescription(id, assignationPart.generate()));
+        } else{
+            Variable t = new Variable(1);
+            st.put(new TACDescription(id, t));
+            tac.put(new Instruction(Operations.COPY, 0, t));
+        }
     }
 
 }

@@ -12,4 +12,8 @@ public class _MainFunction extends Node{
         this.functionBody = functionBody;
     }
     
+    public void generate(){
+        
+    }
+    
 }

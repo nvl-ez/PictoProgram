@@ -1,17 +1,22 @@
 
 package nodes;
+import intermediateCode.Variable;
 import java.util.LinkedList;
 import static nodes.Node.eh;
 import static nodes.Node.st;
 import utils.ErrorPhase;
 import utils.Types;
 import utils.description.IndexDescription;
+import utils.description.TACDescription;
 import utils.description.TypeDescription;
+import utils.description.VariableDescription;
 
 public class _ArrDeclaration extends Node {
     private Types type;
     private _DimentionSizes dimentionSizes;
     private String id;
+    
+    private TypeDescription desc = null;
 
     public _ArrDeclaration(Types type, _DimentionSizes dimentionSizes, String id, int left, int right) {
         super(left, right);
@@ -32,9 +37,7 @@ public class _ArrDeclaration extends Node {
         }
         
         _DimentionSizes i = dimentionSizes;
-        LinkedList<Integer> dimLength = new LinkedList<>();
         while(i!= null){
-            dimLength.push(i.getDecimal());
             if(!checkInt(i.getDecimal()) || i.getDecimal() <= 0){
                 this.type = Types.NULL;
                 description.setType(Types.NULL);
@@ -43,8 +46,6 @@ public class _ArrDeclaration extends Node {
             }
             i = i.getNext();
         }
-
-        description.setDimLengths(dimLength);
         
         i = dimentionSizes;
         
@@ -62,6 +63,20 @@ public class _ArrDeclaration extends Node {
         this.type = type;
         this.dimentionSizes = dimentionSizes;
         this.id = id;
+        this.desc = description;
+    }
+    
+    public void generate(){
+        int size = 1;
+        _DimentionSizes dims = dimentionSizes;
+        LinkedList<Integer> sizes = new LinkedList<>();
+        while(dims != null){
+            sizes.add(dims.getDecimal());
+            size *= dims.getDecimal();
+            dims = dims.getNext();
+        }
+        
+        st.put(new TACDescription(id, new Variable(size), sizes));
     }
 
 }

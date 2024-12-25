@@ -112,7 +112,7 @@ public class _Expression extends Node {
     }
 
     public Variable generate() {
-        Variable var = new Variable();
+        Variable var = new Variable(1);
         //paso de valor simple
         if (expression == null) {
            tac.put(new Instruction(Operations.COPY, value.generate(), null, var)); //REVISAR
@@ -121,7 +121,8 @@ public class _Expression extends Node {
                 if(operation.getOparit() == OpArit.SUM){
                     tac.put(new Instruction(Operations.COPY, value.generate(), null, var));
                 } else{
-                    tac.put(new Instruction(Operations.NEG, expression.generate(), null, var));
+                    tac.put(new Instruction(Operations.COPY, expression.generate(), null, var));
+                    tac.put(new Instruction(Operations.NEG, null, null, var));
                 }
             } else if(operation.getOparit() != null || operation.getOplog() != null){//operacion normal arit o logi
                 tac.put(new Instruction(getOperation(), expression.generate(), value.generate(), var));

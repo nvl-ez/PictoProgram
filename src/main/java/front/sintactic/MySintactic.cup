@@ -121,10 +121,10 @@ start with PictoProgram;
 SetUp               ::=                                                                                             {:  :}
                     ;
 
-PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0);:}
-                    |   SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0);:}
-                    |   SetUp Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0);:}
-                    |   SetUp MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0);:}
+PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0); RESULT.generate();:}
+                    |   SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0); RESULT.generate();:}
+                    |   SetUp Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0); RESULT.generate();:}
+                    |   SetUp MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0); RESULT.generate();:}
                     
                     |   SetUp GlobalDeclarations:globalDeclarations Functions:functions                             {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
                     |   SetUp GlobalDeclarations:globalDeclarations                                                 {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
