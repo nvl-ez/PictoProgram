@@ -1,5 +1,9 @@
 package nodes;
 
+import intermediateCode.Function;
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Tag;
 import java.util.LinkedList;
 import static nodes.Node.eh;
 import static nodes.Node.st;
@@ -28,7 +32,7 @@ public class _Function extends Node {
         }
 
         if (functionHead.getArgs() != null) {
-            _FunctionArgsList args = functionHead.getArgs().getArgsList();
+            _FunctionArgsList args = functionHead.getArgs().getFunctionArgsList();
 
             while (args != null) {
                 //es una array
@@ -80,7 +84,7 @@ public class _Function extends Node {
                     return;
                 }
                 
-                args = args.getNext();
+                args = args.next();
             }
         }
 
@@ -125,6 +129,21 @@ public class _Function extends Node {
         this.type = type;
         this.functionHead = functionHead;
         this.functionBody = functionBody;
+    }
+    
+    public void generate(){
+        Function fun = functionHead.generate(type!=Types.VOID);
+        
+        tac.put(new Instruction(Operations.SKIP, null, null, fun.getStart()));
+        tac.put(new Instruction(Operations.PMB, null, null, fun));
+        
+        if(functionBody != null){
+            functionBody.generate();
+        }
+        //tac.put(new Instruction(Operations.RTN, null, null, fun));
+        st.exitBlock();
+        
+        tac.recalculate();
     }
 
 }

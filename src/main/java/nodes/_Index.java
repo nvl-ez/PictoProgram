@@ -80,9 +80,9 @@ public class _Index extends Node {
         return decimal;
     }
 
-    public Variable generate(LinkedList<Integer> sizes) {
+    public Variable generate(LinkedList<Integer> sizes, int i) {
         // Base case: if there is no next index, return the current decimal value
-        Variable t = new Variable(1);
+        Variable t = new Variable(1, false);
         if (id == null) {
             tac.put(new Instruction(Operations.COPY, decimal, t));
         } else {
@@ -93,13 +93,13 @@ public class _Index extends Node {
         }
 
         // Recursive case: compute the linear index
-        Variable t0 = index.generate(sizes);
+        Variable t0 = index.generate(sizes, i+1);
 
-        Variable t1 = new Variable(1);
-        tac.put(new Instruction(Operations.COPY, sizes.pop(), t1));
-        Variable t2 = new Variable(1);
+        Variable t1 = new Variable(1, false);
+        tac.put(new Instruction(Operations.COPY, sizes.get(i), t1));
+        Variable t2 = new Variable(1, false);
         tac.put(new Instruction(Operations.PROD, t0, t1, t2));
-        Variable t3 = new Variable(1);
+        Variable t3 = new Variable(1, false);
         tac.put(new Instruction(Operations.SUM, t, t2, t3));
         
         return t3;

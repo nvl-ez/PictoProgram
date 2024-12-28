@@ -1,6 +1,7 @@
 
 package utils.description;
 
+import intermediateCode.Variable;
 import java.util.LinkedList;
 import utils.Types;
 
@@ -9,6 +10,7 @@ public class ArgumentDescription extends Description {
     
     private LinkedList<Integer> dimentions = null;
     private Types type;
+    private Variable var = null;
     
     public ArgumentDescription(String id, Types type) {
         super(id);
@@ -21,11 +23,20 @@ public class ArgumentDescription extends Description {
         this.type = type;
     }
     
+    public ArgumentDescription(String id, Variable var) {
+        super(id);
+        this.var = var;
+    }
+    
     public LinkedList<Integer> getDimentions(){
         return dimentions;
     }
     
     public Types getType(){
         return type;
+    }
+    
+    public Variable getVariable(){
+        return var;
     }
 }

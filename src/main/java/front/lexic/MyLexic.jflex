@@ -155,8 +155,7 @@ endline         = ;
 
 // Regles/accions
 {character}     { return symbol(ParserSym.Character, this.yytext().charAt(1)); }
-{id}            { System.out.println(this.yytext());
-    return symbol(ParserSym.Id, this.yytext()); }
+{id}            { return symbol(ParserSym.Id, this.yytext()); }
 {type}          {
                     String type = this.yytext();
                     if(type.equals("🕳".replaceAll("\\ufe0f", ""))){

@@ -55,9 +55,8 @@ public class _VarDeclaration extends Node {
         if(assignationPart != null){
             st.put(new TACDescription(id, assignationPart.generate()));
         } else{
-            Variable t = new Variable(1);
+            Variable t = new Variable(1, false);
             st.put(new TACDescription(id, t));
-            tac.put(new Instruction(Operations.COPY, 0, t));
         }
     }
 

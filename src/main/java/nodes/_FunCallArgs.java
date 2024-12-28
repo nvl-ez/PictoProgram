@@ -1,9 +1,14 @@
 package nodes;
 
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Variable;
+import java.util.LinkedList;
 import static nodes.Node.eh;
 import utils.ErrorPhase;
 import utils.Types;
 import utils.description.Description;
+import utils.description.TACDescription;
 import utils.description.TypeDescription;
 
 
@@ -57,6 +62,19 @@ public class _FunCallArgs extends Node{
     
     public String getId(){
         return id;
+    }
+    
+    public void generate(LinkedList<Variable> args, int i){
+        if(funCallArgs!=null){
+            funCallArgs.generate(args, i+1);
+        }
+        
+        if(id!=null){
+            tac.put(new Instruction(Operations.PUT, null, null, ((TACDescription)st.get(id)).getVariable()));
+        } else {
+            tac.put(new Instruction(Operations.PUT, null, null, expression.generate()));
+        }
+        
     }
 
 }

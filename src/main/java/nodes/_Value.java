@@ -103,16 +103,17 @@ public class _Value extends Node {
         
         //Comprobar que las dimensiones indexadas coincidne con las declaradas
         int i;
-        for( i = st.first(id); i != 0 && index != null; i = st.next(i)){
+        _Index ind = index;
+        for( i = st.first(id); i != 0 && ind != null; i = st.next(i)){
             IndexDescription indexDescription = st.check(i);
             
-            if(index.getDecimal() >= 0){
-                if(index.getDecimal() >= indexDescription.getLength()){
-                    eh.addError(ErrorPhase.Semantic, "Value "+index.getDecimal()+" is out of bounds", left, right);
+            if(ind.getDecimal() >= 0){
+                if(ind.getDecimal() >= indexDescription.getLength()){
+                    eh.addError(ErrorPhase.Semantic, "Value "+ind.getDecimal()+" is out of bounds", left, right);
                     type = Types.NULL;
                     return;
                 }
-            } else if(index.getDecimal() == -1 && index.getId() == null){
+            } else if(ind.getDecimal() == -1 && ind.getId() == null){
                 type = Types.NULL;
                 return;
                 
@@ -121,10 +122,10 @@ public class _Value extends Node {
                 return;
             }
             
-            index = index.getNext();
+            ind = ind.getNext();
         }
         
-        if(index.getNext() != null){
+        if(ind != null){
             eh.addError(ErrorPhase.Semantic, "Invalid indexed dimentions", left, right);
             type = Types.NULL;
             return;
@@ -137,6 +138,7 @@ public class _Value extends Node {
         }
         
         type = ((TypeDescription)description).getType();
+        this.index = index;
     }
     
     //Variable
@@ -195,24 +197,25 @@ public class _Value extends Node {
     public Variable generate(){
         Variable var = null;
         if(characterValue != null){
-            var  = new Variable(1);
+            var  = new Variable(1, false);
             tac.put(new Instruction(Operations.COPY, (int)characterValue, var));
         } else if(decimalValue != null){
-            var  = new Variable(1);
+            var  = new Variable(1, false);
             tac.put(new Instruction(Operations.COPY, decimalValue, var));
         } else if(booleanValue != null){
-            var  = new Variable(1);
+            var  = new Variable(1, false);
             tac.put(new Instruction(Operations.COPY, (booleanValue ? -1 : 0), var));
         } else if(expression != null){
-            var  = new Variable(1);
             var = expression.generate();
         } else if(functionCall != null){//Function
+            var  = new Variable(1, false);
+            functionCall.generate();
             
         } else if(index != null && id != null){//Array
-            var = new Variable(1);
+            var = new Variable(1, false);
             
             TACDescription arrDesc = (TACDescription)st.get(id);
-            Variable i = index.generate(arrDesc.getSizes());
+            Variable i = index.generate(arrDesc.getSizes(), 0);
             
             tac.put(new Instruction(Operations.IND_VAL, arrDesc.getVariable(), i, var));
          

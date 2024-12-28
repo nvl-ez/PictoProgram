@@ -14,6 +14,7 @@ import utils.description.ConstantDescription;
 import utils.description.Description;
 import utils.description.IndexDescription;
 import utils.description.ProcedureDescription;
+import utils.description.TACDescription;
 import utils.description.TypeDescription;
 import utils.description.VariableDescription;
 
@@ -97,7 +98,7 @@ public class SymbolTable {
     public boolean putIndex(String id, IndexDescription description) {
         Description da = descriptionTable.get(id).description;
 
-        if ((da instanceof TypeDescription) == false) {
+        if (((da instanceof TypeDescription) ) == false) {
             return false;
         }
 
@@ -226,7 +227,7 @@ public class SymbolTable {
     public boolean putParam(String idProcedure, Description description) {
         Row row = descriptionTable.get(idProcedure);
         Description procedure = row.description;
-        if ((procedure instanceof ProcedureDescription) == false) {
+        if ((procedure instanceof ProcedureDescription  || (procedure instanceof TACDescription)) == false) {
             return false;
         }
 

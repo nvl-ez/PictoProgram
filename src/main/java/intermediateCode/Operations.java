@@ -25,6 +25,8 @@ public enum Operations {
     PMB,
     CALL,
     RTN,
-    PARAM,
-    INC
+    INC,
+    
+    PUT,
+    POP
 }

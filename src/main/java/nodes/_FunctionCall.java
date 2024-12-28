@@ -1,5 +1,9 @@
 package nodes;
 
+import intermediateCode.Function;
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Variable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import static nodes.Node.eh;
@@ -9,6 +13,7 @@ import utils.description.ArgumentDescription;
 import utils.description.Description;
 import utils.description.IndexDescription;
 import utils.description.ProcedureDescription;
+import utils.description.TACDescription;
 
 public class _FunctionCall extends Node {
 
@@ -65,7 +70,7 @@ public class _FunctionCall extends Node {
                 int j = st.first(arg.getId());
 
                 LinkedList<Integer> dimentions = argDesc.getDimentions();
-                Iterator<Integer> iter = dimentions.iterator();
+                Iterator<Integer> iter = dimentions.descendingIterator();
 
                 while (iter.hasNext() && j != 0) {
                     IndexDescription indDesc = st.check(j);
@@ -106,6 +111,16 @@ public class _FunctionCall extends Node {
 
     public String getId() {
         return id;
+    }
+    
+    public void generate(){
+        Function fun = ((TACDescription)st.get(id)).getFunction();
+        if(funCallArgs == null){
+            tac.put(new Instruction(Operations.CALL, null, null, fun));
+        } else {
+            funCallArgs.generate(fun.getArgs(), 0);
+            tac.put(new Instruction(Operations.CALL, null, null, fun));
+        }
     }
 
 }

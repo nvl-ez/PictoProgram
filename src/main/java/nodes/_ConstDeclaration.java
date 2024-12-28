@@ -171,7 +171,7 @@ public class _ConstDeclaration extends Node {
     }
     
     public void generate(){
-        Variable t = new Variable(1);
+        Variable t = new Variable(1, false);
         st.put(new TACDescription(id, t));
         
         if(decimalValue!=null){

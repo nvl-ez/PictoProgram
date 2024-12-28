@@ -21,10 +21,11 @@ public class _FunctionBody extends Node {
     }
     
     public void generate(){
+        instruction.generate();
+        
         if(functionBody!= null){
             functionBody.generate();
         }
-        instruction.generate();
     }
     
 }

@@ -1,12 +1,16 @@
 
 package nodes;
 
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Variable;
 import static nodes.Node.eh;
 import static nodes.Node.st;
 import utils.ErrorPhase;
 import utils.Types;
 import utils.description.Description;
 import utils.description.IndexDescription;
+import utils.description.TACDescription;
 import utils.description.TypeDescription;
 import utils.description.VariableDescription;
 
@@ -73,9 +77,11 @@ public class _Assignation extends Node{
     
     public void generate(){
         if(index == null){
-            
+            Variable var = ((TACDescription)st.get(id)).getVariable();
+            tac.put(new Instruction(Operations.COPY, expression.generate(), null, var));
         } else{
-            
+            Variable var = ((TACDescription)st.get(id)).getVariable();
+            tac.put(new Instruction(Operations.IND_ASS, expression.generate(), index.generate(((TACDescription)st.get(id)).getSizes(), 0), var));
         }
     }
 

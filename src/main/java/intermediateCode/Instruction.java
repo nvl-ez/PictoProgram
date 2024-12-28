@@ -45,4 +45,26 @@ public class Instruction {
         
         return op.name()+"("+ (operand1!=null?operand1.getName() : "--") + ", " + (operand2!=null?operand2.getName() : "--") + ", "+(result!=null?result.getName() : "--")+")";
     }
+    
+    public Operations getOperation(){
+        return op;
+    }
+    
+    public Operand getOperand1(){
+        return operand1;
+    }
+    
+    public Operand getOperand2(){
+        return operand2;
+    }
+    
+    public Operand getResult(){
+        return result;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+    
+    
 }

@@ -8,6 +8,7 @@ import utils.ErrorPhase;
 import utils.OpType;
 import utils.Types;
 import utils.description.Description;
+import utils.description.TACDescription;
 import utils.description.TypeDescription;
 import utils.description.VariableDescription;
 
@@ -266,7 +267,7 @@ public class _Instruction extends Node {
         if (_else == null) {
             Variable exp = expression1.generate();
 
-            Variable t1 = new Variable(1);
+            Variable t1 = new Variable(1, false);
             tac.put(new Instruction(Operations.COPY, 0, t1));
 
             Tag e = new Tag();
@@ -278,7 +279,7 @@ public class _Instruction extends Node {
             Variable exp = expression1.generate();
             Tag e = new Tag();
 
-            Variable t1 = new Variable(1);
+            Variable t1 = new Variable(1, false);
             tac.put(new Instruction(Operations.COPY, 0, t1));
 
             tac.put(new Instruction(Operations.IFEQ, exp, t1, e));
@@ -301,7 +302,7 @@ public class _Instruction extends Node {
         
         Tag efi = new Tag();
 
-        Variable t1 = new Variable(1);
+        Variable t1 = new Variable(1, false);
         tac.put(new Instruction(Operations.COPY, 0, t1));
         tac.put(new Instruction(Operations.IFEQ, exp, t1, efi));
         
@@ -313,31 +314,55 @@ public class _Instruction extends Node {
     }
 
     private void generate_DECLARATION() {
-        System.out.println("Generating code for DECLARATION");
+        declaration.generate();
     }
 
     private void generate_FUNCTION_CALL() {
-        System.out.println("Generating code for FUNCTION_CALL");
+        functionCall.generate();
     }
 
     private void generate_ASSIGNATION() {
-        System.out.println("Generating code for ASSIGNATION");
+        assignation.generate();
     }
 
     private void generate_RETURN_EXPRESSION() {
-        System.out.println("Generating code for RETURN_EXPRESSION");
+        Variable ret = ((TACDescription)st.get("!")).getVariable();
+        tac.put(new Instruction(Operations.COPY, expression1.generate(), null, ret));
+        tac.put(new Instruction(Operations.RTN, null, null, null));
     }
 
     private void generate_RETURN() {
-        System.out.println("Generating code for RETURN");
+        tac.put(new Instruction(Operations.RTN, null, null, null));
     }
 
     private void generate_FOR() {
-        System.out.println("Generating code for FOR");
+        varDeclaration.generate();
+        
+        Tag ei = new Tag();
+
+        tac.put(new Instruction(Operations.SKIP, null, null, ei));
+        
+        Variable exp = expression1.generate();
+        
+        Tag efi = new Tag();
+
+        Variable t1 = new Variable(1, false);
+        tac.put(new Instruction(Operations.COPY, 0, t1));
+        tac.put(new Instruction(Operations.IFEQ, exp, t1, efi));
+        
+        functionBody.generate();
+        
+        TACDescription desc = (TACDescription)st.get(id);
+        tac.put(new Instruction(Operations.INC, null, null, desc.getVariable()));
+        
+        tac.put(new Instruction(Operations.GOTO, null, null, ei));
+        
+        tac.put(new Instruction(Operations.SKIP, null, null, efi));
     }
 
     private void generate_INCREMENT() {
-        System.out.println("Generating code for INCREMENT");
+        TACDescription desc = (TACDescription)st.get(id);
+        tac.put(new Instruction(Operations.INC, null, null, desc.getVariable()));
     }
 
     private void generate_READ() {

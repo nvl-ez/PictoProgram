@@ -13,6 +13,10 @@ public class _Functions extends Node {
     }
     
     public void generate(){
+        function.generate();
         
+        if(functions!= null){
+            functions.generate();
+        }
     }
 }

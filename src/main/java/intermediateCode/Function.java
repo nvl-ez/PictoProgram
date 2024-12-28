@@ -1,27 +1,29 @@
 
 package intermediateCode;
 
+import java.util.LinkedList;
+
 
 
 public class Function extends  Operand {
     private static int counter = 0;
     private final int id;
     private final Tag start;
-    private int nParams;
+    private LinkedList<Variable> args;
     
     
-    public Function(Tag start, int nParams){
+    public Function(Tag start){
         id = counter;
         counter++;
         this.start = start;
-        this.nParams = nParams;
+        args = new LinkedList<>();
         
         tac.addFunction(this);
     }
 
     @Override
     public String getName() {
-        return "t"+id;
+        return "f"+id;
     }
     
     public int getId() {
@@ -33,6 +35,14 @@ public class Function extends  Operand {
     }
     
     public int getNParams(){
-        return nParams;
+        return args.size();
+    }
+    
+    public void putArg(Variable arg){
+        args.push(arg);
+    }
+    
+    public LinkedList<Variable> getArgs(){
+        return args;
     }
 }

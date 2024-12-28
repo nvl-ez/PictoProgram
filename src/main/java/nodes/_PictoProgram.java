@@ -1,5 +1,6 @@
 package nodes;
 
+import intermediateCode.Variable;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import utils.SymbolTable;
 

@@ -492,7 +492,7 @@ class CUP$Parser$actions {
 		int mainFunctionleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int mainFunctionright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		_MainFunction mainFunction = (_MainFunction)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0); RESULT.generate();
+		RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0); RESULT.generate();tac.assemble();
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("PictoProgram",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -507,7 +507,7 @@ class CUP$Parser$actions {
 		int mainFunctionleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int mainFunctionright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		_MainFunction mainFunction = (_MainFunction)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0); RESULT.generate();
+		RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0); RESULT.generate();tac.assemble();
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("PictoProgram",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -522,7 +522,7 @@ class CUP$Parser$actions {
 		int mainFunctionleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int mainFunctionright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		_MainFunction mainFunction = (_MainFunction)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0); RESULT.generate();
+		RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0); RESULT.generate();tac.assemble();
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("PictoProgram",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -534,7 +534,7 @@ class CUP$Parser$actions {
 		int mainFunctionleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int mainFunctionright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		_MainFunction mainFunction = (_MainFunction)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT = new _PictoProgram(null, null, mainFunction, 0, 0); RESULT.generate();
+		RESULT = new _PictoProgram(null, null, mainFunction, 0, 0); RESULT.generate();tac.assemble();
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("PictoProgram",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

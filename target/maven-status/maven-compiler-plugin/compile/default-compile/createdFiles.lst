@@ -2,6 +2,7 @@ nodes\_Instruction.class
 nodes\_Declaration.class
 utils\description\ArgumentDescription.class
 nodes\_Assignation.class
+nodes\_Instruction$1.class
 nodes\_Index.class
 nodes\_VarDeclaration.class
 nodes\Node.class

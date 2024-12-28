@@ -112,13 +112,13 @@ public class _Expression extends Node {
     }
 
     public Variable generate() {
-        Variable var = new Variable(1);
+        Variable var = new Variable(1, false);
         //paso de valor simple
         if (expression == null) {
            tac.put(new Instruction(Operations.COPY, value.generate(), null, var)); //REVISAR
         } else {
             if (value == null) {//cambio de simbolo
-                if(operation.getOparit() == OpArit.SUM){
+                if(!changeSign){
                     tac.put(new Instruction(Operations.COPY, value.generate(), null, var));
                 } else{
                     tac.put(new Instruction(Operations.COPY, expression.generate(), null, var));

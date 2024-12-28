@@ -18,7 +18,7 @@
 
 }
 
-🔤 numToChar(🔢 answer){
+🔤 numToChar(🔢 answer, 🔤📦10📦7 arr){
     🔤 num1 ⬅ ' ';
 
     ❓(answer ⚖ 0){
@@ -133,9 +133,10 @@
 
     🔢 decimal ⬅ globalCounter ➗ 10;
     🔢 reminder ⬅ globalCounter ® 10;
+    🔤📦10📦7 arr;
 
-    🔤 textDec ⬅ numToChar(decimal);
-    🔤 textRem ⬅ numToChar(reminder);
+    🔤 textDec ⬅ numToChar(decimal, 📦arr);
+    🔤 textRem ⬅ numToChar(reminder, 📦arr);
 
     text 📦0 ⬅ textDec;
     text 📦1 ⬅ textRem;

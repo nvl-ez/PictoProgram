@@ -71,12 +71,12 @@ public class _ArrDeclaration extends Node {
         _DimentionSizes dims = dimentionSizes;
         LinkedList<Integer> sizes = new LinkedList<>();
         while(dims != null){
-            sizes.add(dims.getDecimal());
+            sizes.push(dims.getDecimal());
             size *= dims.getDecimal();
             dims = dims.getNext();
         }
         
-        st.put(new TACDescription(id, new Variable(size), sizes));
+        st.put(new TACDescription(id, new Variable(size, false), sizes));
     }
 
 }

@@ -121,10 +121,10 @@ start with PictoProgram;
 SetUp               ::=                                                                                             {:  :}
                     ;
 
-PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0); RESULT.generate();:}
-                    |   SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0); RESULT.generate();:}
-                    |   SetUp Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0); RESULT.generate();:}
-                    |   SetUp MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0); RESULT.generate();:}
+PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0); RESULT.generate();tac.assemble();:}
+                    |   SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0); RESULT.generate();tac.assemble();:}
+                    |   SetUp Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0); RESULT.generate();tac.assemble();:}
+                    |   SetUp MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0); RESULT.generate();tac.assemble();:}
                     
                     |   SetUp GlobalDeclarations:globalDeclarations Functions:functions                             {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
                     |   SetUp GlobalDeclarations:globalDeclarations                                                 {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
@@ -306,5 +306,7 @@ F_OUT       ::= Rbracket{:st.exitBlock();:};
 /**
 TODO:
 1 variables globales no pueden ser declaradas e inicializadas con read.
-2 Revisar Value, _Index, _ArrDeclaration, _Assignation, _FunctionArgsList y SymbolTable
+**/
+/**
+A6 es BP
 **/

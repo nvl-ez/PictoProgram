@@ -10,7 +10,7 @@ public class _FunctionArgs extends Node {
         this.functionArgsList = functionArgsList;
     }
     
-    public _FunctionArgsList getArgsList(){
+    public _FunctionArgsList getFunctionArgsList(){
         return functionArgsList;
     }
 

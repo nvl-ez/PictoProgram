@@ -1,4 +1,9 @@
-🔤📦10 letters;
+🔤📦10📦7 letters;
+
+🔢 printArray(🔤📦10📦7 let, 🔢 num){
+    ↩ num;
+}
+
 🏠(){
-    letters 11 ⬅ 'a';
+    🔢 numeros ⬅ printArray(📦letters, 1);
 }

@@ -1,0 +1,34 @@
+00000140 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 28-Dec-24 5:23:36 PM
+
+00000000                             1  t0  DS.W 70
+00000140                             2      ORG     $140
+00000140                             3  STAR:
+00000140                             4  * ----COPY GLOBAL VARIABLE ON THE STACK----
+00000140  7C45                       5      MOVE.L #69, D6
+00000142  4BF8 0000                  6      LEA t0, A5
+00000146                             7  MOVE_LOOP_t0:
+00000146  3F1D                       8      MOVE.W (A5)+, -(A7)
+00000148  51CE FFFC                  9      DBF D6, MOVE_LOOP_t0
+0000014C                            10  * ----COPY LOCAL VARIABLE ON THE STACK----
+0000014C  7C00                      11      MOVE.L #0, D6
+0000014E  2A7C FFFFFFFD             12      MOVE.L #-3, A5
+00000154  DBCE                      13      ADD.L A6, A5
+00000156                            14  MOVE_LOOP_t7:
+00000156  3F15                      15      MOVE.W (A5), -(A7)
+00000158  538D                      16      SUB.L #1, A5
+0000015A  51CE FFFA                 17      DBF D6, MOVE_LOOP_t7
+0000015E                            18      END STAR
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+MOVE_LOOP_T0        146
+MOVE_LOOP_T7        156
+STAR                140
+T0                  0

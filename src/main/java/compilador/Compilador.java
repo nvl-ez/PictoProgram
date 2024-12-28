@@ -23,7 +23,7 @@ import utils.SymbolTable;
 public class Compilador {
 
     public static void main(String[] args) {
-        String filePath = "program.txt";
+        String filePath = "empty.txt";
         ErrorHandler eh = new ErrorHandler();
         
         try {
@@ -51,6 +51,7 @@ public class Compilador {
             ThreeAddressCode tac = new ThreeAddressCode();
             Operand.setThreeAddressCode(tac);
             Node.setThreeAddressCode(tac);
+            parser.setThreeAddressCode(tac);
             
             parser.parse();
             
