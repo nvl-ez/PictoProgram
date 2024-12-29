@@ -8,6 +8,7 @@ public class Variable extends Operand {
     private final int id;
     private int words = 1;
     private boolean arg;
+    private int transferCount = 0;
     
     
     public Variable(int words, boolean arg){
@@ -25,11 +26,18 @@ public class Variable extends Operand {
     public int getWords(){
         return words;
     }
-
+    
+    public void incrementTransfer(){
+        transferCount++;
+    }
 
     @Override
     public String getName() {
         return "t"+id;
+    }
+    
+    public String getNameTransfer() {
+        return "t"+id+"_"+transferCount;
     }
     
     public int getId() {

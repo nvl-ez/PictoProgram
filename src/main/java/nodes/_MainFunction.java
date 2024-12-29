@@ -21,6 +21,7 @@ public class _MainFunction extends Node{
     
     public void generate(){
          Tag ei = new Tag();
+         ei.setName("main");
         Function fun = new Function(ei);
         st.put(new TACDescription("#", fun));
         

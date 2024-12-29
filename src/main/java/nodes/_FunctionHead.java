@@ -25,7 +25,7 @@ public class _FunctionHead extends Node {
         return functionArgs;
     }
 
-    public Function generate(boolean hasReturn) {
+    public Function generate() {
         Tag ei = new Tag();
         Function fun = new Function(ei);
         st.put(new TACDescription(id, fun));

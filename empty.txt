@@ -6,4 +6,5 @@
 
 🏠(){
     🔢 numeros ⬅ printArray(📦letters, 1);
+    🔢 result ⬅numeros➖1;
 }

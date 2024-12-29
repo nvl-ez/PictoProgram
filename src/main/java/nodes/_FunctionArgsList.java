@@ -108,10 +108,6 @@ public class _FunctionArgsList extends Node {
     }
 
     public void generate(Function fun) {
-        if (functionArgList != null) {
-            functionArgList.generate(fun);
-        }
-
         if (typeDimentions == null) {
             Variable t = new Variable(1, true);
             st.put(new TACDescription(id, t));
@@ -128,6 +124,10 @@ public class _FunctionArgsList extends Node {
              Variable t = new Variable(size, true);
             st.put(new TACDescription(id, t, sizes));
             fun.putArg(t);
+        }
+        
+        if (functionArgList != null) {
+            functionArgList.generate(fun);
         }
     }
 

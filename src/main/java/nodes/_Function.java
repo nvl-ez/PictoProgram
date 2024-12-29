@@ -132,11 +132,10 @@ public class _Function extends Node {
     }
     
     public void generate(){
-        Function fun = functionHead.generate(type!=Types.VOID);
+        Function fun = functionHead.generate();
         
         tac.put(new Instruction(Operations.SKIP, null, null, fun.getStart()));
         tac.put(new Instruction(Operations.PMB, null, null, fun));
-        
         if(functionBody != null){
             functionBody.generate();
         }

@@ -23,7 +23,7 @@ import utils.SymbolTable;
 public class Compilador {
 
     public static void main(String[] args) {
-        String filePath = "empty.txt";
+        String filePath = "program.txt";
         ErrorHandler eh = new ErrorHandler();
         
         try {

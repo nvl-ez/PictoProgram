@@ -1,5 +1,8 @@
 package nodes;
 
+import intermediateCode.Instruction;
+import intermediateCode.Operations;
+import intermediateCode.Tag;
 import intermediateCode.Variable;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import utils.SymbolTable;
@@ -23,6 +26,9 @@ public class _PictoProgram extends Node {
         if (globalDeclarations != null) {
             globalDeclarations.generate();
         }
+        Tag main = new Tag();
+        main.setName("main");
+        tac.put(new Instruction(Operations.CALL, null, null, main));
         if (functions != null) {
             functions.generate();
         }

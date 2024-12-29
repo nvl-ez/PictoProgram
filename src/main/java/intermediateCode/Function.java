@@ -10,6 +10,7 @@ public class Function extends  Operand {
     private final int id;
     private final Tag start;
     private LinkedList<Variable> args;
+    private boolean isMain = false;
     
     
     public Function(Tag start){
@@ -28,6 +29,10 @@ public class Function extends  Operand {
     
     public int getId() {
         return id;
+    }
+    
+    public void makeMain(){
+        start.setName("main");
     }
     
     public Tag getStart(){

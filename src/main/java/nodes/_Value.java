@@ -221,8 +221,9 @@ public class _Value extends Node {
          
         } else if(id != null  && index == null){//Variable
             return ((TACDescription)st.get(id)).getVariable();
-        } else{ //Read
-            
+        } else{ //Read----------------------------------------------------------------------------------
+            var = new Variable(1, false);
+            tac.put(new Instruction(Operations.COPY, 0, var));
         }
         
         return var;

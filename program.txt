@@ -1,12 +1,12 @@
-🔒 🔢 null ⬅ ➖1;
+🔒 🔢 null ⬅ ➖2;
 🔤📦10📦7 letters;
 🔒 🔤 letterA ⬅ 'a';
 🔒 🔢 pi ⬅ 3;
 
-🔒 ✅ true ⬅ 👍;
+🔒 ✅ true ⬅ 👎;
 
-🔢 globalCounter ⬅ 0;
-🔤 letterCounter ⬅ 'a';
+🔢 globalCounter ⬅ 5;
+🔤 letterCounter ⬅ 'b';
 
 
 
