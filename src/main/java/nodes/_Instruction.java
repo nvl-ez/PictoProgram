@@ -318,7 +318,7 @@ public class _Instruction extends Node {
     }
 
     private void generate_FUNCTION_CALL() {
-        functionCall.generate();
+        tac.put(new Instruction(Operations.POP, functionCall.generate(), null, null));
     }
 
     private void generate_ASSIGNATION() {
@@ -326,9 +326,7 @@ public class _Instruction extends Node {
     }
 
     private void generate_RETURN_EXPRESSION() {
-        Variable ret = ((TACDescription)st.get("!")).getVariable();
-        tac.put(new Instruction(Operations.COPY, expression1.generate(), null, ret));
-        tac.put(new Instruction(Operations.RTN, null, null, null));
+        tac.put(new Instruction(Operations.RTN, null, null, expression1.generate()));
     }
 
     private void generate_RETURN() {
@@ -365,12 +363,12 @@ public class _Instruction extends Node {
         tac.put(new Instruction(Operations.INC, null, null, desc.getVariable()));
     }
 
-    private void generate_READ() {
-        System.out.println("Generating code for READ");
-    }
 
     private void generate_WRITE() {
-        System.out.println("Generating code for WRITE");
+        Variable arr = ((TACDescription)st.get(id)).getVariable();
+        
+        tac.put(new Instruction(Operations.POS, expression3.generate(), expression4.generate(), null));
+        tac.put(new Instruction(Operations.WRITE, expression1.generate(), expression2.generate(), arr));
     }
 
 }

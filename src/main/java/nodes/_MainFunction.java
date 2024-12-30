@@ -32,6 +32,7 @@ public class _MainFunction extends Node{
         if(functionBody != null){
             functionBody.generate();
         }
+        tac.put(new Instruction(Operations.HALT, null, null, null));
         st.exitBlock();
         
         tac.recalculate();

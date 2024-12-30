@@ -209,7 +209,7 @@ public class _Value extends Node {
             var = expression.generate();
         } else if(functionCall != null){//Function
             var  = new Variable(1, false);
-            functionCall.generate();
+            tac.put(new Instruction(Operations.POP, functionCall.generate(), null, var));
             
         } else if(index != null && id != null){//Array
             var = new Variable(1, false);
@@ -223,7 +223,7 @@ public class _Value extends Node {
             return ((TACDescription)st.get(id)).getVariable();
         } else{ //Read----------------------------------------------------------------------------------
             var = new Variable(1, false);
-            tac.put(new Instruction(Operations.COPY, 0, var));
+            tac.put(new Instruction(Operations.READ, null, null, var));
         }
         
         return var;

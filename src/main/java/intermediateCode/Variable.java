@@ -14,7 +14,7 @@ public class Variable extends Operand {
     public Variable(int words, boolean arg){
         id = counter;
         counter++;
-        this.words = words;
+        this.words = words*2;
         this.arg = arg;
         tac.addVariable(this);
     }

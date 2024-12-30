@@ -186,17 +186,17 @@ Functions           ::= Function:function Functions:functions                   
                     |   Function:function                                                                           {:RESULT = new _Functions(function, null, functionleft, functionright);:}
                     ;
 
-Function            ::= Type:type FunctionHead:functionHead Lbracket FunctionBody:functionBody F_OUT                {:RESULT = new _Function(type, functionHead, functionBody, typeleft, functionHeadright);:}
+Function            ::= FunctionHead:functionHead Lbracket FunctionBody:functionBody F_OUT                          {:RESULT = new _Function(functionHead, functionBody, functionHeadleft, functionHeadright);:}
                     ;
 
 TypeDimentions      ::= Type:type DimentionSizes:dimentionSizes                                                     {:RESULT = new _TypeDimentions(dimentionSizes, type, typeleft, dimentionSizesright);:}
                     ;
 
-FunctionHead        ::= Id:id FunctionArgs:functionArgs                                                             {:RESULT = new _FunctionHead(id, functionArgs, idleft, idright);:}
+FunctionHead        ::= Type:type Id:id FunctionArgs:functionArgs                                                             {:RESULT = new _FunctionHead(type, id, functionArgs, idleft, idright);:}
                     ;
 
-FunctionArgs        ::= F_IN FunctionArgsList:functionArgsList Rparen                                               {:RESULT = new _FunctionArgs(functionArgsList, functionArgsListleft, functionArgsListright);:}
-                    |   F_IN Rparen                                                                                 {:  :}
+FunctionArgs        ::= Lparen FunctionArgsList:functionArgsList Rparen                                               {:RESULT = new _FunctionArgs(functionArgsList, functionArgsListleft, functionArgsListright);:}
+                    |   Lparen Rparen                                                                                 {:  :}
                     |   error Rparen                                                                                {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
                     |   error                                                                                       {:eh.addError(ErrorPhase.Sintactic, "Wrong function arguments declaration", getLeft(), getRight());:}
                     ;
@@ -264,7 +264,7 @@ Instruction         ::= Opif Lparen Expression:expression Rparen Lbracket Functi
                     |   Return Expression:expression Endline                                                        {:RESULT = new _Instruction(expression, expressionleft, expressionright);:}
                     |   Opfor Lparen VarDeclaration:varDeclaration Expression:expression Endline Id:id Opinc Rparen Lbracket FunctionBody:functionBody Rbracket    {:RESULT = new _Instruction(varDeclaration, expression, id, functionBody, varDeclarationleft, varDeclarationright);:}
                         //Write (CharArr, IndexBegin, IndexEnd, Column, Row)
-                    |   Write Lparen Id:id Comma Expression:expression1 Comma Expression:expression2 Comma Expression:expression3 Comma Expression:expression4 Rparen Endline {:RESULT = new _Instruction(id, expression1, expression2, expression3, expression4, idleft, idright);:}
+                    |   Write Lparen ArrayIcon Id:id Comma Expression:expression1 Comma Expression:expression2 Comma Expression:expression3 Comma Expression:expression4 Rparen Endline {:RESULT = new _Instruction(id, expression1, expression2, expression3, expression4, idleft, idright);:}
                     ;
 
 Operation           ::= Oparit:opArit                                                                               {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}

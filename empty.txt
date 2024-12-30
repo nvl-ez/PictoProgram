@@ -1,10 +1,8 @@
-🔤📦10📦7 letters;
 
-🔢 printArray(🔤📦10📦7 let, 🔢 num){
-    ↩ num;
-}
+
 
 🏠(){
-    🔢 numeros ⬅ printArray(📦letters, 1);
-    🔢 result ⬅numeros➖1;
+    🔤📦256 arr;
+    arr📦0 ⬅👁();
+    ✏(📦arr, 0, 0, 5, 2);
 }

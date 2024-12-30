@@ -113,7 +113,7 @@ public class _FunctionCall extends Node {
         return id;
     }
     
-    public void generate(){
+    public Function generate(){
         Function fun = ((TACDescription)st.get(id)).getFunction();
         if(funCallArgs == null){
             tac.put(new Instruction(Operations.CALL, null, null, fun));
@@ -121,6 +121,8 @@ public class _FunctionCall extends Node {
             funCallArgs.generate(fun.getArgs(), 0);
             tac.put(new Instruction(Operations.CALL, null, null, fun));
         }
+        
+        return fun;
     }
 
 }

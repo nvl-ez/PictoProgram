@@ -32,6 +32,8 @@ public enum Operations {
     LPC, //Permite cargar PC en A6
     PCSBR, //Hack para acceder al registro de PC
     READ,
-    WRITE
+    WRITE,
+    POS,
+    HALT
     
 }
