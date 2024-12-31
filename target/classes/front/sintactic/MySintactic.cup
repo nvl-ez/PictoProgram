@@ -72,9 +72,19 @@ terminal    ArrayIcon, Const, Main, Read, Write, Return, Lparen, Rparen, Lbracke
             Assign, Opif, Opelse, Opinc, Opwhile, Opfor, Endline, Comma;
 
 terminal Types Type;
-terminal OpComp Opcomp;
-terminal OpLog Oplog;
-terminal OpArit Oparit;
+terminal OpComp EQ;
+terminal OpComp NE;
+terminal OpComp GT;
+terminal OpComp LT;
+terminal OpComp GE;
+terminal OpComp LE;
+terminal OpLog AND;
+terminal OpLog OR;
+terminal     OpArit SUM;
+terminal OpArit SUB;
+terminal OpArit MUL;
+terminal OpArit DIV;
+terminal OpArit MOD;
 terminal int Decimal;
 terminal boolean BooleanValue;
 terminal char Character;
@@ -111,6 +121,11 @@ non terminal    F_OUT;
 non terminal    _AssignationPart        AssignationPart;
 /**** Pere. Hasta aquí  ****/
 
+precedence left OR;
+precedence left AND;
+precedence nonassoc EQ, NE, GT, GE, LT, LE;
+precedence left SUM, SUB;
+precedence left MUL, DIV, MOD;
 
 /***********************************/
 /**************GRAMMAR**************/
@@ -148,7 +163,8 @@ Declaration         ::= ConstDelcaration:constDeclaration                       
     /*************CONSTANT**************/
     /***********************************/
 ConstDelcaration    ::= Const Type:type Id:id Assign Decimal:decimal Endline                                        {:RESULT = new _ConstDeclaration(type, id, decimal, typeleft, decimalright);:}
-                    |   Const Type:type Id:id Assign Oparit:opArit Decimal:decimal Endline                          {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
+                    |   Const Type:type Id:id Assign SUM:opArit Decimal:decimal Endline                          {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
+                    |   Const Type:type Id:id Assign SUB:opArit Decimal:decimal Endline                          {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
                     |   Const Type:type Id:id Assign BooleanValue:booleanValue Endline                              {:RESULT = new _ConstDeclaration(type, id, booleanValue, typeleft, booleanValueright);:}
                     |   Const Type:type Id:id Assign Character:character Endline                                    {:RESULT = new _ConstDeclaration(type, id, character, typeleft, characterright);:}
                     
@@ -235,9 +251,10 @@ FunCallArgs         ::= FunCallArgs:funCallArgs Comma Expression:expression     
 /***********************************/
 /******EXPRESSIONS*AND*VALUES*******/
 /***********************************/
-    Expression          ::= Value:value Operation:operation Expression:expression                                   {:RESULT = new _Expression(value, operation, expression, valueleft, expressionright);:}
-                        |   Value:value                                                                             {:RESULT = new _Expression(value, valueleft, valueright);:}
-                        |   Oparit:opArit Expression:expression                                                     {:RESULT = new _Expression(expression, opArit, expressionleft, expressionright);:}
+    Expression          ::= Value:value                                                                             {:RESULT = new _Expression(value, valueleft, valueright);:}
+                        |   SUB:opArit Expression:expression                                                        {:RESULT = new _Expression(expression, opArit, expressionleft, expressionright);:}
+                        |   SUM:opArit Expression:expression                                                        {:RESULT = new _Expression(expression, opArit, expressionleft, expressionright);:}
+                        |   Value:value Operation:operation Expression:expression                                   {:RESULT = new _Expression(value, operation, expression, valueleft, expressionright);:}
                         ;
 
     Value               ::= FunctionCall:functionCall                                                               {:RESULT = new _Value(functionCall, functionCallleft, functionCallright);:}
@@ -267,9 +284,19 @@ Instruction         ::= Opif Lparen Expression:expression Rparen Lbracket Functi
                     |   Write Lparen ArrayIcon Id:id Comma Expression:expression1 Comma Expression:expression2 Comma Expression:expression3 Comma Expression:expression4 Rparen Endline {:RESULT = new _Instruction(id, expression1, expression2, expression3, expression4, idleft, idright);:}
                     ;
 
-Operation           ::= Oparit:opArit                                                                               {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
-                    |   Oplog:opLog                                                                                 {:RESULT = new _Operation(opLog, opLogleft, opLogright);:}
-                    |   Opcomp:opComp                                                                               {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+Operation           ::= SUM:opArit                                                                                  {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
+                    |   SUB:opArit                                                                                  {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
+                    |   MUL:opArit                                                                                  {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
+                    |   DIV:opArit                                                                                  {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
+                    |   MOD:opArit                                                                                  {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
+                    |   EQ:opComp                                                                                   {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+                    |   NE:opComp                                                                                   {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+                    |   GE:opComp                                                                                   {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+                    |   LE:opComp                                                                                   {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+                    |   GT:opComp                                                                                   {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+                    |   LT:opComp                                                                                   {:RESULT = new _Operation(opComp, opCompleft, opCompright);:}
+                    |   AND:opLog                                                                                   {:RESULT = new _Operation(opLog, opLogleft, opLogright);:}
+                    |   OR:opLog                                                                                    {:RESULT = new _Operation(opLog, opLogleft, opLogright);:}
                     ;
 
 Else                ::= Opelse Lbracket FunctionBody:functionBody Rbracket                                          {:RESULT = new _Else(functionBody, functionBodyleft, functionBodyright);:}

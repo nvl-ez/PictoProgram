@@ -97,11 +97,21 @@ letterR         = ['R'|'r'] //
 opif            = ❓ //
 opelse          = ❌ //
 
-opcomp          = ⚖|⬆|⬇|⬆⚖|⬇⚖|🚫 //
+EQ          = ⚖
+GE          = ⬆⚖
+LE          = ⬇⚖
+GT          = ⬆
+LT          = ⬇
+NE          = 🚫 //
 
-oplog           = ({letterA}{letterN}{letterD})|({letterO}{letterR}) //
+AND           = ({letterA}{letterN}{letterD})
+OR            = ({letterO}{letterR}) //
 
-oparit          = ➕|➖|✖|➗|® //
+SUM          = ➕
+SUB          = ➖
+MUL          = ✖
+DIV          = ➗
+MOD          = ® //
 
 opinc           = ➕➕
 
@@ -186,14 +196,9 @@ endline         = ;
 {write}         { return symbol(ParserSym.Write); }
 {return}        { return symbol(ParserSym.Return); }
 
-{oplog}         { 
-                    String op = this.yytext().toLowerCase();
-                    if(op.equals("and")){
-                        return symbol(ParserSym.Oplog, OpLog.AND); 
-                    } else if(op.equals("or")){
-                        return symbol(ParserSym.Oplog, OpLog.OR); 
-                    }
-                }
+{AND}           { return symbol(ParserSym.AND, OpLog.AND);}
+{OR}            { return symbol(ParserSym.OR, OpLog.OR);}
+                
                 
 {decimal}       { return symbol(ParserSym.Decimal, Integer.parseInt(this.yytext())); }
 {comma}         { return symbol(ParserSym.Comma); }
@@ -204,39 +209,21 @@ endline         = ;
 {opif}          { return symbol(ParserSym.Opif); }
 {opelse}        { return symbol(ParserSym.Opelse); }
 
-{opcomp}        { 
-                    String op = this.yytext();
-                    if(op.equals("⚖".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Opcomp, OpComp.EQUAL);
-                    } else if(op.equals("⬆".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Opcomp, OpComp.GREATER_THAN);
-                    } else if(op.equals("⬇".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Opcomp, OpComp.LESS_THAN);
-                    } else if(op.equals("⬆⚖".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Opcomp, OpComp.GREATER_EQUAL_THAN);
-                    } else if(op.equals("⬇⚖".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Opcomp, OpComp.LESS_EQUAL_THAN);
-                    } else if(op.equals("🚫".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Opcomp, OpComp.DIFFERENT);
-                    }
-                }
+{EQ}            {return symbol(ParserSym.EQ, OpComp.EQUAL);}
+{GE}            {return symbol(ParserSym.GE, OpComp.GREATER_EQUAL_THAN);}
+{LE}            {return symbol(ParserSym.LE, OpComp.LESS_EQUAL_THAN);}
+{GT}            {return symbol(ParserSym.GT, OpComp.GREATER_THAN);}
+{LT}            {return symbol(ParserSym.LT, OpComp.LESS_THAN);}
+{NE}            {return symbol(ParserSym.NE, OpComp.DIFFERENT);}
 
 {opinc}         { return symbol(ParserSym.Opinc); }
 
-{oparit}        { 
-                    String op = this.yytext();
-                    if(op.equals("➕".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Oparit, OpArit.SUM);
-                    } else if(op.equals("➖".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Oparit, OpArit.SUB);
-                    } else if(op.equals("✖".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Oparit, OpArit.MUL);
-                    } else if(op.equals("➗".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Oparit, OpArit.DIV);
-                    } else if(op.equals("®".replaceAll("\\ufe0f", ""))){
-                        return symbol(ParserSym.Oparit, OpArit.MOD);
-                    }
-                }
+
+{SUM}           {return symbol(ParserSym.SUM, OpArit.SUM);}
+{SUB}           {return symbol(ParserSym.SUB, OpArit.SUB);}
+{MUL}           {return symbol(ParserSym.MUL, OpArit.MUL);}
+{DIV}           {return symbol(ParserSym.DIV, OpArit.DIV);}
+{MOD}           {return symbol(ParserSym.MOD, OpArit.MOD);}
 
 {opfor}         { return symbol(ParserSym.Opfor); }
 {opwhile}       { return symbol(ParserSym.Opwhile); }

@@ -1,8 +1,146 @@
+🔤 globalDecimal ⬅ '-';
+🔤 globalUnit ⬅ '-';
 
+🔤 numToChar(🔢 answer){
+    🔤 num1 ⬅ ' ';
 
+    ❓(answer ⚖ 0){
+        num1 ⬅ '0';
+    } ❌{
+        ❓(answer ⚖ 1){
+            num1 ⬅ '1';
+        } ❌{
+            ❓(answer ⚖ 2){
+                num1 ⬅ '2';
+            } ❌{
+                ❓(answer ⚖ 3){
+                    num1 ⬅ '3';
+                } ❌{
+                    ❓(answer ⚖ 4){
+                        num1 ⬅ '4';
+                    } ❌{
+                        ❓(answer ⚖ 5){
+                            num1 ⬅ '5';
+                        } ❌{
+                            ❓(answer ⚖ 6){
+                                num1 ⬅ '6';
+                            } ❌{
+                                ❓(answer ⚖ 7){
+                                    num1 ⬅ '7';
+                                } ❌{
+                                    ❓(answer ⚖ 8){
+                                        num1 ⬅ '8';
+                                    } ❌{
+                                        ❓(answer ⚖ 9){
+                                            num1 ⬅ '9';
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ↩ num1;
+}
+
+🔢 charToNum(🔤 answer){
+    🔢 num1 ⬅ ➖1;
+
+    ❓(answer ⚖ '0'){
+        num1 ⬅ 0;
+    } ❌{
+        ❓(answer ⚖ '1'){
+            num1 ⬅ 1;
+        } ❌{
+            ❓(answer ⚖ '2'){
+                num1 ⬅ 2;
+            } ❌{
+                ❓(answer ⚖ '3'){
+                    num1 ⬅ 3;
+                } ❌{
+                    ❓(answer ⚖ '4'){
+                        num1 ⬅ 4;
+                    } ❌{
+                        ❓(answer ⚖ '5'){
+                            num1 ⬅ 5;
+                        } ❌{
+                            ❓(answer ⚖ '6'){
+                                num1 ⬅ 6;
+                            } ❌{
+                                ❓(answer ⚖ '7'){
+                                    num1 ⬅ 7;
+                                } ❌{
+                                    ❓(answer ⚖ '8'){
+                                        num1 ⬅ 8;
+                                    } ❌{
+                                        ❓(answer ⚖ '9'){
+                                            num1 ⬅ 9;
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ↩ num1;
+}
 
 🏠(){
-    🔤📦256 arr;
-    arr📦0 ⬅👁();
-    ✏(📦arr, 0, 0, 5, 2);
+    🔤📦256 text;
+    text 📦0 ⬅ 'P';
+    text 📦1 ⬅ 'u';
+    text 📦2 ⬅ 't';
+    text 📦3 ⬅ ' ';
+    text 📦4 ⬅ 'a';
+    text 📦5 ⬅ ' ';
+    text 📦6 ⬅ 'd';
+    text 📦7 ⬅ 'e';
+    text 📦8 ⬅ 'c';
+    text 📦9 ⬅ 'i';
+    text 📦10 ⬅ 'm';
+    text 📦11 ⬅ 'a';
+    text 📦12 ⬅ 'l';
+    text 📦13 ⬅ ':';
+    ✏(📦text, 0, 13, 0, 0);
+
+    globalDecimal ⬅👁();
+    text 📦14 ⬅ globalDecimal;
+    globalUnit ⬅👁();
+    text 📦15 ⬅ globalUnit;
+
+    ✏(📦text, 14, 15, 14, 0);
+
+    🔢 decimal ⬅ charToNum(globalUnit)➕charToNum(globalDecimal) ✖ 10;
+
+    text 📦0 ⬅ 'P';
+    text 📦1 ⬅ 'u';
+    text 📦2 ⬅ 't';
+    text 📦3 ⬅ ' ';
+    text 📦4 ⬅ 'a';
+    text 📦5 ⬅ ' ';
+    text 📦6 ⬅ 'l';
+    text 📦7 ⬅ 'e';
+    text 📦8 ⬅ 't';
+    text 📦9 ⬅ 't';
+    text 📦10 ⬅ 'e';
+    text 📦11 ⬅ 'r';
+    text 📦12 ⬅ ':';
+    ✏(📦text, 0, 12, 0, 2);
+
+    🔤 letter ⬅👁();
+
+    decimal⬅decimal➖1;
+
+    🔂(🔢 i ⬅ 0; i⬇⚖decimal; i➕➕){
+        text📦i⬅letter;
+    }
+
+    ✏(📦text, 0, decimal, 0, 4);
 }

@@ -18,8 +18,8 @@
     ↩;
 }
 
-🔤 numToChar(🔢 answer, 🔤 sp){
-    🔤 num1 ⬅ sp;
+🔤 numToChar(🔢 answer){
+    🔤 num1 ⬅ ' ';
 
     ❓(answer ⚖ 0){
         num1 ⬅ '0';
@@ -135,8 +135,8 @@
     🔢 reminder ⬅ globalCounter ® 10;
     🔤📦10📦7 arr;
 
-    🔤 textDec ⬅ numToChar(decimal, ' ');
-    🔤 textRem ⬅ numToChar(reminder, ' ');
+    🔤 textDec ⬅ numToChar(decimal);
+    🔤 textRem ⬅ numToChar(reminder);
 
     text 📦0 ⬅ textDec;
     text 📦1 ⬅ textRem;

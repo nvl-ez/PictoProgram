@@ -10,11 +10,12 @@ public class ThreeAddressCode {
 
     private BufferedWriter writer;
 
-    LinkedList<Instruction> code;
-    TreeMap<Integer, RowVar> varTable;
-    TreeMap<Integer, RowFun> funTable;
-    Function last = null;
-
+    private LinkedList<Instruction> code;
+    private TreeMap<Integer, RowVar> varTable;
+    private TreeMap<Integer, RowFun> funTable;
+    private Function last = null;
+    private int writeLoop = 0;
+    
     public ThreeAddressCode() {
         code = new LinkedList();
         varTable = new TreeMap();
@@ -117,7 +118,10 @@ public class ThreeAddressCode {
                 }
             }
 
-            assembly.write("\tORG \t$" + (globalWords) + "\nSTAR:\n");
+            assembly.write("\tORG \t$" + (globalWords) + "\nSTART:\n");
+            assembly.write("\tMOVE.B #0, D1\n");
+            assembly.write("\tMOVE.W #12, D0\n");
+            assembly.write("\tTRAP #15\n");
 
             for (Instruction i : code) {
                 switch (i.getOperation()) {
@@ -184,7 +188,7 @@ public class ThreeAddressCode {
                 }
             }
 
-            assembly.write("\tEND STAR\n");
+            assembly.write("\tEND START\n");
             assembly.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -288,7 +292,7 @@ public class ThreeAddressCode {
         assembly.write("\tMOVE.W (A5), D2\n");
 
         //Resta
-        assembly.write("\tSUB.W D2, D1\n");
+        assembly.write("\tSUB.W D1, D2\n");
 
         //Guardar valor en memoria
         Variable result = (Variable) i.getResult();
@@ -298,7 +302,7 @@ public class ThreeAddressCode {
             assembly.write("\tMOVE.L #" + varTable.get(result.getId()).delta + ", A5\n");
             assembly.write("\tADD.L A6, A5\n");
         }
-        assembly.write("\tMOVE.W D1, (A5)\n\n");
+        assembly.write("\tMOVE.W D2, (A5)\n\n");
     }
 
     public void prod(BufferedWriter assembly, Instruction i) throws IOException {
@@ -363,7 +367,7 @@ public class ThreeAddressCode {
         assembly.write("\tMOVE.W (A5), D2\n");
 
         //Division
-        assembly.write("\tDIVS.W D2, D1\n");
+        assembly.write("\tDIVS.W D1, D2\n");
 
         //Guardar valor en memoria
         Variable result = (Variable) i.getResult();
@@ -373,7 +377,7 @@ public class ThreeAddressCode {
             assembly.write("\tMOVE.L #" + varTable.get(result.getId()).delta + ", A5\n");
             assembly.write("\tADD.L A6, A5\n");
         }
-        assembly.write("\tMOVE.W D1, (A5)\n\n");
+        assembly.write("\tMOVE.W D2, (A5)\n\n");
     }
 
     public void mod(BufferedWriter assembly, Instruction i) throws IOException {
@@ -402,7 +406,7 @@ public class ThreeAddressCode {
         assembly.write("\tMOVE.W (A5), D2\n");
 
         //Division
-        assembly.write("\tDIVS.W D2, D1\n");
+        assembly.write("\tDIVS.W D1, D2\n");
 
         //Guardar valor en memoria
         Variable result = (Variable) i.getResult();
@@ -413,7 +417,7 @@ public class ThreeAddressCode {
             assembly.write("\tADD.L A6, A5\n");
         }
         assembly.write("\tSWAP D1\n");
-        assembly.write("\tMOVE.W D1, (A5)\n\n");
+        assembly.write("\tMOVE.W D2, (A5)\n\n");
     }
 
     public void neg(BufferedWriter assembly, Instruction i) throws IOException {
@@ -618,12 +622,34 @@ public class ThreeAddressCode {
         }
         assembly.write("\tMOVE.W (A5), D2\n");
 
-        assembly.write("\tCMP.W D1, D2\n");
-        assembly.write("\tBPL.W " + tag.getName() + "\n\n");
+        assembly.write("\tCMP.W D2, D1\n");
+        assembly.write("\tBLT.W " + tag.getName() + "\n\n");
     }
 
     public void ifLe(BufferedWriter assembly, Instruction i) throws IOException {
-        System.out.println("Executing IFLE operation");
+        assembly.write("* ----COMPARE LE----\n");
+        Tag tag = (Tag) i.getResult();
+        Variable value2 = (Variable) i.getOperand2(); // D1 < D2?
+        Variable value1 = (Variable) i.getOperand1();
+
+        if (varTable.get(value1.getId()).idFun == -1) { //Es una variable global
+            assembly.write("\tLEA " + value1.getName() + ", A5\n");
+        } else {
+            assembly.write("\tMOVE.L #" + varTable.get(value1.getId()).delta + ", A5\n");
+            assembly.write("\tADD.L A6, A5\n");
+        }
+        assembly.write("\tMOVE.W (A5), D1\n");
+
+        if (varTable.get(value2.getId()).idFun == -1) { //Es una variable global
+            assembly.write("\tLEA " + value2.getName() + ", A5\n");
+        } else {
+            assembly.write("\tMOVE.L #" + varTable.get(value2.getId()).delta + ", A5\n");
+            assembly.write("\tADD.L A6, A5\n");
+        }
+        assembly.write("\tMOVE.W (A5), D2\n");
+
+        assembly.write("\tCMP.W D2, D1\n");
+        assembly.write("\tBLE.W " + tag.getName() + "\n\n");
     }
 
     public void ifEq(BufferedWriter assembly, Instruction i) throws IOException {
@@ -674,12 +700,34 @@ public class ThreeAddressCode {
         }
         assembly.write("\tMOVE.W (A5), D2\n");
 
-        assembly.write("\tCMP.W D1, D2\n");
-        assembly.write("\tBMI.W " + tag.getName() + "\n\n");
+        assembly.write("\tCMP.W D2, D1\n");
+        assembly.write("\tBGT.W " + tag.getName() + "\n\n");
     }
 
     public void ifGe(BufferedWriter assembly, Instruction i) throws IOException {
-        System.out.println("Executing IFGE operation");
+        assembly.write("* ----COMPARE GE----\n");
+        Tag tag = (Tag) i.getResult();
+        Variable value2 = (Variable) i.getOperand2(); // D1 < D2?
+        Variable value1 = (Variable) i.getOperand1();
+
+        if (varTable.get(value1.getId()).idFun == -1) { //Es una variable global
+            assembly.write("\tLEA " + value1.getName() + ", A5\n");
+        } else {
+            assembly.write("\tMOVE.L #" + varTable.get(value1.getId()).delta + ", A5\n");
+            assembly.write("\tADD.L A6, A5\n");
+        }
+        assembly.write("\tMOVE.W (A5), D1\n");
+
+        if (varTable.get(value2.getId()).idFun == -1) { //Es una variable global
+            assembly.write("\tLEA " + value2.getName() + ", A5\n");
+        } else {
+            assembly.write("\tMOVE.L #" + varTable.get(value2.getId()).delta + ", A5\n");
+            assembly.write("\tADD.L A6, A5\n");
+        }
+        assembly.write("\tMOVE.W (A5), D2\n");
+
+        assembly.write("\tCMP.W D2, D1\n");
+        assembly.write("\tBGE.W " + tag.getName() + "\n\n");
     }
 
     public void ifNe(BufferedWriter assembly, Instruction i) throws IOException {
@@ -849,11 +897,53 @@ public class ThreeAddressCode {
 
     public void write(BufferedWriter assembly, Instruction i) throws IOException {
         assembly.write("* ----WRITE----\n");
+        Variable bot = (Variable) i.getOperand1();
+        if (varTable.get(bot.getId()).idFun == -1) { //Es una variable global
+            assembly.write("\tLEA " + bot.getName() + ", A5\n");
+        } else {
+            assembly.write("\tMOVE.L #" + varTable.get(bot.getId()).delta + ", A5\n");
+            assembly.write("\tADD.L A6, A5\n");
+        }
+        assembly.write("\tMOVE.W (A5), D2\n"); 
+        
+        
+        Variable top = (Variable) i.getOperand2();
+        if (varTable.get(top.getId()).idFun == -1) { //Es una variable global
+            assembly.write("\tLEA " + top.getName() + ", A5\n");
+        } else {
+            assembly.write("\tMOVE.L #" + varTable.get(top.getId()).delta + ", A5\n");
+            assembly.write("\tADD.L A6, A5\n");
+        }
+        assembly.write("\tMOVE.W (A5), D3\n");
+        
+        Variable base = (Variable) i.getResult();
+        if (varTable.get(base.getId()).idFun == -1) { //Es una variable global
+            assembly.write("\tLEA " + base.getName() + ", A5\n");
+        } else {
+            assembly.write("\tMOVE.L #" + varTable.get(base.getId()).delta + ", A5\n");
+            assembly.write("\tADD.L A6, A5\n");
+        }
+        
+        assembly.write("\tSUB.W D2, D3\n");
+        assembly.write("\tLSL.W #1, D2\n");
+        assembly.write("\tADD.W D2, A5\n"); //Base con offest low bound
+        
+        //Registro para iterear
+         
+         
+         assembly.write("\tMOVE.W #6, D0\n");
+         
+         assembly.write("WRITE_LOOP_" + writeLoop + ":\n");
+         assembly.write("\tMOVE.W (A5)+, D1\n");
+         assembly.write("\tTRAP #15\n");
+         assembly.write("\tDBF D3, WRITE_LOOP_" + writeLoop + "\n\n");
+         writeLoop++;
         
     }
 
     public void halt(BufferedWriter assembly, Instruction i) throws IOException {
         assembly.write("\tSIMHALT\n");
     }
+
 
 }

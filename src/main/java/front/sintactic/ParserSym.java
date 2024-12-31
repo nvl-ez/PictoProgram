@@ -8,34 +8,44 @@ package front.sintactic;
 /** CUP generated class containing symbol constants. */
 public class ParserSym {
   /* terminals */
-  public static final int Write = 6;
-  public static final int Character = 26;
-  public static final int Assign = 12;
-  public static final int Comma = 19;
-  public static final int Opfor = 17;
-  public static final int BooleanValue = 25;
-  public static final int Opif = 13;
-  public static final int Lbracket = 10;
-  public static final int ArrayIcon = 2;
-  public static final int Const = 3;
-  public static final int Oparit = 23;
-  public static final int Type = 20;
-  public static final int Opelse = 14;
-  public static final int Opcomp = 21;
-  public static final int Main = 4;
-  public static final int EOF = 0;
-  public static final int Rparen = 9;
-  public static final int Endline = 18;
-  public static final int Decimal = 24;
-  public static final int Return = 7;
-  public static final int Id = 27;
-  public static final int error = 1;
-  public static final int Opwhile = 16;
-  public static final int Oplog = 22;
-  public static final int Lparen = 8;
   public static final int Rbracket = 11;
-  public static final int Opinc = 15;
+  public static final int Comma = 19;
+  public static final int Lparen = 8;
+  public static final int GE = 25;
+  public static final int Id = 37;
+  public static final int Opif = 13;
+  public static final int Opfor = 17;
+  public static final int Rparen = 9;
+  public static final int Character = 36;
   public static final int Read = 5;
+  public static final int Opinc = 15;
+  public static final int AND = 27;
+  public static final int LT = 24;
+  public static final int Assign = 12;
+  public static final int OR = 28;
+  public static final int Return = 7;
+  public static final int DIV = 32;
+  public static final int LE = 26;
+  public static final int EOF = 0;
+  public static final int Opelse = 14;
+  public static final int error = 1;
+  public static final int BooleanValue = 35;
+  public static final int MUL = 31;
+  public static final int Lbracket = 10;
+  public static final int MOD = 33;
+  public static final int EQ = 21;
+  public static final int Opwhile = 16;
+  public static final int Const = 3;
+  public static final int Endline = 18;
+  public static final int NE = 22;
+  public static final int SUM = 29;
+  public static final int Type = 20;
+  public static final int Decimal = 34;
+  public static final int Write = 6;
+  public static final int GT = 23;
+  public static final int Main = 4;
+  public static final int SUB = 30;
+  public static final int ArrayIcon = 2;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -58,9 +68,19 @@ public class ParserSym {
   "Endline",
   "Comma",
   "Type",
-  "Opcomp",
-  "Oplog",
-  "Oparit",
+  "EQ",
+  "NE",
+  "GT",
+  "LT",
+  "GE",
+  "LE",
+  "AND",
+  "OR",
+  "SUM",
+  "SUB",
+  "MUL",
+  "DIV",
+  "MOD",
   "Decimal",
   "BooleanValue",
   "Character",
