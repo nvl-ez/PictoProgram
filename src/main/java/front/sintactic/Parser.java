@@ -64,7 +64,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\002\000\002\025\003\000\002\025\004\000\002\025\004" +
     "\000\002\025\005\000\002\024\003\000\002\024\005\000" +
     "\002\024\003\000\002\024\003\000\002\024\003\000\002" +
-    "\024\004\000\002\024\003\000\002\024\005\000\002\027" +
+    "\024\003\000\002\024\004\000\002\024\005\000\002\027" +
     "\012\000\002\027\011\000\002\027\003\000\002\027\004" +
     "\000\002\027\003\000\002\027\004\000\002\027\005\000" +
     "\002\027\015\000\002\027\020\000\002\026\003\000\002" +
@@ -128,9 +128,9 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\uffc6\040\uffc6\041\uffc6\042\uffc6\043\uffc6\001\002\000\024" +
     "\003\033\007\051\012\047\037\045\040\055\044\044\045" +
     "\053\046\056\047\050\001\002\000\050\003\111\004\114" +
-    "\012\112\013\uffc0\024\uffc0\025\uffc0\027\uffc0\030\uffc0\031" +
-    "\uffc0\032\uffc0\033\uffc0\034\uffc0\035\uffc0\036\uffc0\037\uffc0" +
-    "\040\uffc0\041\uffc0\042\uffc0\043\uffc0\001\002\000\004\012" +
+    "\012\112\013\uffc1\024\uffc1\025\uffc1\027\uffc1\030\uffc1\031" +
+    "\uffc1\032\uffc1\033\uffc1\034\uffc1\035\uffc1\036\uffc1\037\uffc1" +
+    "\040\uffc1\041\uffc1\042\uffc1\043\uffc1\001\002\000\004\012" +
     "\107\001\002\000\004\025\077\001\002\000\042\013\uffc3" +
     "\024\uffc3\025\uffc3\027\uffc3\030\uffc3\031\uffc3\032\uffc3\033" +
     "\uffc3\034\uffc3\035\uffc3\036\uffc3\037\uffc3\040\uffc3\041\uffc3" +
@@ -181,10 +181,10 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\037\uffbf\040\uffbf\041\uffbf\042\uffbf\043\uffbf\001\002\000" +
     "\006\044\135\047\134\001\002\000\032\003\033\004\125" +
     "\007\051\012\047\013\uffcb\025\uffcb\037\045\040\055\044" +
-    "\044\045\053\046\056\047\050\001\002\000\042\013\uffc1" +
-    "\024\uffc1\025\uffc1\027\uffc1\030\uffc1\031\uffc1\032\uffc1\033" +
-    "\uffc1\034\uffc1\035\uffc1\036\uffc1\037\uffc1\040\uffc1\041\uffc1" +
-    "\042\uffc1\043\uffc1\001\002\000\010\003\116\044\117\047" +
+    "\044\045\053\046\056\047\050\001\002\000\042\013\uffc0" +
+    "\024\uffc0\025\uffc0\027\uffc0\030\uffc0\031\uffc0\032\uffc0\033" +
+    "\uffc0\034\uffc0\035\uffc0\036\uffc0\037\uffc0\040\uffc0\041\uffc0" +
+    "\042\uffc0\043\uffc0\001\002\000\010\003\116\044\117\047" +
     "\115\001\002\000\050\003\111\004\114\013\uffa0\016\uffa0" +
     "\024\uffa0\025\uffa0\027\uffa0\030\uffa0\031\uffa0\032\uffa0\033" +
     "\uffa0\034\uffa0\035\uffa0\036\uffa0\037\uffa0\040\uffa0\041\uffa0" +
@@ -1383,7 +1383,19 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 64: // Value ::= Id Index 
+          case 64: // Value ::= Id 
+            {
+              _Value RESULT =null;
+		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		RESULT = new _Value(id, idleft, idright);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("Value",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 65: // Value ::= Id Index 
             {
               _Value RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
@@ -1394,18 +1406,6 @@ class CUP$Parser$actions {
 		_Index index = (_Index)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = new _Value(id, index, idleft, idright);
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Value",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
-            }
-          return CUP$Parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 65: // Value ::= Id 
-            {
-              _Value RESULT =null;
-		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		RESULT = new _Value(id, idleft, idright);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("Value",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 

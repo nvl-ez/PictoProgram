@@ -267,8 +267,8 @@ FunCallArgs         ::= FunCallArgs:funCallArgs Comma Expression:expression     
                         |   Decimal:decimal                                                                         {:RESULT = new _Value(decimal, decimalleft, decimalright);:}
                         |   BooleanValue:booleanValue                                                               {:RESULT = new _Value(booleanValue, booleanValueleft, booleanValueright);:}
                         |   Character:character                                                                     {:RESULT = new _Value(character, characterleft, characterright);:}
-                        |   Id:id Index:index                                                                       {:RESULT = new _Value(id, index, idleft, idright);:}
                         |   Id:id                                                                                   {:RESULT = new _Value(id, idleft, idright);:}
+                        |   Id:id Index:index                                                                       {:RESULT = new _Value(id, index, idleft, idright);:}
                         |   Read:read Lparen Rparen                                                                 {:RESULT = new _Value(readleft, readright);:}
                         ;
 

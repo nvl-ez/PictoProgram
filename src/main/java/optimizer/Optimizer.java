@@ -68,11 +68,10 @@ public class Optimizer {
             if (instr.getResult() != null) {
                 int id = instr.getResult().getId();
                 Uses uses = varUses.get(id);
-                if (instr.getValue() != null && uses.assign == 1 && uses.copy == 1) {
+                if (instr.getValue() != null && uses.assign == 1 ) {
                     ((Variable) instr.getResult()).setValue(instr.getValue());
                     iterator.remove();
                     varTable.remove(id);
-                    System.out.println(id+" "+uses.assign+" "+uses.copy);
                 }
             }
         }

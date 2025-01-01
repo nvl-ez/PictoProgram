@@ -23,7 +23,7 @@ N = 1
 ----------------------------------------
 |    ID    |     TYPE     |    DESC    |
 ----------------------------------------
-| globalUnit | CHAR | VariableDescription 	|
+| num | INT | VariableDescription 	|
 | globalDecimal | CHAR | VariableDescription 	|
 ----------------------------------------
 [BEFORE EXITING BLOCK]----------------------------------------------------
@@ -52,9 +52,8 @@ N = 2
 ----------------------------------------
 |    ID    |     TYPE     |    DESC    |
 ----------------------------------------
-| answer | INT | VariableDescription 	|
-| globalUnit | CHAR | VariableDescription 	|
-| num1 | CHAR | VariableDescription 	|
+| answer | CHAR | VariableDescription 	|
+| num | INT | VariableDescription 	|
 | globalDecimal | CHAR | VariableDescription 	|
 ----------------------------------------
 [BEFORE ENTERING BLOCK]----------------------------------------------------
@@ -66,7 +65,7 @@ N = 1
 | LVL   | IDX    |
 ------------------
 |0		|0		|
-|1		|2		|
+|1		|1		|
 |2		|1		|
 ------------------
 
@@ -76,7 +75,6 @@ N = 1
 | INDX | NP | ID | DESC | FIRST | NEXT |
 ----------------------------------------
 | 1 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
-| 2 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
 ----------------------------------------
 
 ----------------------------------------
@@ -84,7 +82,7 @@ N = 1
 ----------------------------------------
 |    ID    |     TYPE     |    DESC    |
 ----------------------------------------
-| globalUnit | CHAR | VariableDescription 	|
+| num | INT | VariableDescription 	|
 | globalDecimal | CHAR | VariableDescription 	|
 ----------------------------------------
 [BEFORE EXITING BLOCK]----------------------------------------------------
@@ -96,8 +94,8 @@ N = 2
 | LVL   | IDX    |
 ------------------
 |0		|0		|
-|1		|2		|
-|2		|2		|
+|1		|1		|
+|2		|1		|
 ------------------
 
 ----------------------------------------
@@ -106,7 +104,6 @@ N = 2
 | INDX | NP | ID | DESC | FIRST | NEXT |
 ----------------------------------------
 | 1 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
-| 2 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
 ----------------------------------------
 
 ----------------------------------------
@@ -114,73 +111,8 @@ N = 2
 ----------------------------------------
 |    ID    |     TYPE     |    DESC    |
 ----------------------------------------
-| answer | CHAR | VariableDescription 	|
+| num | INT | VariableDescription 	|
 | globalUnit | CHAR | VariableDescription 	|
 | num1 | INT | VariableDescription 	|
 | globalDecimal | CHAR | VariableDescription 	|
-----------------------------------------
-[BEFORE ENTERING BLOCK]----------------------------------------------------
-N = 1
-
-------------------
-| ACCESS   TABLE |
-------------------
-| LVL   | IDX    |
-------------------
-|0		|0		|
-|1		|2		|
-|2		|2		|
-------------------
-
-----------------------------------------
-|           EXPANSION  TABLE           |
-----------------------------------------
-| INDX | NP | ID | DESC | FIRST | NEXT |
-----------------------------------------
-| 1 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
-| 2 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
-----------------------------------------
-
-----------------------------------------
-|          DESCRIPTION  TABLE          |
-----------------------------------------
-|    ID    |     TYPE     |    DESC    |
-----------------------------------------
-| globalUnit | CHAR | VariableDescription 	|
-| globalDecimal | CHAR | VariableDescription 	|
-----------------------------------------
-[BEFORE EXITING BLOCK]----------------------------------------------------
-N = 2
-
-------------------
-| ACCESS   TABLE |
-------------------
-| LVL   | IDX    |
-------------------
-|0		|0		|
-|1		|2		|
-|2		|3		|
-------------------
-
-----------------------------------------
-|           EXPANSION  TABLE           |
-----------------------------------------
-| INDX | NP | ID | DESC | FIRST | NEXT |
-----------------------------------------
-| 1 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
-| 2 | -1 |  | answer | ArgumentDescription | 0 | 0 	|
-| 3 | -1 |  | null | IndexDescription | 0 | 0 	|
-----------------------------------------
-
-----------------------------------------
-|          DESCRIPTION  TABLE          |
-----------------------------------------
-|    ID    |     TYPE     |    DESC    |
-----------------------------------------
-| globalUnit | CHAR | VariableDescription 	|
-| letter | CHAR | VariableDescription 	|
-| i | INT | VariableDescription 	|
-| text | CHAR | TypeDescription 	|
-| globalDecimal | CHAR | VariableDescription 	|
-| decimal | INT | VariableDescription 	|
 ----------------------------------------

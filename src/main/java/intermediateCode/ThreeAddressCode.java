@@ -587,21 +587,27 @@ public class ThreeAddressCode {
             assembly.write("\tADD.L A6, A5\n");
         }
 
-        //Obtain if offset is local or global
-        if (varTable.get(offset.getId()).idFun == -1) { //Es una variable global
-            assembly.write("\tLEA " + offset.getName() + ", A4\n");
-        } else {
-            assembly.write("\tMOVE.L #" + varTable.get(offset.getId()).delta + ", A4\n");
-            assembly.write("\tADD.L A6, A4\n");
-        }
-
-        //Obtain offset value and add it to the base
         assembly.write("\tCLR.L D1\n");
-        assembly.write("\tMOVE.W (A4), D1\n");
+        //Obtain if offset is local or global
+        if (offset.getValue() != null) {
+            assembly.write("\tMOVE.W #" + offset.getValue() + ", D1\n");
+        } else {
+            if (varTable.get(offset.getId()).idFun == -1) { //Es una variable global
+                assembly.write("\tLEA " + offset.getName() + ", A4\n");
+            } else {
+                assembly.write("\tMOVE.L #" + varTable.get(offset.getId()).delta + ", A4\n");
+                assembly.write("\tADD.L A6, A4\n");
+            }
+
+            //Obtain offset value and add it to the base
+            assembly.write("\tMOVE.W (A4), D1\n");
+        }
+        assembly.write("\tMULU.W #2, D1\n");
         assembly.write("\tEXT.L D1\n");
         assembly.write("\tADD.L D1, A5\n"); //REVISAR
 
         //Obtain if result is local or global
+        
         if (varTable.get(destination.getId()).idFun == -1) { //Es una variable global
             assembly.write("\tLEA " + destination.getName() + ", A4\n");
         } else {

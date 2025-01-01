@@ -32,7 +32,7 @@ public class Compilador {
         |
         |
         */
-        String filePath = "IOTest.txt";
+        String filePath = "empty.txt";
         ErrorHandler eh = new ErrorHandler();
 
         try {

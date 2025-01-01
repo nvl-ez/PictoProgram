@@ -1,0 +1,11 @@
+🔤 globalDecimal ⬅ '-';
+🔢 num ⬅ ➖1;
+
+🔢 numFun(🔤 answer){
+    ↩ ➖1;
+}
+
+🏠(){
+    🔤 globalUnit ⬅ '-';
+    🔢 num1 ⬅ numFun(globalUnit);
+}
