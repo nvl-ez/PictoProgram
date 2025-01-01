@@ -115,11 +115,11 @@ public class _Expression extends Node {
         Variable var = new Variable(1, false);
         //paso de valor simple
         if (expression == null) {
-           tac.put(new Instruction(Operations.COPY, value.generate(), null, var)); //REVISAR
+           return value.generate(); //REVISAR
         } else {
             if (value == null) {//cambio de simbolo
                 if(!changeSign){
-                    tac.put(new Instruction(Operations.COPY, value.generate(), null, var));
+                    return value.generate();
                 } else{
                     tac.put(new Instruction(Operations.COPY, expression.generate(), null, var));
                     tac.put(new Instruction(Operations.NEG, null, null, var));

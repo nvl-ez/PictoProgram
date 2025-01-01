@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.SymbolFactory;
 import nodes.Node;
+import optimizer.Optimizer;
 import utils.ErrorHandler;
 import utils.SymbolTable;
 
@@ -23,58 +24,72 @@ import utils.SymbolTable;
 public class Compilador {
 
     public static void main(String[] args) {
-        String filePath = "empty.txt";
+        /*---------------------------------------------------\
+        |   PROGRAMS THAT WILL COMPILE                       |                         
+        |----------------------------------------------------| 
+        |   IOTest.txt
+        |
+        |
+        |
+        */
+        String filePath = "IOTest.txt";
         ErrorHandler eh = new ErrorHandler();
-        
+
         try {
             preprocessFile(filePath);
             FileReader input = new FileReader(new File(filePath));
-            
+
             SymbolTable st = new SymbolTable(eh, true);
-            
-            
+
             SymbolFactory sf = new ComplexSymbolFactory();
-            
+
             //Set up scanner
             Scanner scanner = new Scanner(input);
             scanner.setErrorHandler(eh);
-            
-            
+
             //Set up parser
             Parser parser = new Parser(scanner, sf);
             parser.setSymbolTable(st);
             parser.setErrorHandler(eh);
-            
+
             Node.setSymbolTable(st);
             Node.setErrorHandler(eh);
-            
+
             ThreeAddressCode tac = new ThreeAddressCode();
             Operand.setThreeAddressCode(tac);
             Node.setThreeAddressCode(tac);
             parser.setThreeAddressCode(tac);
-            
+
             parser.parse();
             
+            Optimizer opt = new Optimizer(tac.getCode(), tac.getVarTable());
+            opt.optimize();
+            tac.recalculate();
+            tac.assemble();
+            
             scanner.closeTokenStram();
-            
 
-            
+            if (!eh.isErrorFree()) {
+                System.out.println(eh.toString());
+            } else {
+                System.out.println("Program compiled into \"assembly.x68\"");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
+            //System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
         }
-        
-        System.out.println(eh.toString());
     }
-    
+
     //Sometimes text edditors add special characters, these cause problems for the lexic.
-    public static void preprocessFile(String filePath)throws IOException{
+    public static void preprocessFile(String filePath) throws IOException {
         // Read the file content into a string
-            String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+        String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
 
-            // Remove the character \uFE0F
-            String updatedContent = content.replace("\uFE0F", "");
+        // Remove the character \uFE0F
+        String updatedContent = content.replace("\uFE0F", "");
 
-            // Write the updated content back to the file
-            Files.writeString(Paths.get(filePath), updatedContent, StandardCharsets.UTF_8);
+        // Write the updated content back to the file
+        Files.writeString(Paths.get(filePath), updatedContent, StandardCharsets.UTF_8);
     }
 }

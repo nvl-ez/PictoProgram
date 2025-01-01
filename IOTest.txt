@@ -1,22 +1,5 @@
-🔒 🔢 null ⬅ ➖2;
-🔤📦10📦7 letters;
-🔒 🔤 letterA ⬅ 'a';
-🔒 🔢 pi ⬅ 3;
-
-🔒 ✅ true ⬅ 👎;
-
-🔢 globalCounter ⬅ 5;
-🔤 letterCounter ⬅ 'b';
-
-
-
-✅ equalsNum(🔢 num1, 🔢 num2){
-    ↩ num1 ⚖ num2;
-} 
-
-🕳 printArray(🔤📦10📦7 arr){
-    ↩;
-}
+🔤 globalDecimal ⬅ '-';
+🔤 globalUnit ⬅ '-';
 
 🔤 numToChar(🔢 answer){
     🔤 num1 ⬅ ' ';
@@ -111,64 +94,53 @@
 
 🏠(){
     🔤📦256 text;
+    text 📦0 ⬅ 'P';
+    text 📦1 ⬅ 'u';
+    text 📦2 ⬅ 't';
+    text 📦3 ⬅ ' ';
+    text 📦4 ⬅ 'a';
+    text 📦5 ⬅ ' ';
+    text 📦6 ⬅ 'd';
+    text 📦7 ⬅ 'e';
+    text 📦8 ⬅ 'c';
+    text 📦9 ⬅ 'i';
+    text 📦10 ⬅ 'm';
+    text 📦11 ⬅ 'a';
+    text 📦12 ⬅ 'l';
+    text 📦13 ⬅ ':';
+    ✏(📦text, 0, 13, 0, 0);
 
-    text 📦0 ⬅ 'L';
-    text 📦1 ⬅ 'e';
-    text 📦2 ⬅ 'n';
-    text 📦3 ⬅ 'g';
-    text 📦4 ⬅ 't';
-    text 📦5 ⬅ 'h';
-    text 📦6 ⬅ ':';
-    text 📦7 ⬅ ' ';
+    globalDecimal ⬅👁();
+    text 📦14 ⬅ globalDecimal;
+    globalUnit ⬅👁();
+    text 📦15 ⬅ globalUnit;
 
-    ✏(📦text, 0, 7, 0, 0);
+    ✏(📦text, 14, 15, 14, 0);
 
-    🔤 answer ⬅ 👁();
+    🔢 decimal ⬅ charToNum(globalUnit)➕charToNum(globalDecimal) ✖ 10;
 
-    🔢 num1;
+    text 📦0 ⬅ 'P';
+    text 📦1 ⬅ 'u';
+    text 📦2 ⬅ 't';
+    text 📦3 ⬅ ' ';
+    text 📦4 ⬅ 'a';
+    text 📦5 ⬅ ' ';
+    text 📦6 ⬅ 'l';
+    text 📦7 ⬅ 'e';
+    text 📦8 ⬅ 't';
+    text 📦9 ⬅ 't';
+    text 📦10 ⬅ 'e';
+    text 📦11 ⬅ 'r';
+    text 📦12 ⬅ ':';
+    ✏(📦text, 0, 12, 0, 2);
 
-    🔂(🔢 num2 ⬅ 0; num2⬇num1; num2➕➕){
-        globalCounter ⬅ globalCounter ➕ 2;
+    🔤 letter ⬅👁();
+
+    decimal⬅decimal➖1;
+
+    🔂(🔢 i ⬅ 0; i⬇⚖decimal; i➕➕){
+        text📦i⬅letter;
     }
 
-    🔢 decimal ⬅ globalCounter ➗ 10;
-    🔢 reminder ⬅ globalCounter ® 10;
-    🔤📦10📦7 arr;
-
-    🔤 textDec ⬅ numToChar(decimal);
-    🔤 textRem ⬅ numToChar(reminder);
-
-    text 📦0 ⬅ textDec;
-    text 📦1 ⬅ textRem;
-
-    ✏(📦text, 0, 1, 0, 2);
-
-    answer ⬅ 👁();
-
-    🔤📦256 whitespace;
-
-    🔂(🔢 i ⬅ 0; i⬇10; i➕➕){
-        whitespace 📦i ⬅ ' ';
-        ✏(📦whitespace, 0, 9, 0, i);
-    }
-
-    🔢📦10📦10 array;
-    🔢 a;
-    🔁(a⬇10){
-        🔢 f ⬅ a;
-        🔢 g ⬅ a;
-
-        🔁(f⬇10){
-            array 📦f📦a ⬅ a;
-            f⬅f➕1;
-        }
-
-        🔁(g⬇10){
-            array 📦a📦g ⬅ a;
-            g⬅g➕1;
-        }
-
-        a⬅a➕1;
-    }
-
+    ✏(📦text, 0, decimal, 0, 4);
 }

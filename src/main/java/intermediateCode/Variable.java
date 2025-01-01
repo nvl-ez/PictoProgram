@@ -9,6 +9,7 @@ public class Variable extends Operand {
     private int words = 1;
     private boolean arg;
     private int transferCount = 0;
+    private Integer value = null;
     
     
     public Variable(int words, boolean arg){
@@ -33,7 +34,11 @@ public class Variable extends Operand {
 
     @Override
     public String getName() {
+        if(value == null){
         return "t"+id;
+        } else {
+            return value+"";
+        }
     }
     
     public String getNameTransfer() {
@@ -46,5 +51,13 @@ public class Variable extends Operand {
     
     public boolean isArg(){
         return arg;
+    }
+    
+    public Integer getValue(){
+        return value;
+    }
+    
+    public void setValue(Integer i) {
+        value = i;
     }
 }

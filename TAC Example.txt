@@ -1,0 +1,431 @@
+COPY(45, --, t1)
+COPY(45, --, t3)
+CALL(--, --, main)
+e1: SKIP
+PMB(--, --, f0)
+COPY(32, --, t6)
+COPY(0, --, t9)
+IFEQ(t4, t9, e2)
+COPY(0, --, t7)
+GOTO(--, --, e3)
+e2: SKIP
+COPY(-1, --, t7)
+e3: SKIP
+COPY(0, --, t10)
+IFEQ(t7, t10, e4)
+COPY(48, --, t12)
+COPY(t12, --, t6)
+GOTO(--, --, e5)
+e4: SKIP
+COPY(1, --, t15)
+IFEQ(t4, t15, e6)
+COPY(0, --, t13)
+GOTO(--, --, e7)
+e6: SKIP
+COPY(-1, --, t13)
+e7: SKIP
+COPY(0, --, t16)
+IFEQ(t13, t16, e8)
+COPY(49, --, t18)
+COPY(t18, --, t6)
+GOTO(--, --, e9)
+e8: SKIP
+COPY(2, --, t21)
+IFEQ(t4, t21, e10)
+COPY(0, --, t19)
+GOTO(--, --, e11)
+e10: SKIP
+COPY(-1, --, t19)
+e11: SKIP
+COPY(0, --, t22)
+IFEQ(t19, t22, e12)
+COPY(50, --, t24)
+COPY(t24, --, t6)
+GOTO(--, --, e13)
+e12: SKIP
+COPY(3, --, t27)
+IFEQ(t4, t27, e14)
+COPY(0, --, t25)
+GOTO(--, --, e15)
+e14: SKIP
+COPY(-1, --, t25)
+e15: SKIP
+COPY(0, --, t28)
+IFEQ(t25, t28, e16)
+COPY(51, --, t30)
+COPY(t30, --, t6)
+GOTO(--, --, e17)
+e16: SKIP
+COPY(4, --, t33)
+IFEQ(t4, t33, e18)
+COPY(0, --, t31)
+GOTO(--, --, e19)
+e18: SKIP
+COPY(-1, --, t31)
+e19: SKIP
+COPY(0, --, t34)
+IFEQ(t31, t34, e20)
+COPY(52, --, t36)
+COPY(t36, --, t6)
+GOTO(--, --, e21)
+e20: SKIP
+COPY(5, --, t39)
+IFEQ(t4, t39, e22)
+COPY(0, --, t37)
+GOTO(--, --, e23)
+e22: SKIP
+COPY(-1, --, t37)
+e23: SKIP
+COPY(0, --, t40)
+IFEQ(t37, t40, e24)
+COPY(53, --, t42)
+COPY(t42, --, t6)
+GOTO(--, --, e25)
+e24: SKIP
+COPY(6, --, t45)
+IFEQ(t4, t45, e26)
+COPY(0, --, t43)
+GOTO(--, --, e27)
+e26: SKIP
+COPY(-1, --, t43)
+e27: SKIP
+COPY(0, --, t46)
+IFEQ(t43, t46, e28)
+COPY(54, --, t48)
+COPY(t48, --, t6)
+GOTO(--, --, e29)
+e28: SKIP
+COPY(7, --, t51)
+IFEQ(t4, t51, e30)
+COPY(0, --, t49)
+GOTO(--, --, e31)
+e30: SKIP
+COPY(-1, --, t49)
+e31: SKIP
+COPY(0, --, t52)
+IFEQ(t49, t52, e32)
+COPY(55, --, t54)
+COPY(t54, --, t6)
+GOTO(--, --, e33)
+e32: SKIP
+COPY(8, --, t57)
+IFEQ(t4, t57, e34)
+COPY(0, --, t55)
+GOTO(--, --, e35)
+e34: SKIP
+COPY(-1, --, t55)
+e35: SKIP
+COPY(0, --, t58)
+IFEQ(t55, t58, e36)
+COPY(56, --, t60)
+COPY(t60, --, t6)
+GOTO(--, --, e37)
+e36: SKIP
+COPY(9, --, t63)
+IFEQ(t4, t63, e38)
+COPY(0, --, t61)
+GOTO(--, --, e39)
+e38: SKIP
+COPY(-1, --, t61)
+e39: SKIP
+COPY(0, --, t64)
+IFEQ(t61, t64, e40)
+COPY(57, --, t66)
+COPY(t66, --, t6)
+e40: SKIP
+e37: SKIP
+e33: SKIP
+e29: SKIP
+e25: SKIP
+e21: SKIP
+e17: SKIP
+e13: SKIP
+e9: SKIP
+e5: SKIP
+RTN(--, --, t6)
+e41: SKIP
+PMB(--, --, f1)
+COPY(1, --, t71)
+COPY(t71, --, t69)
+NEG(--, --, t69)
+COPY(48, --, t74)
+IFEQ(t68, t74, e42)
+COPY(0, --, t72)
+GOTO(--, --, e43)
+e42: SKIP
+COPY(-1, --, t72)
+e43: SKIP
+COPY(0, --, t75)
+IFEQ(t72, t75, e44)
+COPY(0, --, t77)
+COPY(t77, --, t69)
+GOTO(--, --, e45)
+e44: SKIP
+COPY(49, --, t80)
+IFEQ(t68, t80, e46)
+COPY(0, --, t78)
+GOTO(--, --, e47)
+e46: SKIP
+COPY(-1, --, t78)
+e47: SKIP
+COPY(0, --, t81)
+IFEQ(t78, t81, e48)
+COPY(1, --, t83)
+COPY(t83, --, t69)
+GOTO(--, --, e49)
+e48: SKIP
+COPY(50, --, t86)
+IFEQ(t68, t86, e50)
+COPY(0, --, t84)
+GOTO(--, --, e51)
+e50: SKIP
+COPY(-1, --, t84)
+e51: SKIP
+COPY(0, --, t87)
+IFEQ(t84, t87, e52)
+COPY(2, --, t89)
+COPY(t89, --, t69)
+GOTO(--, --, e53)
+e52: SKIP
+COPY(51, --, t92)
+IFEQ(t68, t92, e54)
+COPY(0, --, t90)
+GOTO(--, --, e55)
+e54: SKIP
+COPY(-1, --, t90)
+e55: SKIP
+COPY(0, --, t93)
+IFEQ(t90, t93, e56)
+COPY(3, --, t95)
+COPY(t95, --, t69)
+GOTO(--, --, e57)
+e56: SKIP
+COPY(52, --, t98)
+IFEQ(t68, t98, e58)
+COPY(0, --, t96)
+GOTO(--, --, e59)
+e58: SKIP
+COPY(-1, --, t96)
+e59: SKIP
+COPY(0, --, t99)
+IFEQ(t96, t99, e60)
+COPY(4, --, t101)
+COPY(t101, --, t69)
+GOTO(--, --, e61)
+e60: SKIP
+COPY(53, --, t104)
+IFEQ(t68, t104, e62)
+COPY(0, --, t102)
+GOTO(--, --, e63)
+e62: SKIP
+COPY(-1, --, t102)
+e63: SKIP
+COPY(0, --, t105)
+IFEQ(t102, t105, e64)
+COPY(5, --, t107)
+COPY(t107, --, t69)
+GOTO(--, --, e65)
+e64: SKIP
+COPY(54, --, t110)
+IFEQ(t68, t110, e66)
+COPY(0, --, t108)
+GOTO(--, --, e67)
+e66: SKIP
+COPY(-1, --, t108)
+e67: SKIP
+COPY(0, --, t111)
+IFEQ(t108, t111, e68)
+COPY(6, --, t113)
+COPY(t113, --, t69)
+GOTO(--, --, e69)
+e68: SKIP
+COPY(55, --, t116)
+IFEQ(t68, t116, e70)
+COPY(0, --, t114)
+GOTO(--, --, e71)
+e70: SKIP
+COPY(-1, --, t114)
+e71: SKIP
+COPY(0, --, t117)
+IFEQ(t114, t117, e72)
+COPY(7, --, t119)
+COPY(t119, --, t69)
+GOTO(--, --, e73)
+e72: SKIP
+COPY(56, --, t122)
+IFEQ(t68, t122, e74)
+COPY(0, --, t120)
+GOTO(--, --, e75)
+e74: SKIP
+COPY(-1, --, t120)
+e75: SKIP
+COPY(0, --, t123)
+IFEQ(t120, t123, e76)
+COPY(8, --, t125)
+COPY(t125, --, t69)
+GOTO(--, --, e77)
+e76: SKIP
+COPY(57, --, t128)
+IFEQ(t68, t128, e78)
+COPY(0, --, t126)
+GOTO(--, --, e79)
+e78: SKIP
+COPY(-1, --, t126)
+e79: SKIP
+COPY(0, --, t129)
+IFEQ(t126, t129, e80)
+COPY(9, --, t131)
+COPY(t131, --, t69)
+e80: SKIP
+e77: SKIP
+e73: SKIP
+e69: SKIP
+e65: SKIP
+e61: SKIP
+e57: SKIP
+e53: SKIP
+e49: SKIP
+e45: SKIP
+RTN(--, --, t69)
+main: SKIP
+PMB(--, --, f2)
+COPY(80, --, t135)
+COPY(0, --, t136)
+IND_ASS(t135, t136, t133)
+COPY(117, --, t138)
+COPY(1, --, t139)
+IND_ASS(t138, t139, t133)
+COPY(116, --, t141)
+COPY(2, --, t142)
+IND_ASS(t141, t142, t133)
+COPY(32, --, t144)
+COPY(3, --, t145)
+IND_ASS(t144, t145, t133)
+COPY(97, --, t147)
+COPY(4, --, t148)
+IND_ASS(t147, t148, t133)
+COPY(32, --, t150)
+COPY(5, --, t151)
+IND_ASS(t150, t151, t133)
+COPY(100, --, t153)
+COPY(6, --, t154)
+IND_ASS(t153, t154, t133)
+COPY(101, --, t156)
+COPY(7, --, t157)
+IND_ASS(t156, t157, t133)
+COPY(99, --, t159)
+COPY(8, --, t160)
+IND_ASS(t159, t160, t133)
+COPY(105, --, t162)
+COPY(9, --, t163)
+IND_ASS(t162, t163, t133)
+COPY(109, --, t165)
+COPY(10, --, t166)
+IND_ASS(t165, t166, t133)
+COPY(97, --, t168)
+COPY(11, --, t169)
+IND_ASS(t168, t169, t133)
+COPY(108, --, t171)
+COPY(12, --, t172)
+IND_ASS(t171, t172, t133)
+COPY(58, --, t174)
+COPY(13, --, t175)
+IND_ASS(t174, t175, t133)
+COPY(0, --, t177)
+COPY(0, --, t179)
+POS(t177, t179, --)
+COPY(0, --, t181)
+COPY(13, --, t183)
+WRITE(t181, t183, t133)
+READ(--, --, t185)
+COPY(t185, --, t1)
+COPY(14, --, t187)
+IND_ASS(t1, t187, t133)
+READ(--, --, t189)
+COPY(t189, --, t3)
+COPY(15, --, t191)
+IND_ASS(t3, t191, t133)
+COPY(14, --, t193)
+COPY(0, --, t195)
+POS(t193, t195, --)
+COPY(14, --, t197)
+COPY(15, --, t199)
+WRITE(t197, t199, t133)
+COPY(10, --, t203)
+PUT(--, --, t1)
+CALL(--, --, f1)
+POP(f1, --, t204)
+PROD(t203, t204, t201)
+PUT(--, --, t3)
+CALL(--, --, f1)
+POP(f1, --, t206)
+SUM(t201, t206, t200)
+COPY(80, --, t209)
+COPY(0, --, t210)
+IND_ASS(t209, t210, t133)
+COPY(117, --, t212)
+COPY(1, --, t213)
+IND_ASS(t212, t213, t133)
+COPY(116, --, t215)
+COPY(2, --, t216)
+IND_ASS(t215, t216, t133)
+COPY(32, --, t218)
+COPY(3, --, t219)
+IND_ASS(t218, t219, t133)
+COPY(97, --, t221)
+COPY(4, --, t222)
+IND_ASS(t221, t222, t133)
+COPY(32, --, t224)
+COPY(5, --, t225)
+IND_ASS(t224, t225, t133)
+COPY(108, --, t227)
+COPY(6, --, t228)
+IND_ASS(t227, t228, t133)
+COPY(101, --, t230)
+COPY(7, --, t231)
+IND_ASS(t230, t231, t133)
+COPY(116, --, t233)
+COPY(8, --, t234)
+IND_ASS(t233, t234, t133)
+COPY(116, --, t236)
+COPY(9, --, t237)
+IND_ASS(t236, t237, t133)
+COPY(101, --, t239)
+COPY(10, --, t240)
+IND_ASS(t239, t240, t133)
+COPY(114, --, t242)
+COPY(11, --, t243)
+IND_ASS(t242, t243, t133)
+COPY(58, --, t245)
+COPY(12, --, t246)
+IND_ASS(t245, t246, t133)
+COPY(0, --, t248)
+COPY(2, --, t250)
+POS(t248, t250, --)
+COPY(0, --, t252)
+COPY(12, --, t254)
+WRITE(t252, t254, t133)
+READ(--, --, t256)
+COPY(1, --, t259)
+SUB(t259, t200, t257)
+COPY(t257, --, t200)
+COPY(0, --, t261)
+e82: SKIP
+IFLE(t261, t200, e83)
+COPY(0, --, t262)
+GOTO(--, --, e84)
+e83: SKIP
+COPY(-1, --, t262)
+e84: SKIP
+COPY(0, --, t264)
+IFEQ(t262, t264, e85)
+IND_ASS(t256, t261, t133)
+INC(--, --, t261)
+GOTO(--, --, e82)
+e85: SKIP
+COPY(0, --, t268)
+COPY(4, --, t270)
+POS(t268, t270, --)
+COPY(0, --, t272)
+WRITE(t272, t200, t133)
+HALT(--, --, --)
