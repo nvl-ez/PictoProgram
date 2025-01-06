@@ -42,7 +42,7 @@ public class SymbolTable {
 
         if (print) {
             try {
-                writer = new BufferedWriter(new FileWriter("SymbolTable.txt"));
+                writer = new BufferedWriter(new FileWriter("compileFiles/SymbolTable.txt"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -283,38 +283,38 @@ public class SymbolTable {
         value += "------------------\n";
 
         for (Map.Entry<Integer, Integer> entry : scopeTable.entrySet()) {
-            value += "|" + entry.getKey() + "\t\t|" + entry.getValue() + "\t\t|\n";
+            value += "|" + entry.getKey() + "\t|" + entry.getValue() + "\t |\n";
         }
         value += "------------------\n\n";
-        value += "----------------------------------------\n";
-        value += "|           EXPANSION  TABLE           |\n";
-        value += "----------------------------------------\n";
-        value += "| INDX | NP | ID | DESC | FIRST | NEXT |\n";
-        value += "----------------------------------------\n";
+        value += "-----------------------------------------------------------------\n";
+        value += "|                       EXPANSION  TABLE                        |\n";
+        value += "-----------------------------------------------------------------\n";
+        value += "| INDX  | NP    | ID     | DESC                | FIRST  | NEXT  |\n";
+        value += "-----------------------------------------------------------------\n";
 
         for (Map.Entry<Integer, Row> entry : expansionTable.entrySet()) {
             Row row = entry.getValue();
-            value += "| " + entry.getKey() + " | " + row.np + " | " + " | " + row.description.getId() + " | " + row.description.getClass().getSimpleName() + " | " + row.first + " | " + row.next + " \t|\n";
+            value += "| " + entry.getKey() + "\t| " + row.np + "\t| "  + row.description.getId() + " | " + row.description.getClass().getSimpleName() + " | " + row.first + "\t| " + row.next + " \t|\n";
         }
-        value += "----------------------------------------\n\n";
+        value += "-----------------------------------------------------------------\n\n";
 
-        value += "----------------------------------------\n";
-        value += "|          DESCRIPTION  TABLE          |\n";
-        value += "----------------------------------------\n";
-        value += "|    ID    |     TYPE     |    DESC    |\n";
-        value += "----------------------------------------\n";
+        value += "---------------------------------------------\n";
+        value += "|             DESCRIPTION  TABLE            |\n";
+        value += "---------------------------------------------\n";
+        value += "|  ID       |  TYPE  |    DESC              |\n";
+        value += "---------------------------------------------\n";
 
         for (Map.Entry<String, Row> entry : descriptionTable.entrySet()) {
             Row row = entry.getValue();
             if (row.description instanceof ConstantDescription) {
-                value += "| " + row.description.getId() + " | " + ((ConstantDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
+                value += "| " + row.description.getId() + "\t | " + ((ConstantDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
             } else if (row.description instanceof VariableDescription) {
-                value += "| " + row.description.getId() + " | " + ((VariableDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
+                value += "| " + row.description.getId() + "\t | " + ((VariableDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
             } else if (row.description instanceof TypeDescription) {
-                value += "| " + row.description.getId() + " | " + ((TypeDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
+                value += "| " + row.description.getId() + "\t | " + ((TypeDescription) row.description).getType().name() + " | " + row.description.getClass().getSimpleName() + " \t|\n";
             }
         }
-        value += "----------------------------------------\n";
+        value += "---------------------------------------------\n";
         return value;
     }
 

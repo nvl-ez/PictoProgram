@@ -1,1 +1,0 @@
-Type Id Assign Character Endline Type Id Assign SUB Decimal Endline Type Id Lparen Type Id Rparen Lbracket Return SUB Decimal Endline Rbracket Main Lparen Rparen Lbracket Type Id Assign Character Endline Type Id Assign Id Lparen Id Rparen Endline Rbracket EOF EOF 

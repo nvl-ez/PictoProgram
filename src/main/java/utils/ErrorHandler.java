@@ -1,5 +1,8 @@
 package utils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class ErrorHandler {
@@ -9,21 +12,29 @@ public class ErrorHandler {
     public void addError(ErrorPhase phase, String errorDesc, int line, int column) {
         errors.add(new Row(phase, errorDesc, line, column));
     }
-    
-    public boolean isErrorFree(){
+
+    public boolean isErrorFree() {
         return errors.isEmpty();
     }
-    
-    public String toString(){
+
+    public void save() {
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("compileFiles/ErrorLog.txt"))) {
+            writer.write(toString());
+        } catch (IOException ex) {
+            System.out.println("ERROR PRINTING THE ERROR LOG");
+        }
+    }
+
+    public String toString() {
         String errorString = "-------------------------------------------------------------------------------------------------------------------------\n";
         errorString += "|################################################### ERRORS ############################################################|\n";
         errorString += "-------------------------------------------------------------------------------------------------------------------------\n";
         errorString += "| Compiling Phase | Row \t| Column | Details\n";
-        
-        
-        for(Row error : errors){
+
+        for (Row error : errors) {
             errorString += "| ";
-            switch(error.phase){
+            switch (error.phase) {
                 case ErrorPhase.Lexic:
                     errorString += "LEXIC           |";
                     break;
@@ -34,23 +45,24 @@ public class ErrorHandler {
                     errorString += "SEMANTIC        |";
                     break;
             }
-            if(error.line >= 0){
-                errorString += " "+error.line+"\t\t|";
-            } else{
+            if (error.line >= 0) {
+                errorString += " " + error.line + "\t\t|";
+            } else {
                 errorString += " \t\t|";
             }
-            if(error.column >= 0){
-                errorString += " "+error.column+"\t |";
-            } else{
+            if (error.column >= 0) {
+                errorString += " " + error.column + "\t |";
+            } else {
                 errorString += " \t |";
             }
-            errorString += " "+error.errorDesc+"\n";
+            errorString += " " + error.errorDesc + "\n";
         }
         errorString += "-------------------------------------------------------------------------------------------------------------------------\n";
         return errorString;
     }
 
     private class Row {
+
         ErrorPhase phase;
         String errorDesc;
         int line;

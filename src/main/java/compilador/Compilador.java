@@ -31,8 +31,8 @@ public class Compilador {
         |
         |
         |
-        */
-        String filePath = "empty.txt";
+         */
+        String filePath = "IOTest.txt";
         ErrorHandler eh = new ErrorHandler();
 
         try {
@@ -41,9 +41,8 @@ public class Compilador {
 
             SymbolTable st = new SymbolTable(eh, true);
 
-            SymbolFactory sf = new ComplexSymbolFactory();
-
             //Set up scanner
+            SymbolFactory sf = new ComplexSymbolFactory();
             Scanner scanner = new Scanner(input);
             scanner.setErrorHandler(eh);
 
@@ -51,33 +50,39 @@ public class Compilador {
             Parser parser = new Parser(scanner, sf);
             parser.setSymbolTable(st);
             parser.setErrorHandler(eh);
-
+            
+            ThreeAddressCode tac = new ThreeAddressCode();
+            
+            //Set static references to other modules
             Node.setSymbolTable(st);
             Node.setErrorHandler(eh);
-
-            ThreeAddressCode tac = new ThreeAddressCode();
             Operand.setThreeAddressCode(tac);
             Node.setThreeAddressCode(tac);
             parser.setThreeAddressCode(tac);
 
             parser.parse();
+
+            scanner.closeTokenStream();
             
-            Optimizer opt = new Optimizer(tac.getCode(), tac.getVarTable());
-            opt.optimize();
-            tac.recalculate();
-            tac.assemble();
-            
-            scanner.closeTokenStram();
+            tac.save(false);
 
             if (!eh.isErrorFree()) {
                 System.out.println(eh.toString());
+                System.out.println("The assembly file was not changed.");
             } else {
-                System.out.println("Program compiled into \"assembly.x68\"");
+                System.out.println("Program compiled into \"assembly_optimized.x68\"");
+                tac.assemble("assembly");
+                Optimizer opt = new Optimizer(tac.getCode(), tac.getVarTable());
+                opt.optimize();
+                tac.recalculate();
+                tac.save(true);
+                tac.assemble("assembly_optimized");
             }
+            eh.save();
 
         } catch (Exception e) {
+            System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
             e.printStackTrace();
-            //System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
         }
     }
 

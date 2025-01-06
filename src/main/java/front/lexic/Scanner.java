@@ -349,7 +349,7 @@ public class Scanner implements java_cup.runtime.Scanner {
         return cs;
     }
 
-    public void closeTokenStram(){
+    public void closeTokenStream(){
         try {
             if (writer != null) {
                 writer.close();  
@@ -371,7 +371,7 @@ public class Scanner implements java_cup.runtime.Scanner {
    * @param   in  the java.io.Reader to read input from.
    */
   public Scanner(java.io.Reader in) {
-      String file = "Tokens.txt";
+      String file = "compileFiles/Tokens.txt";
 
     try {
         writer = new BufferedWriter(new FileWriter(file));

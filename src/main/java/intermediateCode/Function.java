@@ -45,6 +45,7 @@ public class Function extends  Operand {
     
     public void putArg(Variable arg){
         args.push(arg);
+        tac.incrementFunArg(id);
     }
     
     public LinkedList<Variable> getArgs(){

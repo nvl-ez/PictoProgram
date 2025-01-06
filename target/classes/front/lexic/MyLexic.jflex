@@ -46,7 +46,7 @@ import utils.OpArit;
 %}
 
 %init{
-    String file = "Tokens.txt";
+    String file = "compileFiles/Tokens.txt";
 
     try {
         writer = new BufferedWriter(new FileWriter(file));
