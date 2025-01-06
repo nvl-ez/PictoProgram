@@ -38,15 +38,15 @@ public class ConstantDescription extends Description{
         return type;
     }
 
-    public int getDecimalValue() {
+    public Integer getDecimalValue() {
         return decimalValue;
     }
 
-    public boolean getBooleanValue() {
+    public Boolean getBooleanValue() {
         return booleanValue;
     }
 
-    public char getCharacterValue() {
+    public Character getCharacterValue() {
         return characterValue;
     }
     

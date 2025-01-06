@@ -117,7 +117,7 @@ public class _Value extends Node {
                 type = Types.NULL;
                 return;
                 
-            } else{
+            } else if(ind.getId() == null){
                 type = Types.NULL;
                 return;
             }

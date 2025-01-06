@@ -1,1337 +1,808 @@
-00000008 Starting Address
+00000000 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 06-Jan-25 12:31:56 PM
+Created On: 06-Jan-25 6:52:57 PM
 
-00000000                             1  t0  DS.W 2
-00000004                             2  t1  DS.W 2
-00000008                             3  t2  DS.W 2
-0000000C                             4  t3  DS.W 2
-00000008                             5      ORG     $8
-00000008                             6  START:
-00000008  123C 0000                  7      MOVE.B #0, D1
-0000000C  303C 000C                  8      MOVE.W #12, D0
-00000010  4E4F                       9      TRAP #15
-00000012                            10  * ----COPY:COPY(45, --, t1)----
-00000012  4BF8 0004                 11      LEA t1, A5
-00000016  3ABC 002D                 12      MOVE.W #45, (A5)
-0000001A                            13  
-0000001A                            14  * ----COPY:COPY(45, --, t3)----
-0000001A  4BF8 000C                 15      LEA t3, A5
-0000001E  3ABC 002D                 16      MOVE.W #45, (A5)
-00000022                            17  
-00000022  2F4E FFF8                 18      MOVE.L A6, -8(A7)
-00000026  2C4F                      19      MOVE.L A7, A6
-00000028  4EB9 00000758             20      JSR main * ----FUNCTION CALL:CALL(--, --, main)----
-0000002E                            21  
-0000002E                            22  e1: *e1: SKIP
-0000002E  9FFC 00000046             23      SUB.L #70, SP *:PMB(--, --, f0)
-00000034                            24  
-00000034                            25  * ----COPY:COPY(32, --, t6)----
-00000034  2A7C FFFFFFF4             26      MOVE.L #-12, A5
-0000003A  DBCE                      27      ADD.L A6, A5
-0000003C  3ABC 0020                 28      MOVE.W #32, (A5)
-00000040                            29  
-00000040                            30  * ----COMPARE EQ:IFEQ(t4, 0, e2)----
-00000040  2A7C 00000000             31      MOVE.L #0, A5
-00000046  DBCE                      32      ADD.L A6, A5
-00000048  3215                      33      MOVE.W (A5), D1
-0000004A  343C 0000                 34      MOVE.W #0, D2
-0000004E  B441                      35      CMP.W D1, D2
-00000050  6700 0014                 36      BEQ.W e2
-00000054                            37  
-00000054                            38  * ----COPY:COPY(0, --, t7)----
-00000054  2A7C FFFFFFF2             39      MOVE.L #-14, A5
-0000005A  DBCE                      40      ADD.L A6, A5
-0000005C  3ABC 0000                 41      MOVE.W #0, (A5)
-00000060                            42  
-00000060  4EF9 00000072             43      JMP e3 * ----GOTO:GOTO(--, --, e3)----
-00000066                            44  
-00000066                            45  e2: *e2: SKIP
-00000066                            46  * ----COPY:COPY(-1, --, t7)----
-00000066  2A7C FFFFFFF2             47      MOVE.L #-14, A5
-0000006C  DBCE                      48      ADD.L A6, A5
-0000006E  3ABC FFFF                 49      MOVE.W #-1, (A5)
-00000072                            50  
-00000072                            51  e3: *e3: SKIP
-00000072                            52  * ----COMPARE EQ:IFEQ(t7, 0, e4)----
-00000072  2A7C FFFFFFF2             53      MOVE.L #-14, A5
-00000078  DBCE                      54      ADD.L A6, A5
-0000007A  3215                      55      MOVE.W (A5), D1
-0000007C  343C 0000                 56      MOVE.W #0, D2
-00000080  B441                      57      CMP.W D1, D2
-00000082  6700 0014                 58      BEQ.W e4
-00000086                            59  
-00000086                            60  * ----COPY:COPY(48, --, t6)----
-00000086  2A7C FFFFFFF4             61      MOVE.L #-12, A5
-0000008C  DBCE                      62      ADD.L A6, A5
-0000008E  3ABC 0030                 63      MOVE.W #48, (A5)
-00000092  4EF9 000003AA             64      JMP e5 * ----GOTO:GOTO(--, --, e5)----
-00000098                            65  
-00000098                            66  e4: *e4: SKIP
-00000098                            67  * ----COMPARE EQ:IFEQ(t4, 1, e6)----
-00000098  2A7C 00000000             68      MOVE.L #0, A5
-0000009E  DBCE                      69      ADD.L A6, A5
-000000A0  3215                      70      MOVE.W (A5), D1
-000000A2  343C 0001                 71      MOVE.W #1, D2
-000000A6  B441                      72      CMP.W D1, D2
-000000A8  6700 0014                 73      BEQ.W e6
-000000AC                            74  
-000000AC                            75  * ----COPY:COPY(0, --, t13)----
-000000AC  2A7C FFFFFFEC             76      MOVE.L #-20, A5
-000000B2  DBCE                      77      ADD.L A6, A5
-000000B4  3ABC 0000                 78      MOVE.W #0, (A5)
-000000B8                            79  
-000000B8  4EF9 000000CA             80      JMP e7 * ----GOTO:GOTO(--, --, e7)----
-000000BE                            81  
-000000BE                            82  e6: *e6: SKIP
-000000BE                            83  * ----COPY:COPY(-1, --, t13)----
-000000BE  2A7C FFFFFFEC             84      MOVE.L #-20, A5
-000000C4  DBCE                      85      ADD.L A6, A5
-000000C6  3ABC FFFF                 86      MOVE.W #-1, (A5)
-000000CA                            87  
-000000CA                            88  e7: *e7: SKIP
-000000CA                            89  * ----COMPARE EQ:IFEQ(t13, 0, e8)----
-000000CA  2A7C FFFFFFEC             90      MOVE.L #-20, A5
-000000D0  DBCE                      91      ADD.L A6, A5
-000000D2  3215                      92      MOVE.W (A5), D1
-000000D4  343C 0000                 93      MOVE.W #0, D2
-000000D8  B441                      94      CMP.W D1, D2
-000000DA  6700 0014                 95      BEQ.W e8
-000000DE                            96  
-000000DE                            97  * ----COPY:COPY(49, --, t6)----
-000000DE  2A7C FFFFFFF4             98      MOVE.L #-12, A5
-000000E4  DBCE                      99      ADD.L A6, A5
-000000E6  3ABC 0031                100      MOVE.W #49, (A5)
-000000EA  4EF9 000003AA            101      JMP e9 * ----GOTO:GOTO(--, --, e9)----
-000000F0                           102  
-000000F0                           103  e8: *e8: SKIP
-000000F0                           104  * ----COMPARE EQ:IFEQ(t4, 2, e10)----
-000000F0  2A7C 00000000            105      MOVE.L #0, A5
-000000F6  DBCE                     106      ADD.L A6, A5
-000000F8  3215                     107      MOVE.W (A5), D1
-000000FA  343C 0002                108      MOVE.W #2, D2
-000000FE  B441                     109      CMP.W D1, D2
-00000100  6700 0014                110      BEQ.W e10
-00000104                           111  
-00000104                           112  * ----COPY:COPY(0, --, t19)----
-00000104  2A7C FFFFFFE6            113      MOVE.L #-26, A5
-0000010A  DBCE                     114      ADD.L A6, A5
-0000010C  3ABC 0000                115      MOVE.W #0, (A5)
-00000110                           116  
-00000110  4EF9 00000122            117      JMP e11 * ----GOTO:GOTO(--, --, e11)----
-00000116                           118  
-00000116                           119  e10: *e10: SKIP
-00000116                           120  * ----COPY:COPY(-1, --, t19)----
-00000116  2A7C FFFFFFE6            121      MOVE.L #-26, A5
-0000011C  DBCE                     122      ADD.L A6, A5
-0000011E  3ABC FFFF                123      MOVE.W #-1, (A5)
-00000122                           124  
-00000122                           125  e11: *e11: SKIP
-00000122                           126  * ----COMPARE EQ:IFEQ(t19, 0, e12)----
-00000122  2A7C FFFFFFE6            127      MOVE.L #-26, A5
-00000128  DBCE                     128      ADD.L A6, A5
-0000012A  3215                     129      MOVE.W (A5), D1
-0000012C  343C 0000                130      MOVE.W #0, D2
-00000130  B441                     131      CMP.W D1, D2
-00000132  6700 0014                132      BEQ.W e12
-00000136                           133  
-00000136                           134  * ----COPY:COPY(50, --, t6)----
-00000136  2A7C FFFFFFF4            135      MOVE.L #-12, A5
-0000013C  DBCE                     136      ADD.L A6, A5
-0000013E  3ABC 0032                137      MOVE.W #50, (A5)
-00000142  4EF9 000003AA            138      JMP e13 * ----GOTO:GOTO(--, --, e13)----
-00000148                           139  
-00000148                           140  e12: *e12: SKIP
-00000148                           141  * ----COMPARE EQ:IFEQ(t4, 3, e14)----
-00000148  2A7C 00000000            142      MOVE.L #0, A5
-0000014E  DBCE                     143      ADD.L A6, A5
-00000150  3215                     144      MOVE.W (A5), D1
-00000152  343C 0003                145      MOVE.W #3, D2
-00000156  B441                     146      CMP.W D1, D2
-00000158  6700 0014                147      BEQ.W e14
-0000015C                           148  
-0000015C                           149  * ----COPY:COPY(0, --, t25)----
-0000015C  2A7C FFFFFFE0            150      MOVE.L #-32, A5
-00000162  DBCE                     151      ADD.L A6, A5
-00000164  3ABC 0000                152      MOVE.W #0, (A5)
-00000168                           153  
-00000168  4EF9 0000017A            154      JMP e15 * ----GOTO:GOTO(--, --, e15)----
-0000016E                           155  
-0000016E                           156  e14: *e14: SKIP
-0000016E                           157  * ----COPY:COPY(-1, --, t25)----
-0000016E  2A7C FFFFFFE0            158      MOVE.L #-32, A5
-00000174  DBCE                     159      ADD.L A6, A5
-00000176  3ABC FFFF                160      MOVE.W #-1, (A5)
-0000017A                           161  
-0000017A                           162  e15: *e15: SKIP
-0000017A                           163  * ----COMPARE EQ:IFEQ(t25, 0, e16)----
-0000017A  2A7C FFFFFFE0            164      MOVE.L #-32, A5
-00000180  DBCE                     165      ADD.L A6, A5
-00000182  3215                     166      MOVE.W (A5), D1
-00000184  343C 0000                167      MOVE.W #0, D2
-00000188  B441                     168      CMP.W D1, D2
-0000018A  6700 0014                169      BEQ.W e16
-0000018E                           170  
-0000018E                           171  * ----COPY:COPY(51, --, t6)----
-0000018E  2A7C FFFFFFF4            172      MOVE.L #-12, A5
-00000194  DBCE                     173      ADD.L A6, A5
-00000196  3ABC 0033                174      MOVE.W #51, (A5)
-0000019A  4EF9 000003AA            175      JMP e17 * ----GOTO:GOTO(--, --, e17)----
-000001A0                           176  
-000001A0                           177  e16: *e16: SKIP
-000001A0                           178  * ----COMPARE EQ:IFEQ(t4, 4, e18)----
-000001A0  2A7C 00000000            179      MOVE.L #0, A5
-000001A6  DBCE                     180      ADD.L A6, A5
-000001A8  3215                     181      MOVE.W (A5), D1
-000001AA  343C 0004                182      MOVE.W #4, D2
-000001AE  B441                     183      CMP.W D1, D2
-000001B0  6700 0014                184      BEQ.W e18
-000001B4                           185  
-000001B4                           186  * ----COPY:COPY(0, --, t31)----
-000001B4  2A7C FFFFFFDA            187      MOVE.L #-38, A5
-000001BA  DBCE                     188      ADD.L A6, A5
-000001BC  3ABC 0000                189      MOVE.W #0, (A5)
-000001C0                           190  
-000001C0  4EF9 000001D2            191      JMP e19 * ----GOTO:GOTO(--, --, e19)----
-000001C6                           192  
-000001C6                           193  e18: *e18: SKIP
-000001C6                           194  * ----COPY:COPY(-1, --, t31)----
-000001C6  2A7C FFFFFFDA            195      MOVE.L #-38, A5
-000001CC  DBCE                     196      ADD.L A6, A5
-000001CE  3ABC FFFF                197      MOVE.W #-1, (A5)
-000001D2                           198  
-000001D2                           199  e19: *e19: SKIP
-000001D2                           200  * ----COMPARE EQ:IFEQ(t31, 0, e20)----
-000001D2  2A7C FFFFFFDA            201      MOVE.L #-38, A5
-000001D8  DBCE                     202      ADD.L A6, A5
-000001DA  3215                     203      MOVE.W (A5), D1
-000001DC  343C 0000                204      MOVE.W #0, D2
-000001E0  B441                     205      CMP.W D1, D2
-000001E2  6700 0014                206      BEQ.W e20
-000001E6                           207  
-000001E6                           208  * ----COPY:COPY(52, --, t6)----
-000001E6  2A7C FFFFFFF4            209      MOVE.L #-12, A5
-000001EC  DBCE                     210      ADD.L A6, A5
-000001EE  3ABC 0034                211      MOVE.W #52, (A5)
-000001F2  4EF9 000003AA            212      JMP e21 * ----GOTO:GOTO(--, --, e21)----
-000001F8                           213  
-000001F8                           214  e20: *e20: SKIP
-000001F8                           215  * ----COMPARE EQ:IFEQ(t4, 5, e22)----
-000001F8  2A7C 00000000            216      MOVE.L #0, A5
-000001FE  DBCE                     217      ADD.L A6, A5
-00000200  3215                     218      MOVE.W (A5), D1
-00000202  343C 0005                219      MOVE.W #5, D2
-00000206  B441                     220      CMP.W D1, D2
-00000208  6700 0014                221      BEQ.W e22
-0000020C                           222  
-0000020C                           223  * ----COPY:COPY(0, --, t37)----
-0000020C  2A7C FFFFFFD4            224      MOVE.L #-44, A5
-00000212  DBCE                     225      ADD.L A6, A5
-00000214  3ABC 0000                226      MOVE.W #0, (A5)
-00000218                           227  
-00000218  4EF9 0000022A            228      JMP e23 * ----GOTO:GOTO(--, --, e23)----
-0000021E                           229  
-0000021E                           230  e22: *e22: SKIP
-0000021E                           231  * ----COPY:COPY(-1, --, t37)----
-0000021E  2A7C FFFFFFD4            232      MOVE.L #-44, A5
-00000224  DBCE                     233      ADD.L A6, A5
-00000226  3ABC FFFF                234      MOVE.W #-1, (A5)
-0000022A                           235  
-0000022A                           236  e23: *e23: SKIP
-0000022A                           237  * ----COMPARE EQ:IFEQ(t37, 0, e24)----
-0000022A  2A7C FFFFFFD4            238      MOVE.L #-44, A5
-00000230  DBCE                     239      ADD.L A6, A5
-00000232  3215                     240      MOVE.W (A5), D1
-00000234  343C 0000                241      MOVE.W #0, D2
-00000238  B441                     242      CMP.W D1, D2
-0000023A  6700 0014                243      BEQ.W e24
-0000023E                           244  
-0000023E                           245  * ----COPY:COPY(53, --, t6)----
-0000023E  2A7C FFFFFFF4            246      MOVE.L #-12, A5
-00000244  DBCE                     247      ADD.L A6, A5
-00000246  3ABC 0035                248      MOVE.W #53, (A5)
-0000024A  4EF9 000003AA            249      JMP e25 * ----GOTO:GOTO(--, --, e25)----
-00000250                           250  
-00000250                           251  e24: *e24: SKIP
-00000250                           252  * ----COMPARE EQ:IFEQ(t4, 6, e26)----
-00000250  2A7C 00000000            253      MOVE.L #0, A5
-00000256  DBCE                     254      ADD.L A6, A5
-00000258  3215                     255      MOVE.W (A5), D1
-0000025A  343C 0006                256      MOVE.W #6, D2
-0000025E  B441                     257      CMP.W D1, D2
-00000260  6700 0014                258      BEQ.W e26
-00000264                           259  
-00000264                           260  * ----COPY:COPY(0, --, t43)----
-00000264  2A7C FFFFFFCE            261      MOVE.L #-50, A5
-0000026A  DBCE                     262      ADD.L A6, A5
-0000026C  3ABC 0000                263      MOVE.W #0, (A5)
-00000270                           264  
-00000270  4EF9 00000282            265      JMP e27 * ----GOTO:GOTO(--, --, e27)----
-00000276                           266  
-00000276                           267  e26: *e26: SKIP
-00000276                           268  * ----COPY:COPY(-1, --, t43)----
-00000276  2A7C FFFFFFCE            269      MOVE.L #-50, A5
-0000027C  DBCE                     270      ADD.L A6, A5
-0000027E  3ABC FFFF                271      MOVE.W #-1, (A5)
-00000282                           272  
-00000282                           273  e27: *e27: SKIP
-00000282                           274  * ----COMPARE EQ:IFEQ(t43, 0, e28)----
-00000282  2A7C FFFFFFCE            275      MOVE.L #-50, A5
-00000288  DBCE                     276      ADD.L A6, A5
-0000028A  3215                     277      MOVE.W (A5), D1
-0000028C  343C 0000                278      MOVE.W #0, D2
-00000290  B441                     279      CMP.W D1, D2
-00000292  6700 0014                280      BEQ.W e28
-00000296                           281  
-00000296                           282  * ----COPY:COPY(54, --, t6)----
-00000296  2A7C FFFFFFF4            283      MOVE.L #-12, A5
-0000029C  DBCE                     284      ADD.L A6, A5
-0000029E  3ABC 0036                285      MOVE.W #54, (A5)
-000002A2  4EF9 000003AA            286      JMP e29 * ----GOTO:GOTO(--, --, e29)----
-000002A8                           287  
-000002A8                           288  e28: *e28: SKIP
-000002A8                           289  * ----COMPARE EQ:IFEQ(t4, 7, e30)----
-000002A8  2A7C 00000000            290      MOVE.L #0, A5
-000002AE  DBCE                     291      ADD.L A6, A5
-000002B0  3215                     292      MOVE.W (A5), D1
-000002B2  343C 0007                293      MOVE.W #7, D2
-000002B6  B441                     294      CMP.W D1, D2
-000002B8  6700 0014                295      BEQ.W e30
-000002BC                           296  
-000002BC                           297  * ----COPY:COPY(0, --, t49)----
-000002BC  2A7C FFFFFFC8            298      MOVE.L #-56, A5
-000002C2  DBCE                     299      ADD.L A6, A5
-000002C4  3ABC 0000                300      MOVE.W #0, (A5)
-000002C8                           301  
-000002C8  4EF9 000002DA            302      JMP e31 * ----GOTO:GOTO(--, --, e31)----
-000002CE                           303  
-000002CE                           304  e30: *e30: SKIP
-000002CE                           305  * ----COPY:COPY(-1, --, t49)----
-000002CE  2A7C FFFFFFC8            306      MOVE.L #-56, A5
-000002D4  DBCE                     307      ADD.L A6, A5
-000002D6  3ABC FFFF                308      MOVE.W #-1, (A5)
-000002DA                           309  
-000002DA                           310  e31: *e31: SKIP
-000002DA                           311  * ----COMPARE EQ:IFEQ(t49, 0, e32)----
-000002DA  2A7C FFFFFFC8            312      MOVE.L #-56, A5
-000002E0  DBCE                     313      ADD.L A6, A5
-000002E2  3215                     314      MOVE.W (A5), D1
-000002E4  343C 0000                315      MOVE.W #0, D2
-000002E8  B441                     316      CMP.W D1, D2
-000002EA  6700 0014                317      BEQ.W e32
-000002EE                           318  
-000002EE                           319  * ----COPY:COPY(55, --, t6)----
-000002EE  2A7C FFFFFFF4            320      MOVE.L #-12, A5
-000002F4  DBCE                     321      ADD.L A6, A5
-000002F6  3ABC 0037                322      MOVE.W #55, (A5)
-000002FA  4EF9 000003AA            323      JMP e33 * ----GOTO:GOTO(--, --, e33)----
-00000300                           324  
-00000300                           325  e32: *e32: SKIP
-00000300                           326  * ----COMPARE EQ:IFEQ(t4, 8, e34)----
-00000300  2A7C 00000000            327      MOVE.L #0, A5
-00000306  DBCE                     328      ADD.L A6, A5
-00000308  3215                     329      MOVE.W (A5), D1
-0000030A  343C 0008                330      MOVE.W #8, D2
-0000030E  B441                     331      CMP.W D1, D2
-00000310  6700 0014                332      BEQ.W e34
-00000314                           333  
-00000314                           334  * ----COPY:COPY(0, --, t55)----
-00000314  2A7C FFFFFFC2            335      MOVE.L #-62, A5
-0000031A  DBCE                     336      ADD.L A6, A5
-0000031C  3ABC 0000                337      MOVE.W #0, (A5)
-00000320                           338  
-00000320  4EF9 00000332            339      JMP e35 * ----GOTO:GOTO(--, --, e35)----
-00000326                           340  
-00000326                           341  e34: *e34: SKIP
-00000326                           342  * ----COPY:COPY(-1, --, t55)----
-00000326  2A7C FFFFFFC2            343      MOVE.L #-62, A5
-0000032C  DBCE                     344      ADD.L A6, A5
-0000032E  3ABC FFFF                345      MOVE.W #-1, (A5)
-00000332                           346  
-00000332                           347  e35: *e35: SKIP
-00000332                           348  * ----COMPARE EQ:IFEQ(t55, 0, e36)----
-00000332  2A7C FFFFFFC2            349      MOVE.L #-62, A5
-00000338  DBCE                     350      ADD.L A6, A5
-0000033A  3215                     351      MOVE.W (A5), D1
-0000033C  343C 0000                352      MOVE.W #0, D2
-00000340  B441                     353      CMP.W D1, D2
-00000342  6700 0014                354      BEQ.W e36
-00000346                           355  
-00000346                           356  * ----COPY:COPY(56, --, t6)----
-00000346  2A7C FFFFFFF4            357      MOVE.L #-12, A5
-0000034C  DBCE                     358      ADD.L A6, A5
-0000034E  3ABC 0038                359      MOVE.W #56, (A5)
-00000352  4EF9 000003AA            360      JMP e37 * ----GOTO:GOTO(--, --, e37)----
-00000358                           361  
-00000358                           362  e36: *e36: SKIP
-00000358                           363  * ----COMPARE EQ:IFEQ(t4, 9, e38)----
-00000358  2A7C 00000000            364      MOVE.L #0, A5
-0000035E  DBCE                     365      ADD.L A6, A5
-00000360  3215                     366      MOVE.W (A5), D1
-00000362  343C 0009                367      MOVE.W #9, D2
-00000366  B441                     368      CMP.W D1, D2
-00000368  6700 0014                369      BEQ.W e38
-0000036C                           370  
-0000036C                           371  * ----COPY:COPY(0, --, t61)----
-0000036C  2A7C FFFFFFBC            372      MOVE.L #-68, A5
-00000372  DBCE                     373      ADD.L A6, A5
-00000374  3ABC 0000                374      MOVE.W #0, (A5)
-00000378                           375  
-00000378  4EF9 0000038A            376      JMP e39 * ----GOTO:GOTO(--, --, e39)----
-0000037E                           377  
-0000037E                           378  e38: *e38: SKIP
-0000037E                           379  * ----COPY:COPY(-1, --, t61)----
-0000037E  2A7C FFFFFFBC            380      MOVE.L #-68, A5
-00000384  DBCE                     381      ADD.L A6, A5
-00000386  3ABC FFFF                382      MOVE.W #-1, (A5)
-0000038A                           383  
-0000038A                           384  e39: *e39: SKIP
-0000038A                           385  * ----COMPARE EQ:IFEQ(t61, 0, e40)----
-0000038A  2A7C FFFFFFBC            386      MOVE.L #-68, A5
-00000390  DBCE                     387      ADD.L A6, A5
-00000392  3215                     388      MOVE.W (A5), D1
-00000394  343C 0000                389      MOVE.W #0, D2
-00000398  B441                     390      CMP.W D1, D2
-0000039A  6700 000E                391      BEQ.W e40
-0000039E                           392  
-0000039E                           393  * ----COPY:COPY(57, --, t6)----
-0000039E  2A7C FFFFFFF4            394      MOVE.L #-12, A5
-000003A4  DBCE                     395      ADD.L A6, A5
-000003A6  3ABC 0039                396      MOVE.W #57, (A5)
-000003AA                           397  e40: *e40: SKIP
-000003AA                           398  e37: *e37: SKIP
-000003AA                           399  e33: *e33: SKIP
-000003AA                           400  e29: *e29: SKIP
-000003AA                           401  e25: *e25: SKIP
-000003AA                           402  e21: *e21: SKIP
-000003AA                           403  e17: *e17: SKIP
-000003AA                           404  e13: *e13: SKIP
-000003AA                           405  e9: *e9: SKIP
-000003AA                           406  e5: *e5: SKIP
-000003AA                           407  * ----RETURN:RTN(--, --, t6)----
-000003AA  2A7C FFFFFFF4            408      MOVE.L #-12, A5
-000003B0  DBCE                     409      ADD.L A6, A5
-000003B2  3815                     410      MOVE.W (A5), D4 * ----RETURN VALUE----
-000003B4  2E4E                     411      MOVE.L A6, A7
-000003B6  598F                     412      SUB.L #4, A7
-000003B8  2C6E FFF8                413      MOVE.L -8(A6), A6
-000003BC  4E75                     414      RTS
-000003BE                           415  
-000003BE                           416  e41: *e41: SKIP
-000003BE  9FFC 00000046            417      SUB.L #70, SP *:PMB(--, --, f1)
-000003C4                           418  
-000003C4                           419  * ----COPY:COPY(1, --, t69)----
-000003C4  2A7C FFFFFFF6            420      MOVE.L #-10, A5
-000003CA  DBCE                     421      ADD.L A6, A5
-000003CC  3ABC 0001                422      MOVE.W #1, (A5)
-000003D0                           423  * ----NEGATE:NEG(--, --, t69)----
-000003D0  2A7C FFFFFFF6            424      MOVE.L #-10, A5
-000003D6  DBCE                     425      ADD.L A6, A5
-000003D8  4455                     426      NEG.W (A5)
-000003DA                           427  
-000003DA                           428  * ----COMPARE EQ:IFEQ(t68, 48, e42)----
-000003DA  2A7C 00000000            429      MOVE.L #0, A5
-000003E0  DBCE                     430      ADD.L A6, A5
-000003E2  3215                     431      MOVE.W (A5), D1
-000003E4  343C 0030                432      MOVE.W #48, D2
-000003E8  B441                     433      CMP.W D1, D2
-000003EA  6700 0014                434      BEQ.W e42
-000003EE                           435  
-000003EE                           436  * ----COPY:COPY(0, --, t72)----
-000003EE  2A7C FFFFFFF2            437      MOVE.L #-14, A5
-000003F4  DBCE                     438      ADD.L A6, A5
-000003F6  3ABC 0000                439      MOVE.W #0, (A5)
-000003FA                           440  
-000003FA  4EF9 0000040C            441      JMP e43 * ----GOTO:GOTO(--, --, e43)----
-00000400                           442  
-00000400                           443  e42: *e42: SKIP
-00000400                           444  * ----COPY:COPY(-1, --, t72)----
-00000400  2A7C FFFFFFF2            445      MOVE.L #-14, A5
-00000406  DBCE                     446      ADD.L A6, A5
-00000408  3ABC FFFF                447      MOVE.W #-1, (A5)
-0000040C                           448  
-0000040C                           449  e43: *e43: SKIP
-0000040C                           450  * ----COMPARE EQ:IFEQ(t72, 0, e44)----
-0000040C  2A7C FFFFFFF2            451      MOVE.L #-14, A5
-00000412  DBCE                     452      ADD.L A6, A5
-00000414  3215                     453      MOVE.W (A5), D1
-00000416  343C 0000                454      MOVE.W #0, D2
-0000041A  B441                     455      CMP.W D1, D2
-0000041C  6700 0014                456      BEQ.W e44
-00000420                           457  
-00000420                           458  * ----COPY:COPY(0, --, t69)----
-00000420  2A7C FFFFFFF6            459      MOVE.L #-10, A5
-00000426  DBCE                     460      ADD.L A6, A5
-00000428  3ABC 0000                461      MOVE.W #0, (A5)
-0000042C  4EF9 00000744            462      JMP e45 * ----GOTO:GOTO(--, --, e45)----
-00000432                           463  
-00000432                           464  e44: *e44: SKIP
-00000432                           465  * ----COMPARE EQ:IFEQ(t68, 49, e46)----
-00000432  2A7C 00000000            466      MOVE.L #0, A5
-00000438  DBCE                     467      ADD.L A6, A5
-0000043A  3215                     468      MOVE.W (A5), D1
-0000043C  343C 0031                469      MOVE.W #49, D2
-00000440  B441                     470      CMP.W D1, D2
-00000442  6700 0014                471      BEQ.W e46
-00000446                           472  
-00000446                           473  * ----COPY:COPY(0, --, t78)----
-00000446  2A7C FFFFFFEC            474      MOVE.L #-20, A5
-0000044C  DBCE                     475      ADD.L A6, A5
-0000044E  3ABC 0000                476      MOVE.W #0, (A5)
-00000452                           477  
-00000452  4EF9 00000464            478      JMP e47 * ----GOTO:GOTO(--, --, e47)----
-00000458                           479  
-00000458                           480  e46: *e46: SKIP
-00000458                           481  * ----COPY:COPY(-1, --, t78)----
-00000458  2A7C FFFFFFEC            482      MOVE.L #-20, A5
-0000045E  DBCE                     483      ADD.L A6, A5
-00000460  3ABC FFFF                484      MOVE.W #-1, (A5)
-00000464                           485  
-00000464                           486  e47: *e47: SKIP
-00000464                           487  * ----COMPARE EQ:IFEQ(t78, 0, e48)----
-00000464  2A7C FFFFFFEC            488      MOVE.L #-20, A5
-0000046A  DBCE                     489      ADD.L A6, A5
-0000046C  3215                     490      MOVE.W (A5), D1
-0000046E  343C 0000                491      MOVE.W #0, D2
-00000472  B441                     492      CMP.W D1, D2
-00000474  6700 0014                493      BEQ.W e48
-00000478                           494  
-00000478                           495  * ----COPY:COPY(1, --, t69)----
-00000478  2A7C FFFFFFF6            496      MOVE.L #-10, A5
-0000047E  DBCE                     497      ADD.L A6, A5
-00000480  3ABC 0001                498      MOVE.W #1, (A5)
-00000484  4EF9 00000744            499      JMP e49 * ----GOTO:GOTO(--, --, e49)----
-0000048A                           500  
-0000048A                           501  e48: *e48: SKIP
-0000048A                           502  * ----COMPARE EQ:IFEQ(t68, 50, e50)----
-0000048A  2A7C 00000000            503      MOVE.L #0, A5
-00000490  DBCE                     504      ADD.L A6, A5
-00000492  3215                     505      MOVE.W (A5), D1
-00000494  343C 0032                506      MOVE.W #50, D2
-00000498  B441                     507      CMP.W D1, D2
-0000049A  6700 0014                508      BEQ.W e50
-0000049E                           509  
-0000049E                           510  * ----COPY:COPY(0, --, t84)----
-0000049E  2A7C FFFFFFE6            511      MOVE.L #-26, A5
-000004A4  DBCE                     512      ADD.L A6, A5
-000004A6  3ABC 0000                513      MOVE.W #0, (A5)
-000004AA                           514  
-000004AA  4EF9 000004BC            515      JMP e51 * ----GOTO:GOTO(--, --, e51)----
-000004B0                           516  
-000004B0                           517  e50: *e50: SKIP
-000004B0                           518  * ----COPY:COPY(-1, --, t84)----
-000004B0  2A7C FFFFFFE6            519      MOVE.L #-26, A5
-000004B6  DBCE                     520      ADD.L A6, A5
-000004B8  3ABC FFFF                521      MOVE.W #-1, (A5)
-000004BC                           522  
-000004BC                           523  e51: *e51: SKIP
-000004BC                           524  * ----COMPARE EQ:IFEQ(t84, 0, e52)----
-000004BC  2A7C FFFFFFE6            525      MOVE.L #-26, A5
-000004C2  DBCE                     526      ADD.L A6, A5
-000004C4  3215                     527      MOVE.W (A5), D1
-000004C6  343C 0000                528      MOVE.W #0, D2
-000004CA  B441                     529      CMP.W D1, D2
-000004CC  6700 0014                530      BEQ.W e52
-000004D0                           531  
-000004D0                           532  * ----COPY:COPY(2, --, t69)----
-000004D0  2A7C FFFFFFF6            533      MOVE.L #-10, A5
-000004D6  DBCE                     534      ADD.L A6, A5
-000004D8  3ABC 0002                535      MOVE.W #2, (A5)
-000004DC  4EF9 00000744            536      JMP e53 * ----GOTO:GOTO(--, --, e53)----
-000004E2                           537  
-000004E2                           538  e52: *e52: SKIP
-000004E2                           539  * ----COMPARE EQ:IFEQ(t68, 51, e54)----
-000004E2  2A7C 00000000            540      MOVE.L #0, A5
-000004E8  DBCE                     541      ADD.L A6, A5
-000004EA  3215                     542      MOVE.W (A5), D1
-000004EC  343C 0033                543      MOVE.W #51, D2
-000004F0  B441                     544      CMP.W D1, D2
-000004F2  6700 0014                545      BEQ.W e54
-000004F6                           546  
-000004F6                           547  * ----COPY:COPY(0, --, t90)----
-000004F6  2A7C FFFFFFE0            548      MOVE.L #-32, A5
-000004FC  DBCE                     549      ADD.L A6, A5
-000004FE  3ABC 0000                550      MOVE.W #0, (A5)
-00000502                           551  
-00000502  4EF9 00000514            552      JMP e55 * ----GOTO:GOTO(--, --, e55)----
-00000508                           553  
-00000508                           554  e54: *e54: SKIP
-00000508                           555  * ----COPY:COPY(-1, --, t90)----
-00000508  2A7C FFFFFFE0            556      MOVE.L #-32, A5
-0000050E  DBCE                     557      ADD.L A6, A5
-00000510  3ABC FFFF                558      MOVE.W #-1, (A5)
-00000514                           559  
-00000514                           560  e55: *e55: SKIP
-00000514                           561  * ----COMPARE EQ:IFEQ(t90, 0, e56)----
-00000514  2A7C FFFFFFE0            562      MOVE.L #-32, A5
-0000051A  DBCE                     563      ADD.L A6, A5
-0000051C  3215                     564      MOVE.W (A5), D1
-0000051E  343C 0000                565      MOVE.W #0, D2
-00000522  B441                     566      CMP.W D1, D2
-00000524  6700 0014                567      BEQ.W e56
-00000528                           568  
-00000528                           569  * ----COPY:COPY(3, --, t69)----
-00000528  2A7C FFFFFFF6            570      MOVE.L #-10, A5
-0000052E  DBCE                     571      ADD.L A6, A5
-00000530  3ABC 0003                572      MOVE.W #3, (A5)
-00000534  4EF9 00000744            573      JMP e57 * ----GOTO:GOTO(--, --, e57)----
-0000053A                           574  
-0000053A                           575  e56: *e56: SKIP
-0000053A                           576  * ----COMPARE EQ:IFEQ(t68, 52, e58)----
-0000053A  2A7C 00000000            577      MOVE.L #0, A5
-00000540  DBCE                     578      ADD.L A6, A5
-00000542  3215                     579      MOVE.W (A5), D1
-00000544  343C 0034                580      MOVE.W #52, D2
-00000548  B441                     581      CMP.W D1, D2
-0000054A  6700 0014                582      BEQ.W e58
-0000054E                           583  
-0000054E                           584  * ----COPY:COPY(0, --, t96)----
-0000054E  2A7C FFFFFFDA            585      MOVE.L #-38, A5
-00000554  DBCE                     586      ADD.L A6, A5
-00000556  3ABC 0000                587      MOVE.W #0, (A5)
-0000055A                           588  
-0000055A  4EF9 0000056C            589      JMP e59 * ----GOTO:GOTO(--, --, e59)----
-00000560                           590  
-00000560                           591  e58: *e58: SKIP
-00000560                           592  * ----COPY:COPY(-1, --, t96)----
-00000560  2A7C FFFFFFDA            593      MOVE.L #-38, A5
-00000566  DBCE                     594      ADD.L A6, A5
-00000568  3ABC FFFF                595      MOVE.W #-1, (A5)
-0000056C                           596  
-0000056C                           597  e59: *e59: SKIP
-0000056C                           598  * ----COMPARE EQ:IFEQ(t96, 0, e60)----
-0000056C  2A7C FFFFFFDA            599      MOVE.L #-38, A5
-00000572  DBCE                     600      ADD.L A6, A5
-00000574  3215                     601      MOVE.W (A5), D1
-00000576  343C 0000                602      MOVE.W #0, D2
-0000057A  B441                     603      CMP.W D1, D2
-0000057C  6700 0014                604      BEQ.W e60
-00000580                           605  
-00000580                           606  * ----COPY:COPY(4, --, t69)----
-00000580  2A7C FFFFFFF6            607      MOVE.L #-10, A5
-00000586  DBCE                     608      ADD.L A6, A5
-00000588  3ABC 0004                609      MOVE.W #4, (A5)
-0000058C  4EF9 00000744            610      JMP e61 * ----GOTO:GOTO(--, --, e61)----
-00000592                           611  
-00000592                           612  e60: *e60: SKIP
-00000592                           613  * ----COMPARE EQ:IFEQ(t68, 53, e62)----
-00000592  2A7C 00000000            614      MOVE.L #0, A5
-00000598  DBCE                     615      ADD.L A6, A5
-0000059A  3215                     616      MOVE.W (A5), D1
-0000059C  343C 0035                617      MOVE.W #53, D2
-000005A0  B441                     618      CMP.W D1, D2
-000005A2  6700 0014                619      BEQ.W e62
-000005A6                           620  
-000005A6                           621  * ----COPY:COPY(0, --, t102)----
-000005A6  2A7C FFFFFFD4            622      MOVE.L #-44, A5
-000005AC  DBCE                     623      ADD.L A6, A5
-000005AE  3ABC 0000                624      MOVE.W #0, (A5)
-000005B2                           625  
-000005B2  4EF9 000005C4            626      JMP e63 * ----GOTO:GOTO(--, --, e63)----
-000005B8                           627  
-000005B8                           628  e62: *e62: SKIP
-000005B8                           629  * ----COPY:COPY(-1, --, t102)----
-000005B8  2A7C FFFFFFD4            630      MOVE.L #-44, A5
-000005BE  DBCE                     631      ADD.L A6, A5
-000005C0  3ABC FFFF                632      MOVE.W #-1, (A5)
-000005C4                           633  
-000005C4                           634  e63: *e63: SKIP
-000005C4                           635  * ----COMPARE EQ:IFEQ(t102, 0, e64)----
-000005C4  2A7C FFFFFFD4            636      MOVE.L #-44, A5
-000005CA  DBCE                     637      ADD.L A6, A5
-000005CC  3215                     638      MOVE.W (A5), D1
-000005CE  343C 0000                639      MOVE.W #0, D2
-000005D2  B441                     640      CMP.W D1, D2
-000005D4  6700 0014                641      BEQ.W e64
-000005D8                           642  
-000005D8                           643  * ----COPY:COPY(5, --, t69)----
-000005D8  2A7C FFFFFFF6            644      MOVE.L #-10, A5
-000005DE  DBCE                     645      ADD.L A6, A5
-000005E0  3ABC 0005                646      MOVE.W #5, (A5)
-000005E4  4EF9 00000744            647      JMP e65 * ----GOTO:GOTO(--, --, e65)----
-000005EA                           648  
-000005EA                           649  e64: *e64: SKIP
-000005EA                           650  * ----COMPARE EQ:IFEQ(t68, 54, e66)----
-000005EA  2A7C 00000000            651      MOVE.L #0, A5
-000005F0  DBCE                     652      ADD.L A6, A5
-000005F2  3215                     653      MOVE.W (A5), D1
-000005F4  343C 0036                654      MOVE.W #54, D2
-000005F8  B441                     655      CMP.W D1, D2
-000005FA  6700 0014                656      BEQ.W e66
-000005FE                           657  
-000005FE                           658  * ----COPY:COPY(0, --, t108)----
-000005FE  2A7C FFFFFFCE            659      MOVE.L #-50, A5
-00000604  DBCE                     660      ADD.L A6, A5
-00000606  3ABC 0000                661      MOVE.W #0, (A5)
-0000060A                           662  
-0000060A  4EF9 0000061C            663      JMP e67 * ----GOTO:GOTO(--, --, e67)----
-00000610                           664  
-00000610                           665  e66: *e66: SKIP
-00000610                           666  * ----COPY:COPY(-1, --, t108)----
-00000610  2A7C FFFFFFCE            667      MOVE.L #-50, A5
-00000616  DBCE                     668      ADD.L A6, A5
-00000618  3ABC FFFF                669      MOVE.W #-1, (A5)
-0000061C                           670  
-0000061C                           671  e67: *e67: SKIP
-0000061C                           672  * ----COMPARE EQ:IFEQ(t108, 0, e68)----
-0000061C  2A7C FFFFFFCE            673      MOVE.L #-50, A5
+00000000                             1      ORG     $0
+00000000                             2  START:
+00000000  123C 0000                  3      MOVE.B #0, D1
+00000004  303C 000C                  4      MOVE.W #12, D0
+00000008  4E4F                       5      TRAP #15
+0000000A  2F4E FFF8                  6      MOVE.L A6, -8(A7)
+0000000E  2C4F                       7      MOVE.L A7, A6
+00000010  4EB9 000004FC              8      JSR main * ----FUNCTION CALL:CALL(--, --, main)----
+00000016                             9  
+00000016                            10  e1: *e1: SKIP
+00000016  9FFC 0000001A             11      SUB.L #26, SP *:PMB(--, --, f0)
+0000001C                            12  
+0000001C                            13  * ----COPY:COPY(32, --, t1)----
+0000001C  2A7C FFFFFFF6             14      MOVE.L #-10, A5
+00000022  DBCE                      15      ADD.L A6, A5
+00000024  3ABC 0020                 16      MOVE.W #32, (A5)
+00000028                            17  * ----COMPARE EQ:IFEQ(t0, 0, e2)----
+00000028  2A7C 00000000             18      MOVE.L #0, A5
+0000002E  DBCE                      19      ADD.L A6, A5
+00000030  3215                      20      MOVE.W (A5), D1
+00000032  343C 0000                 21      MOVE.W #0, D2
+00000036  B441                      22      CMP.W D1, D2
+00000038  6700 0014                 23      BEQ.W e2
+0000003C                            24  
+0000003C                            25  * ----COPY:COPY(0, --, t3)----
+0000003C  2A7C FFFFFFF4             26      MOVE.L #-12, A5
+00000042  DBCE                      27      ADD.L A6, A5
+00000044  3ABC 0000                 28      MOVE.W #0, (A5)
+00000048                            29  
+00000048  4EF9 0000005A             30      JMP e3 * ----GOTO:GOTO(--, --, e3)----
+0000004E                            31  
+0000004E                            32  e2: *e2: SKIP
+0000004E                            33  * ----COPY:COPY(-1, --, t3)----
+0000004E  2A7C FFFFFFF4             34      MOVE.L #-12, A5
+00000054  DBCE                      35      ADD.L A6, A5
+00000056  3ABC FFFF                 36      MOVE.W #-1, (A5)
+0000005A                            37  
+0000005A                            38  e3: *e3: SKIP
+0000005A                            39  * ----COMPARE EQ:IFEQ(t3, 0, e4)----
+0000005A  2A7C FFFFFFF4             40      MOVE.L #-12, A5
+00000060  DBCE                      41      ADD.L A6, A5
+00000062  3215                      42      MOVE.W (A5), D1
+00000064  343C 0000                 43      MOVE.W #0, D2
+00000068  B441                      44      CMP.W D1, D2
+0000006A  6700 0014                 45      BEQ.W e4
+0000006E                            46  
+0000006E                            47  * ----COPY:COPY(48, --, t1)----
+0000006E  2A7C FFFFFFF6             48      MOVE.L #-10, A5
+00000074  DBCE                      49      ADD.L A6, A5
+00000076  3ABC 0030                 50      MOVE.W #48, (A5)
+0000007A  4EF9 00000392             51      JMP e5 * ----GOTO:GOTO(--, --, e5)----
+00000080                            52  
+00000080                            53  e4: *e4: SKIP
+00000080                            54  * ----COMPARE EQ:IFEQ(t0, 1, e6)----
+00000080  2A7C 00000000             55      MOVE.L #0, A5
+00000086  DBCE                      56      ADD.L A6, A5
+00000088  3215                      57      MOVE.W (A5), D1
+0000008A  343C 0001                 58      MOVE.W #1, D2
+0000008E  B441                      59      CMP.W D1, D2
+00000090  6700 0014                 60      BEQ.W e6
+00000094                            61  
+00000094                            62  * ----COPY:COPY(0, --, t7)----
+00000094  2A7C FFFFFFF2             63      MOVE.L #-14, A5
+0000009A  DBCE                      64      ADD.L A6, A5
+0000009C  3ABC 0000                 65      MOVE.W #0, (A5)
+000000A0                            66  
+000000A0  4EF9 000000B2             67      JMP e7 * ----GOTO:GOTO(--, --, e7)----
+000000A6                            68  
+000000A6                            69  e6: *e6: SKIP
+000000A6                            70  * ----COPY:COPY(-1, --, t7)----
+000000A6  2A7C FFFFFFF2             71      MOVE.L #-14, A5
+000000AC  DBCE                      72      ADD.L A6, A5
+000000AE  3ABC FFFF                 73      MOVE.W #-1, (A5)
+000000B2                            74  
+000000B2                            75  e7: *e7: SKIP
+000000B2                            76  * ----COMPARE EQ:IFEQ(t7, 0, e8)----
+000000B2  2A7C FFFFFFF2             77      MOVE.L #-14, A5
+000000B8  DBCE                      78      ADD.L A6, A5
+000000BA  3215                      79      MOVE.W (A5), D1
+000000BC  343C 0000                 80      MOVE.W #0, D2
+000000C0  B441                      81      CMP.W D1, D2
+000000C2  6700 0014                 82      BEQ.W e8
+000000C6                            83  
+000000C6                            84  * ----COPY:COPY(49, --, t1)----
+000000C6  2A7C FFFFFFF6             85      MOVE.L #-10, A5
+000000CC  DBCE                      86      ADD.L A6, A5
+000000CE  3ABC 0031                 87      MOVE.W #49, (A5)
+000000D2  4EF9 00000392             88      JMP e9 * ----GOTO:GOTO(--, --, e9)----
+000000D8                            89  
+000000D8                            90  e8: *e8: SKIP
+000000D8                            91  * ----COMPARE EQ:IFEQ(t0, 2, e10)----
+000000D8  2A7C 00000000             92      MOVE.L #0, A5
+000000DE  DBCE                      93      ADD.L A6, A5
+000000E0  3215                      94      MOVE.W (A5), D1
+000000E2  343C 0002                 95      MOVE.W #2, D2
+000000E6  B441                      96      CMP.W D1, D2
+000000E8  6700 0014                 97      BEQ.W e10
+000000EC                            98  
+000000EC                            99  * ----COPY:COPY(0, --, t11)----
+000000EC  2A7C FFFFFFF0            100      MOVE.L #-16, A5
+000000F2  DBCE                     101      ADD.L A6, A5
+000000F4  3ABC 0000                102      MOVE.W #0, (A5)
+000000F8                           103  
+000000F8  4EF9 0000010A            104      JMP e11 * ----GOTO:GOTO(--, --, e11)----
+000000FE                           105  
+000000FE                           106  e10: *e10: SKIP
+000000FE                           107  * ----COPY:COPY(-1, --, t11)----
+000000FE  2A7C FFFFFFF0            108      MOVE.L #-16, A5
+00000104  DBCE                     109      ADD.L A6, A5
+00000106  3ABC FFFF                110      MOVE.W #-1, (A5)
+0000010A                           111  
+0000010A                           112  e11: *e11: SKIP
+0000010A                           113  * ----COMPARE EQ:IFEQ(t11, 0, e12)----
+0000010A  2A7C FFFFFFF0            114      MOVE.L #-16, A5
+00000110  DBCE                     115      ADD.L A6, A5
+00000112  3215                     116      MOVE.W (A5), D1
+00000114  343C 0000                117      MOVE.W #0, D2
+00000118  B441                     118      CMP.W D1, D2
+0000011A  6700 0014                119      BEQ.W e12
+0000011E                           120  
+0000011E                           121  * ----COPY:COPY(50, --, t1)----
+0000011E  2A7C FFFFFFF6            122      MOVE.L #-10, A5
+00000124  DBCE                     123      ADD.L A6, A5
+00000126  3ABC 0032                124      MOVE.W #50, (A5)
+0000012A  4EF9 00000392            125      JMP e13 * ----GOTO:GOTO(--, --, e13)----
+00000130                           126  
+00000130                           127  e12: *e12: SKIP
+00000130                           128  * ----COMPARE EQ:IFEQ(t0, 3, e14)----
+00000130  2A7C 00000000            129      MOVE.L #0, A5
+00000136  DBCE                     130      ADD.L A6, A5
+00000138  3215                     131      MOVE.W (A5), D1
+0000013A  343C 0003                132      MOVE.W #3, D2
+0000013E  B441                     133      CMP.W D1, D2
+00000140  6700 0014                134      BEQ.W e14
+00000144                           135  
+00000144                           136  * ----COPY:COPY(0, --, t15)----
+00000144  2A7C FFFFFFEE            137      MOVE.L #-18, A5
+0000014A  DBCE                     138      ADD.L A6, A5
+0000014C  3ABC 0000                139      MOVE.W #0, (A5)
+00000150                           140  
+00000150  4EF9 00000162            141      JMP e15 * ----GOTO:GOTO(--, --, e15)----
+00000156                           142  
+00000156                           143  e14: *e14: SKIP
+00000156                           144  * ----COPY:COPY(-1, --, t15)----
+00000156  2A7C FFFFFFEE            145      MOVE.L #-18, A5
+0000015C  DBCE                     146      ADD.L A6, A5
+0000015E  3ABC FFFF                147      MOVE.W #-1, (A5)
+00000162                           148  
+00000162                           149  e15: *e15: SKIP
+00000162                           150  * ----COMPARE EQ:IFEQ(t15, 0, e16)----
+00000162  2A7C FFFFFFEE            151      MOVE.L #-18, A5
+00000168  DBCE                     152      ADD.L A6, A5
+0000016A  3215                     153      MOVE.W (A5), D1
+0000016C  343C 0000                154      MOVE.W #0, D2
+00000170  B441                     155      CMP.W D1, D2
+00000172  6700 0014                156      BEQ.W e16
+00000176                           157  
+00000176                           158  * ----COPY:COPY(51, --, t1)----
+00000176  2A7C FFFFFFF6            159      MOVE.L #-10, A5
+0000017C  DBCE                     160      ADD.L A6, A5
+0000017E  3ABC 0033                161      MOVE.W #51, (A5)
+00000182  4EF9 00000392            162      JMP e17 * ----GOTO:GOTO(--, --, e17)----
+00000188                           163  
+00000188                           164  e16: *e16: SKIP
+00000188                           165  * ----COMPARE EQ:IFEQ(t0, 4, e18)----
+00000188  2A7C 00000000            166      MOVE.L #0, A5
+0000018E  DBCE                     167      ADD.L A6, A5
+00000190  3215                     168      MOVE.W (A5), D1
+00000192  343C 0004                169      MOVE.W #4, D2
+00000196  B441                     170      CMP.W D1, D2
+00000198  6700 0014                171      BEQ.W e18
+0000019C                           172  
+0000019C                           173  * ----COPY:COPY(0, --, t19)----
+0000019C  2A7C FFFFFFEC            174      MOVE.L #-20, A5
+000001A2  DBCE                     175      ADD.L A6, A5
+000001A4  3ABC 0000                176      MOVE.W #0, (A5)
+000001A8                           177  
+000001A8  4EF9 000001BA            178      JMP e19 * ----GOTO:GOTO(--, --, e19)----
+000001AE                           179  
+000001AE                           180  e18: *e18: SKIP
+000001AE                           181  * ----COPY:COPY(-1, --, t19)----
+000001AE  2A7C FFFFFFEC            182      MOVE.L #-20, A5
+000001B4  DBCE                     183      ADD.L A6, A5
+000001B6  3ABC FFFF                184      MOVE.W #-1, (A5)
+000001BA                           185  
+000001BA                           186  e19: *e19: SKIP
+000001BA                           187  * ----COMPARE EQ:IFEQ(t19, 0, e20)----
+000001BA  2A7C FFFFFFEC            188      MOVE.L #-20, A5
+000001C0  DBCE                     189      ADD.L A6, A5
+000001C2  3215                     190      MOVE.W (A5), D1
+000001C4  343C 0000                191      MOVE.W #0, D2
+000001C8  B441                     192      CMP.W D1, D2
+000001CA  6700 0014                193      BEQ.W e20
+000001CE                           194  
+000001CE                           195  * ----COPY:COPY(52, --, t1)----
+000001CE  2A7C FFFFFFF6            196      MOVE.L #-10, A5
+000001D4  DBCE                     197      ADD.L A6, A5
+000001D6  3ABC 0034                198      MOVE.W #52, (A5)
+000001DA  4EF9 00000392            199      JMP e21 * ----GOTO:GOTO(--, --, e21)----
+000001E0                           200  
+000001E0                           201  e20: *e20: SKIP
+000001E0                           202  * ----COMPARE EQ:IFEQ(t0, 5, e22)----
+000001E0  2A7C 00000000            203      MOVE.L #0, A5
+000001E6  DBCE                     204      ADD.L A6, A5
+000001E8  3215                     205      MOVE.W (A5), D1
+000001EA  343C 0005                206      MOVE.W #5, D2
+000001EE  B441                     207      CMP.W D1, D2
+000001F0  6700 0014                208      BEQ.W e22
+000001F4                           209  
+000001F4                           210  * ----COPY:COPY(0, --, t23)----
+000001F4  2A7C FFFFFFEA            211      MOVE.L #-22, A5
+000001FA  DBCE                     212      ADD.L A6, A5
+000001FC  3ABC 0000                213      MOVE.W #0, (A5)
+00000200                           214  
+00000200  4EF9 00000212            215      JMP e23 * ----GOTO:GOTO(--, --, e23)----
+00000206                           216  
+00000206                           217  e22: *e22: SKIP
+00000206                           218  * ----COPY:COPY(-1, --, t23)----
+00000206  2A7C FFFFFFEA            219      MOVE.L #-22, A5
+0000020C  DBCE                     220      ADD.L A6, A5
+0000020E  3ABC FFFF                221      MOVE.W #-1, (A5)
+00000212                           222  
+00000212                           223  e23: *e23: SKIP
+00000212                           224  * ----COMPARE EQ:IFEQ(t23, 0, e24)----
+00000212  2A7C FFFFFFEA            225      MOVE.L #-22, A5
+00000218  DBCE                     226      ADD.L A6, A5
+0000021A  3215                     227      MOVE.W (A5), D1
+0000021C  343C 0000                228      MOVE.W #0, D2
+00000220  B441                     229      CMP.W D1, D2
+00000222  6700 0014                230      BEQ.W e24
+00000226                           231  
+00000226                           232  * ----COPY:COPY(53, --, t1)----
+00000226  2A7C FFFFFFF6            233      MOVE.L #-10, A5
+0000022C  DBCE                     234      ADD.L A6, A5
+0000022E  3ABC 0035                235      MOVE.W #53, (A5)
+00000232  4EF9 00000392            236      JMP e25 * ----GOTO:GOTO(--, --, e25)----
+00000238                           237  
+00000238                           238  e24: *e24: SKIP
+00000238                           239  * ----COMPARE EQ:IFEQ(t0, 6, e26)----
+00000238  2A7C 00000000            240      MOVE.L #0, A5
+0000023E  DBCE                     241      ADD.L A6, A5
+00000240  3215                     242      MOVE.W (A5), D1
+00000242  343C 0006                243      MOVE.W #6, D2
+00000246  B441                     244      CMP.W D1, D2
+00000248  6700 0014                245      BEQ.W e26
+0000024C                           246  
+0000024C                           247  * ----COPY:COPY(0, --, t27)----
+0000024C  2A7C FFFFFFE8            248      MOVE.L #-24, A5
+00000252  DBCE                     249      ADD.L A6, A5
+00000254  3ABC 0000                250      MOVE.W #0, (A5)
+00000258                           251  
+00000258  4EF9 0000026A            252      JMP e27 * ----GOTO:GOTO(--, --, e27)----
+0000025E                           253  
+0000025E                           254  e26: *e26: SKIP
+0000025E                           255  * ----COPY:COPY(-1, --, t27)----
+0000025E  2A7C FFFFFFE8            256      MOVE.L #-24, A5
+00000264  DBCE                     257      ADD.L A6, A5
+00000266  3ABC FFFF                258      MOVE.W #-1, (A5)
+0000026A                           259  
+0000026A                           260  e27: *e27: SKIP
+0000026A                           261  * ----COMPARE EQ:IFEQ(t27, 0, e28)----
+0000026A  2A7C FFFFFFE8            262      MOVE.L #-24, A5
+00000270  DBCE                     263      ADD.L A6, A5
+00000272  3215                     264      MOVE.W (A5), D1
+00000274  343C 0000                265      MOVE.W #0, D2
+00000278  B441                     266      CMP.W D1, D2
+0000027A  6700 0014                267      BEQ.W e28
+0000027E                           268  
+0000027E                           269  * ----COPY:COPY(54, --, t1)----
+0000027E  2A7C FFFFFFF6            270      MOVE.L #-10, A5
+00000284  DBCE                     271      ADD.L A6, A5
+00000286  3ABC 0036                272      MOVE.W #54, (A5)
+0000028A  4EF9 00000392            273      JMP e29 * ----GOTO:GOTO(--, --, e29)----
+00000290                           274  
+00000290                           275  e28: *e28: SKIP
+00000290                           276  * ----COMPARE EQ:IFEQ(t0, 7, e30)----
+00000290  2A7C 00000000            277      MOVE.L #0, A5
+00000296  DBCE                     278      ADD.L A6, A5
+00000298  3215                     279      MOVE.W (A5), D1
+0000029A  343C 0007                280      MOVE.W #7, D2
+0000029E  B441                     281      CMP.W D1, D2
+000002A0  6700 0014                282      BEQ.W e30
+000002A4                           283  
+000002A4                           284  * ----COPY:COPY(0, --, t31)----
+000002A4  2A7C FFFFFFE6            285      MOVE.L #-26, A5
+000002AA  DBCE                     286      ADD.L A6, A5
+000002AC  3ABC 0000                287      MOVE.W #0, (A5)
+000002B0                           288  
+000002B0  4EF9 000002C2            289      JMP e31 * ----GOTO:GOTO(--, --, e31)----
+000002B6                           290  
+000002B6                           291  e30: *e30: SKIP
+000002B6                           292  * ----COPY:COPY(-1, --, t31)----
+000002B6  2A7C FFFFFFE6            293      MOVE.L #-26, A5
+000002BC  DBCE                     294      ADD.L A6, A5
+000002BE  3ABC FFFF                295      MOVE.W #-1, (A5)
+000002C2                           296  
+000002C2                           297  e31: *e31: SKIP
+000002C2                           298  * ----COMPARE EQ:IFEQ(t31, 0, e32)----
+000002C2  2A7C FFFFFFE6            299      MOVE.L #-26, A5
+000002C8  DBCE                     300      ADD.L A6, A5
+000002CA  3215                     301      MOVE.W (A5), D1
+000002CC  343C 0000                302      MOVE.W #0, D2
+000002D0  B441                     303      CMP.W D1, D2
+000002D2  6700 0014                304      BEQ.W e32
+000002D6                           305  
+000002D6                           306  * ----COPY:COPY(55, --, t1)----
+000002D6  2A7C FFFFFFF6            307      MOVE.L #-10, A5
+000002DC  DBCE                     308      ADD.L A6, A5
+000002DE  3ABC 0037                309      MOVE.W #55, (A5)
+000002E2  4EF9 00000392            310      JMP e33 * ----GOTO:GOTO(--, --, e33)----
+000002E8                           311  
+000002E8                           312  e32: *e32: SKIP
+000002E8                           313  * ----COMPARE EQ:IFEQ(t0, 8, e34)----
+000002E8  2A7C 00000000            314      MOVE.L #0, A5
+000002EE  DBCE                     315      ADD.L A6, A5
+000002F0  3215                     316      MOVE.W (A5), D1
+000002F2  343C 0008                317      MOVE.W #8, D2
+000002F6  B441                     318      CMP.W D1, D2
+000002F8  6700 0014                319      BEQ.W e34
+000002FC                           320  
+000002FC                           321  * ----COPY:COPY(0, --, t35)----
+000002FC  2A7C FFFFFFE4            322      MOVE.L #-28, A5
+00000302  DBCE                     323      ADD.L A6, A5
+00000304  3ABC 0000                324      MOVE.W #0, (A5)
+00000308                           325  
+00000308  4EF9 0000031A            326      JMP e35 * ----GOTO:GOTO(--, --, e35)----
+0000030E                           327  
+0000030E                           328  e34: *e34: SKIP
+0000030E                           329  * ----COPY:COPY(-1, --, t35)----
+0000030E  2A7C FFFFFFE4            330      MOVE.L #-28, A5
+00000314  DBCE                     331      ADD.L A6, A5
+00000316  3ABC FFFF                332      MOVE.W #-1, (A5)
+0000031A                           333  
+0000031A                           334  e35: *e35: SKIP
+0000031A                           335  * ----COMPARE EQ:IFEQ(t35, 0, e36)----
+0000031A  2A7C FFFFFFE4            336      MOVE.L #-28, A5
+00000320  DBCE                     337      ADD.L A6, A5
+00000322  3215                     338      MOVE.W (A5), D1
+00000324  343C 0000                339      MOVE.W #0, D2
+00000328  B441                     340      CMP.W D1, D2
+0000032A  6700 0014                341      BEQ.W e36
+0000032E                           342  
+0000032E                           343  * ----COPY:COPY(56, --, t1)----
+0000032E  2A7C FFFFFFF6            344      MOVE.L #-10, A5
+00000334  DBCE                     345      ADD.L A6, A5
+00000336  3ABC 0038                346      MOVE.W #56, (A5)
+0000033A  4EF9 00000392            347      JMP e37 * ----GOTO:GOTO(--, --, e37)----
+00000340                           348  
+00000340                           349  e36: *e36: SKIP
+00000340                           350  * ----COMPARE EQ:IFEQ(t0, 9, e38)----
+00000340  2A7C 00000000            351      MOVE.L #0, A5
+00000346  DBCE                     352      ADD.L A6, A5
+00000348  3215                     353      MOVE.W (A5), D1
+0000034A  343C 0009                354      MOVE.W #9, D2
+0000034E  B441                     355      CMP.W D1, D2
+00000350  6700 0014                356      BEQ.W e38
+00000354                           357  
+00000354                           358  * ----COPY:COPY(0, --, t39)----
+00000354  2A7C FFFFFFE2            359      MOVE.L #-30, A5
+0000035A  DBCE                     360      ADD.L A6, A5
+0000035C  3ABC 0000                361      MOVE.W #0, (A5)
+00000360                           362  
+00000360  4EF9 00000372            363      JMP e39 * ----GOTO:GOTO(--, --, e39)----
+00000366                           364  
+00000366                           365  e38: *e38: SKIP
+00000366                           366  * ----COPY:COPY(-1, --, t39)----
+00000366  2A7C FFFFFFE2            367      MOVE.L #-30, A5
+0000036C  DBCE                     368      ADD.L A6, A5
+0000036E  3ABC FFFF                369      MOVE.W #-1, (A5)
+00000372                           370  
+00000372                           371  e39: *e39: SKIP
+00000372                           372  * ----COMPARE EQ:IFEQ(t39, 0, e40)----
+00000372  2A7C FFFFFFE2            373      MOVE.L #-30, A5
+00000378  DBCE                     374      ADD.L A6, A5
+0000037A  3215                     375      MOVE.W (A5), D1
+0000037C  343C 0000                376      MOVE.W #0, D2
+00000380  B441                     377      CMP.W D1, D2
+00000382  6700 000E                378      BEQ.W e40
+00000386                           379  
+00000386                           380  * ----COPY:COPY(57, --, t1)----
+00000386  2A7C FFFFFFF6            381      MOVE.L #-10, A5
+0000038C  DBCE                     382      ADD.L A6, A5
+0000038E  3ABC 0039                383      MOVE.W #57, (A5)
+00000392                           384  e40: *e40: SKIP
+00000392                           385  e37: *e37: SKIP
+00000392                           386  e33: *e33: SKIP
+00000392                           387  e29: *e29: SKIP
+00000392                           388  e25: *e25: SKIP
+00000392                           389  e21: *e21: SKIP
+00000392                           390  e17: *e17: SKIP
+00000392                           391  e13: *e13: SKIP
+00000392                           392  e9: *e9: SKIP
+00000392                           393  e5: *e5: SKIP
+00000392                           394  * ----RETURN:RTN(--, --, t1)----
+00000392  2A7C FFFFFFF6            395      MOVE.L #-10, A5
+00000398  DBCE                     396      ADD.L A6, A5
+0000039A  3815                     397      MOVE.W (A5), D4 * ----RETURN VALUE----
+0000039C  2E4E                     398      MOVE.L A6, A7
+0000039E  598F                     399      SUB.L #4, A7
+000003A0  2C6E FFF8                400      MOVE.L -8(A6), A6
+000003A4  4E75                     401      RTS
+000003A6                           402  
+000003A6                           403  e41: *e41: SKIP
+000003A6  9FFC 00000010            404      SUB.L #16, SP *:PMB(--, --, f1)
+000003AC                           405  
+000003AC                           406  * ----COMPARE EQ:IFEQ(t43, 1, e42)----
+000003AC  2A7C 00000000            407      MOVE.L #0, A5
+000003B2  DBCE                     408      ADD.L A6, A5
+000003B4  3215                     409      MOVE.W (A5), D1
+000003B6  343C 0001                410      MOVE.W #1, D2
+000003BA  B441                     411      CMP.W D1, D2
+000003BC  6700 0014                412      BEQ.W e42
+000003C0                           413  
+000003C0                           414  * ----COPY:COPY(0, --, t46)----
+000003C0  2A7C FFFFFFF6            415      MOVE.L #-10, A5
+000003C6  DBCE                     416      ADD.L A6, A5
+000003C8  3ABC 0000                417      MOVE.W #0, (A5)
+000003CC                           418  
+000003CC  4EF9 000003DE            419      JMP e43 * ----GOTO:GOTO(--, --, e43)----
+000003D2                           420  
+000003D2                           421  e42: *e42: SKIP
+000003D2                           422  * ----COPY:COPY(-1, --, t46)----
+000003D2  2A7C FFFFFFF6            423      MOVE.L #-10, A5
+000003D8  DBCE                     424      ADD.L A6, A5
+000003DA  3ABC FFFF                425      MOVE.W #-1, (A5)
+000003DE                           426  
+000003DE                           427  e43: *e43: SKIP
+000003DE                           428  * ----COMPARE EQ:IFEQ(t46, 0, e44)----
+000003DE  2A7C FFFFFFF6            429      MOVE.L #-10, A5
+000003E4  DBCE                     430      ADD.L A6, A5
+000003E6  3215                     431      MOVE.W (A5), D1
+000003E8  343C 0000                432      MOVE.W #0, D2
+000003EC  B441                     433      CMP.W D1, D2
+000003EE  6700 003A                434      BEQ.W e44
+000003F2                           435  
+000003F2                           436  * ----SUM:SUM(t44, t45, t49)----
+000003F2  4281                     437      CLR.L D1
+000003F4  4282                     438      CLR.L D2
+000003F6  2A7C 00000002            439      MOVE.L #2, A5
+000003FC  DBCE                     440      ADD.L A6, A5
+000003FE  3215                     441      MOVE.W (A5), D1
+00000400  2A7C 00000004            442      MOVE.L #4, A5
+00000406  DBCE                     443      ADD.L A6, A5
+00000408  3415                     444      MOVE.W (A5), D2
+0000040A  D441                     445      ADD.W D1, D2
+0000040C  2A7C FFFFFFF4            446      MOVE.L #-12, A5
+00000412  DBCE                     447      ADD.L A6, A5
+00000414  3A82                     448      MOVE.W D2, (A5)
+00000416                           449  
+00000416                           450  * ----RETURN:RTN(--, --, t49)----
+00000416  2A7C FFFFFFF4            451      MOVE.L #-12, A5
+0000041C  DBCE                     452      ADD.L A6, A5
+0000041E  3815                     453      MOVE.W (A5), D4 * ----RETURN VALUE----
+00000420  2E4E                     454      MOVE.L A6, A7
+00000422  598F                     455      SUB.L #4, A7
+00000424  2C6E FFF8                456      MOVE.L -8(A6), A6
+00000428  4E75                     457      RTS
+0000042A                           458  
+0000042A                           459  e44: *e44: SKIP
+0000042A                           460  * ----COPY:COPY(t45, --, t50)----
+0000042A  2A7C FFFFFFF2            461      MOVE.L #-14, A5
+00000430  DBCE                     462      ADD.L A6, A5
+00000432  287C 00000004            463      MOVE.L #4, A4
+00000438  D9CE                     464      ADD.L A6, A4
+0000043A  3A94                     465      MOVE.W (A4), (A5)
+0000043C                           466  
+0000043C                           467  * ----COPY:COPY(t44, --, t45)----
+0000043C  2A7C 00000004            468      MOVE.L #4, A5
+00000442  DBCE                     469      ADD.L A6, A5
+00000444  287C 00000002            470      MOVE.L #2, A4
+0000044A  D9CE                     471      ADD.L A6, A4
+0000044C  3A94                     472      MOVE.W (A4), (A5)
+0000044E                           473  
+0000044E                           474  * ----SUM:SUM(t44, t50, t51)----
+0000044E  4281                     475      CLR.L D1
+00000450  4282                     476      CLR.L D2
+00000452  2A7C 00000002            477      MOVE.L #2, A5
+00000458  DBCE                     478      ADD.L A6, A5
+0000045A  3215                     479      MOVE.W (A5), D1
+0000045C  2A7C FFFFFFF2            480      MOVE.L #-14, A5
+00000462  DBCE                     481      ADD.L A6, A5
+00000464  3415                     482      MOVE.W (A5), D2
+00000466  D441                     483      ADD.W D1, D2
+00000468  2A7C FFFFFFF0            484      MOVE.L #-16, A5
+0000046E  DBCE                     485      ADD.L A6, A5
+00000470  3A82                     486      MOVE.W D2, (A5)
+00000472                           487  
+00000472                           488  * ----COPY:COPY(t51, --, t44)----
+00000472  2A7C 00000002            489      MOVE.L #2, A5
+00000478  DBCE                     490      ADD.L A6, A5
+0000047A  287C FFFFFFF0            491      MOVE.L #-16, A4
+00000480  D9CE                     492      ADD.L A6, A4
+00000482  3A94                     493      MOVE.W (A4), (A5)
+00000484                           494  
+00000484                           495  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t45)----
+00000484  7C00                     496      MOVE.L #0, D6
+00000486  2A7C 00000004            497      MOVE.L #4, A5
+0000048C  DBCE                     498      ADD.L A6, A5
+0000048E                           499  MOVE_LOOP_t45_2:
+0000048E  3F1D                     500      MOVE.W (A5)+, -(A7)
+00000490  51CE FFFC                501      DBF D6, MOVE_LOOP_t45_2
+00000494                           502  
+00000494                           503  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t44)----
+00000494  7C00                     504      MOVE.L #0, D6
+00000496  2A7C 00000002            505      MOVE.L #2, A5
+0000049C  DBCE                     506      ADD.L A6, A5
+0000049E                           507  MOVE_LOOP_t44_2:
+0000049E  3F1D                     508      MOVE.W (A5)+, -(A7)
+000004A0  51CE FFFC                509      DBF D6, MOVE_LOOP_t44_2
+000004A4                           510  
+000004A4                           511  * ----SUB:SUB(1, t43, t53)----
+000004A4  4281                     512      CLR.L D1
+000004A6  4282                     513      CLR.L D2
+000004A8  323C 0001                514      MOVE.W #1, D1
+000004AC  2A7C 00000000            515      MOVE.L #0, A5
+000004B2  DBCE                     516      ADD.L A6, A5
+000004B4  3415                     517      MOVE.W (A5), D2
+000004B6  9441                     518      SUB.W D1, D2
+000004B8  2A7C FFFFFFEC            519      MOVE.L #-20, A5
+000004BE  DBCE                     520      ADD.L A6, A5
+000004C0  3A82                     521      MOVE.W D2, (A5)
+000004C2                           522  
+000004C2                           523  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t53)----
+000004C2  7C00                     524      MOVE.L #0, D6
+000004C4  2A7C FFFFFFEC            525      MOVE.L #-20, A5
+000004CA  DBCE                     526      ADD.L A6, A5
+000004CC                           527  MOVE_LOOP_t53_2:
+000004CC  3F1D                     528      MOVE.W (A5)+, -(A7)
+000004CE  51CE FFFC                529      DBF D6, MOVE_LOOP_t53_2
+000004D2                           530  
+000004D2  2F4E FFF8                531      MOVE.L A6, -8(A7)
+000004D6  2C4F                     532      MOVE.L A7, A6
+000004D8  4EB8 03A6                533      JSR e41 * ----FUNCTION CALL:CALL(--, --, f1)----
+000004DC                           534  
+000004DC                           535  * ----POP:POP(f1, --, t52)----
+000004DC  5C8F                     536      ADD.L #6, A7
+000004DE  2A7C FFFFFFEE            537      MOVE.L #-18, A5
+000004E4  DBCE                     538      ADD.L A6, A5
+000004E6  3A84                     539      MOVE.W D4, (A5)
+000004E8                           540  
+000004E8                           541  * ----RETURN:RTN(--, --, t52)----
+000004E8  2A7C FFFFFFEE            542      MOVE.L #-18, A5
+000004EE  DBCE                     543      ADD.L A6, A5
+000004F0  3815                     544      MOVE.W (A5), D4 * ----RETURN VALUE----
+000004F2  2E4E                     545      MOVE.L A6, A7
+000004F4  598F                     546      SUB.L #4, A7
+000004F6  2C6E FFF8                547      MOVE.L -8(A6), A6
+000004FA  4E75                     548      RTS
+000004FC                           549  
+000004FC                           550  main: *main: SKIP
+000004FC  9FFC 00000224            551      SUB.L #548, SP *:PMB(--, --, f2)
+00000502                           552  
+00000502                           553  * ----COPY:COPY(0, --, t58)----
+00000502  2A7C FFFFFDF2            554      MOVE.L #-526, A5
+00000508  DBCE                     555      ADD.L A6, A5
+0000050A  3ABC 0000                556      MOVE.W #0, (A5)
+0000050E                           557  
+0000050E                           558  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t58)----
+0000050E  7C00                     559      MOVE.L #0, D6
+00000510  2A7C FFFFFDF2            560      MOVE.L #-526, A5
+00000516  DBCE                     561      ADD.L A6, A5
+00000518                           562  MOVE_LOOP_t58_2:
+00000518  3F1D                     563      MOVE.W (A5)+, -(A7)
+0000051A  51CE FFFC                564      DBF D6, MOVE_LOOP_t58_2
+0000051E                           565  
+0000051E                           566  * ----COPY:COPY(1, --, t59)----
+0000051E  2A7C FFFFFDF0            567      MOVE.L #-528, A5
+00000524  DBCE                     568      ADD.L A6, A5
+00000526  3ABC 0001                569      MOVE.W #1, (A5)
+0000052A                           570  
+0000052A                           571  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t59)----
+0000052A  7C00                     572      MOVE.L #0, D6
+0000052C  2A7C FFFFFDF0            573      MOVE.L #-528, A5
+00000532  DBCE                     574      ADD.L A6, A5
+00000534                           575  MOVE_LOOP_t59_2:
+00000534  3F1D                     576      MOVE.W (A5)+, -(A7)
+00000536  51CE FFFC                577      DBF D6, MOVE_LOOP_t59_2
+0000053A                           578  
+0000053A                           579  * ----COPY:COPY(10, --, t60)----
+0000053A  2A7C FFFFFDEE            580      MOVE.L #-530, A5
+00000540  DBCE                     581      ADD.L A6, A5
+00000542  3ABC 000A                582      MOVE.W #10, (A5)
+00000546                           583  
+00000546                           584  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t60)----
+00000546  7C00                     585      MOVE.L #0, D6
+00000548  2A7C FFFFFDEE            586      MOVE.L #-530, A5
+0000054E  DBCE                     587      ADD.L A6, A5
+00000550                           588  MOVE_LOOP_t60_2:
+00000550  3F1D                     589      MOVE.W (A5)+, -(A7)
+00000552  51CE FFFC                590      DBF D6, MOVE_LOOP_t60_2
+00000556                           591  
+00000556  2F4E FFF8                592      MOVE.L A6, -8(A7)
+0000055A  2C4F                     593      MOVE.L A7, A6
+0000055C  4EB8 03A6                594      JSR e41 * ----FUNCTION CALL:CALL(--, --, f1)----
+00000560                           595  
+00000560                           596  * ----POP:POP(f1, --, t57)----
+00000560  5C8F                     597      ADD.L #6, A7
+00000562  2A7C FFFFFDF4            598      MOVE.L #-524, A5
+00000568  DBCE                     599      ADD.L A6, A5
+0000056A  3A84                     600      MOVE.W D4, (A5)
+0000056C                           601  
+0000056C                           602  * ----COPY:COPY(t57, --, t56)----
+0000056C  2A7C FFFFFDF6            603      MOVE.L #-522, A5
+00000572  DBCE                     604      ADD.L A6, A5
+00000574  287C FFFFFDF4            605      MOVE.L #-524, A4
+0000057A  D9CE                     606      ADD.L A6, A4
+0000057C  3A94                     607      MOVE.W (A4), (A5)
+0000057E                           608  
+0000057E                           609  * ----COPY:COPY(10000, --, t61)----
+0000057E  2A7C FFFFFDEC            610      MOVE.L #-532, A5
+00000584  DBCE                     611      ADD.L A6, A5
+00000586  3ABC 2710                612      MOVE.W #10000, (A5)
+0000058A                           613  * ----COPY:COPY(0, --, t63)----
+0000058A  2A7C FFFFFDEA            614      MOVE.L #-534, A5
+00000590  DBCE                     615      ADD.L A6, A5
+00000592  3ABC 0000                616      MOVE.W #0, (A5)
+00000596                           617  e46: *e46: SKIP
+00000596                           618  * ----COMPARE GT:IFGT(t61, 0, e47)----
+00000596  2A7C FFFFFDEC            619      MOVE.L #-532, A5
+0000059C  DBCE                     620      ADD.L A6, A5
+0000059E  3215                     621      MOVE.W (A5), D1
+000005A0  343C 0000                622      MOVE.W #0, D2
+000005A4  B242                     623      CMP.W D2, D1
+000005A6  6E00 0014                624      BGT.W e47
+000005AA                           625  
+000005AA                           626  * ----COPY:COPY(0, --, t65)----
+000005AA  2A7C FFFFFDE8            627      MOVE.L #-536, A5
+000005B0  DBCE                     628      ADD.L A6, A5
+000005B2  3ABC 0000                629      MOVE.W #0, (A5)
+000005B6                           630  
+000005B6  4EF9 000005C8            631      JMP e48 * ----GOTO:GOTO(--, --, e48)----
+000005BC                           632  
+000005BC                           633  e47: *e47: SKIP
+000005BC                           634  * ----COPY:COPY(-1, --, t65)----
+000005BC  2A7C FFFFFDE8            635      MOVE.L #-536, A5
+000005C2  DBCE                     636      ADD.L A6, A5
+000005C4  3ABC FFFF                637      MOVE.W #-1, (A5)
+000005C8                           638  
+000005C8                           639  e48: *e48: SKIP
+000005C8                           640  * ----COMPARE EQ:IFEQ(t65, 0, e49)----
+000005C8  2A7C FFFFFDE8            641      MOVE.L #-536, A5
+000005CE  DBCE                     642      ADD.L A6, A5
+000005D0  3215                     643      MOVE.W (A5), D1
+000005D2  343C 0000                644      MOVE.W #0, D2
+000005D6  B441                     645      CMP.W D1, D2
+000005D8  6700 0180                646      BEQ.W e49
+000005DC                           647  
+000005DC                           648  * ----DIV:DIV(t61, t56, t69)----
+000005DC  2A7C FFFFFDF6            649      MOVE.L #-522, A5
+000005E2  DBCE                     650      ADD.L A6, A5
+000005E4  3415                     651      MOVE.W (A5), D2
+000005E6  2A7C FFFFFDEC            652      MOVE.L #-532, A5
+000005EC  DBCE                     653      ADD.L A6, A5
+000005EE  3215                     654      MOVE.W (A5), D1
+000005F0  85C1                     655      DIVS.W D1, D2
+000005F2  2A7C FFFFFDE4            656      MOVE.L #-540, A5
+000005F8  DBCE                     657      ADD.L A6, A5
+000005FA  3A82                     658      MOVE.W D2, (A5)
+000005FC                           659  
+000005FC                           660  * ----COPY:COPY(t69, --, t68)----
+000005FC  2A7C FFFFFDE6            661      MOVE.L #-538, A5
+00000602  DBCE                     662      ADD.L A6, A5
+00000604  287C FFFFFDE4            663      MOVE.L #-540, A4
+0000060A  D9CE                     664      ADD.L A6, A4
+0000060C  3A94                     665      MOVE.W (A4), (A5)
+0000060E                           666  
+0000060E                           667  * ----MUL:PROD(t61, t68, t71)----
+0000060E  4281                     668      CLR.L D1
+00000610  4282                     669      CLR.L D2
+00000612  2A7C FFFFFDEC            670      MOVE.L #-532, A5
+00000618  DBCE                     671      ADD.L A6, A5
+0000061A  3215                     672      MOVE.W (A5), D1
+0000061C  2A7C FFFFFDE6            673      MOVE.L #-538, A5
 00000622  DBCE                     674      ADD.L A6, A5
-00000624  3215                     675      MOVE.W (A5), D1
-00000626  343C 0000                676      MOVE.W #0, D2
-0000062A  B441                     677      CMP.W D1, D2
-0000062C  6700 0014                678      BEQ.W e68
-00000630                           679  
-00000630                           680  * ----COPY:COPY(6, --, t69)----
-00000630  2A7C FFFFFFF6            681      MOVE.L #-10, A5
-00000636  DBCE                     682      ADD.L A6, A5
-00000638  3ABC 0006                683      MOVE.W #6, (A5)
-0000063C  4EF9 00000744            684      JMP e69 * ----GOTO:GOTO(--, --, e69)----
-00000642                           685  
-00000642                           686  e68: *e68: SKIP
-00000642                           687  * ----COMPARE EQ:IFEQ(t68, 55, e70)----
-00000642  2A7C 00000000            688      MOVE.L #0, A5
-00000648  DBCE                     689      ADD.L A6, A5
-0000064A  3215                     690      MOVE.W (A5), D1
-0000064C  343C 0037                691      MOVE.W #55, D2
-00000650  B441                     692      CMP.W D1, D2
-00000652  6700 0014                693      BEQ.W e70
-00000656                           694  
-00000656                           695  * ----COPY:COPY(0, --, t114)----
-00000656  2A7C FFFFFFC8            696      MOVE.L #-56, A5
-0000065C  DBCE                     697      ADD.L A6, A5
-0000065E  3ABC 0000                698      MOVE.W #0, (A5)
-00000662                           699  
-00000662  4EF9 00000674            700      JMP e71 * ----GOTO:GOTO(--, --, e71)----
+00000624  3415                     675      MOVE.W (A5), D2
+00000626  C5C1                     676      MULS.W D1, D2
+00000628  2A7C FFFFFDE0            677      MOVE.L #-544, A5
+0000062E  DBCE                     678      ADD.L A6, A5
+00000630  3A82                     679      MOVE.W D2, (A5)
+00000632                           680  
+00000632                           681  * ----COPY:COPY(t71, --, t70)----
+00000632  2A7C FFFFFDE2            682      MOVE.L #-542, A5
+00000638  DBCE                     683      ADD.L A6, A5
+0000063A  287C FFFFFDE0            684      MOVE.L #-544, A4
+00000640  D9CE                     685      ADD.L A6, A4
+00000642  3A94                     686      MOVE.W (A4), (A5)
+00000644                           687  
+00000644                           688  * ----SUB:SUB(t70, t56, t72)----
+00000644  4281                     689      CLR.L D1
+00000646  4282                     690      CLR.L D2
+00000648  2A7C FFFFFDE2            691      MOVE.L #-542, A5
+0000064E  DBCE                     692      ADD.L A6, A5
+00000650  3215                     693      MOVE.W (A5), D1
+00000652  2A7C FFFFFDF6            694      MOVE.L #-522, A5
+00000658  DBCE                     695      ADD.L A6, A5
+0000065A  3415                     696      MOVE.W (A5), D2
+0000065C  9441                     697      SUB.W D1, D2
+0000065E  2A7C FFFFFDDE            698      MOVE.L #-546, A5
+00000664  DBCE                     699      ADD.L A6, A5
+00000666  3A82                     700      MOVE.W D2, (A5)
 00000668                           701  
-00000668                           702  e70: *e70: SKIP
-00000668                           703  * ----COPY:COPY(-1, --, t114)----
-00000668  2A7C FFFFFFC8            704      MOVE.L #-56, A5
-0000066E  DBCE                     705      ADD.L A6, A5
-00000670  3ABC FFFF                706      MOVE.W #-1, (A5)
-00000674                           707  
-00000674                           708  e71: *e71: SKIP
-00000674                           709  * ----COMPARE EQ:IFEQ(t114, 0, e72)----
-00000674  2A7C FFFFFFC8            710      MOVE.L #-56, A5
-0000067A  DBCE                     711      ADD.L A6, A5
-0000067C  3215                     712      MOVE.W (A5), D1
-0000067E  343C 0000                713      MOVE.W #0, D2
-00000682  B441                     714      CMP.W D1, D2
-00000684  6700 0014                715      BEQ.W e72
-00000688                           716  
-00000688                           717  * ----COPY:COPY(7, --, t69)----
-00000688  2A7C FFFFFFF6            718      MOVE.L #-10, A5
-0000068E  DBCE                     719      ADD.L A6, A5
-00000690  3ABC 0007                720      MOVE.W #7, (A5)
-00000694  4EF9 00000744            721      JMP e73 * ----GOTO:GOTO(--, --, e73)----
-0000069A                           722  
-0000069A                           723  e72: *e72: SKIP
-0000069A                           724  * ----COMPARE EQ:IFEQ(t68, 56, e74)----
-0000069A  2A7C 00000000            725      MOVE.L #0, A5
-000006A0  DBCE                     726      ADD.L A6, A5
-000006A2  3215                     727      MOVE.W (A5), D1
-000006A4  343C 0038                728      MOVE.W #56, D2
-000006A8  B441                     729      CMP.W D1, D2
-000006AA  6700 0014                730      BEQ.W e74
-000006AE                           731  
-000006AE                           732  * ----COPY:COPY(0, --, t120)----
-000006AE  2A7C FFFFFFC2            733      MOVE.L #-62, A5
-000006B4  DBCE                     734      ADD.L A6, A5
-000006B6  3ABC 0000                735      MOVE.W #0, (A5)
-000006BA                           736  
-000006BA  4EF9 000006CC            737      JMP e75 * ----GOTO:GOTO(--, --, e75)----
-000006C0                           738  
-000006C0                           739  e74: *e74: SKIP
-000006C0                           740  * ----COPY:COPY(-1, --, t120)----
-000006C0  2A7C FFFFFFC2            741      MOVE.L #-62, A5
-000006C6  DBCE                     742      ADD.L A6, A5
-000006C8  3ABC FFFF                743      MOVE.W #-1, (A5)
-000006CC                           744  
-000006CC                           745  e75: *e75: SKIP
-000006CC                           746  * ----COMPARE EQ:IFEQ(t120, 0, e76)----
-000006CC  2A7C FFFFFFC2            747      MOVE.L #-62, A5
-000006D2  DBCE                     748      ADD.L A6, A5
-000006D4  3215                     749      MOVE.W (A5), D1
-000006D6  343C 0000                750      MOVE.W #0, D2
-000006DA  B441                     751      CMP.W D1, D2
-000006DC  6700 0014                752      BEQ.W e76
-000006E0                           753  
-000006E0                           754  * ----COPY:COPY(8, --, t69)----
-000006E0  2A7C FFFFFFF6            755      MOVE.L #-10, A5
-000006E6  DBCE                     756      ADD.L A6, A5
-000006E8  3ABC 0008                757      MOVE.W #8, (A5)
-000006EC  4EF9 00000744            758      JMP e77 * ----GOTO:GOTO(--, --, e77)----
-000006F2                           759  
-000006F2                           760  e76: *e76: SKIP
-000006F2                           761  * ----COMPARE EQ:IFEQ(t68, 57, e78)----
-000006F2  2A7C 00000000            762      MOVE.L #0, A5
-000006F8  DBCE                     763      ADD.L A6, A5
-000006FA  3215                     764      MOVE.W (A5), D1
-000006FC  343C 0039                765      MOVE.W #57, D2
-00000700  B441                     766      CMP.W D1, D2
-00000702  6700 0014                767      BEQ.W e78
-00000706                           768  
-00000706                           769  * ----COPY:COPY(0, --, t126)----
-00000706  2A7C FFFFFFBC            770      MOVE.L #-68, A5
-0000070C  DBCE                     771      ADD.L A6, A5
-0000070E  3ABC 0000                772      MOVE.W #0, (A5)
-00000712                           773  
-00000712  4EF9 00000724            774      JMP e79 * ----GOTO:GOTO(--, --, e79)----
-00000718                           775  
-00000718                           776  e78: *e78: SKIP
-00000718                           777  * ----COPY:COPY(-1, --, t126)----
-00000718  2A7C FFFFFFBC            778      MOVE.L #-68, A5
-0000071E  DBCE                     779      ADD.L A6, A5
-00000720  3ABC FFFF                780      MOVE.W #-1, (A5)
-00000724                           781  
-00000724                           782  e79: *e79: SKIP
-00000724                           783  * ----COMPARE EQ:IFEQ(t126, 0, e80)----
-00000724  2A7C FFFFFFBC            784      MOVE.L #-68, A5
-0000072A  DBCE                     785      ADD.L A6, A5
-0000072C  3215                     786      MOVE.W (A5), D1
-0000072E  343C 0000                787      MOVE.W #0, D2
-00000732  B441                     788      CMP.W D1, D2
-00000734  6700 000E                789      BEQ.W e80
-00000738                           790  
-00000738                           791  * ----COPY:COPY(9, --, t69)----
-00000738  2A7C FFFFFFF6            792      MOVE.L #-10, A5
-0000073E  DBCE                     793      ADD.L A6, A5
-00000740  3ABC 0009                794      MOVE.W #9, (A5)
-00000744                           795  e80: *e80: SKIP
-00000744                           796  e77: *e77: SKIP
-00000744                           797  e73: *e73: SKIP
-00000744                           798  e69: *e69: SKIP
-00000744                           799  e65: *e65: SKIP
-00000744                           800  e61: *e61: SKIP
-00000744                           801  e57: *e57: SKIP
-00000744                           802  e53: *e53: SKIP
-00000744                           803  e49: *e49: SKIP
-00000744                           804  e45: *e45: SKIP
-00000744                           805  * ----RETURN:RTN(--, --, t69)----
-00000744  2A7C FFFFFFF6            806      MOVE.L #-10, A5
-0000074A  DBCE                     807      ADD.L A6, A5
-0000074C  3815                     808      MOVE.W (A5), D4 * ----RETURN VALUE----
-0000074E  2E4E                     809      MOVE.L A6, A7
-00000750  598F                     810      SUB.L #4, A7
-00000752  2C6E FFF8                811      MOVE.L -8(A6), A6
-00000756  4E75                     812      RTS
-00000758                           813  
-00000758                           814  main: *main: SKIP
-00000758  9FFC 0000028A            815      SUB.L #650, SP *:PMB(--, --, f2)
-0000075E                           816  
-0000075E                           817  * ----SET VALUE FROM INDIRECTION:IND_ASS(80, 0, t133)----
-0000075E  2A7C FFFFFDF8            818      MOVE.L #-520, A5
-00000764  DBCE                     819      ADD.L A6, A5
-00000766  323C 0000                820      MOVE.W #0, D1
-0000076A  C2FC 0002                821      MULU.W #2, D1
-0000076E  48C1                     822      EXT.L D1
-00000770  DBC1                     823      ADD.L D1, A5
-00000772  3ABC 0050                824      MOVE.W #80, (A5)
-00000776                           825  * ----SET VALUE FROM INDIRECTION:IND_ASS(117, 1, t133)----
-00000776  2A7C FFFFFDF8            826      MOVE.L #-520, A5
-0000077C  DBCE                     827      ADD.L A6, A5
-0000077E  323C 0001                828      MOVE.W #1, D1
-00000782  C2FC 0002                829      MULU.W #2, D1
-00000786  48C1                     830      EXT.L D1
-00000788  DBC1                     831      ADD.L D1, A5
-0000078A  3ABC 0075                832      MOVE.W #117, (A5)
-0000078E                           833  * ----SET VALUE FROM INDIRECTION:IND_ASS(116, 2, t133)----
-0000078E  2A7C FFFFFDF8            834      MOVE.L #-520, A5
-00000794  DBCE                     835      ADD.L A6, A5
-00000796  323C 0002                836      MOVE.W #2, D1
-0000079A  C2FC 0002                837      MULU.W #2, D1
-0000079E  48C1                     838      EXT.L D1
-000007A0  DBC1                     839      ADD.L D1, A5
-000007A2  3ABC 0074                840      MOVE.W #116, (A5)
-000007A6                           841  * ----SET VALUE FROM INDIRECTION:IND_ASS(32, 3, t133)----
-000007A6  2A7C FFFFFDF8            842      MOVE.L #-520, A5
-000007AC  DBCE                     843      ADD.L A6, A5
-000007AE  323C 0003                844      MOVE.W #3, D1
-000007B2  C2FC 0002                845      MULU.W #2, D1
-000007B6  48C1                     846      EXT.L D1
-000007B8  DBC1                     847      ADD.L D1, A5
-000007BA  3ABC 0020                848      MOVE.W #32, (A5)
-000007BE                           849  * ----SET VALUE FROM INDIRECTION:IND_ASS(97, 4, t133)----
-000007BE  2A7C FFFFFDF8            850      MOVE.L #-520, A5
-000007C4  DBCE                     851      ADD.L A6, A5
-000007C6  323C 0004                852      MOVE.W #4, D1
-000007CA  C2FC 0002                853      MULU.W #2, D1
-000007CE  48C1                     854      EXT.L D1
-000007D0  DBC1                     855      ADD.L D1, A5
-000007D2  3ABC 0061                856      MOVE.W #97, (A5)
-000007D6                           857  * ----SET VALUE FROM INDIRECTION:IND_ASS(32, 5, t133)----
-000007D6  2A7C FFFFFDF8            858      MOVE.L #-520, A5
-000007DC  DBCE                     859      ADD.L A6, A5
-000007DE  323C 0005                860      MOVE.W #5, D1
-000007E2  C2FC 0002                861      MULU.W #2, D1
-000007E6  48C1                     862      EXT.L D1
-000007E8  DBC1                     863      ADD.L D1, A5
-000007EA  3ABC 0020                864      MOVE.W #32, (A5)
-000007EE                           865  * ----SET VALUE FROM INDIRECTION:IND_ASS(100, 6, t133)----
-000007EE  2A7C FFFFFDF8            866      MOVE.L #-520, A5
-000007F4  DBCE                     867      ADD.L A6, A5
-000007F6  323C 0006                868      MOVE.W #6, D1
-000007FA  C2FC 0002                869      MULU.W #2, D1
-000007FE  48C1                     870      EXT.L D1
-00000800  DBC1                     871      ADD.L D1, A5
-00000802  3ABC 0064                872      MOVE.W #100, (A5)
-00000806                           873  * ----SET VALUE FROM INDIRECTION:IND_ASS(101, 7, t133)----
-00000806  2A7C FFFFFDF8            874      MOVE.L #-520, A5
-0000080C  DBCE                     875      ADD.L A6, A5
-0000080E  323C 0007                876      MOVE.W #7, D1
-00000812  C2FC 0002                877      MULU.W #2, D1
-00000816  48C1                     878      EXT.L D1
-00000818  DBC1                     879      ADD.L D1, A5
-0000081A  3ABC 0065                880      MOVE.W #101, (A5)
-0000081E                           881  * ----SET VALUE FROM INDIRECTION:IND_ASS(99, 8, t133)----
-0000081E  2A7C FFFFFDF8            882      MOVE.L #-520, A5
-00000824  DBCE                     883      ADD.L A6, A5
-00000826  323C 0008                884      MOVE.W #8, D1
-0000082A  C2FC 0002                885      MULU.W #2, D1
-0000082E  48C1                     886      EXT.L D1
-00000830  DBC1                     887      ADD.L D1, A5
-00000832  3ABC 0063                888      MOVE.W #99, (A5)
-00000836                           889  * ----SET VALUE FROM INDIRECTION:IND_ASS(105, 9, t133)----
-00000836  2A7C FFFFFDF8            890      MOVE.L #-520, A5
-0000083C  DBCE                     891      ADD.L A6, A5
-0000083E  323C 0009                892      MOVE.W #9, D1
-00000842  C2FC 0002                893      MULU.W #2, D1
-00000846  48C1                     894      EXT.L D1
-00000848  DBC1                     895      ADD.L D1, A5
-0000084A  3ABC 0069                896      MOVE.W #105, (A5)
-0000084E                           897  * ----SET VALUE FROM INDIRECTION:IND_ASS(109, 10, t133)----
-0000084E  2A7C FFFFFDF8            898      MOVE.L #-520, A5
-00000854  DBCE                     899      ADD.L A6, A5
-00000856  323C 000A                900      MOVE.W #10, D1
-0000085A  C2FC 0002                901      MULU.W #2, D1
-0000085E  48C1                     902      EXT.L D1
-00000860  DBC1                     903      ADD.L D1, A5
-00000862  3ABC 006D                904      MOVE.W #109, (A5)
-00000866                           905  * ----SET VALUE FROM INDIRECTION:IND_ASS(97, 11, t133)----
-00000866  2A7C FFFFFDF8            906      MOVE.L #-520, A5
-0000086C  DBCE                     907      ADD.L A6, A5
-0000086E  323C 000B                908      MOVE.W #11, D1
-00000872  C2FC 0002                909      MULU.W #2, D1
-00000876  48C1                     910      EXT.L D1
-00000878  DBC1                     911      ADD.L D1, A5
-0000087A  3ABC 0061                912      MOVE.W #97, (A5)
-0000087E                           913  * ----SET VALUE FROM INDIRECTION:IND_ASS(108, 12, t133)----
-0000087E  2A7C FFFFFDF8            914      MOVE.L #-520, A5
-00000884  DBCE                     915      ADD.L A6, A5
-00000886  323C 000C                916      MOVE.W #12, D1
-0000088A  C2FC 0002                917      MULU.W #2, D1
-0000088E  48C1                     918      EXT.L D1
-00000890  DBC1                     919      ADD.L D1, A5
-00000892  3ABC 006C                920      MOVE.W #108, (A5)
-00000896                           921  * ----SET VALUE FROM INDIRECTION:IND_ASS(58, 13, t133)----
-00000896  2A7C FFFFFDF8            922      MOVE.L #-520, A5
-0000089C  DBCE                     923      ADD.L A6, A5
-0000089E  323C 000D                924      MOVE.W #13, D1
-000008A2  C2FC 0002                925      MULU.W #2, D1
-000008A6  48C1                     926      EXT.L D1
-000008A8  DBC1                     927      ADD.L D1, A5
-000008AA  3ABC 003A                928      MOVE.W #58, (A5)
-000008AE                           929  * ----POS:POS(0, 0, --)----
-000008AE  1A3C 0000                930      MOVE.B #0, D5
-000008B2  E14D                     931      LSL.W #8, D5
-000008B4  1A3C 0000                932      MOVE.B #0, D5
-000008B8  3205                     933      MOVE.W D5, D1
-000008BA  303C 000B                934      MOVE.W #11, D0
-000008BE  4E4F                     935      TRAP #15
-000008C0                           936  * ----WRITE:WRITE(0, 13, t133)----
-000008C0  343C 0000                937      MOVE.W #0, D2
-000008C4  363C 000D                938      MOVE.W #13, D3
-000008C8  2A7C FFFFFDF8            939      MOVE.L #-520, A5
-000008CE  DBCE                     940      ADD.L A6, A5
-000008D0  9642                     941      SUB.W D2, D3
-000008D2  E34A                     942      LSL.W #1, D2
-000008D4  DAC2                     943      ADD.W D2, A5
-000008D6  303C 0006                944      MOVE.W #6, D0
-000008DA                           945  WRITE_LOOP_4:
-000008DA  321D                     946      MOVE.W (A5)+, D1
-000008DC  4E4F                     947      TRAP #15
-000008DE  51CB FFFA                948      DBF D3, WRITE_LOOP_4
-000008E2                           949  
-000008E2                           950  * ----READ:READ(--, --, t185)----
-000008E2  4241                     951      CLR.W D1
-000008E4  303C 0005                952      MOVE.W #5, D0
-000008E8  4E4F                     953      TRAP #15
-000008EA  2A7C FFFFFDD0            954      MOVE.L #-560, A5
-000008F0  DBCE                     955      ADD.L A6, A5
-000008F2  3A81                     956      MOVE.W D1, (A5)
-000008F4                           957  
-000008F4                           958  * ----COPY:COPY(t185, --, t1)----
-000008F4  4BF8 0004                959      LEA t1, A5
-000008F8  287C FFFFFDD0            960      MOVE.L #-560, A4
-000008FE  D9CE                     961      ADD.L A6, A4
-00000900  3A94                     962      MOVE.W (A4), (A5)
-00000902                           963  
-00000902                           964  * ----SET VALUE FROM INDIRECTION:IND_ASS(t1, 14, t133)----
-00000902  2A7C FFFFFDF8            965      MOVE.L #-520, A5
-00000908  DBCE                     966      ADD.L A6, A5
-0000090A  323C 000E                967      MOVE.W #14, D1
-0000090E  C2FC 0002                968      MULU.W #2, D1
-00000912  48C1                     969      EXT.L D1
-00000914  DBC1                     970      ADD.L D1, A5
-00000916  49F8 0004                971      LEA t1, A4
-0000091A  3A94                     972      MOVE.W (A4), (A5)
-0000091C                           973  
-0000091C                           974  * ----READ:READ(--, --, t189)----
-0000091C  4241                     975      CLR.W D1
-0000091E  303C 0005                976      MOVE.W #5, D0
-00000922  4E4F                     977      TRAP #15
-00000924  2A7C FFFFFDCA            978      MOVE.L #-566, A5
-0000092A  DBCE                     979      ADD.L A6, A5
-0000092C  3A81                     980      MOVE.W D1, (A5)
-0000092E                           981  
-0000092E                           982  * ----COPY:COPY(t189, --, t3)----
-0000092E  4BF8 000C                983      LEA t3, A5
-00000932  287C FFFFFDCA            984      MOVE.L #-566, A4
-00000938  D9CE                     985      ADD.L A6, A4
-0000093A  3A94                     986      MOVE.W (A4), (A5)
-0000093C                           987  
-0000093C                           988  * ----SET VALUE FROM INDIRECTION:IND_ASS(t3, 15, t133)----
-0000093C  2A7C FFFFFDF8            989      MOVE.L #-520, A5
-00000942  DBCE                     990      ADD.L A6, A5
-00000944  323C 000F                991      MOVE.W #15, D1
-00000948  C2FC 0002                992      MULU.W #2, D1
-0000094C  48C1                     993      EXT.L D1
-0000094E  DBC1                     994      ADD.L D1, A5
-00000950  49F8 000C                995      LEA t3, A4
-00000954  3A94                     996      MOVE.W (A4), (A5)
-00000956                           997  
-00000956                           998  * ----POS:POS(14, 0, --)----
-00000956  1A3C 000E                999      MOVE.B #14, D5
-0000095A  E14D                    1000      LSL.W #8, D5
-0000095C  1A3C 0000               1001      MOVE.B #0, D5
-00000960  3205                    1002      MOVE.W D5, D1
-00000962  303C 000B               1003      MOVE.W #11, D0
-00000966  4E4F                    1004      TRAP #15
-00000968                          1005  * ----WRITE:WRITE(14, 15, t133)----
-00000968  343C 000E               1006      MOVE.W #14, D2
-0000096C  363C 000F               1007      MOVE.W #15, D3
-00000970  2A7C FFFFFDF8           1008      MOVE.L #-520, A5
-00000976  DBCE                    1009      ADD.L A6, A5
-00000978  9642                    1010      SUB.W D2, D3
-0000097A  E34A                    1011      LSL.W #1, D2
-0000097C  DAC2                    1012      ADD.W D2, A5
-0000097E  303C 0006               1013      MOVE.W #6, D0
-00000982                          1014  WRITE_LOOP_5:
-00000982  321D                    1015      MOVE.W (A5)+, D1
-00000984  4E4F                    1016      TRAP #15
-00000986  51CB FFFA               1017      DBF D3, WRITE_LOOP_5
-0000098A                          1018  
-0000098A                          1019  * ----COPY GLOBAL VARIABLE ON THE STACK:PUT(--, --, t1)----
-0000098A  7C00                    1020      MOVE.L #0, D6
-0000098C  4BF8 0004               1021      LEA t1, A5
-00000990                          1022  MOVE_LOOP_t1_2:
-00000990  3F1D                    1023      MOVE.W (A5)+, -(A7)
-00000992  51CE FFFC               1024      DBF D6, MOVE_LOOP_t1_2
-00000996                          1025  
-00000996  2F4E FFF8               1026      MOVE.L A6, -8(A7)
-0000099A  2C4F                    1027      MOVE.L A7, A6
-0000099C  4EB8 03BE               1028      JSR e41 * ----FUNCTION CALL:CALL(--, --, f1)----
-000009A0                          1029  
-000009A0                          1030  * ----POP:POP(f1, --, t204)----
-000009A0  548F                    1031      ADD.L #2, A7
-000009A2  2A7C FFFFFDB8           1032      MOVE.L #-584, A5
-000009A8  DBCE                    1033      ADD.L A6, A5
-000009AA  3A84                    1034      MOVE.W D4, (A5)
-000009AC                          1035  
-000009AC                          1036  * ----MUL:PROD(10, t204, t201)----
-000009AC  4281                    1037      CLR.L D1
-000009AE  4282                    1038      CLR.L D2
-000009B0  323C 000A               1039      MOVE.W #10, D1
-000009B4  2A7C FFFFFDB8           1040      MOVE.L #-584, A5
-000009BA  DBCE                    1041      ADD.L A6, A5
-000009BC  3415                    1042      MOVE.W (A5), D2
-000009BE  C5C1                    1043      MULS.W D1, D2
-000009C0  2A7C FFFFFDBC           1044      MOVE.L #-580, A5
-000009C6  DBCE                    1045      ADD.L A6, A5
-000009C8  3A82                    1046      MOVE.W D2, (A5)
-000009CA                          1047  
-000009CA                          1048  * ----COPY GLOBAL VARIABLE ON THE STACK:PUT(--, --, t3)----
-000009CA  7C00                    1049      MOVE.L #0, D6
-000009CC  4BF8 000C               1050      LEA t3, A5
-000009D0                          1051  MOVE_LOOP_t3_2:
-000009D0  3F1D                    1052      MOVE.W (A5)+, -(A7)
-000009D2  51CE FFFC               1053      DBF D6, MOVE_LOOP_t3_2
-000009D6                          1054  
-000009D6  2F4E FFF8               1055      MOVE.L A6, -8(A7)
-000009DA  2C4F                    1056      MOVE.L A7, A6
-000009DC  4EB8 03BE               1057      JSR e41 * ----FUNCTION CALL:CALL(--, --, f1)----
-000009E0                          1058  
-000009E0                          1059  * ----POP:POP(f1, --, t206)----
-000009E0  548F                    1060      ADD.L #2, A7
-000009E2  2A7C FFFFFDB4           1061      MOVE.L #-588, A5
-000009E8  DBCE                    1062      ADD.L A6, A5
-000009EA  3A84                    1063      MOVE.W D4, (A5)
-000009EC                          1064  
-000009EC                          1065  * ----SUM:SUM(t201, t206, t200)----
-000009EC  4281                    1066      CLR.L D1
-000009EE  4282                    1067      CLR.L D2
-000009F0  2A7C FFFFFDBC           1068      MOVE.L #-580, A5
-000009F6  DBCE                    1069      ADD.L A6, A5
-000009F8  3215                    1070      MOVE.W (A5), D1
-000009FA  2A7C FFFFFDB4           1071      MOVE.L #-588, A5
-00000A00  DBCE                    1072      ADD.L A6, A5
-00000A02  3415                    1073      MOVE.W (A5), D2
-00000A04  D441                    1074      ADD.W D1, D2
-00000A06  2A7C FFFFFDBE           1075      MOVE.L #-578, A5
-00000A0C  DBCE                    1076      ADD.L A6, A5
-00000A0E  3A82                    1077      MOVE.W D2, (A5)
-00000A10                          1078  
-00000A10                          1079  * ----SET VALUE FROM INDIRECTION:IND_ASS(80, 0, t133)----
-00000A10  2A7C FFFFFDF8           1080      MOVE.L #-520, A5
-00000A16  DBCE                    1081      ADD.L A6, A5
-00000A18  323C 0000               1082      MOVE.W #0, D1
-00000A1C  C2FC 0002               1083      MULU.W #2, D1
-00000A20  48C1                    1084      EXT.L D1
-00000A22  DBC1                    1085      ADD.L D1, A5
-00000A24  3ABC 0050               1086      MOVE.W #80, (A5)
-00000A28                          1087  * ----SET VALUE FROM INDIRECTION:IND_ASS(117, 1, t133)----
-00000A28  2A7C FFFFFDF8           1088      MOVE.L #-520, A5
-00000A2E  DBCE                    1089      ADD.L A6, A5
-00000A30  323C 0001               1090      MOVE.W #1, D1
-00000A34  C2FC 0002               1091      MULU.W #2, D1
-00000A38  48C1                    1092      EXT.L D1
-00000A3A  DBC1                    1093      ADD.L D1, A5
-00000A3C  3ABC 0075               1094      MOVE.W #117, (A5)
-00000A40                          1095  * ----SET VALUE FROM INDIRECTION:IND_ASS(116, 2, t133)----
-00000A40  2A7C FFFFFDF8           1096      MOVE.L #-520, A5
-00000A46  DBCE                    1097      ADD.L A6, A5
-00000A48  323C 0002               1098      MOVE.W #2, D1
-00000A4C  C2FC 0002               1099      MULU.W #2, D1
-00000A50  48C1                    1100      EXT.L D1
-00000A52  DBC1                    1101      ADD.L D1, A5
-00000A54  3ABC 0074               1102      MOVE.W #116, (A5)
-00000A58                          1103  * ----SET VALUE FROM INDIRECTION:IND_ASS(32, 3, t133)----
-00000A58  2A7C FFFFFDF8           1104      MOVE.L #-520, A5
-00000A5E  DBCE                    1105      ADD.L A6, A5
-00000A60  323C 0003               1106      MOVE.W #3, D1
-00000A64  C2FC 0002               1107      MULU.W #2, D1
-00000A68  48C1                    1108      EXT.L D1
-00000A6A  DBC1                    1109      ADD.L D1, A5
-00000A6C  3ABC 0020               1110      MOVE.W #32, (A5)
-00000A70                          1111  * ----SET VALUE FROM INDIRECTION:IND_ASS(97, 4, t133)----
-00000A70  2A7C FFFFFDF8           1112      MOVE.L #-520, A5
-00000A76  DBCE                    1113      ADD.L A6, A5
-00000A78  323C 0004               1114      MOVE.W #4, D1
-00000A7C  C2FC 0002               1115      MULU.W #2, D1
-00000A80  48C1                    1116      EXT.L D1
-00000A82  DBC1                    1117      ADD.L D1, A5
-00000A84  3ABC 0061               1118      MOVE.W #97, (A5)
-00000A88                          1119  * ----SET VALUE FROM INDIRECTION:IND_ASS(32, 5, t133)----
-00000A88  2A7C FFFFFDF8           1120      MOVE.L #-520, A5
-00000A8E  DBCE                    1121      ADD.L A6, A5
-00000A90  323C 0005               1122      MOVE.W #5, D1
-00000A94  C2FC 0002               1123      MULU.W #2, D1
-00000A98  48C1                    1124      EXT.L D1
-00000A9A  DBC1                    1125      ADD.L D1, A5
-00000A9C  3ABC 0020               1126      MOVE.W #32, (A5)
-00000AA0                          1127  * ----SET VALUE FROM INDIRECTION:IND_ASS(108, 6, t133)----
-00000AA0  2A7C FFFFFDF8           1128      MOVE.L #-520, A5
-00000AA6  DBCE                    1129      ADD.L A6, A5
-00000AA8  323C 0006               1130      MOVE.W #6, D1
-00000AAC  C2FC 0002               1131      MULU.W #2, D1
-00000AB0  48C1                    1132      EXT.L D1
-00000AB2  DBC1                    1133      ADD.L D1, A5
-00000AB4  3ABC 006C               1134      MOVE.W #108, (A5)
-00000AB8                          1135  * ----SET VALUE FROM INDIRECTION:IND_ASS(101, 7, t133)----
-00000AB8  2A7C FFFFFDF8           1136      MOVE.L #-520, A5
-00000ABE  DBCE                    1137      ADD.L A6, A5
-00000AC0  323C 0007               1138      MOVE.W #7, D1
-00000AC4  C2FC 0002               1139      MULU.W #2, D1
-00000AC8  48C1                    1140      EXT.L D1
-00000ACA  DBC1                    1141      ADD.L D1, A5
-00000ACC  3ABC 0065               1142      MOVE.W #101, (A5)
-00000AD0                          1143  * ----SET VALUE FROM INDIRECTION:IND_ASS(116, 8, t133)----
-00000AD0  2A7C FFFFFDF8           1144      MOVE.L #-520, A5
-00000AD6  DBCE                    1145      ADD.L A6, A5
-00000AD8  323C 0008               1146      MOVE.W #8, D1
-00000ADC  C2FC 0002               1147      MULU.W #2, D1
-00000AE0  48C1                    1148      EXT.L D1
-00000AE2  DBC1                    1149      ADD.L D1, A5
-00000AE4  3ABC 0074               1150      MOVE.W #116, (A5)
-00000AE8                          1151  * ----SET VALUE FROM INDIRECTION:IND_ASS(116, 9, t133)----
-00000AE8  2A7C FFFFFDF8           1152      MOVE.L #-520, A5
-00000AEE  DBCE                    1153      ADD.L A6, A5
-00000AF0  323C 0009               1154      MOVE.W #9, D1
-00000AF4  C2FC 0002               1155      MULU.W #2, D1
-00000AF8  48C1                    1156      EXT.L D1
-00000AFA  DBC1                    1157      ADD.L D1, A5
-00000AFC  3ABC 0074               1158      MOVE.W #116, (A5)
-00000B00                          1159  * ----SET VALUE FROM INDIRECTION:IND_ASS(101, 10, t133)----
-00000B00  2A7C FFFFFDF8           1160      MOVE.L #-520, A5
-00000B06  DBCE                    1161      ADD.L A6, A5
-00000B08  323C 000A               1162      MOVE.W #10, D1
-00000B0C  C2FC 0002               1163      MULU.W #2, D1
-00000B10  48C1                    1164      EXT.L D1
-00000B12  DBC1                    1165      ADD.L D1, A5
-00000B14  3ABC 0065               1166      MOVE.W #101, (A5)
-00000B18                          1167  * ----SET VALUE FROM INDIRECTION:IND_ASS(114, 11, t133)----
-00000B18  2A7C FFFFFDF8           1168      MOVE.L #-520, A5
-00000B1E  DBCE                    1169      ADD.L A6, A5
-00000B20  323C 000B               1170      MOVE.W #11, D1
-00000B24  C2FC 0002               1171      MULU.W #2, D1
-00000B28  48C1                    1172      EXT.L D1
-00000B2A  DBC1                    1173      ADD.L D1, A5
-00000B2C  3ABC 0072               1174      MOVE.W #114, (A5)
-00000B30                          1175  * ----OBTAIN VALUE FROM INDIRECTION:IND_VAL(t133, 13, t245)----
-00000B30  2A7C FFFFFDF8           1176      MOVE.L #-520, A5
-00000B36  DBCE                    1177      ADD.L A6, A5
-00000B38  4281                    1178      CLR.L D1
-00000B3A  323C 000D               1179      MOVE.W #13, D1
-00000B3E  C2FC 0002               1180      MULU.W #2, D1
-00000B42  48C1                    1181      EXT.L D1
-00000B44  DBC1                    1182      ADD.L D1, A5
-00000B46  287C FFFFFD96           1183      MOVE.L #-618, A4
-00000B4C  D9CE                    1184      ADD.L A6, A4
-00000B4E  3895                    1185      MOVE.W (A5), (A4)
-00000B50                          1186  
-00000B50                          1187  * ----SET VALUE FROM INDIRECTION:IND_ASS(t245, 12, t133)----
-00000B50  2A7C FFFFFDF8           1188      MOVE.L #-520, A5
-00000B56  DBCE                    1189      ADD.L A6, A5
-00000B58  323C 000C               1190      MOVE.W #12, D1
-00000B5C  C2FC 0002               1191      MULU.W #2, D1
-00000B60  48C1                    1192      EXT.L D1
-00000B62  DBC1                    1193      ADD.L D1, A5
-00000B64  287C FFFFFD96           1194      MOVE.L #-618, A4
-00000B6A  D9CE                    1195      ADD.L A6, A4
-00000B6C  3A94                    1196      MOVE.W (A4), (A5)
-00000B6E                          1197  
-00000B6E                          1198  * ----POS:POS(0, 2, --)----
-00000B6E  1A3C 0000               1199      MOVE.B #0, D5
-00000B72  E14D                    1200      LSL.W #8, D5
-00000B74  1A3C 0002               1201      MOVE.B #2, D5
-00000B78  3205                    1202      MOVE.W D5, D1
-00000B7A  303C 000B               1203      MOVE.W #11, D0
-00000B7E  4E4F                    1204      TRAP #15
-00000B80                          1205  * ----WRITE:WRITE(0, 12, t133)----
-00000B80  343C 0000               1206      MOVE.W #0, D2
-00000B84  363C 000C               1207      MOVE.W #12, D3
-00000B88  2A7C FFFFFDF8           1208      MOVE.L #-520, A5
-00000B8E  DBCE                    1209      ADD.L A6, A5
-00000B90  9642                    1210      SUB.W D2, D3
-00000B92  E34A                    1211      LSL.W #1, D2
-00000B94  DAC2                    1212      ADD.W D2, A5
-00000B96  303C 0006               1213      MOVE.W #6, D0
-00000B9A                          1214  WRITE_LOOP_6:
-00000B9A  321D                    1215      MOVE.W (A5)+, D1
-00000B9C  4E4F                    1216      TRAP #15
-00000B9E  51CB FFFA               1217      DBF D3, WRITE_LOOP_6
-00000BA2                          1218  
-00000BA2                          1219  * ----READ:READ(--, --, t257)----
-00000BA2  4241                    1220      CLR.W D1
-00000BA4  303C 0005               1221      MOVE.W #5, D0
-00000BA8  4E4F                    1222      TRAP #15
-00000BAA  2A7C FFFFFD8A           1223      MOVE.L #-630, A5
-00000BB0  DBCE                    1224      ADD.L A6, A5
-00000BB2  3A81                    1225      MOVE.W D1, (A5)
-00000BB4                          1226  
-00000BB4                          1227  * ----SUB:SUB(1, t200, t258)----
-00000BB4  4281                    1228      CLR.L D1
-00000BB6  4282                    1229      CLR.L D2
-00000BB8  323C 0001               1230      MOVE.W #1, D1
-00000BBC  2A7C FFFFFDBE           1231      MOVE.L #-578, A5
-00000BC2  DBCE                    1232      ADD.L A6, A5
-00000BC4  3415                    1233      MOVE.W (A5), D2
-00000BC6  9441                    1234      SUB.W D1, D2
-00000BC8  2A7C FFFFFD88           1235      MOVE.L #-632, A5
-00000BCE  DBCE                    1236      ADD.L A6, A5
-00000BD0  3A82                    1237      MOVE.W D2, (A5)
-00000BD2                          1238  
-00000BD2                          1239  * ----COPY:COPY(t258, --, t200)----
-00000BD2  2A7C FFFFFDBE           1240      MOVE.L #-578, A5
-00000BD8  DBCE                    1241      ADD.L A6, A5
-00000BDA  287C FFFFFD88           1242      MOVE.L #-632, A4
-00000BE0  D9CE                    1243      ADD.L A6, A4
-00000BE2  3A94                    1244      MOVE.W (A4), (A5)
-00000BE4                          1245  
-00000BE4                          1246  * ----COPY:COPY(0, --, t262)----
-00000BE4  2A7C FFFFFD82           1247      MOVE.L #-638, A5
-00000BEA  DBCE                    1248      ADD.L A6, A5
-00000BEC  3ABC 0000               1249      MOVE.W #0, (A5)
-00000BF0                          1250  
-00000BF0                          1251  e82: *e82: SKIP
-00000BF0                          1252  * ----COMPARE LE:IFLE(t262, t200, e83)----
-00000BF0  2A7C FFFFFD82           1253      MOVE.L #-638, A5
-00000BF6  DBCE                    1254      ADD.L A6, A5
-00000BF8  3215                    1255      MOVE.W (A5), D1
-00000BFA  2A7C FFFFFDBE           1256      MOVE.L #-578, A5
-00000C00  DBCE                    1257      ADD.L A6, A5
-00000C02  3415                    1258      MOVE.W (A5), D2
-00000C04  B242                    1259      CMP.W D2, D1
-00000C06  6F00 0014               1260      BLE.W e83
-00000C0A                          1261  
-00000C0A                          1262  * ----COPY:COPY(0, --, t263)----
-00000C0A  2A7C FFFFFD80           1263      MOVE.L #-640, A5
-00000C10  DBCE                    1264      ADD.L A6, A5
-00000C12  3ABC 0000               1265      MOVE.W #0, (A5)
-00000C16                          1266  
-00000C16  4EF9 00000C28           1267      JMP e84 * ----GOTO:GOTO(--, --, e84)----
-00000C1C                          1268  
-00000C1C                          1269  e83: *e83: SKIP
-00000C1C                          1270  * ----COPY:COPY(-1, --, t263)----
-00000C1C  2A7C FFFFFD80           1271      MOVE.L #-640, A5
-00000C22  DBCE                    1272      ADD.L A6, A5
-00000C24  3ABC FFFF               1273      MOVE.W #-1, (A5)
-00000C28                          1274  
-00000C28                          1275  e84: *e84: SKIP
-00000C28                          1276  * ----COMPARE EQ:IFEQ(t263, 0, e85)----
-00000C28  2A7C FFFFFD80           1277      MOVE.L #-640, A5
-00000C2E  DBCE                    1278      ADD.L A6, A5
-00000C30  3215                    1279      MOVE.W (A5), D1
-00000C32  343C 0000               1280      MOVE.W #0, D2
-00000C36  B441                    1281      CMP.W D1, D2
-00000C38  6700 0036               1282      BEQ.W e85
-00000C3C                          1283  
-00000C3C                          1284  * ----SET VALUE FROM INDIRECTION:IND_ASS(t257, t262, t133)----
-00000C3C  2A7C FFFFFDF8           1285      MOVE.L #-520, A5
-00000C42  DBCE                    1286      ADD.L A6, A5
-00000C44  287C FFFFFD82           1287      MOVE.L #-638, A4
-00000C4A  D9CE                    1288      ADD.L A6, A4
-00000C4C  4281                    1289      CLR.L D1
-00000C4E  3214                    1290      MOVE.W (A4), D1
-00000C50  C2FC 0002               1291      MULU.W #2, D1
-00000C54  48C1                    1292      EXT.L D1
-00000C56  DBC1                    1293      ADD.L D1, A5
-00000C58  287C FFFFFD8A           1294      MOVE.L #-630, A4
-00000C5E  D9CE                    1295      ADD.L A6, A4
-00000C60  3A94                    1296      MOVE.W (A4), (A5)
-00000C62                          1297  
-00000C62                          1298  * ----INCREMENT LOCAL VARIABLE:INC(--, --, t262)----
-00000C62  2A7C FFFFFD82           1299      MOVE.L #-638, A5
-00000C68  DBCE                    1300      ADD.L A6, A5
-00000C6A  5255                    1301      ADD.W #1, (A5)
-00000C6C                          1302  
-00000C6C  4EF8 0BF0               1303      JMP e82 * ----GOTO:GOTO(--, --, e82)----
-00000C70                          1304  
-00000C70                          1305  e85: *e85: SKIP
-00000C70                          1306  * ----POS:POS(0, 4, --)----
-00000C70  1A3C 0000               1307      MOVE.B #0, D5
-00000C74  E14D                    1308      LSL.W #8, D5
-00000C76  1A3C 0004               1309      MOVE.B #4, D5
-00000C7A  3205                    1310      MOVE.W D5, D1
-00000C7C  303C 000B               1311      MOVE.W #11, D0
-00000C80  4E4F                    1312      TRAP #15
-00000C82                          1313  * ----WRITE:WRITE(0, t200, t133)----
-00000C82  343C 0000               1314      MOVE.W #0, D2
-00000C86  2A7C FFFFFDBE           1315      MOVE.L #-578, A5
-00000C8C  DBCE                    1316      ADD.L A6, A5
-00000C8E  3615                    1317      MOVE.W (A5), D3
-00000C90  2A7C FFFFFDF8           1318      MOVE.L #-520, A5
-00000C96  DBCE                    1319      ADD.L A6, A5
-00000C98  9642                    1320      SUB.W D2, D3
-00000C9A  E34A                    1321      LSL.W #1, D2
-00000C9C  DAC2                    1322      ADD.W D2, A5
-00000C9E  303C 0006               1323      MOVE.W #6, D0
-00000CA2                          1324  WRITE_LOOP_7:
-00000CA2  321D                    1325      MOVE.W (A5)+, D1
-00000CA4  4E4F                    1326      TRAP #15
-00000CA6  51CB FFFA               1327      DBF D3, WRITE_LOOP_7
-00000CAA                          1328  
-00000CAA  FFFF FFFF               1329      SIMHALT *HALT(--, --, --)
-00000CAE                          1330      END START
+00000668                           702  * ----COPY:COPY(t72, --, t56)----
+00000668  2A7C FFFFFDF6            703      MOVE.L #-522, A5
+0000066E  DBCE                     704      ADD.L A6, A5
+00000670  287C FFFFFDDE            705      MOVE.L #-546, A4
+00000676  D9CE                     706      ADD.L A6, A4
+00000678  3A94                     707      MOVE.W (A4), (A5)
+0000067A                           708  
+0000067A                           709  * ----DIV:DIV(10, t61, t73)----
+0000067A  2A7C FFFFFDEC            710      MOVE.L #-532, A5
+00000680  DBCE                     711      ADD.L A6, A5
+00000682  3415                     712      MOVE.W (A5), D2
+00000684  323C 000A                713      MOVE.W #10, D1
+00000688  85C1                     714      DIVS.W D1, D2
+0000068A  2A7C FFFFFDDC            715      MOVE.L #-548, A5
+00000690  DBCE                     716      ADD.L A6, A5
+00000692  3A82                     717      MOVE.W D2, (A5)
+00000694                           718  
+00000694                           719  * ----COPY:COPY(t73, --, t61)----
+00000694  2A7C FFFFFDEC            720      MOVE.L #-532, A5
+0000069A  DBCE                     721      ADD.L A6, A5
+0000069C  287C FFFFFDDC            722      MOVE.L #-548, A4
+000006A2  D9CE                     723      ADD.L A6, A4
+000006A4  3A94                     724      MOVE.W (A4), (A5)
+000006A6                           725  
+000006A6                           726  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t68)----
+000006A6  7C00                     727      MOVE.L #0, D6
+000006A8  2A7C FFFFFDE6            728      MOVE.L #-538, A5
+000006AE  DBCE                     729      ADD.L A6, A5
+000006B0                           730  MOVE_LOOP_t68_2:
+000006B0  3F1D                     731      MOVE.W (A5)+, -(A7)
+000006B2  51CE FFFC                732      DBF D6, MOVE_LOOP_t68_2
+000006B6                           733  
+000006B6  2F4E FFF8                734      MOVE.L A6, -8(A7)
+000006BA  2C4F                     735      MOVE.L A7, A6
+000006BC  4EB8 0016                736      JSR e1 * ----FUNCTION CALL:CALL(--, --, f0)----
+000006C0                           737  
+000006C0                           738  * ----POP:POP(f0, --, t75)----
+000006C0  548F                     739      ADD.L #2, A7
+000006C2  2A7C FFFFFDDA            740      MOVE.L #-550, A5
+000006C8  DBCE                     741      ADD.L A6, A5
+000006CA  3A84                     742      MOVE.W D4, (A5)
+000006CC                           743  
+000006CC                           744  * ----SET VALUE FROM INDIRECTION:IND_ASS(t75, 0, t55)----
+000006CC  2A7C FFFFFDF8            745      MOVE.L #-520, A5
+000006D2  DBCE                     746      ADD.L A6, A5
+000006D4  323C 0000                747      MOVE.W #0, D1
+000006D8  C2FC 0002                748      MULU.W #2, D1
+000006DC  48C1                     749      EXT.L D1
+000006DE  DBC1                     750      ADD.L D1, A5
+000006E0  287C FFFFFDDA            751      MOVE.L #-550, A4
+000006E6  D9CE                     752      ADD.L A6, A4
+000006E8  3A94                     753      MOVE.W (A4), (A5)
+000006EA                           754  
+000006EA                           755  * ----POS:POS(t63, 0, --)----
+000006EA  287C FFFFFDEA            756      MOVE.L #-534, A4
+000006F0  D9CE                     757      ADD.L A6, A4
+000006F2  1A2C 0001                758      MOVE.B 1(A4), D5
+000006F6  E14D                     759      LSL.W #8, D5
+000006F8  1A3C 0000                760      MOVE.B #0, D5
+000006FC  3205                     761      MOVE.W D5, D1
+000006FE  303C 000B                762      MOVE.W #11, D0
+00000702  4E4F                     763      TRAP #15
+00000704                           764  * ----WRITE:WRITE(0, 0, t55)----
+00000704  343C 0000                765      MOVE.W #0, D2
+00000708  363C 0000                766      MOVE.W #0, D3
+0000070C  2A7C FFFFFDF8            767      MOVE.L #-520, A5
+00000712  DBCE                     768      ADD.L A6, A5
+00000714  9642                     769      SUB.W D2, D3
+00000716  E34A                     770      LSL.W #1, D2
+00000718  DAC2                     771      ADD.W D2, A5
+0000071A  303C 0006                772      MOVE.W #6, D0
+0000071E                           773  WRITE_LOOP_1:
+0000071E  321D                     774      MOVE.W (A5)+, D1
+00000720  4E4F                     775      TRAP #15
+00000722  51CB FFFA                776      DBF D3, WRITE_LOOP_1
+00000726                           777  
+00000726                           778  * ----SUM:SUM(1, t63, t80)----
+00000726  4281                     779      CLR.L D1
+00000728  4282                     780      CLR.L D2
+0000072A  323C 0001                781      MOVE.W #1, D1
+0000072E  2A7C FFFFFDEA            782      MOVE.L #-534, A5
+00000734  DBCE                     783      ADD.L A6, A5
+00000736  3415                     784      MOVE.W (A5), D2
+00000738  D441                     785      ADD.W D1, D2
+0000073A  2A7C FFFFFDD8            786      MOVE.L #-552, A5
+00000740  DBCE                     787      ADD.L A6, A5
+00000742  3A82                     788      MOVE.W D2, (A5)
+00000744                           789  
+00000744                           790  * ----COPY:COPY(t80, --, t63)----
+00000744  2A7C FFFFFDEA            791      MOVE.L #-534, A5
+0000074A  DBCE                     792      ADD.L A6, A5
+0000074C  287C FFFFFDD8            793      MOVE.L #-552, A4
+00000752  D9CE                     794      ADD.L A6, A4
+00000754  3A94                     795      MOVE.W (A4), (A5)
+00000756                           796  
+00000756  4EF8 0596                797      JMP e46 * ----GOTO:GOTO(--, --, e46)----
+0000075A                           798  
+0000075A                           799  e49: *e49: SKIP
+0000075A  FFFF FFFF                800      SIMHALT *HALT(--, --, --)
+0000075E                           801      END START
 
 No errors detected
 No warnings generated
@@ -1340,99 +811,61 @@ No warnings generated
 SYMBOL TABLE INFORMATION
 Symbol-name         Value
 -------------------------
-E1                  2E
-E10                 116
-E11                 122
-E12                 148
-E13                 3AA
-E14                 16E
-E15                 17A
-E16                 1A0
-E17                 3AA
-E18                 1C6
-E19                 1D2
-E2                  66
-E20                 1F8
-E21                 3AA
-E22                 21E
-E23                 22A
-E24                 250
-E25                 3AA
-E26                 276
-E27                 282
-E28                 2A8
-E29                 3AA
-E3                  72
-E30                 2CE
-E31                 2DA
-E32                 300
-E33                 3AA
-E34                 326
-E35                 332
-E36                 358
-E37                 3AA
-E38                 37E
-E39                 38A
-E4                  98
-E40                 3AA
-E41                 3BE
-E42                 400
-E43                 40C
-E44                 432
-E45                 744
-E46                 458
-E47                 464
-E48                 48A
-E49                 744
-E5                  3AA
-E50                 4B0
-E51                 4BC
-E52                 4E2
-E53                 744
-E54                 508
-E55                 514
-E56                 53A
-E57                 744
-E58                 560
-E59                 56C
-E6                  BE
-E60                 592
-E61                 744
-E62                 5B8
-E63                 5C4
-E64                 5EA
-E65                 744
-E66                 610
-E67                 61C
-E68                 642
-E69                 744
-E7                  CA
-E70                 668
-E71                 674
-E72                 69A
-E73                 744
-E74                 6C0
-E75                 6CC
-E76                 6F2
-E77                 744
-E78                 718
-E79                 724
-E8                  F0
-E80                 744
-E82                 BF0
-E83                 C1C
-E84                 C28
-E85                 C70
-E9                  3AA
-MAIN                758
-MOVE_LOOP_T1_2      990
-MOVE_LOOP_T3_2      9D0
-START               8
-T0                  0
-T1                  4
-T2                  8
-T3                  C
-WRITE_LOOP_4        8DA
-WRITE_LOOP_5        982
-WRITE_LOOP_6        B9A
-WRITE_LOOP_7        CA2
+E1                  16
+E10                 FE
+E11                 10A
+E12                 130
+E13                 392
+E14                 156
+E15                 162
+E16                 188
+E17                 392
+E18                 1AE
+E19                 1BA
+E2                  4E
+E20                 1E0
+E21                 392
+E22                 206
+E23                 212
+E24                 238
+E25                 392
+E26                 25E
+E27                 26A
+E28                 290
+E29                 392
+E3                  5A
+E30                 2B6
+E31                 2C2
+E32                 2E8
+E33                 392
+E34                 30E
+E35                 31A
+E36                 340
+E37                 392
+E38                 366
+E39                 372
+E4                  80
+E40                 392
+E41                 3A6
+E42                 3D2
+E43                 3DE
+E44                 42A
+E46                 596
+E47                 5BC
+E48                 5C8
+E49                 75A
+E5                  392
+E6                  A6
+E7                  B2
+E8                  D8
+E9                  392
+MAIN                4FC
+MOVE_LOOP_T44_2     49E
+MOVE_LOOP_T45_2     48E
+MOVE_LOOP_T53_2     4CC
+MOVE_LOOP_T58_2     518
+MOVE_LOOP_T59_2     534
+MOVE_LOOP_T60_2     550
+MOVE_LOOP_T68_2     6B0
+START               0
+WRITE_LOOP_1        71E

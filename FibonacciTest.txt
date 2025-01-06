@@ -1,0 +1,76 @@
+🔤 numToChar(🔢 answer){
+    🔤 num1 ⬅ ' ';
+
+    ❓(answer ⚖ 0){
+        num1 ⬅ '0';
+    } ❌{
+        ❓(answer ⚖ 1){
+            num1 ⬅ '1';
+        } ❌{
+            ❓(answer ⚖ 2){
+                num1 ⬅ '2';
+            } ❌{
+                ❓(answer ⚖ 3){
+                    num1 ⬅ '3';
+                } ❌{
+                    ❓(answer ⚖ 4){
+                        num1 ⬅ '4';
+                    } ❌{
+                        ❓(answer ⚖ 5){
+                            num1 ⬅ '5';
+                        } ❌{
+                            ❓(answer ⚖ 6){
+                                num1 ⬅ '6';
+                            } ❌{
+                                ❓(answer ⚖ 7){
+                                    num1 ⬅ '7';
+                                } ❌{
+                                    ❓(answer ⚖ 8){
+                                        num1 ⬅ '8';
+                                    } ❌{
+                                        ❓(answer ⚖ 9){
+                                            num1 ⬅ '9';
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ↩ num1;
+}
+
+🔢 fibonacci(🔢 first, 🔢 next, 🔢 depth){
+    ❓(depth ⚖ 1){
+        ↩ first ➕ next;
+    }
+
+    🔢 tmp ⬅ first;
+    first ⬅ next;
+    next ⬅ tmp ➕ next;
+
+    ↩ fibonacci(first, next, depth➖1);
+}
+
+🏠(){
+    🔤📦256 text;
+
+    🔢 result ⬅ fibonacci(0, 1, 20);
+    🔢 factor ⬅ 10000;
+
+    🔢i⬅0;
+    🔁(factor ⬆ 0){
+        🔢 num ⬅ result ➗ factor;
+        🔢 delete ⬅ num ✖ factor;
+        result ⬅ result ➖ delete;
+        factor ⬅ factor➗ 10;
+
+        text 📦0 ⬅ numToChar(num);
+         ✏(📦text, 0, 0, i, 0);
+
+        i⬅i➕1;
+    }
+}

@@ -88,15 +88,14 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
     "\11\0\2\1\2\0\1\1\22\0\1\2\6\3\1\4"+
     "\1\5\1\6\2\3\1\7\3\3\12\10\1\3\1\11"+
-    "\5\3\1\12\2\13\1\14\11\13\1\15\1\16\2\13"+
-    "\1\17\10\13\4\3\1\13\1\3\1\12\2\13\1\14"+
-    "\11\13\1\15\1\16\2\13\1\17\10\13\1\20\1\21"+
-    "\1\22\1\3\57\0\1\23\u01fa\0\1\24\354\0\1\25"+
-    "\156\0\1\26\11\0\1\27\6\0\1\30\65\0\1\31"+
-    "\6\0\1\32\101\0\1\33\1\34\1\35\155\0\1\36"+
-    "\1\37\1\40\u01d8\0\1\41\140\0\1\42\13\0\2\43"+
-    "\227\0\1\44\32\0\1\45\1\46\17\0\1\47\17\0"+
-    "\1\26\1\0\1\26\116\0\1\26\u0137\0\1\50\124\0";
+    "\5\3\32\12\4\3\1\12\1\3\32\12\1\13\1\3"+
+    "\1\14\1\3\57\0\1\15\u01fa\0\1\16\163\0\1\17"+
+    "\170\0\1\20\156\0\1\21\6\0\1\22\2\0\1\23"+
+    "\6\0\1\24\65\0\1\25\6\0\1\26\101\0\1\27"+
+    "\1\30\1\31\155\0\1\32\1\33\1\34\u01d8\0\1\35"+
+    "\140\0\1\36\13\0\2\37\227\0\1\40\32\0\1\41"+
+    "\1\42\17\0\1\43\17\0\1\21\1\0\1\21\116\0"+
+    "\1\21\u0137\0\1\44\124\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[2560];
@@ -124,14 +123,14 @@ public class Scanner implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\1\1\3\1\4\1\5\1\6"+
-    "\1\7\3\10\1\11\1\1\1\12\1\13\1\14\1\15"+
-    "\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25"+
-    "\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35"+
-    "\1\36\1\37\1\40\1\0\1\41\1\0\1\41\1\0"+
-    "\1\10\2\41\1\42\1\43\1\44\1\45\1\46";
+    "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
+    "\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26"+
+    "\1\27\1\30\1\31\1\32\1\33\1\34\1\35\1\36"+
+    "\1\37\1\40\1\41\1\42\1\0\1\43\1\44\1\45"+
+    "\1\46";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[50];
+    int [] result = new int[41];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -156,16 +155,15 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\51\0\122\0\173\0\51\0\51\0\51\0\244"+
-    "\0\51\0\315\0\366\0\u011f\0\51\0\u0148\0\51\0\51"+
-    "\0\51\0\51\0\51\0\51\0\51\0\51\0\51\0\u0171"+
-    "\0\51\0\51\0\51\0\u019a\0\u01c3\0\51\0\51\0\51"+
-    "\0\51\0\51\0\51\0\51\0\51\0\u01ec\0\u0215\0\u0215"+
-    "\0\u01ec\0\u023e\0\u0267\0\51\0\u023e\0\51\0\51\0\51"+
-    "\0\51\0\51";
+    "\0\0\0\45\0\112\0\157\0\45\0\45\0\45\0\224"+
+    "\0\45\0\271\0\45\0\45\0\45\0\45\0\45\0\45"+
+    "\0\45\0\45\0\45\0\45\0\45\0\45\0\336\0\45"+
+    "\0\45\0\45\0\u0103\0\u0128\0\45\0\45\0\45\0\45"+
+    "\0\45\0\45\0\45\0\45\0\u014d\0\45\0\45\0\45"+
+    "\0\45";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[50];
+    int [] result = new int[41];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -189,22 +187,15 @@ public class Scanner implements java_cup.runtime.Scanner {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\2\3\1\2\1\4\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\3\13\1\14\1\13\1\15\1\16\1\17"+
-    "\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27"+
-    "\1\30\1\31\1\32\1\33\1\34\1\35\1\36\1\37"+
-    "\1\40\1\41\1\42\1\43\1\44\1\45\52\0\2\3"+
-    "\50\0\2\46\1\47\10\46\1\50\1\46\1\51\1\46"+
-    "\1\47\1\46\36\0\1\10\44\0\1\52\3\0\1\13"+
-    "\1\0\3\13\1\53\2\13\1\0\1\52\37\0\1\13"+
-    "\1\0\6\13\35\0\1\54\3\0\1\13\1\0\6\13"+
-    "\1\0\1\54\33\0\1\55\10\0\1\52\1\0\1\54"+
-    "\1\0\1\55\62\0\1\56\42\0\1\57\50\0\1\60"+
-    "\27\0\1\61\50\0\1\61\7\0\1\62\4\0\1\62"+
-    "\33\0\1\62\7\0\1\62\4\0\1\62\33\0\1\62"+
-    "\3\0\1\13\1\0\6\13\1\0\1\62\27\0";
+    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20"+
+    "\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30"+
+    "\1\31\1\32\1\33\1\34\1\35\1\36\1\37\1\40"+
+    "\1\41\1\42\1\43\1\44\46\0\2\3\44\0\13\45"+
+    "\40\0\1\10\44\0\1\12\1\0\1\12\61\0\1\46"+
+    "\35\0\1\47\44\0\1\50\30\0\1\51\40\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[656];
+    int [] result = new int[370];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -247,12 +238,11 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\2\1\3\11\1\1\1\11\3\1\1\11"+
-    "\1\1\11\11\1\1\3\11\2\1\10\11\1\0\1\1"+
-    "\1\0\1\1\1\0\1\1\1\11\1\1\5\11";
+    "\1\0\1\11\2\1\3\11\1\1\1\11\1\1\14\11"+
+    "\1\1\3\11\2\1\10\11\1\0\4\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[50];
+    int [] result = new int[41];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -857,11 +847,17 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 50: break;
           case 13:
-            { return symbol(ParserSym.EQ, OpComp.EQUAL);
+            { 
+                return symbol(ParserSym.OR, OpLog.OR);
             }
           // fall through
           case 51: break;
           case 14:
+            { return symbol(ParserSym.EQ, OpComp.EQUAL);
+            }
+          // fall through
+          case 52: break;
+          case 15:
             { String type = this.yytext();
                     if(type.equals("🕳".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.Type, Types.VOID);
@@ -874,68 +870,74 @@ public class Scanner implements java_cup.runtime.Scanner {
                     }
             }
           // fall through
-          case 52: break;
-          case 15:
-            { return symbol(ParserSym.Write);
-            }
-          // fall through
           case 53: break;
           case 16:
-            { return symbol(ParserSym.MUL, OpArit.MUL);
+            { 
+                return symbol(ParserSym.AND, OpLog.AND);
             }
           // fall through
           case 54: break;
           case 17:
-            { return symbol(ParserSym.Opelse);
+            { return symbol(ParserSym.Write);
             }
           // fall through
           case 55: break;
           case 18:
-            { return symbol(ParserSym.Opif);
+            { return symbol(ParserSym.MUL, OpArit.MUL);
             }
           // fall through
           case 56: break;
           case 19:
-            { return symbol(ParserSym.SUM, OpArit.SUM);
+            { return symbol(ParserSym.Opelse);
             }
           // fall through
           case 57: break;
           case 20:
-            { return symbol(ParserSym.SUB, OpArit.SUB);
+            { return symbol(ParserSym.Opif);
             }
           // fall through
           case 58: break;
           case 21:
-            { return symbol(ParserSym.DIV, OpArit.DIV);
+            { return symbol(ParserSym.SUM, OpArit.SUM);
             }
           // fall through
           case 59: break;
           case 22:
-            { return symbol(ParserSym.Assign);
+            { return symbol(ParserSym.SUB, OpArit.SUB);
             }
           // fall through
           case 60: break;
           case 23:
-            { return symbol(ParserSym.GT, OpComp.GREATER_THAN);
+            { return symbol(ParserSym.DIV, OpArit.DIV);
             }
           // fall through
           case 61: break;
           case 24:
-            { return symbol(ParserSym.LT, OpComp.LESS_THAN);
+            { return symbol(ParserSym.Assign);
             }
           // fall through
           case 62: break;
           case 25:
-            { return symbol(ParserSym.Main);
+            { return symbol(ParserSym.GT, OpComp.GREATER_THAN);
             }
           // fall through
           case 63: break;
           case 26:
-            { return symbol(ParserSym.Read);
+            { return symbol(ParserSym.LT, OpComp.LESS_THAN);
             }
           // fall through
           case 64: break;
           case 27:
+            { return symbol(ParserSym.Main);
+            }
+          // fall through
+          case 65: break;
+          case 28:
+            { return symbol(ParserSym.Read);
+            }
+          // fall through
+          case 66: break;
+          case 29:
             { if(this.yytext().equals("👍".replaceAll("\\ufe0f", ""))){
                         return symbol(ParserSym.BooleanValue, true);
                     } else if(this.yytext().equals("👎".replaceAll("\\ufe0f", ""))){
@@ -943,59 +945,49 @@ public class Scanner implements java_cup.runtime.Scanner {
                     }
             }
           // fall through
-          case 65: break;
-          case 28:
-            { return symbol(ParserSym.ArrayIcon);
-            }
-          // fall through
-          case 66: break;
-          case 29:
-            { return symbol(ParserSym.Opwhile);
-            }
-          // fall through
           case 67: break;
           case 30:
-            { return symbol(ParserSym.Opfor);
+            { return symbol(ParserSym.ArrayIcon);
             }
           // fall through
           case 68: break;
           case 31:
-            { return symbol(ParserSym.Const);
+            { return symbol(ParserSym.Opwhile);
             }
           // fall through
           case 69: break;
           case 32:
-            { return symbol(ParserSym.NE, OpComp.DIFFERENT);
+            { return symbol(ParserSym.Opfor);
             }
           // fall through
           case 70: break;
           case 33:
-            { return symbol(ParserSym.OR, OpLog.OR);
+            { return symbol(ParserSym.Const);
             }
           // fall through
           case 71: break;
           case 34:
-            { return symbol(ParserSym.Opinc);
+            { return symbol(ParserSym.NE, OpComp.DIFFERENT);
             }
           // fall through
           case 72: break;
           case 35:
-            { return symbol(ParserSym.GE, OpComp.GREATER_EQUAL_THAN);
+            { return symbol(ParserSym.Opinc);
             }
           // fall through
           case 73: break;
           case 36:
-            { return symbol(ParserSym.LE, OpComp.LESS_EQUAL_THAN);
+            { return symbol(ParserSym.GE, OpComp.GREATER_EQUAL_THAN);
             }
           // fall through
           case 74: break;
           case 37:
-            { return symbol(ParserSym.Character, this.yytext().charAt(1));
+            { return symbol(ParserSym.LE, OpComp.LESS_EQUAL_THAN);
             }
           // fall through
           case 75: break;
           case 38:
-            { return symbol(ParserSym.AND, OpLog.AND);
+            { return symbol(ParserSym.Character, this.yytext().charAt(1));
             }
           // fall through
           case 76: break;

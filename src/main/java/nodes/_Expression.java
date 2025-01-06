@@ -112,7 +112,7 @@ public class _Expression extends Node {
     }
 
     public Variable generate() {
-        Variable var = new Variable(1, false);
+        Variable var = null;
         //paso de valor simple
         if (expression == null) {
            return value.generate(); //REVISAR
@@ -121,12 +121,15 @@ public class _Expression extends Node {
                 if(!changeSign){
                     return value.generate();
                 } else{
+                    var = new Variable(1, false);
                     tac.put(new Instruction(Operations.COPY, expression.generate(), null, var));
                     tac.put(new Instruction(Operations.NEG, null, null, var));
                 }
             } else if(operation.getOparit() != null || operation.getOplog() != null){//operacion normal arit o logi
+                var = new Variable(1, false);
                 tac.put(new Instruction(getOperation(), expression.generate(), value.generate(), var));
             } else if(operation.getOpcomp() != null){ //operacion comp
+                var = new Variable(1, false);
                 Tag e1 = new Tag();
                 Tag e2 = new Tag();
                 tac.put(new Instruction(getOperation(), value.generate(), expression.generate(), e1));
@@ -135,7 +138,6 @@ public class _Expression extends Node {
                 tac.put(new Instruction(Operations.SKIP, null, null, e1));
                 tac.put(new Instruction(Operations.COPY, -1, var));
                 tac.put(new Instruction(Operations.SKIP, null, null, e2));
-                
             }
         }
 

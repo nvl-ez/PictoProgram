@@ -28,11 +28,11 @@ public class Compilador {
         |   PROGRAMS THAT WILL COMPILE                       |                         
         |----------------------------------------------------| 
         |   IOTest.txt
-        |
+        |   FibonacciTest.txt
         |
         |
          */
-        String filePath = "IOTest.txt";
+        String filePath = "program.txt";
         ErrorHandler eh = new ErrorHandler();
 
         try {
@@ -81,7 +81,7 @@ public class Compilador {
             eh.save();
 
         } catch (Exception e) {
-            System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
+            //System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
             e.printStackTrace();
         }
     }

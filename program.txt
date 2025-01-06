@@ -1,22 +1,5 @@
-🔒 🔢 null ⬅ ➖2;
-🔤📦10📦7 letters;
-🔒 🔤 letterA ⬅ 'a';
-🔒 🔢 pi ⬅ 3;
+🔒 🔢 globalCounter ⬅ 10;
 
-🔒 ✅ true ⬅ 👎;
-
-🔢 globalCounter ⬅ 5;
-🔤 letterCounter ⬅ 'b';
-
-
-
-✅ equalsNum(🔢 num1, 🔢 num2){
-    ↩ num1 ⚖ num2;
-} 
-
-🕳 printArray(🔤📦10📦7 arr){
-    ↩;
-}
 
 🔤 numToChar(🔢 answer){
     🔤 num1 ⬅ ' ';
@@ -112,63 +95,59 @@
 🏠(){
     🔤📦256 text;
 
-    text 📦0 ⬅ 'L';
-    text 📦1 ⬅ 'e';
-    text 📦2 ⬅ 'n';
-    text 📦3 ⬅ 'g';
-    text 📦4 ⬅ 't';
-    text 📦5 ⬅ 'h';
-    text 📦6 ⬅ ':';
-    text 📦7 ⬅ ' ';
+    🔤📦10📦10 array;
+    🔢 level ⬅ 0;
 
-    ✏(📦text, 0, 7, 0, 0);
+    ✅res1 ⬅ level⬇10;
+    ✅res2 ⬅ level⬇globalCounter;
+    🔁(res1 ✌ res2){
+        🔢 i ⬅ level;
+        🔢 j ⬅ level;
 
-    🔤 answer ⬅ 👁();
+        ✅res3 ⬅ i⬇10;
+        ✅res4 ⬅ i⬇globalCounter;
+        🔁(res3 ✌ res4){
+            array 📦i📦level ⬅ numToChar(level);
+            i⬅i➕1;
 
-    🔢 num1;
-
-    🔂(🔢 num2 ⬅ 0; num2⬇num1; num2➕➕){
-        globalCounter ⬅ globalCounter ➕ 2;
-    }
-
-    🔢 decimal ⬅ globalCounter ➗ 10;
-    🔢 reminder ⬅ globalCounter ® 10;
-    🔤📦10📦7 arr;
-
-    🔤 textDec ⬅ numToChar(decimal);
-    🔤 textRem ⬅ numToChar(reminder);
-
-    text 📦0 ⬅ textDec;
-    text 📦1 ⬅ textRem;
-
-    ✏(📦text, 0, 1, 0, 2);
-
-    answer ⬅ 👁();
-
-    🔤📦256 whitespace;
-
-    🔂(🔢 i ⬅ 0; i⬇10; i➕➕){
-        whitespace 📦i ⬅ ' ';
-        ✏(📦whitespace, 0, 9, 0, i);
-    }
-
-    🔢📦10📦10 array;
-    🔢 a;
-    🔁(a⬇10){
-        🔢 f ⬅ a;
-        🔢 g ⬅ a;
-
-        🔁(f⬇10){
-            array 📦f📦a ⬅ a;
-            f⬅f➕1;
+            res3 ⬅ i⬇10;
+            res4 ⬅ i⬇globalCounter;
         }
 
-        🔁(g⬇10){
-            array 📦a📦g ⬅ a;
-            g⬅g➕1;
+        ✅res5 ⬅ j⬇10;
+        ✅res6 ⬅ j⬇globalCounter;
+        🔁(res5 ✌ res6){
+            array 📦level📦j ⬅ numToChar(level);
+            j⬅j➕1;
+
+            res5 ⬅ j⬇globalCounter;
+            res6 ⬅ j⬇10;
+        }
+        
+        level⬅level➕1;
+        res1 ⬅ level⬇10;
+        res2 ⬅ level⬇globalCounter;
+    }
+
+    level ⬅ 0;
+    ✅res7 ⬅ level⬇10;
+    ✅res8 ⬅ level⬇globalCounter;
+    🔁(res7 ✌ res8){
+
+        🔢 k ⬅ level;
+        ✅res9 ⬅ k⬇10;
+        ✅res10 ⬅ k⬇globalCounter;
+        🔁(res9 ✌ res10){
+            text 📦k ⬅ array📦level📦k;
+            k⬅k➕1;
+            res9 ⬅ k⬇10;
+            res10 ⬅ k⬇globalCounter;
         }
 
-        a⬅a➕1;
+        ✏(📦text, level, globalCounter➖1, level, level);
+        level⬅level➕1;
+        res7 ⬅ level⬇10;
+        res8 ⬅ level⬇globalCounter;
     }
 
 }

@@ -88,12 +88,6 @@ decimal		= {digit10}+
 
 assign          = ⬅ //
 
-letterA         = ['A'|'a'] //
-letterD         = ['D'|'d'] //
-letterN         = ['N'|'n'] //
-letterO         = ['O'|'o'] //
-letterR         = ['R'|'r'] //
-
 opif            = ❓ //
 opelse          = ❌ //
 
@@ -104,8 +98,8 @@ GT          = ⬆
 LT          = ⬇
 NE          = 🚫 //
 
-AND           = ({letterA}{letterN}{letterD})
-OR            = ({letterO}{letterR}) //
+AND           =✌
+OR            =☝
 
 SUM          = ➕
 SUB          = ➖
@@ -144,7 +138,7 @@ endline         = ;
         return cs;
     }
 
-    public void closeTokenStram(){
+    public void closeTokenStream(){
         try {
             if (writer != null) {
                 writer.close();  

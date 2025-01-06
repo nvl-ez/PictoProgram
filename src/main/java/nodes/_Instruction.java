@@ -273,7 +273,9 @@ public class _Instruction extends Node {
             Tag e = new Tag();
 
             tac.put(new Instruction(Operations.IFEQ, exp, t1, e));
+            if (functionBody != null) {
             functionBody.generate();
+        }
             tac.put(new Instruction(Operations.SKIP, null, null, e));
         } else {
             Variable exp = expression1.generate();
@@ -283,7 +285,9 @@ public class _Instruction extends Node {
             tac.put(new Instruction(Operations.COPY, 0, t1));
 
             tac.put(new Instruction(Operations.IFEQ, exp, t1, e));
+            if (functionBody != null) {
             functionBody.generate();
+        }
 
             Tag efi = new Tag();
             tac.put(new Instruction(Operations.GOTO, null, null, efi));
@@ -297,19 +301,21 @@ public class _Instruction extends Node {
         Tag ei = new Tag();
 
         tac.put(new Instruction(Operations.SKIP, null, null, ei));
-        
+
         Variable exp = expression1.generate();
-        
+
         Tag efi = new Tag();
 
         Variable t1 = new Variable(1, false);
         tac.put(new Instruction(Operations.COPY, 0, t1));
         tac.put(new Instruction(Operations.IFEQ, exp, t1, efi));
-        
-        functionBody.generate();
-        
+
+        if (functionBody != null) {
+            functionBody.generate();
+        }
+
         tac.put(new Instruction(Operations.GOTO, null, null, ei));
-        
+
         tac.put(new Instruction(Operations.SKIP, null, null, efi));
     }
 
@@ -335,38 +341,39 @@ public class _Instruction extends Node {
 
     private void generate_FOR() {
         varDeclaration.generate();
-        
+
         Tag ei = new Tag();
 
         tac.put(new Instruction(Operations.SKIP, null, null, ei));
-        
+
         Variable exp = expression1.generate();
-        
+
         Tag efi = new Tag();
 
         Variable t1 = new Variable(1, false);
         tac.put(new Instruction(Operations.COPY, 0, t1));
         tac.put(new Instruction(Operations.IFEQ, exp, t1, efi));
-        
-        functionBody.generate();
-        
-        TACDescription desc = (TACDescription)st.get(id);
+
+        if (functionBody != null) {
+            functionBody.generate();
+        }
+
+        TACDescription desc = (TACDescription) st.get(id);
         tac.put(new Instruction(Operations.INC, null, null, desc.getVariable()));
-        
+
         tac.put(new Instruction(Operations.GOTO, null, null, ei));
-        
+
         tac.put(new Instruction(Operations.SKIP, null, null, efi));
     }
 
     private void generate_INCREMENT() {
-        TACDescription desc = (TACDescription)st.get(id);
+        TACDescription desc = (TACDescription) st.get(id);
         tac.put(new Instruction(Operations.INC, null, null, desc.getVariable()));
     }
 
-
     private void generate_WRITE() {
-        Variable arr = ((TACDescription)st.get(id)).getVariable();
-        
+        Variable arr = ((TACDescription) st.get(id)).getVariable();
+
         tac.put(new Instruction(Operations.POS, expression3.generate(), expression4.generate(), null));
         tac.put(new Instruction(Operations.WRITE, expression1.generate(), expression2.generate(), arr));
     }
