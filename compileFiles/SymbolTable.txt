@@ -23,6 +23,7 @@ N = 1
 ---------------------------------------------
 |  ID       |  TYPE  |    DESC              |
 ---------------------------------------------
+| globalCounter	 | INT | ConstantDescription 	|
 ---------------------------------------------
 [BEFORE EXITING BLOCK]----------------------------------------------------
 N = 2
@@ -50,6 +51,7 @@ N = 2
 ---------------------------------------------
 |  ID       |  TYPE  |    DESC              |
 ---------------------------------------------
+| globalCounter	 | INT | ConstantDescription 	|
 | answer	 | INT | VariableDescription 	|
 | num1	 | CHAR | VariableDescription 	|
 ---------------------------------------------
@@ -62,7 +64,7 @@ N = 1
 | LVL   | IDX    |
 ------------------
 |0	|0	 |
-|1	|4	 |
+|1	|2	 |
 |2	|1	 |
 ------------------
 
@@ -72,9 +74,7 @@ N = 1
 | INDX  | NP    | ID     | DESC                | FIRST  | NEXT  |
 -----------------------------------------------------------------
 | 1	| -1	| answer | ArgumentDescription | 0	| 0 	|
-| 2	| -1	| depth | ArgumentDescription | 0	| 3 	|
-| 3	| -1	| next | ArgumentDescription | 0	| 4 	|
-| 4	| -1	| first | ArgumentDescription | 0	| 0 	|
+| 2	| -1	| answer | ArgumentDescription | 0	| 0 	|
 -----------------------------------------------------------------
 
 ---------------------------------------------
@@ -82,6 +82,7 @@ N = 1
 ---------------------------------------------
 |  ID       |  TYPE  |    DESC              |
 ---------------------------------------------
+| globalCounter	 | INT | ConstantDescription 	|
 ---------------------------------------------
 [BEFORE EXITING BLOCK]----------------------------------------------------
 N = 2
@@ -92,8 +93,8 @@ N = 2
 | LVL   | IDX    |
 ------------------
 |0	|0	 |
-|1	|4	 |
-|2	|4	 |
+|1	|2	 |
+|2	|2	 |
 ------------------
 
 -----------------------------------------------------------------
@@ -102,9 +103,7 @@ N = 2
 | INDX  | NP    | ID     | DESC                | FIRST  | NEXT  |
 -----------------------------------------------------------------
 | 1	| -1	| answer | ArgumentDescription | 0	| 0 	|
-| 2	| -1	| depth | ArgumentDescription | 0	| 3 	|
-| 3	| -1	| next | ArgumentDescription | 0	| 4 	|
-| 4	| -1	| first | ArgumentDescription | 0	| 0 	|
+| 2	| -1	| answer | ArgumentDescription | 0	| 0 	|
 -----------------------------------------------------------------
 
 ---------------------------------------------
@@ -112,10 +111,9 @@ N = 2
 ---------------------------------------------
 |  ID       |  TYPE  |    DESC              |
 ---------------------------------------------
-| next	 | INT | VariableDescription 	|
-| depth	 | INT | VariableDescription 	|
-| tmp	 | INT | VariableDescription 	|
-| first	 | INT | VariableDescription 	|
+| globalCounter	 | INT | ConstantDescription 	|
+| answer	 | CHAR | VariableDescription 	|
+| num1	 | INT | VariableDescription 	|
 ---------------------------------------------
 [BEFORE ENTERING BLOCK]----------------------------------------------------
 N = 1
@@ -126,8 +124,8 @@ N = 1
 | LVL   | IDX    |
 ------------------
 |0	|0	 |
-|1	|4	 |
-|2	|4	 |
+|1	|2	 |
+|2	|2	 |
 ------------------
 
 -----------------------------------------------------------------
@@ -136,9 +134,7 @@ N = 1
 | INDX  | NP    | ID     | DESC                | FIRST  | NEXT  |
 -----------------------------------------------------------------
 | 1	| -1	| answer | ArgumentDescription | 0	| 0 	|
-| 2	| -1	| depth | ArgumentDescription | 0	| 3 	|
-| 3	| -1	| next | ArgumentDescription | 0	| 4 	|
-| 4	| -1	| first | ArgumentDescription | 0	| 0 	|
+| 2	| -1	| answer | ArgumentDescription | 0	| 0 	|
 -----------------------------------------------------------------
 
 ---------------------------------------------
@@ -146,6 +142,7 @@ N = 1
 ---------------------------------------------
 |  ID       |  TYPE  |    DESC              |
 ---------------------------------------------
+| globalCounter	 | INT | ConstantDescription 	|
 ---------------------------------------------
 [BEFORE EXITING BLOCK]----------------------------------------------------
 N = 2
@@ -156,7 +153,7 @@ N = 2
 | LVL   | IDX    |
 ------------------
 |0	|0	 |
-|1	|4	 |
+|1	|2	 |
 |2	|5	 |
 ------------------
 
@@ -166,10 +163,10 @@ N = 2
 | INDX  | NP    | ID     | DESC                | FIRST  | NEXT  |
 -----------------------------------------------------------------
 | 1	| -1	| answer | ArgumentDescription | 0	| 0 	|
-| 2	| -1	| depth | ArgumentDescription | 0	| 3 	|
-| 3	| -1	| next | ArgumentDescription | 0	| 4 	|
-| 4	| -1	| first | ArgumentDescription | 0	| 0 	|
-| 5	| -1	| null | IndexDescription | 0	| 0 	|
+| 2	| -1	| answer | ArgumentDescription | 0	| 0 	|
+| 3	| -1	| null | IndexDescription | 0	| 0 	|
+| 4	| -1	| null | IndexDescription | 0	| 0 	|
+| 5	| -1	| null | IndexDescription | 0	| 4 	|
 -----------------------------------------------------------------
 
 ---------------------------------------------
@@ -177,10 +174,21 @@ N = 2
 ---------------------------------------------
 |  ID       |  TYPE  |    DESC              |
 ---------------------------------------------
-| result	 | INT | VariableDescription 	|
-| num	 | INT | VariableDescription 	|
+| res5	 | BOOL | VariableDescription 	|
+| res4	 | BOOL | VariableDescription 	|
+| res7	 | BOOL | VariableDescription 	|
+| res6	 | BOOL | VariableDescription 	|
+| res1	 | BOOL | VariableDescription 	|
+| level	 | INT | VariableDescription 	|
+| res3	 | BOOL | VariableDescription 	|
+| res2	 | BOOL | VariableDescription 	|
 | i	 | INT | VariableDescription 	|
+| res10	 | BOOL | VariableDescription 	|
+| j	 | INT | VariableDescription 	|
+| k	 | INT | VariableDescription 	|
+| res9	 | BOOL | VariableDescription 	|
+| res8	 | BOOL | VariableDescription 	|
+| globalCounter	 | INT | ConstantDescription 	|
+| array	 | CHAR | TypeDescription 	|
 | text	 | CHAR | TypeDescription 	|
-| factor	 | INT | VariableDescription 	|
-| delete	 | INT | VariableDescription 	|
 ---------------------------------------------

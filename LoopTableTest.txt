@@ -144,7 +144,7 @@
             res10 ⬅ k⬇globalCounter;
         }
 
-        ✏(📦text, level, globalCounter➖1, level, level);
+        ✏(📦text, 0, globalCounter➖1, 0, level);
         level⬅level➕1;
         res7 ⬅ level⬇10;
         res8 ⬅ level⬇globalCounter;
