@@ -322,7 +322,7 @@ public class Scanner implements java_cup.runtime.Scanner {
     private BufferedWriter writer; 
 
     private ComplexSymbol symbol(int type) throws IOException{
-        writer.write(ParserSym.terminalNames[type]+" "); 
+        writer.write(ParserSym.terminalNames[type]+"\n"); 
         writer.flush();
         ComplexSymbol cs = new ComplexSymbol(ParserSym.terminalNames[type], type);
         cs.left = yyline + 1;
@@ -331,7 +331,7 @@ public class Scanner implements java_cup.runtime.Scanner {
     }
     
     private ComplexSymbol symbol(int type, Object value) throws IOException{
-        writer.write(ParserSym.terminalNames[type]+" "); 
+        writer.write(ParserSym.terminalNames[type]+"["+value.toString()+"]"+"\n"); 
         writer.flush();
         ComplexSymbol cs = new ComplexSymbol(ParserSym.terminalNames[type], type, value);
         cs.left = yyline + 1;
@@ -847,8 +847,7 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 50: break;
           case 13:
-            { 
-                return symbol(ParserSym.OR, OpLog.OR);
+            { return symbol(ParserSym.OR, OpLog.OR);
             }
           // fall through
           case 51: break;
@@ -872,8 +871,7 @@ public class Scanner implements java_cup.runtime.Scanner {
           // fall through
           case 53: break;
           case 16:
-            { 
-                return symbol(ParserSym.AND, OpLog.AND);
+            { return symbol(ParserSym.AND, OpLog.AND);
             }
           // fall through
           case 54: break;

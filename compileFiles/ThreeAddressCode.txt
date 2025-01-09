@@ -235,7 +235,7 @@ e82: SKIP
 COPY(-1, --, t93)
 e83: SKIP
 COPY(t93, --, t92)
-IFLT(t90, 1, e84)
+IFLT(t90, 10, e84)
 COPY(0, --, t96)
 GOTO(--, --, e85)
 e84: SKIP
@@ -254,7 +254,7 @@ e88: SKIP
 COPY(-1, --, t103)
 e89: SKIP
 COPY(t103, --, t102)
-IFLT(t100, 1, e90)
+IFLT(t100, 10, e90)
 COPY(0, --, t106)
 GOTO(--, --, e91)
 e90: SKIP
@@ -279,7 +279,7 @@ e94: SKIP
 COPY(-1, --, t118)
 e95: SKIP
 COPY(t118, --, t102)
-IFLT(t100, 1, e96)
+IFLT(t100, 10, e96)
 COPY(0, --, t120)
 GOTO(--, --, e97)
 e96: SKIP
@@ -295,7 +295,7 @@ e98: SKIP
 COPY(-1, --, t123)
 e99: SKIP
 COPY(t123, --, t122)
-IFLT(t101, 1, e100)
+IFLT(t101, 10, e100)
 COPY(0, --, t126)
 GOTO(--, --, e101)
 e100: SKIP
@@ -313,7 +313,7 @@ SUM(t90, t134, t135)
 IND_ASS(t130, t135, t89)
 SUM(1, t101, t136)
 COPY(t136, --, t101)
-IFLT(t101, 1, e104)
+IFLT(t101, 10, e104)
 COPY(0, --, t138)
 GOTO(--, --, e105)
 e104: SKIP
@@ -338,7 +338,7 @@ e108: SKIP
 COPY(-1, --, t144)
 e109: SKIP
 COPY(t144, --, t92)
-IFLT(t90, 1, e110)
+IFLT(t90, 10, e110)
 COPY(0, --, t146)
 GOTO(--, --, e111)
 e110: SKIP
@@ -355,7 +355,7 @@ e112: SKIP
 COPY(-1, --, t150)
 e113: SKIP
 COPY(t150, --, t149)
-IFLT(t90, 1, e114)
+IFLT(t90, 10, e114)
 COPY(0, --, t153)
 GOTO(--, --, e115)
 e114: SKIP
@@ -373,7 +373,7 @@ e118: SKIP
 COPY(-1, --, t159)
 e119: SKIP
 COPY(t159, --, t158)
-IFLT(t157, 1, e120)
+IFLT(t157, 10, e120)
 COPY(0, --, t162)
 GOTO(--, --, e121)
 e120: SKIP
@@ -396,7 +396,7 @@ e124: SKIP
 COPY(-1, --, t175)
 e125: SKIP
 COPY(t175, --, t158)
-IFLT(t157, 1, e126)
+IFLT(t157, 10, e126)
 COPY(0, --, t177)
 GOTO(--, --, e127)
 e126: SKIP
@@ -406,7 +406,7 @@ COPY(t177, --, t161)
 GOTO(--, --, e122)
 e123: SKIP
 POS(0, t90, --)
-SUB(1, 1, t181)
+SUB(1, 10, t181)
 WRITE(0, t181, t88)
 SUM(1, t90, t184)
 COPY(t184, --, t90)
@@ -417,7 +417,7 @@ e128: SKIP
 COPY(-1, --, t186)
 e129: SKIP
 COPY(t186, --, t149)
-IFLT(t90, 1, e130)
+IFLT(t90, 10, e130)
 COPY(0, --, t188)
 GOTO(--, --, e131)
 e130: SKIP

@@ -29,10 +29,10 @@ public class Compilador {
         |----------------------------------------------------| 
         |   IOTest.txt
         |   FibonacciTest.txt
-        |
+        |   LoopTableTest.txt
         |
          */
-        String filePath = "program.txt";
+        String filePath = "LoopTableTest.txt";
         ErrorHandler eh = new ErrorHandler();
 
         try {

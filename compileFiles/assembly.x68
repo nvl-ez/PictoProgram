@@ -4,9 +4,9 @@ START:
 	MOVE.B #0, D1
 	MOVE.W #12, D0
 	TRAP #15
-* ----COPY:COPY(1, --, t0)----
+* ----COPY:COPY(10, --, t0)----
 	LEA t0, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 	MOVE.L A6, -8(A7)
 	MOVE.L A7, A6
@@ -1317,10 +1317,10 @@ e83: *e83: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t97)----
+* ----COPY:COPY(10, --, t97)----
 	MOVE.L #-736, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t90, t97, e84)----
 	MOVE.L #-722, A5
@@ -1433,10 +1433,10 @@ e89: *e89: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t107)----
+* ----COPY:COPY(10, --, t107)----
 	MOVE.L #-756, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t100, t107, e90)----
 	MOVE.L #-742, A5
@@ -1626,10 +1626,10 @@ e95: *e95: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t121)----
+* ----COPY:COPY(10, --, t121)----
 	MOVE.L #-784, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t100, t121, e96)----
 	MOVE.L #-742, A5
@@ -1701,10 +1701,10 @@ e99: *e99: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t127)----
+* ----COPY:COPY(10, --, t127)----
 	MOVE.L #-796, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t101, t127, e100)----
 	MOVE.L #-744, A5
@@ -1858,10 +1858,10 @@ MOVE_LOOP_t90_2:
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t139)----
+* ----COPY:COPY(10, --, t139)----
 	MOVE.L #-820, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t101, t139, e104)----
 	MOVE.L #-744, A5
@@ -1995,10 +1995,10 @@ e109: *e109: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t147)----
+* ----COPY:COPY(10, --, t147)----
 	MOVE.L #-836, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t90, t147, e110)----
 	MOVE.L #-722, A5
@@ -2082,10 +2082,10 @@ e113: *e113: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t154)----
+* ----COPY:COPY(10, --, t154)----
 	MOVE.L #-850, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t90, t154, e114)----
 	MOVE.L #-722, A5
@@ -2191,10 +2191,10 @@ e119: *e119: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t163)----
+* ----COPY:COPY(10, --, t163)----
 	MOVE.L #-868, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t157, t163, e120)----
 	MOVE.L #-856, A5
@@ -2380,10 +2380,10 @@ e125: *e125: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t178)----
+* ----COPY:COPY(10, --, t178)----
 	MOVE.L #-898, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t157, t178, e126)----
 	MOVE.L #-856, A5
@@ -2445,10 +2445,10 @@ e123: *e123: SKIP
 	ADD.L A6, A5
 	MOVE.W #1, (A5)
 
-* ----COPY:COPY(1, --, t183)----
+* ----COPY:COPY(10, --, t183)----
 	MOVE.L #-908, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----SUB:SUB(t182, t183, t181)----
 	CLR.L D1
@@ -2544,10 +2544,10 @@ e129: *e129: SKIP
 	ADD.L A6, A4
 	MOVE.W (A4), (A5)
 
-* ----COPY:COPY(1, --, t189)----
+* ----COPY:COPY(10, --, t189)----
 	MOVE.L #-920, A5
 	ADD.L A6, A5
-	MOVE.W #1, (A5)
+	MOVE.W #10, (A5)
 
 * ----COMPARE LT:IFLT(t90, t189, e130)----
 	MOVE.L #-722, A5

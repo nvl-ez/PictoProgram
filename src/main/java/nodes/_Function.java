@@ -22,14 +22,20 @@ public class _Function extends Node {
     public _Function(_FunctionHead functionHead, _FunctionBody functionBody, int left, int right) {
         super(left, right);
 
-        ProcedureDescription description = (ProcedureDescription)st.get(functionHead.getId());
+        ProcedureDescription description = (ProcedureDescription) st.get(functionHead.getId());
         this.type = functionHead.getType();
         boolean found = false;
 
         _FunctionBody funcBody = functionBody;
-        
+
         while (funcBody != null) {
             _Instruction instr = funcBody.getInstruction();
+            if (instr == null) {
+                this.type = Types.NULL;
+                description.setType(Types.NULL);
+                return;
+            }
+
             if (instr.getOpType() == OpType.RETURN_EXPRESSION) {
                 _Expression exp = instr.getReturnExpression();
 
@@ -41,14 +47,14 @@ public class _Function extends Node {
                 }
                 found = true;
             }
-            if(instr.getOpType() == OpType.RETURN && type != Types.VOID){
-                    eh.addError(ErrorPhase.Semantic, "Function type does not match return type", instr.getLine(), instr.getColumn());
-                    this.type = Types.NULL;
-                    description.setType(Types.NULL);
-                    return;
+            if (instr.getOpType() == OpType.RETURN && type != Types.VOID) {
+                eh.addError(ErrorPhase.Semantic, "Function type does not match return type", instr.getLine(), instr.getColumn());
+                this.type = Types.NULL;
+                description.setType(Types.NULL);
+                return;
             }
-            
-            if(instr.getOpType() == OpType.RETURN && type == Types.VOID){
+
+            if (instr.getOpType() == OpType.RETURN && type == Types.VOID) {
                 found = true;
             }
 
@@ -64,18 +70,18 @@ public class _Function extends Node {
         this.functionHead = functionHead;
         this.functionBody = functionBody;
     }
-    
-    public void generate(){
+
+    public void generate() {
         Function fun = functionHead.generate();
-        
+
         tac.put(new Instruction(Operations.SKIP, null, null, fun.getStart()));
         tac.put(new Instruction(Operations.PMB, null, null, fun));
-        if(functionBody != null){
+        if (functionBody != null) {
             functionBody.generate();
         }
         //tac.put(new Instruction(Operations.RTN, null, null, fun));
         st.exitBlock();
-        
+
         tac.recalculate();
     }
 

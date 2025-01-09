@@ -121,7 +121,7 @@ endline         = ;
 %{
 
     private ComplexSymbol symbol(int type) throws IOException{
-        writer.write(ParserSym.terminalNames[type]+" "); 
+        writer.write(ParserSym.terminalNames[type]+"\n"); 
         writer.flush();
         ComplexSymbol cs = new ComplexSymbol(ParserSym.terminalNames[type], type);
         cs.left = yyline + 1;
@@ -130,7 +130,7 @@ endline         = ;
     }
     
     private ComplexSymbol symbol(int type, Object value) throws IOException{
-        writer.write(ParserSym.terminalNames[type]+" "); 
+        writer.write(ParserSym.terminalNames[type]+"["+value.toString()+"]"+"\n"); 
         writer.flush();
         ComplexSymbol cs = new ComplexSymbol(ParserSym.terminalNames[type], type, value);
         cs.left = yyline + 1;
