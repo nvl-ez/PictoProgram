@@ -82,6 +82,7 @@ public class Compilador {
 
         } catch (Exception e) {
             //System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
+    
             e.printStackTrace();
         }
     }

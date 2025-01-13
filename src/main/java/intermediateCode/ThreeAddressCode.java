@@ -109,7 +109,7 @@ public class ThreeAddressCode {
     public void save(boolean optimized) {
         try {
             //save TAC
-            BufferedWriter writer = new BufferedWriter(new FileWriter("compileFiles/ThreeAddressCode.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("compileFiles/"+(optimized?"Optimized_":"")+"ThreeAddressCode.txt"));
             for (Instruction instr : code) {
                 writer.write(instr.toString() + "\n");
                 writer.flush();

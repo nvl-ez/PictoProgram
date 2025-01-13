@@ -164,7 +164,7 @@ PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:fu
                     |   SetUp GlobalDeclarations:globalDeclarations                                                 {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
                     |   SetUp Functions:functions                                                                   {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
                     |   SetUp                                                                                       {:eh.addError(ErrorPhase.Sintactic, "The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp error                                                                                       {:eh.addError(ErrorPhase.Sintactic, "Too many errors were found", getLeft(), getRight());:}
+                    |   SetUp error                                                                                 {:eh.addError(ErrorPhase.Sintactic, "Too many errors were found", getLeft(), getRight());:}
                     ;
 
 /***********************************/
@@ -173,6 +173,7 @@ PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:fu
 GlobalDeclarations  ::= GlobalDeclarations:globalDeclarations Declaration:declaration                               {:RESULT = new _GlobalDeclarations(declaration, globalDeclarations, declarationleft, declarationright);:}
                     |   Declaration:declaration                                                                     {:RESULT = new _GlobalDeclarations(declaration, null, declarationleft, declarationright);:}
                     |   error Endline                                                                               {:eh.addError(ErrorPhase.Sintactic, "Wrong global declaration", getLeft(), getRight());:}
+                    |   error Rparen                                                                                {:eh.addError(ErrorPhase.Sintactic, "Wrong global declaration", getLeft(), getRight());:}
                     ;
 
 Declaration         ::= ConstDelcaration:constDeclaration                                                           {:RESULT = new _Declaration(constDeclaration, constDeclarationleft, constDeclarationright);:}
@@ -216,6 +217,7 @@ DimentionSizes      ::= DimentionSizes:dimentionSizes ArrayIcon Decimal:decimal 
 Functions           ::= Function:function Functions:functions                                                       {:RESULT = new _Functions(function, functions, functionleft, functionright);:}
                     |   Function:function                                                                           {:RESULT = new _Functions(function, null, functionleft, functionright);:}
                     |   error Rbracket                                                                              {:eh.addError(ErrorPhase.Sintactic, "Wrong function declaration", getLeft(), getRight());:}
+                    |   error Main                                                                                  {:eh.addError(ErrorPhase.Sintactic, "Wrong function declaration", getLeft(), getRight());:}
                     ;
 
 Function            ::= FunctionHead:functionHead Lbracket FunctionBody:functionBody F_OUT                          {:RESULT = new _Function(functionHead, functionBody, functionHeadleft, functionHeadright);:}
@@ -226,6 +228,7 @@ TypeDimentions      ::= Type:type DimentionSizes:dimentionSizes                 
 
 FunctionHead        ::= Type:type Id:id FunctionArgs:functionArgs                                                   {:RESULT = new _FunctionHead(type, id, functionArgs, idleft, idright);:}
                     |   error F_OUT                                                                                 {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
+                    |   error Main                                                                                  {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
                     ;
 
 FunctionArgs        ::= Lparen FunctionArgsList:functionArgsList Rparen                                             {:RESULT = new _FunctionArgs(functionArgsList, functionArgsListleft, functionArgsListright);:}
@@ -296,6 +299,8 @@ Instruction         ::= Opif Lparen Expression:expression Rparen Lbracket Functi
                         //Write (CharArr, IndexBegin, IndexEnd, Column, Row)
                     |   Write Lparen ArrayIcon Id:id Comma Expression:expression1 Comma Expression:expression2 Comma Expression:expression3 Comma Expression:expression4 Rparen Endline {:RESULT = new _Instruction(id, expression1, expression2, expression3, expression4, idleft, idright);:}
                     |   error Endline                                                                               {:eh.addError(ErrorPhase.Sintactic, "Error defining a instruction", getLeft(), getRight());:}
+                    |   error Rbracket                                                                              {:eh.addError(ErrorPhase.Sintactic, "Error defining a instruction", getLeft(), getRight());:}
+                    |   error Rparen                                                                                {:eh.addError(ErrorPhase.Sintactic, "Error defining a instruction", getLeft(), getRight());:}
                     ;
 
 Operation           ::= SUM:opArit                                                                                  {:RESULT = new _Operation(opArit, opAritleft, opAritright);:}
