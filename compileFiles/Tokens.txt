@@ -1,6 +1,5 @@
 Type[VOID]
 Id[printHello]
-Lparen
 Type[CHAR]
 ArrayIcon
 Decimal[256]

@@ -1,4 +1,4 @@
-🕳 printHello(🔤📦256 text, 🔢n){
+🕳printHello🔤📦256 text, 🔢n){
     🔂(🔢i⬅0; i⬇n; i➕➕){
         ✏(📦text, 0, 10, 0, i);
     }

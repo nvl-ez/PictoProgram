@@ -215,19 +215,18 @@ DimentionSizes      ::= DimentionSizes:dimentionSizes ArrayIcon Decimal:decimal 
 /***********************************/
 Functions           ::= Function:function Functions:functions                                                       {:RESULT = new _Functions(function, functions, functionleft, functionright);:}
                     |   Function:function                                                                           {:RESULT = new _Functions(function, null, functionleft, functionright);:}
-                    |   error Rbracket                                                                              {:eh.addError(ErrorPhase.Sintactic, "Wrong function declaration", getLeft(), getRight());:}
-                    |   error Main                                                                                  {:eh.addError(ErrorPhase.Sintactic, "Wrong function declaration", getLeft(), getRight());:}
                     ;
 
 Function            ::= FunctionHead:functionHead Lbracket FunctionBody:functionBody F_OUT                          {:RESULT = new _Function(functionHead, functionBody, functionHeadleft, functionHeadright);:}
+                    |   error F_IN                                                                                  {:eh.addError(ErrorPhase.Sintactic, "Wrong function declaration", getLeft(), getRight());:}
+                    |   error F_OUT                                                                                 {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
+                    |   error Instruction                                                                           {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
                     ;
 
 TypeDimentions      ::= Type:type DimentionSizes:dimentionSizes                                                     {:RESULT = new _TypeDimentions(dimentionSizes, type, typeleft, dimentionSizesright);:}
                     ;
 
 FunctionHead        ::= Type:type Id:id FunctionArgs:functionArgs                                                   {:RESULT = new _FunctionHead(type, id, functionArgs, idleft, idright);:}
-                    |   error F_OUT                                                                                 {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
-                    |   error Main                                                                                  {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
                     ;
 
 FunctionArgs        ::= Lparen FunctionArgsList:functionArgsList Rparen                                             {:RESULT = new _FunctionArgs(functionArgsList, functionArgsListleft, functionArgsListright);:}
