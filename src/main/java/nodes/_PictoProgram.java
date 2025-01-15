@@ -29,6 +29,7 @@ public class _PictoProgram extends Node {
         Tag main = new Tag();
         main.setName("main");
         tac.put(new Instruction(Operations.CALL, null, null, main));
+        tac.put(new Instruction(Operations.HALT, null, null, null));
         if (functions != null) {
             functions.generate();
         }

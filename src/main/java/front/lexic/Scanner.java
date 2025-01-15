@@ -7,7 +7,7 @@
  * Estudis: Grau en Informàtica 
  * Itinerari: Intel·ligència Artificial i Computació
  *
- * Alumnes: Nahuel Vazquez y Yelizaveta Denysova
+ * Alumnes: Nahuel Vazquez y Yelyzaveta Denysova
  */
 package front.lexic;
 

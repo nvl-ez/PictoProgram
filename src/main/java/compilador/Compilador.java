@@ -27,12 +27,17 @@ public class Compilador {
         /*---------------------------------------------------\
         |   PROGRAMS THAT WILL COMPILE                       |                         
         |----------------------------------------------------| 
-        |   IOTest.txt
-        |   FibonacciTest.txt
-        |   LoopTableTest.txt
+        |   IOTest.txt                                       |
+        |   FibonacciTest.txt                                |
+        |   LoopTableTest.txt                                |
+        /----------------------------------------------------\
+        |   PROGRAMS THAT WILL NOT COMPILE                   |                         
+        |----------------------------------------------------| 
+        |   LexicTest.txt
+        |   SintacticTest.txt
         |
-         */
-        String filePath = "LoopTableTest.txt";
+        |---------------------------------------------------*/
+        String filePath = "SintacticTest.txt";
         ErrorHandler eh = new ErrorHandler();
 
         try {

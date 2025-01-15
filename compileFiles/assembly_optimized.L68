@@ -1,0 +1,232 @@
+00000000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 14-Jan-25 11:50:35 AM
+
+00000000                             1      ORG     $0
+00000000                             2  START:
+00000000  123C 0000                  3      MOVE.B #0, D1
+00000004  303C 000C                  4      MOVE.W #12, D0
+00000008  4E4F                       5      TRAP #15
+0000000A  2F4E FFF8                  6      MOVE.L A6, -8(A7)
+0000000E  2C4F                       7      MOVE.L A7, A6
+00000010  4EB9 000000C8              8      JSR main * ----FUNCTION CALL:CALL(--, --, main)----
+00000016                             9  
+00000016  FFFF FFFF                 10      SIMHALT *HALT(--, --, --)
+0000001A                            11  e1: *e1: SKIP
+0000001A  518F                      12      SUB.L #8, SP *:PMB(--, --, f0)
+0000001C                            13  
+0000001C                            14  * ----COPY:COPY(0, --, t2)----
+0000001C  2A7C FFFFFFF6             15      MOVE.L #-10, A5
+00000022  DBCE                      16      ADD.L A6, A5
+00000024  3ABC 0000                 17      MOVE.W #0, (A5)
+00000028                            18  e2: *e2: SKIP
+00000028                            19  * ----COMPARE LT:IFLT(t2, t0, e3)----
+00000028  2A7C FFFFFFF6             20      MOVE.L #-10, A5
+0000002E  DBCE                      21      ADD.L A6, A5
+00000030  3215                      22      MOVE.W (A5), D1
+00000032  2A7C 00000000             23      MOVE.L #0, A5
+00000038  DBCE                      24      ADD.L A6, A5
+0000003A  3415                      25      MOVE.W (A5), D2
+0000003C  B242                      26      CMP.W D2, D1
+0000003E  6D00 0014                 27      BLT.W e3
+00000042                            28  
+00000042                            29  * ----COPY:COPY(0, --, t4)----
+00000042  2A7C FFFFFFF4             30      MOVE.L #-12, A5
+00000048  DBCE                      31      ADD.L A6, A5
+0000004A  3ABC 0000                 32      MOVE.W #0, (A5)
+0000004E                            33  
+0000004E  4EF9 00000060             34      JMP e4 * ----GOTO:GOTO(--, --, e4)----
+00000054                            35  
+00000054                            36  e3: *e3: SKIP
+00000054                            37  * ----COPY:COPY(-1, --, t4)----
+00000054  2A7C FFFFFFF4             38      MOVE.L #-12, A5
+0000005A  DBCE                      39      ADD.L A6, A5
+0000005C  3ABC FFFF                 40      MOVE.W #-1, (A5)
+00000060                            41  
+00000060                            42  e4: *e4: SKIP
+00000060                            43  * ----COMPARE EQ:IFEQ(t4, 0, e5)----
+00000060  2A7C FFFFFFF4             44      MOVE.L #-12, A5
+00000066  DBCE                      45      ADD.L A6, A5
+00000068  3215                      46      MOVE.W (A5), D1
+0000006A  343C 0000                 47      MOVE.W #0, D2
+0000006E  B441                      48      CMP.W D1, D2
+00000070  6700 004C                 49      BEQ.W e5
+00000074                            50  
+00000074                            51  * ----POS:POS(0, t2, --)----
+00000074  1A3C 0000                 52      MOVE.B #0, D5
+00000078  E14D                      53      LSL.W #8, D5
+0000007A  2A7C FFFFFFF6             54      MOVE.L #-10, A5
+00000080  DBCE                      55      ADD.L A6, A5
+00000082  1A2D 0001                 56      MOVE.B 1(A5), D5
+00000086  3205                      57      MOVE.W D5, D1
+00000088  303C 000B                 58      MOVE.W #11, D0
+0000008C  4E4F                      59      TRAP #15
+0000008E                            60  * ----WRITE:WRITE(0, 10, t1)----
+0000008E  343C 0000                 61      MOVE.W #0, D2
+00000092  363C 000A                 62      MOVE.W #10, D3
+00000096  2A7C 00000200             63      MOVE.L #512, A5
+0000009C  DBCE                      64      ADD.L A6, A5
+0000009E  9642                      65      SUB.W D2, D3
+000000A0  E34A                      66      LSL.W #1, D2
+000000A2  DAC2                      67      ADD.W D2, A5
+000000A4  303C 0006                 68      MOVE.W #6, D0
+000000A8                            69  WRITE_LOOP_1:
+000000A8  321D                      70      MOVE.W (A5)+, D1
+000000AA  4E4F                      71      TRAP #15
+000000AC  51CB FFFA                 72      DBF D3, WRITE_LOOP_1
+000000B0                            73  
+000000B0                            74  * ----INCREMENT LOCAL VARIABLE:INC(--, --, t2)----
+000000B0  2A7C FFFFFFF6             75      MOVE.L #-10, A5
+000000B6  DBCE                      76      ADD.L A6, A5
+000000B8  5255                      77      ADD.W #1, (A5)
+000000BA                            78  
+000000BA  4EF8 0028                 79      JMP e2 * ----GOTO:GOTO(--, --, e2)----
+000000BE                            80  
+000000BE                            81  e5: *e5: SKIP
+000000BE                            82  * ----RETURN:RTN(--, --, --)----
+000000BE  2E4E                      83      MOVE.L A6, A7
+000000C0  598F                      84      SUB.L #4, A7
+000000C2  2C6E FFF8                 85      MOVE.L -8(A6), A6
+000000C6  4E75                      86      RTS
+000000C8                            87  
+000000C8                            88  main: *main: SKIP
+000000C8  9FFC 00000206             89      SUB.L #518, SP *:PMB(--, --, f1)
+000000CE                            90  
+000000CE                            91  * ----SET VALUE FROM INDIRECTION:IND_ASS(72, 0, t9)----
+000000CE  2A7C FFFFFDF8             92      MOVE.L #-520, A5
+000000D4  DBCE                      93      ADD.L A6, A5
+000000D6  323C 0000                 94      MOVE.W #0, D1
+000000DA  C2FC 0002                 95      MULU.W #2, D1
+000000DE  48C1                      96      EXT.L D1
+000000E0  DBC1                      97      ADD.L D1, A5
+000000E2  3ABC 0048                 98      MOVE.W #72, (A5)
+000000E6                            99  * ----SET VALUE FROM INDIRECTION:IND_ASS(101, 1, t9)----
+000000E6  2A7C FFFFFDF8            100      MOVE.L #-520, A5
+000000EC  DBCE                     101      ADD.L A6, A5
+000000EE  323C 0001                102      MOVE.W #1, D1
+000000F2  C2FC 0002                103      MULU.W #2, D1
+000000F6  48C1                     104      EXT.L D1
+000000F8  DBC1                     105      ADD.L D1, A5
+000000FA  3ABC 0065                106      MOVE.W #101, (A5)
+000000FE                           107  * ----SET VALUE FROM INDIRECTION:IND_ASS(108, 2, t9)----
+000000FE  2A7C FFFFFDF8            108      MOVE.L #-520, A5
+00000104  DBCE                     109      ADD.L A6, A5
+00000106  323C 0002                110      MOVE.W #2, D1
+0000010A  C2FC 0002                111      MULU.W #2, D1
+0000010E  48C1                     112      EXT.L D1
+00000110  DBC1                     113      ADD.L D1, A5
+00000112  3ABC 006C                114      MOVE.W #108, (A5)
+00000116                           115  * ----SET VALUE FROM INDIRECTION:IND_ASS(108, 3, t9)----
+00000116  2A7C FFFFFDF8            116      MOVE.L #-520, A5
+0000011C  DBCE                     117      ADD.L A6, A5
+0000011E  323C 0003                118      MOVE.W #3, D1
+00000122  C2FC 0002                119      MULU.W #2, D1
+00000126  48C1                     120      EXT.L D1
+00000128  DBC1                     121      ADD.L D1, A5
+0000012A  3ABC 006C                122      MOVE.W #108, (A5)
+0000012E                           123  * ----SET VALUE FROM INDIRECTION:IND_ASS(111, 4, t9)----
+0000012E  2A7C FFFFFDF8            124      MOVE.L #-520, A5
+00000134  DBCE                     125      ADD.L A6, A5
+00000136  323C 0004                126      MOVE.W #4, D1
+0000013A  C2FC 0002                127      MULU.W #2, D1
+0000013E  48C1                     128      EXT.L D1
+00000140  DBC1                     129      ADD.L D1, A5
+00000142  3ABC 006F                130      MOVE.W #111, (A5)
+00000146                           131  * ----SET VALUE FROM INDIRECTION:IND_ASS(32, 5, t9)----
+00000146  2A7C FFFFFDF8            132      MOVE.L #-520, A5
+0000014C  DBCE                     133      ADD.L A6, A5
+0000014E  323C 0005                134      MOVE.W #5, D1
+00000152  C2FC 0002                135      MULU.W #2, D1
+00000156  48C1                     136      EXT.L D1
+00000158  DBC1                     137      ADD.L D1, A5
+0000015A  3ABC 0020                138      MOVE.W #32, (A5)
+0000015E                           139  * ----SET VALUE FROM INDIRECTION:IND_ASS(87, 6, t9)----
+0000015E  2A7C FFFFFDF8            140      MOVE.L #-520, A5
+00000164  DBCE                     141      ADD.L A6, A5
+00000166  323C 0006                142      MOVE.W #6, D1
+0000016A  C2FC 0002                143      MULU.W #2, D1
+0000016E  48C1                     144      EXT.L D1
+00000170  DBC1                     145      ADD.L D1, A5
+00000172  3ABC 0057                146      MOVE.W #87, (A5)
+00000176                           147  * ----SET VALUE FROM INDIRECTION:IND_ASS(111, 7, t9)----
+00000176  2A7C FFFFFDF8            148      MOVE.L #-520, A5
+0000017C  DBCE                     149      ADD.L A6, A5
+0000017E  323C 0007                150      MOVE.W #7, D1
+00000182  C2FC 0002                151      MULU.W #2, D1
+00000186  48C1                     152      EXT.L D1
+00000188  DBC1                     153      ADD.L D1, A5
+0000018A  3ABC 006F                154      MOVE.W #111, (A5)
+0000018E                           155  * ----SET VALUE FROM INDIRECTION:IND_ASS(114, 8, t9)----
+0000018E  2A7C FFFFFDF8            156      MOVE.L #-520, A5
+00000194  DBCE                     157      ADD.L A6, A5
+00000196  323C 0008                158      MOVE.W #8, D1
+0000019A  C2FC 0002                159      MULU.W #2, D1
+0000019E  48C1                     160      EXT.L D1
+000001A0  DBC1                     161      ADD.L D1, A5
+000001A2  3ABC 0072                162      MOVE.W #114, (A5)
+000001A6                           163  * ----SET VALUE FROM INDIRECTION:IND_ASS(108, 9, t9)----
+000001A6  2A7C FFFFFDF8            164      MOVE.L #-520, A5
+000001AC  DBCE                     165      ADD.L A6, A5
+000001AE  323C 0009                166      MOVE.W #9, D1
+000001B2  C2FC 0002                167      MULU.W #2, D1
+000001B6  48C1                     168      EXT.L D1
+000001B8  DBC1                     169      ADD.L D1, A5
+000001BA  3ABC 006C                170      MOVE.W #108, (A5)
+000001BE                           171  * ----SET VALUE FROM INDIRECTION:IND_ASS(100, 10, t9)----
+000001BE  2A7C FFFFFDF8            172      MOVE.L #-520, A5
+000001C4  DBCE                     173      ADD.L A6, A5
+000001C6  323C 000A                174      MOVE.W #10, D1
+000001CA  C2FC 0002                175      MULU.W #2, D1
+000001CE  48C1                     176      EXT.L D1
+000001D0  DBC1                     177      ADD.L D1, A5
+000001D2  3ABC 0064                178      MOVE.W #100, (A5)
+000001D6                           179  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t9)----
+000001D6  2C3C 00000100            180      MOVE.L #256, D6
+000001DC  0487 00000200            181      SUB.L #512, D7
+000001E2  2A7C FFFFFDF8            182      MOVE.L #-520, A5
+000001E8  DBCE                     183      ADD.L A6, A5
+000001EA                           184  MOVE_LOOP_t9_2:
+000001EA  3EDD                     185      MOVE.W (A5)+, (A7)+
+000001EC  51CE FFFC                186      DBF D6, MOVE_LOOP_t9_2
+000001F0                           187  
+000001F0                           188  * ----COPY:COPY(2, --, t32)----
+000001F0  2A7C FFFFFDF6            189      MOVE.L #-522, A5
+000001F6  DBCE                     190      ADD.L A6, A5
+000001F8  3ABC 0002                191      MOVE.W #2, (A5)
+000001FC                           192  
+000001FC                           193  * ----COPY LOCAL VARIABLE ON THE STACK:PUT(--, --, t32)----
+000001FC  7C01                     194      MOVE.L #1, D6
+000001FE  5587                     195      SUB.L #2, D7
+00000200  2A7C FFFFFDF6            196      MOVE.L #-522, A5
+00000206  DBCE                     197      ADD.L A6, A5
+00000208                           198  MOVE_LOOP_t32_2:
+00000208  3EDD                     199      MOVE.W (A5)+, (A7)+
+0000020A  51CE FFFC                200      DBF D6, MOVE_LOOP_t32_2
+0000020E                           201  
+0000020E  2F4E FFF8                202      MOVE.L A6, -8(A7)
+00000212  2C4F                     203      MOVE.L A7, A6
+00000214  4EB8 001A                204      JSR e1 * ----FUNCTION CALL:CALL(--, --, f0)----
+00000218                           205  
+00000218                           206  * ----POP:POP(f0, --, --)----
+00000218  DFFC 00000202            207      ADD.L #514, A7
+0000021E                           208  
+0000021E  FFFF FFFF                209      SIMHALT *HALT(--, --, --)
+00000222                           210      END START
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+E1                  1A
+E2                  28
+E3                  54
+E4                  60
+E5                  BE
+MAIN                C8
+MOVE_LOOP_T32_2     208
+MOVE_LOOP_T9_2      1EA
+START               0
+WRITE_LOOP_1        A8

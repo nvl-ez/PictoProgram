@@ -133,7 +133,6 @@
     ✅res7 ⬅ level⬇10;
     ✅res8 ⬅ level⬇globalCounter;
     🔁(res7 ✌ res8){
-
         🔢 k ⬅ level;
         ✅res9 ⬅ k⬇10;
         ✅res10 ⬅ k⬇globalCounter;

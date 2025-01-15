@@ -64,8 +64,8 @@ public class ThreeAddressCode {
                 varTable.get(rowVar).delta = -(rowFun.wordsVars + 8);
             } else if (varTable.get(rowVar).var.isArg() && varTable.get(rowVar).idFun != -1) {
                 RowFun rowFun = funTable.get(varTable.get(rowVar).idFun);
+                varTable.get(rowVar).delta = rowFun.wordsParam;
                 rowFun.wordsParam += varTable.get(rowVar).words;
-                varTable.get(rowVar).delta = rowFun.wordsParam - 2;
             }
         }
 
@@ -964,10 +964,10 @@ public class ThreeAddressCode {
         } else {
             assembly.write("* ----COPY LOCAL VARIABLE ON THE STACK:"+i.toString()+"----\n");
             assembly.write("\tMOVE.L #" + (result.getWords() / 2 - 1) + ", D6\n");
-            assembly.write("\tMOVE.L #" + varTable.get(result.getId()).delta + ", A5\n");
+            assembly.write("\tMOVE.L #" + (varTable.get(result.getId()).delta+varTable.get(result.getId()).words) + ", A5\n");
             assembly.write("\tADD.L A6, A5\n");
             assembly.write("MOVE_LOOP_" + result.getNameTransfer() + ":\n");
-            assembly.write("\tMOVE.W (A5)+, -(A7)\n");
+            assembly.write("\tMOVE.W -(A5), -(A7)\n");
             assembly.write("\tDBF D6, MOVE_LOOP_" + result.getNameTransfer() + "\n\n");
         }
     }
@@ -1069,8 +1069,8 @@ public class ThreeAddressCode {
                 assembly.write("\tADD.L A6, A5\n");
             }
             assembly.write("\tMOVE.W (A5), D3\n");
-
         }
+        
         Variable base = (Variable) i.getResult();
         if (varTable.get(base.getId()).idFun == -1) { //Es una variable global
             assembly.write("\tLEA " + base.getName() + ", A5\n");

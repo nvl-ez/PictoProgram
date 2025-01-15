@@ -65,6 +65,7 @@ parser code {:
 
 
     //Quitar errores por defecto de cup, ya se manejan con el gestor de errores
+    /*
     @Override
     public void report_error(String message, Object info) {
     }
@@ -76,6 +77,7 @@ parser code {:
     @Override
     public void syntax_error(Symbol cur_token) {
     }
+    */
 :}
 
 /**
@@ -105,7 +107,6 @@ terminal boolean BooleanValue;
 terminal char Character;
 terminal String Id;
 
-non terminal                            SetUp;
 non terminal    _PictoProgram           PictoProgram;
 non terminal    _GlobalDeclarations     GlobalDeclarations;
 non terminal    _Functions              Functions;
@@ -148,23 +149,21 @@ precedence left MUL, DIV, MOD;
 
 start with PictoProgram;
 
-SetUp               ::=                                                                                             {:  :}
-                    ;
 
-PictoProgram        ::= SetUp GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0); 
+PictoProgram        ::= GlobalDeclarations:globalDeclarations Functions:functions MainFunction:mainFunction   {:RESULT = new _PictoProgram(globalDeclarations, functions, mainFunction, 0, 0); 
                                                                                                                         if(eh.isErrorFree()){RESULT.generate();}:}
-                    |   SetUp GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0); 
+                    |   GlobalDeclarations:globalDeclarations MainFunction:mainFunction                       {:RESULT = new _PictoProgram(globalDeclarations, null, mainFunction, 0, 0); 
                                                                                                                         if(eh.isErrorFree()){RESULT.generate();}:}
-                    |   SetUp Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0); 
+                    |   Functions:functions MainFunction:mainFunction                                         {:RESULT = new _PictoProgram(null, functions, mainFunction, 0, 0); 
                                                                                                                         if(eh.isErrorFree()){RESULT.generate();}:}
-                    |   SetUp MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0); 
+                    |   MainFunction:mainFunction                                                             {:RESULT = new _PictoProgram(null, null, mainFunction, 0, 0); 
                                                                                                                         if(eh.isErrorFree()){RESULT.generate();}:}
                     
-                    |   SetUp GlobalDeclarations:globalDeclarations Functions:functions                             {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp GlobalDeclarations:globalDeclarations                                                 {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp Functions:functions                                                                   {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp                                                                                       {:eh.addError(ErrorPhase.Sintactic, "The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
-                    |   SetUp error                                                                                 {:eh.addError(ErrorPhase.Sintactic, "Too many errors were found", getLeft(), getRight());:}
+                    |   GlobalDeclarations:globalDeclarations Functions:functions                             {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+                    |   GlobalDeclarations:globalDeclarations                                                 {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+                    |   Functions:functions                                                                   {:eh.addError(ErrorPhase.Sintactic, "Missing 'main' function. The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+                    |                                                                                         {:eh.addError(ErrorPhase.Sintactic, "The file must follow the order: global definitions (optional), functions (optional), and main (mandatory).", getLeft(), getRight());:}
+                    |   error                                                                                 {:eh.addError(ErrorPhase.Sintactic, "Too many errors were found", getLeft(), getRight());:}
                     ;
 
 /***********************************/
