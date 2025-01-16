@@ -35,9 +35,9 @@ public class Compilador {
         |----------------------------------------------------| 
         |   LexicTest.txt
         |   SintacticTest.txt
-        |
+        |   SemanticTest.txt
         |---------------------------------------------------*/
-        String filePath = "SintacticTest.txt";
+        String filePath = "SemanticTest.txt";
         ErrorHandler eh = new ErrorHandler();
 
         try {

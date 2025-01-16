@@ -1,5 +1,6 @@
 Type[VOID]
 Id[printHello]
+Lparen
 Type[CHAR]
 ArrayIcon
 Decimal[256]
@@ -40,13 +41,14 @@ Rparen
 Endline
 Rbracket
 Return
+Id[n]
 Endline
 Rbracket
 Main
 Lparen
 Rparen
 Lbracket
-Type[CHAR]
+Type[INT]
 ArrayIcon
 Decimal[256]
 Id[text]
@@ -83,6 +85,8 @@ Character[o]
 Endline
 Id[text]
 ArrayIcon
+Decimal[2]
+ArrayIcon
 Decimal[5]
 Assign
 Character[ ]
@@ -107,7 +111,7 @@ Character[r]
 Endline
 Id[text]
 ArrayIcon
-Decimal[9]
+Decimal[300]
 Assign
 Character[l]
 Endline
@@ -115,12 +119,11 @@ Id[text]
 ArrayIcon
 Decimal[10]
 Assign
-Character[d]
+Id[dd]
 Endline
 Id[printHello]
 Lparen
-ArrayIcon
-Id[text]
+Decimal[1]
 Comma
 Decimal[2]
 Rparen

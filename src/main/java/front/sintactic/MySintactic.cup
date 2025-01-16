@@ -184,8 +184,8 @@ Declaration         ::= ConstDelcaration:constDeclaration                       
     /*************CONSTANT**************/
     /***********************************/
 ConstDelcaration    ::= Const Type:type Id:id Assign Decimal:decimal Endline                                        {:RESULT = new _ConstDeclaration(type, id, decimal, typeleft, decimalright);:}
-                    |   Const Type:type Id:id Assign SUM:opArit Decimal:decimal Endline                          {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
-                    |   Const Type:type Id:id Assign SUB:opArit Decimal:decimal Endline                          {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
+                    |   Const Type:type Id:id Assign SUM:opArit Decimal:decimal Endline                             {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
+                    |   Const Type:type Id:id Assign SUB:opArit Decimal:decimal Endline                             {:RESULT = new _ConstDeclaration(type, id, opArit, decimal, typeleft, decimalright);:}
                     |   Const Type:type Id:id Assign BooleanValue:booleanValue Endline                              {:RESULT = new _ConstDeclaration(type, id, booleanValue, typeleft, booleanValueright);:}
                     |   Const Type:type Id:id Assign Character:character Endline                                    {:RESULT = new _ConstDeclaration(type, id, character, typeleft, characterright);:}
                     ;
@@ -221,6 +221,7 @@ Function            ::= FunctionHead:functionHead Lbracket FunctionBody:function
                     |   error F_IN                                                                                  {:eh.addError(ErrorPhase.Sintactic, "Wrong function declaration", getLeft(), getRight());:}
                     |   error F_OUT                                                                                 {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
                     |   error Instruction                                                                           {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
+                    |   error Main                                                                                  {:eh.addError(ErrorPhase.Sintactic, "Error defining a function", getLeft(), getRight());:}
                     ;
 
 TypeDimentions      ::= Type:type DimentionSizes:dimentionSizes                                                     {:RESULT = new _TypeDimentions(dimentionSizes, type, typeleft, dimentionSizesright);:}
@@ -246,7 +247,7 @@ FunctionBody        ::= Instruction:instruction FunctionBody:functionBody       
     /****************MAIN***************/
     /***********************************/
 MainFunction        ::= Main:main F_IN Rparen Lbracket FunctionBody:functionBody F_OUT                              {:RESULT = new _MainFunction(functionBody, functionBodyleft, functionBodyright);:}
-                    |   Main error F_OUT                                                                            {:eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());:}                                                                      {:eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());:}
+                    //|   Main error F_OUT                                                                            {:eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());:}                                                                      {:eh.addError(ErrorPhase.Sintactic, "Wrong Main function declaration", getLeft(), getRight());:}
                     ;
 
     /***********************************/
