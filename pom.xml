@@ -16,6 +16,10 @@
     </properties>
 
     <dependencies>
+        <!--
+          Use normal (default) scope and coordinates for java-cup-runtime;
+          We'll let the maven-install-plugin handle making this jar available locally.
+        -->
         <dependency>
             <groupId>java-cup</groupId>
             <artifactId>java-cup-runtime</artifactId>
@@ -25,25 +29,38 @@
 
     <build>
         <plugins>
+            <!-- This plugin will automatically install your local jar into each user's local repo
+                 when they run "mvn compile" or any phase after 'initialize', so it resolves cleanly. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.5.2</version>
                 <executions>
                     <execution>
+                        <id>install-local-cup</id>
                         <phase>initialize</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
+                            <file>${project.basedir}/utils/Cup/java-cup-11b-runtime.jar</file>
                             <groupId>java-cup</groupId>
                             <artifactId>java-cup-runtime</artifactId>
                             <version>11b-20160615</version>
                             <packaging>jar</packaging>
-                            <file>${project.basedir}/utils/Cup/java-cup-11b-runtime.jar</file>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- If you want to run this via "mvn exec:java -Dexec.mainClass=..." you can use: -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.mycompany.compilador.Compilador</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
