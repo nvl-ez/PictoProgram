@@ -12,6 +12,13 @@
         <exec.mainClass>com.mycompany.compilador.Compilador</exec.mainClass>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>java-cup</groupId>
+            <artifactId>java-cup-runtime</artifactId>
+            <version>11b</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/utils/Cup/java-cup-11b-runtime.jar</systemPath>
+        </dependency>
         <!-- Other dependencies -->
     </dependencies>
     <build>
@@ -40,7 +47,7 @@
                                 <artifactItem>
                                     <groupId>java-cup</groupId>
                                     <artifactId>java-cup-runtime</artifactId>
-                                    <version>11b-20160615</version>
+                                    <version>11b</version>
                                     <type>jar</type>
                                     <outputDirectory>${project.build.directory}/lib</outputDirectory>
                                 </artifactItem>
