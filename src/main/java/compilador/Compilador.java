@@ -33,9 +33,9 @@ public class Compilador {
         /----------------------------------------------------\
         |   PROGRAMS THAT WILL NOT COMPILE                   |                         
         |----------------------------------------------------| 
-        |   LexicTest.txt
-        |   SintacticTest.txt
-        |   SemanticTest.txt
+        |   LexicTest.txt                                    |
+        |   SintacticTest.txt                                |
+        |   SemanticTest.txt                                 |
         |---------------------------------------------------*/
         String filePath = "SemanticTest.txt";
         ErrorHandler eh = new ErrorHandler();
@@ -84,9 +84,10 @@ public class Compilador {
                 tac.assemble("assembly_optimized");
             }
             eh.save();
-
+            
+        //El catch para todas las excepciones es porque parser.parse() puede lanzar un Exception y necita ser controlado
         } catch (Exception e) {
-            //System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
+            System.out.println("ERROR: File located at \"" + filePath + "\" was not found");
     
             e.printStackTrace();
         }
