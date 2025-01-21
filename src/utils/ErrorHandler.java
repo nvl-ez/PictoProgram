@@ -35,13 +35,13 @@ public class ErrorHandler {
         for (Row error : errors) {
             errorString += "| ";
             switch (error.phase) {
-                case ErrorPhase.Lexic:
+                case Lexic: // Remove `ErrorPhase.`
                     errorString += "LEXIC           |";
                     break;
-                case ErrorPhase.Sintactic:
+                case Sintactic:
                     errorString += "SINTACTIC       |";
                     break;
-                case ErrorPhase.Semantic:
+                case Semantic:
                     errorString += "SEMANTIC        |";
                     break;
             }

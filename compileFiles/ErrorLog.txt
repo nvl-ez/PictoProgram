@@ -2,4 +2,18 @@
 |################################################### ERRORS ############################################################|
 -------------------------------------------------------------------------------------------------------------------------
 | Compiling Phase | Row 	| Column | Details
+| SEMANTIC        | 5		| 5	 | Function type does not match return type
+| SEMANTIC        | 10		| 1	 | Invalid type assignation for array: text
+| SEMANTIC        | 11		| 4	 | Invalid type assignation for array: text
+| SEMANTIC        | 12		| 4	 | Invalid type assignation for array: text
+| SEMANTIC        | 13		| 4	 | Invalid type assignation for array: text
+| SEMANTIC        | 14		| 4	 | Invalid type assignation for array: text
+| SEMANTIC        | 15		| 4	 | Unmatching indexed dimentions for array text
+| SEMANTIC        | 16		| 4	 | Invalid type assignation for array: text
+| SEMANTIC        | 17		| 4	 | Invalid type assignation for array: text
+| SEMANTIC        | 18		| 4	 | Invalid type assignation for array: text
+| SEMANTIC        | 19		| 4	 | Indexed position '300' is out of boudnds for length '256'
+| LEXIC           | 20		| 14	 | Unexpected character: '''
+| LEXIC           | 20		| 17	 | Unexpected character: '''
+| SEMANTIC        | 20		| 15	 | Inexistent variable: dd
 -------------------------------------------------------------------------------------------------------------------------

@@ -37,7 +37,7 @@ public class Compilador {
         |   SintacticTest.txt                                |
         |   SemanticTest.txt                                 |
         |---------------------------------------------------*/
-        String filePath = "IOTest.txt";
+        String filePath = "SemanticTest.txt";
         ErrorHandler eh = new ErrorHandler();
 
         try {
